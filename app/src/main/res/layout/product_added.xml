@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="fill_parent"
+	android:layout_marginTop="20dp"
+	android:orientation="vertical">
+
+	<ListView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/list"/>
+
+	<LinearLayout
+		android:id="@android:id/empty"
+		android:gravity="center_vertical"
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<ImageView
+			android:layout_gravity="center"
+			android:src="@drawable/buy"
+			android:layout_width="100dp"
+			android:layout_height="95dp"/>
+
+		<TextView
+			android:layout_gravity="center"
+			android:textSize="20dp"
+			android:text="Carrinho Vázio!"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+
+	</LinearLayout>
+
+</RelativeLayout>
+

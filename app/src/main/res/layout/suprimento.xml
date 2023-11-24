@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<android.support.design.widget.TextInputLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="5dp"
+		app:hintTextAppearance="@style/HintTextSan"
+	>
+
+		<android.support.design.widget.TextInputEditText
+			android:id="@+id/supVal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp"
+			android:ems="30"
+			android:hint="Valor.:"
+			android:inputType="numberDecimal"
+			tools:textColorHint="#ffffff" />
+
+	</android.support.design.widget.TextInputLayout>
+
+	<android.support.design.widget.TextInputLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="5dp"
+		app:hintTextAppearance="@style/HintTextSan"
+	>
+
+		<android.support.design.widget.TextInputEditText
+			android:id="@+id/supDesc"
+			android:layout_width="wrap_content"
+			android:layout_height="150dp"
+			android:layout_margin="10dp"
+			android:ems="30"
+			android:gravity="left"
+			android:hint="Motivo.:"
+			tools:textColorHint="#ffffff" />
+
+	</android.support.design.widget.TextInputLayout>
+
+
+</LinearLayout>
+

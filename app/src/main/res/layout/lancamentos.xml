@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:showIn="@layout/lancamentos_">
+
+	<LinearLayout
+		android:layout_marginTop="55dp"
+		android:orientation="vertical"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Código"
+				android:layout_margin="10dp"
+				android:textSize="14sp"
+				android:layout_marginBottom="-1dp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Produto"
+				android:textSize="14sp"
+				android:layout_marginBottom="-1dp"
+				android:layout_marginLeft="25dp"
+				android:layout_marginTop="10dp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Quant"
+				android:textSize="14sp"
+				android:layout_marginBottom="-1dp"
+				android:layout_marginLeft="585dp"
+				android:layout_marginTop="10dp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Valor"
+				android:textSize="14sp"
+				android:layout_marginBottom="-1dp"
+				android:layout_marginLeft="50dp"
+				android:layout_marginTop="10dp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Tipo Pagto"
+				android:layout_marginTop="10dp"
+				android:textSize="14sp"
+				android:layout_marginLeft="70dp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Pago"
+				android:textSize="14sp"
+				android:layout_marginLeft="150dp"
+				android:layout_marginTop="10dp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Troco"
+				android:textSize="14sp"
+				android:layout_marginLeft="65dp"
+				android:layout_marginTop="10dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="4"
+				android:layout_height="wrap_content"
+				android:hint="Código..."
+				android:id="@+id/pcod"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="30"
+				android:layout_height="wrap_content"
+				android:hint="Produto..."
+				android:id="@+id/prod"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="4"
+				android:layout_height="wrap_content"
+				android:hint="Quant..."
+				android:id="@+id/quant"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="5"
+				android:layout_height="wrap_content"
+				android:hint="Valor..."
+				android:id="@+id/valor"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="10"
+				android:layout_height="wrap_content"
+				android:hint="Tipo Pagto..."
+				android:id="@+id/payT"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="5"
+				android:layout_height="wrap_content"
+				android:hint="Pagto..."
+				android:id="@+id/pagto"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="5"
+				android:layout_height="wrap_content"
+				android:hint="Troco..."
+				android:id="@+id/troco"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</HorizontalScrollView>
+

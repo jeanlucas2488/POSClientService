@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:orientation="vertical"
+	android:layout_height="fill_parent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="7"
+				android:layout_height="wrap_content"
+				android:hint="Soma..."
+				android:id="@+id/som1"
+				android:inputType="numberDecimal"
+				android:textColorHint="#FFFFFF"
+				android:textColor="#FFFFFF"/>
+			<ImageView
+				android:id="@+id/im1"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+			<Spinner
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/spn1"
+				android:layout_marginLeft="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginTop="-10dp"
+			android:id="@+id/lay1">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="5"
+				android:layout_height="wrap_content"
+				android:hint="Pagto..."
+				android:id="@+id/pagto1"
+				android:inputType="numberDecimal"
+				android:imeOptions="actionDone"
+				android:textColor="#FFFFFF"
+				android:textColorHint="#FFFFFF"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="10"
+				android:layout_height="wrap_content"
+				android:hint="Troco..."
+				android:id="@+id/troco1"
+				android:inputType="numberDecimal"
+				android:textColor="#FFFFFF"
+				android:textColorHint="#FFFFFF"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_marginTop="-10dp"
+			android:id="@+id/spnlay2"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="7"
+				android:layout_height="wrap_content"
+				android:hint="Soma..."
+				android:id="@+id/som2"
+				android:inputType="numberDecimal"
+				android:textColor="#FFFFFF"
+				android:textColorHint="#FFFFFF"/>
+			<ImageView
+				android:id="@+id/im2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+			<Spinner
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/spn2"
+				android:layout_marginLeft="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginTop="-10dp"
+			android:id="@+id/lay2">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="5"
+				android:layout_height="wrap_content"
+				android:hint="Pagto..."
+				android:id="@+id/pagto2"
+				android:inputType="numberDecimal"
+				android:imeOptions="actionDone"
+				android:textColor="#FFFEFE"
+				android:textColorHint="#FFFFFF"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="10"
+				android:layout_height="wrap_content"
+				android:hint="Troco..."
+				android:id="@+id/troco2"
+				android:inputType="numberDecimal"
+				android:textColor="#FFFFFF"
+				android:textColorHint="#FFF8F8"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_marginTop="-10dp"
+			android:id="@+id/spnlay3"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="7"
+				android:layout_height="wrap_content"
+				android:hint="Soma..."
+				android:id="@+id/som3"
+				android:inputType="numberDecimal"
+				android:textColor="#FFFFFF"
+				android:textColorHint="#FFFDFC"/>
+			<ImageView
+				android:id="@+id/im3"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+			<Spinner
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/spn3"
+				android:layout_marginLeft="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginTop="-10dp"
+			android:id="@+id/lay3">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="5"
+				android:layout_height="wrap_content"
+				android:hint="Pagto..."
+				android:id="@+id/pagto3"
+				android:inputType="numberDecimal"
+				android:imeOptions="actionDone"
+				android:textColor="#FFFFFF"
+				android:textColorHint="#FFF0F3"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="10"
+				android:layout_height="wrap_content"
+				android:hint="Troco..."
+				android:id="@+id/troco3"
+				android:inputType="numberDecimal"
+				android:textColorHint="#FFFFFF"
+				android:textColor="#FFFFFF"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_marginTop="-10dp"
+			android:id="@+id/spnlay4"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="7"
+				android:layout_height="wrap_content"
+				android:hint="Soma..."
+				android:id="@+id/som4"
+				android:inputType="numberDecimal"
+				android:textColor="#FFFAFA"
+				android:textColorHint="#FFF2F3"/>
+			<ImageView
+				android:id="@+id/im4"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+			<Spinner
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/spn4"
+				android:layout_marginLeft="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginTop="-10dp"
+			android:id="@+id/lay4">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="5"
+				android:layout_height="wrap_content"
+				android:hint="Pagto..."
+				android:id="@+id/pagto4"
+				android:inputType="numberDecimal"
+				android:imeOptions="actionDone"
+				android:textColor="#F6F6F6"
+				android:textColorHint="#FFFBFA"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="10"
+				android:layout_height="wrap_content"
+				android:hint="Troco..."
+				android:id="@+id/troco4"
+				android:inputType="numberDecimal"
+				android:textColor="#FFF6F9"
+				android:textColorHint="#FFFFFF"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_marginTop="-10dp"
+			android:id="@+id/spnlay5"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="7"
+				android:layout_height="wrap_content"
+				android:hint="Soma..."
+				android:id="@+id/som5"
+				android:inputType="numberDecimal"
+				android:textColor="#FFFFFE"
+				android:textColorHint="#FFF5F8"/>
+			<ImageView
+				android:id="@+id/im5"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+			<Spinner
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/spn5"
+				android:layout_marginLeft="5dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginTop="-10dp"
+			android:id="@+id/lay5">
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="5"
+				android:layout_height="wrap_content"
+				android:hint="Pagto..."
+				android:id="@+id/pagto5"
+				android:inputType="numberDecimal"
+				android:imeOptions="actionDone"
+				android:textColor="#FFFFFF"
+				android:textColorHint="#FFFCFC"/>
+
+			<EditText
+				android:layout_width="wrap_content"
+				android:ems="10"
+				android:layout_height="wrap_content"
+				android:hint="Troco..."
+				android:id="@+id/troco5"
+				android:inputType="numberDecimal"
+				android:textColor="#FAF9F9"
+				android:textColorHint="#FFF1F6"/>
+
+		</LinearLayout>
+<LinearLayout
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+	<Button
+		android:id="@+id/canc"
+		android:layout_width="wrap_content"
+		style="?android:attr/buttonBarButtonStyle"
+		android:layout_height="wrap_content"
+		android:text="Cancelar"/>
+		<Button
+			android:id="@+id/finish"
+			android:layout_width="wrap_content"
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_height="wrap_content"
+			android:text="Finalizar"/>
+		<Button
+			android:id="@+id/tipo"
+			android:gravity="right"
+			android:layout_width="wrap_content"
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_height="wrap_content"
+			android:text="+1 Tipo"/>
+</LinearLayout>
+	</LinearLayout>
+
+</ScrollView>
+

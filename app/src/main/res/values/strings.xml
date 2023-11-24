@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transações_com_cartão">Transações com Cartão</string>
+    <string name="transações_em_dinheiro">Transações em Dinheiro</string>
+
+    <string name="fundo">Fundo.:</string>
+    <string name="operador">Operador.:</string>
+    <string name="data">Data.:</string>
+	<string name="app_pdv"> POS - Fazer Pedido</string>
+	<string name="app_his">POS - Lançamentos</string>
+	<string name="app_vendas">POS - Vendas Lançadas</string>
+    <string name="app_name">POS Client Service</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>

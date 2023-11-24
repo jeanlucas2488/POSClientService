@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<resources>
+	<style name="App" parent="@android:style/Theme.Holo">
+	</style>
+		<style name="dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+			<item name="android:windowBackground">@drawable/pop</item>
+
+		</style>
+	</resources>

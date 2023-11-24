@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="34">
+        <activity
+            android:theme="@style/dialog"
+            android:name=".caixa.selfConfig"
+            android:exported="true"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:theme="@style/dialog"
+            android:name=".Login"
+            android:label="@string/app_pdv" >
+
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".caixa.caixaMain"
+            android:label="@string/app_name" >
+
+        </activity>
+
+        <activity
+            android:theme="@style/dialog"
+            android:name=".caixa.product.productActivity"
+            android:label="@string/app_pdv" >
+
+        </activity>
+        <activity
+            android:theme="@style/dialog"
+            android:name=".caixa.product.pay"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:theme="@style/dialog"
+            android:name=".caixa.setup.fechamentos.fechaCaixa"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".caixa.setup.lancamentos.historico"
+            android:label="@string/app_his" >
+
+        </activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".caixa.setup.lancamentos.vendas"
+            android:label="@string/app_vendas" >
+
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".caixa.setup.fechamentos.NFeWebServiceView"
+            android:label="@string/app_vendas" >
+
+        </activity>
+    </application>
+
+</manifest>

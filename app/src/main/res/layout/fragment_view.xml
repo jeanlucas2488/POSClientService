@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+	android:background="#D4F5F5"
+    android:orientation="vertical">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+	<LinearLayout
+		
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="#BCC8C8">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:padding="10dp"
+			android:textColor="#000000"
+			android:id="@+id/barOp"/>
+
+	</LinearLayout>
+    <GridView
+		android:gravity="center"
+		android:scrollbars="none"
+		android:id="@+id/grid"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_margin="10dp"
+		android:columnWidth="130dp"
+		android:elevation="14dp"
+		android:horizontalSpacing="10dp"
+		android:numColumns="auto_fit"
+		android:verticalSpacing="20dp"
+		android:scrollbarAlwaysDrawHorizontalTrack="true"
+		android:layout_marginTop="140dp"/>
+	</LinearLayout>
+	<ImageButton
+		android:id="@+id/finish"
+		android:layout_width="60dp"
+		android:layout_height="60dp"
+		android:contentDescription="description"
+		android:background="@drawable/oval_ripple"
+		android:elevation="9dp"
+		android:src="@drawable/finish_sale"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginBottom="30dp"
+		android:layout_marginRight="26dp"/>
+	
+</RelativeLayout>

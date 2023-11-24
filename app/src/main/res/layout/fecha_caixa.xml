@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<android.support.design.widget.TextInputLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="5dp"
+			app:hintTextAppearance="@style/HintText"
+		>
+
+			<android.support.design.widget.TextInputEditText
+				android:id="@+id/data"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="10dp"
+				android:ems="30"
+				android:hint="Data.:"
+				android:inputType="datetime"
+				tools:textColorHint="#ffffff" />
+
+		</android.support.design.widget.TextInputLayout>
+		
+		<android.support.design.widget.TextInputLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="5dp"
+			app:hintTextAppearance="@style/HintText"
+		>
+
+			<android.support.design.widget.TextInputEditText
+				android:id="@+id/operador"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="10dp"
+				android:ems="30"
+				android:hint="Operador.:"
+				android:inputType="text"
+				android:textColor="#000000" />
+
+		</android.support.design.widget.TextInputLayout>
+		
+		<android.support.design.widget.TextInputLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="5dp"
+			app:hintTextAppearance="@style/HintText"
+		>
+
+			<android.support.design.widget.TextInputEditText
+				android:id="@+id/fundo"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="10dp"
+				android:ems="30"
+				android:hint="Fundo.:"
+				android:inputType="numberDecimal"
+				android:textColor="#000000" />
+
+		</android.support.design.widget.TextInputLayout>
+		
+		<android.support.design.widget.TextInputLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="5dp"
+			app:hintTextAppearance="@style/HintText"
+		>
+
+			<android.support.design.widget.TextInputEditText
+				android:id="@+id/sangria"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="10dp"
+				android:ems="30"
+				android:hint="Sangrias em Dinheiro.:"
+				android:inputType="numberDecimal"
+				android:textColor="#000000" />
+
+		</android.support.design.widget.TextInputLayout>
+		
+		<LinearLayout
+			android:id="@+id/money_ID"
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+
+				<android.support.design.widget.TextInputEditText
+					android:id="@+id/dinheiro"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_margin="10dp"
+					android:ems="30"
+					android:hint="Transações em Dinheiro.:"
+					android:inputType="numberDecimal"
+					android:textColor="#000000" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/trancard"
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="15dp"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp">
+
+			<TextView
+				android:textColor="#000000"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/transações_com_cartão"
+				android:textSize="18sp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/eloD_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="15dp"
+				android:src="@drawable/elo"
+				android:layout_width="57dp"
+				android:layout_height="60dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+
+				<android.support.design.widget.TextInputEditText
+					android:id="@+id/eloD"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ems="30"
+					android:hint="Elo Débito.:"
+
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/eloC_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="5dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="15dp"
+				android:src="@drawable/elo"
+				android:layout_width="57dp"
+				android:layout_height="60dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+
+				<android.support.design.widget.TextInputEditText
+					android:id="@+id/eloC"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ems="30"
+					android:hint="Elo Crédito.:"
+
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/visaD_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="5dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="15dp"
+				android:src="@drawable/visa"
+				android:layout_width="50dp"
+				android:layout_height="45dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/visaD"
+
+					android:layout_height="wrap_content"
+					android:hint="Visa Débito.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/visaC_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="15dp"
+				android:src="@drawable/visa"
+				android:layout_width="50dp"
+				android:layout_height="45dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/visaC"
+
+					android:layout_height="wrap_content"
+					android:hint="Visa Crédito.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/masterD_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="15dp"
+				android:src="@drawable/master"
+				android:layout_width="50dp"
+				android:layout_height="45dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/masterD"
+
+					android:layout_height="wrap_content"
+					android:hint="Master Débito.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/masterC_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="15dp"
+				android:src="@drawable/master"
+				android:layout_width="50dp"
+				android:layout_height="45dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/masterC"
+
+					android:layout_height="wrap_content"
+					android:hint="Master Crédito.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/hiper_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/hiper"
+				android:layout_width="35dp"
+				android:layout_height="30dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/hiper"
+
+					android:layout_height="wrap_content"
+					android:hint="Hiper.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/hiperC_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/hiperc"
+				android:layout_width="40dp"
+				android:layout_height="35dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/hiperc"
+
+					android:layout_height="wrap_content"
+					android:hint="Hiper Card.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/cabal_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/cabal"
+				android:layout_width="35dp"
+				android:layout_height="30dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/cabal"
+
+					android:layout_height="wrap_content"
+					android:hint="Cabal Débito.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/pix_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/pix"
+				android:layout_width="35dp"
+				android:layout_height="30dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/pix"
+
+					android:layout_height="wrap_content"
+					android:hint="Pix.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/verde_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/verde"
+				android:layout_width="35dp"
+				android:layout_height="30dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/verde"
+
+					android:layout_height="wrap_content"
+					android:hint="Verde Card.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/soro_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/soro"
+				android:layout_width="35dp"
+				android:layout_height="30dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/soro"
+
+					android:layout_height="wrap_content"
+					android:hint="Soro Cred.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/person_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/person"
+				android:layout_width="35dp"
+				android:layout_height="30dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/person"
+
+					android:layout_height="wrap_content"
+					android:hint="Personal Card.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/ouro_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/ouro"
+				android:layout_width="35dp"
+				android:layout_height="30dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/ouro"
+
+					android:layout_height="wrap_content"
+					android:hint="Ouro Card.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/banric_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/banric"
+				android:layout_width="35dp"
+				android:layout_height="30dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/banrisul"
+
+					android:layout_height="wrap_content"
+					android:hint="Banrisul.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/banrico_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/banrico"
+				android:layout_width="35dp"
+				android:layout_height="30dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/banrico"
+
+					android:layout_height="wrap_content"
+					android:hint="Banri Compras.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/banes_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/banes"
+				android:layout_width="50dp"
+				android:layout_height="40dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/banes"
+
+					android:layout_height="wrap_content"
+					android:hint="Banes Card.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/americ_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
+
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/americ"
+				android:layout_width="50dp"
+				android:layout_height="50dp"/>
+
+			<android.support.design.widget.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				app:hintTextAppearance="@style/HintText"
+			>
+				<android.support.design.widget.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/americ"
+
+					android:layout_height="wrap_content"
+					android:hint="American Express.:" />
+
+			</android.support.design.widget.TextInputLayout>
+			
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+
+			<Button
+				android:id="@+id/canc"
+				android:layout_marginLeft="15dp"
+				android:layout_width="wrap_content"
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_height="wrap_content"
+				android:text="Cancelar"/>
+
+			<Button
+				android:id="@+id/fecha"
+				android:layout_marginRight="15dp"
+				android:layout_width="wrap_content"
+				style="?android:attr/buttonBarButtonStyle"
+				android:layout_height="wrap_content"
+				android:text="Fechar Caixa"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</ScrollView>
+
