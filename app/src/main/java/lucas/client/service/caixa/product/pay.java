@@ -3,6 +3,8 @@ import android.app.*;
 import android.content.*;
 import android.icu.text.*;
 import android.os.*;
+import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AppCompatActivity;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*;
@@ -17,7 +19,7 @@ import android.widget.TextView.*;
 import android.view.inputmethod.*;
 
 
-public class pay extends Activity
+public class pay extends AppCompatActivity
 {
 	DB db;
 	Context c = this;
@@ -28,7 +30,7 @@ public class pay extends Activity
 	ImageView im1, im2, im3, im4, im5;
 	LinearLayout lay1, lay2, lay3, lay4, lay5;
 	LinearLayout spnlay2, spnlay3, spnlay4, spnlay5;
-	EditText som1, som2, som3, som4, som5, 
+	TextInputEditText som1, som2, som3, som4, som5,
 	         pagto1, pagto2, pagto3, pagto4, pagto5,
 			 troco1, troco2, troco3, troco4, troco5;
 	@Override
