@@ -23,8 +23,8 @@
 				android:hint="Soma..."
 				android:id="@+id/som1"
 				android:inputType="numberDecimal"
-				android:textColorHint="#FFFFFF"
-				android:textColor="#FFFFFF"/>
+				android:textColorHint="#000000"
+				android:textColor="#050505"/>
 			<ImageView
 				android:id="@+id/im1"
 				android:layout_width="wrap_content"
@@ -38,34 +38,35 @@
 		</LinearLayout>
 
 		<LinearLayout
-			android:orientation="horizontal"
+			android:id="@+id/lay1"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="10dp"
-			android:layout_marginRight="10dp"
 			android:layout_marginTop="-10dp"
-			android:id="@+id/lay1">
+			android:layout_marginRight="10dp"
+			android:orientation="horizontal">
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="5"
-				android:layout_height="wrap_content"
-				android:hint="Pagto..."
 				android:id="@+id/pagto1"
-				android:inputType="numberDecimal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:baselineAligned="false"
+				android:ems="5"
+				android:hint="Pagto..."
 				android:imeOptions="actionDone"
-				android:textColor="#FFFFFF"
-				android:textColorHint="#FFFFFF"/>
+				android:inputType="numberDecimal"
+				android:textColor="#000000"
+				android:textColorHint="#000000" />
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="10"
-				android:layout_height="wrap_content"
-				android:hint="Troco..."
 				android:id="@+id/troco1"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="10"
+				android:hint="Troco..."
 				android:inputType="numberDecimal"
-				android:textColor="#FFFFFF"
-				android:textColorHint="#FFFFFF"/>
+				android:textColor="#191919"
+				android:textColorHint="#000000" />
 
 		</LinearLayout>
 
@@ -78,14 +79,14 @@
 			android:layout_margin="10dp">
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="7"
-				android:layout_height="wrap_content"
-				android:hint="Soma..."
 				android:id="@+id/som2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="7"
+				android:hint="Soma..."
 				android:inputType="numberDecimal"
-				android:textColor="#FFFFFF"
-				android:textColorHint="#FFFFFF"/>
+				android:textColor="#000000"
+				android:textColorHint="#000000" />
 			<ImageView
 				android:id="@+id/im2"
 				android:layout_width="wrap_content"
@@ -108,25 +109,25 @@
 			android:id="@+id/lay2">
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="5"
-				android:layout_height="wrap_content"
-				android:hint="Pagto..."
 				android:id="@+id/pagto2"
-				android:inputType="numberDecimal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="5"
+				android:hint="Pagto..."
 				android:imeOptions="actionDone"
-				android:textColor="#FFFEFE"
-				android:textColorHint="#FFFFFF"/>
+				android:inputType="numberDecimal"
+				android:textColor="#000000"
+				android:textColorHint="#000000" />
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="10"
-				android:layout_height="wrap_content"
-				android:hint="Troco..."
 				android:id="@+id/troco2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="10"
+				android:hint="Troco..."
 				android:inputType="numberDecimal"
-				android:textColor="#FFFFFF"
-				android:textColorHint="#FFF8F8"/>
+				android:textColor="#000000"
+				android:textColorHint="#090909" />
 
 		</LinearLayout>
 
@@ -139,14 +140,14 @@
 			android:layout_margin="10dp">
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="7"
-				android:layout_height="wrap_content"
-				android:hint="Soma..."
 				android:id="@+id/som3"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="7"
+				android:hint="Soma..."
 				android:inputType="numberDecimal"
-				android:textColor="#FFFFFF"
-				android:textColorHint="#FFFDFC"/>
+				android:textColor="#000000"
+				android:textColorHint="#000000" />
 			<ImageView
 				android:id="@+id/im3"
 				android:layout_width="wrap_content"
@@ -169,25 +170,25 @@
 			android:id="@+id/lay3">
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="5"
-				android:layout_height="wrap_content"
-				android:hint="Pagto..."
 				android:id="@+id/pagto3"
-				android:inputType="numberDecimal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="5"
+				android:hint="Pagto..."
 				android:imeOptions="actionDone"
-				android:textColor="#FFFFFF"
-				android:textColorHint="#FFF0F3"/>
+				android:inputType="numberDecimal"
+				android:textColor="#000000"
+				android:textColorHint="#000000" />
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="10"
-				android:layout_height="wrap_content"
-				android:hint="Troco..."
 				android:id="@+id/troco3"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="10"
+				android:hint="Troco..."
 				android:inputType="numberDecimal"
-				android:textColorHint="#FFFFFF"
-				android:textColor="#FFFFFF"/>
+				android:textColor="#000000"
+				android:textColorHint="#000000" />
 
 		</LinearLayout>
 
@@ -200,14 +201,14 @@
 			android:layout_margin="10dp">
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="7"
-				android:layout_height="wrap_content"
-				android:hint="Soma..."
 				android:id="@+id/som4"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="7"
+				android:hint="Soma..."
 				android:inputType="numberDecimal"
-				android:textColor="#FFFAFA"
-				android:textColorHint="#FFF2F3"/>
+				android:textColor="#020202"
+				android:textColorHint="#000000" />
 			<ImageView
 				android:id="@+id/im4"
 				android:layout_width="wrap_content"
@@ -230,15 +231,15 @@
 			android:id="@+id/lay4">
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="5"
-				android:layout_height="wrap_content"
-				android:hint="Pagto..."
 				android:id="@+id/pagto4"
-				android:inputType="numberDecimal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="5"
+				android:hint="Pagto..."
 				android:imeOptions="actionDone"
-				android:textColor="#F6F6F6"
-				android:textColorHint="#FFFBFA"/>
+				android:inputType="numberDecimal"
+				android:textColor="#000000"
+				android:textColorHint="#000000" />
 
 			<EditText
 				android:layout_width="wrap_content"
@@ -261,14 +262,14 @@
 			android:layout_margin="10dp">
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="7"
-				android:layout_height="wrap_content"
-				android:hint="Soma..."
 				android:id="@+id/som5"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="7"
+				android:hint="Soma..."
 				android:inputType="numberDecimal"
-				android:textColor="#FFFFFE"
-				android:textColorHint="#FFF5F8"/>
+				android:textColor="#000000"
+				android:textColorHint="#000000" />
 			<ImageView
 				android:id="@+id/im5"
 				android:layout_width="wrap_content"
@@ -291,25 +292,25 @@
 			android:id="@+id/lay5">
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="5"
-				android:layout_height="wrap_content"
-				android:hint="Pagto..."
 				android:id="@+id/pagto5"
-				android:inputType="numberDecimal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="5"
+				android:hint="Pagto..."
 				android:imeOptions="actionDone"
-				android:textColor="#FFFFFF"
-				android:textColorHint="#FFFCFC"/>
+				android:inputType="numberDecimal"
+				android:textColor="#000000"
+				android:textColorHint="#000000" />
 
 			<EditText
-				android:layout_width="wrap_content"
-				android:ems="10"
-				android:layout_height="wrap_content"
-				android:hint="Troco..."
 				android:id="@+id/troco5"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ems="10"
+				android:hint="Troco..."
 				android:inputType="numberDecimal"
-				android:textColor="#FAF9F9"
-				android:textColorHint="#FFF1F6"/>
+				android:textColor="#000000"
+				android:textColorHint="#000000" />
 
 		</LinearLayout>
 <LinearLayout
