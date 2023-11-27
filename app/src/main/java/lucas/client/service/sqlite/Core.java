@@ -7,12 +7,17 @@ public class Core extends SQLiteOpenHelper
 	public static String name = "myDB.db";
 	
 	public Core(Context c){
-		super(c, name, null, 7);
+		super(c, name, null, 8);
 	}
 	@Override
 	public void onCreate(SQLiteDatabase db)
 	{
 		// TODO: Implement this method
+		db.execSQL("CREATE TABLE ContasPagar" +
+				"(id integer primary key, codigo text, classificacao text, valor_pagar text, data_vencimento text, empresa text, " +
+				"conta_bancaria text, valor_pagar_ag text, data_ag text, pessoa text, data_comp text, desc_ag text, " +
+				"comentarios text, status text, valor_pago text, saldo_pagar text);");
+
 		db.execSQL("CREATE TABLE senhas" + 
 		           "(userId integer primary key, usuario text, senha text);");
 		
