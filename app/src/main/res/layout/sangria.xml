@@ -11,6 +11,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="5dp"
+		android:textColorHint="#000000"
 		app:hintTextAppearance="@style/HintTextSan"
 	>
 
@@ -22,7 +23,7 @@
 			android:ems="30"
 			android:hint="Valor.:"
 			android:inputType="numberDecimal"
-			tools:textColorHint="#ffffff" />
+			 />
 
 	</android.support.design.widget.TextInputLayout>
 	
@@ -30,6 +31,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="5dp"
+		android:textColorHint="#000000"
 		app:hintTextAppearance="@style/HintTextSan"
 	>
 

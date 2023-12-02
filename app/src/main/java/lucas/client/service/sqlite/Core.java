@@ -7,11 +7,24 @@ public class Core extends SQLiteOpenHelper
 	public static String name = "myDB.db";
 	
 	public Core(Context c){
-		super(c, name, null, 8);
+		super(c, name, null, 1);
 	}
 	@Override
 	public void onCreate(SQLiteDatabase db)
 	{
+		db.execSQL("CREATE TABLE ContasReceber" +
+				"(id integer primary key, docto text, cliente text, dataCadastro text, valRecebido text, valDoc text, desconto text, acrescimo text, saldo text, status text);");
+		db.execSQL("CREATE TABLE BaixaBoletos" +
+				"(id integer primary key, data text, vencimento text, valor text, tipo text, status text, descricao text, imagem blob);");
+
+		// TODO: Implement this method
+		db.execSQL("CREATE TABLE Boletos" +
+				"(id integer primary key, data text, vencimento text, valor text, tipo text, status text, descricao text, imagem blob);");
+		db.execSQL("CREATE TABLE ContasPagar" +
+				"(id integer primary key, codigo text, classificacao text, valor_pagar text, data_vencimento text, empresa text, " +
+				"conta_bancaria text, valor_pagar_ag text, data_ag text, pessoa text, data_comp text, desc_ag text, " +
+				"comentarios text, status text, valor_pago text, saldo_pagar text);");
+
 		// TODO: Implement this method
 		db.execSQL("CREATE TABLE ContasPagar" +
 				"(id integer primary key, codigo text, classificacao text, valor_pagar text, data_vencimento text, empresa text, " +

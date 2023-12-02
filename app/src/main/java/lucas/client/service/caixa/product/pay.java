@@ -41,7 +41,7 @@ public class pay extends AppCompatActivity
 		
 		LayoutInflater li = getLayoutInflater();
 		View r = li.inflate(R.layout.fecha_pedido, null);
-		final String[] opts = {"N/A","Dinheiro", "Elo Débito","Elo Crédito","Visa Débito", "Visa Crédito", "Master Débito", "Master Crédito", "Hiper", "Hiper Card", "Cabal Débito", "Pix", "Verde Card", "Soro Cred", "Ouro Card", "Personal Card", "Banrisul", "Banri Compras", "Banes Card", "American Express"};
+		final String[] opts = {"Selecione a Forma de Pagto","Dinheiro", "Elo Débito","Elo Crédito","Visa Débito", "Visa Crédito", "Master Débito", "Master Crédito", "Hiper", "Hiper Card", "Cabal Débito", "Pix", "Verde Card", "Soro Cred", "Ouro Card", "Personal Card", "Banrisul", "Banri Compras", "Banes Card", "American Express"};
 		final Spinner spn1 = r.findViewById(R.id.spn1);
 		final Spinner spn2 = r.findViewById(R.id.spn2);
 		final Spinner spn3 = r.findViewById(R.id.spn3);
