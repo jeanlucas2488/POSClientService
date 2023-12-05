@@ -12,6 +12,18 @@
         android:theme="@style/AppTheme"
         tools:targetApi="34">
         <activity
+            android:theme="@style/AppTheme"
+            android:name=".dbImport"
+            android:exported="true"
+            android:label="POS DB" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:theme="@style/dialog"
             android:name=".caixa.selfConfig"
             android:exported="true"

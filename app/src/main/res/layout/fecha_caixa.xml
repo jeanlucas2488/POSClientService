@@ -619,7 +619,7 @@
 
 			<ImageView
 				android:layout_marginTop="20dp"
-				android:src="@drawable/ouro"
+				android:src="@drawable/ouro_card"
 				android:layout_width="35dp"
 				android:layout_height="30dp"/>
 

@@ -127,5 +127,40 @@ public class Login extends AppCompatActivity
 		b.create();
 		b.show();
 		
-    } 
+    }
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
+			try {
+				File sd = Environment.getExternalStorageDirectory();
+				File data = Environment.getDataDirectory();
+
+				if (sd.canWrite()) {
+					String  currentDBPath= "//data//" + c.getOpPackageName()
+							+ "//databases//" + "myDB.db";
+					String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
+					File dbshm = new File(data, currentDBPath + "-shm");
+					File dbwal = new File(data, currentDBPath + "-wal");
+					if (dbshm.exists()) {
+						dbshm.delete();
+					}
+					if (dbwal.exists()) {
+						dbwal.delete();
+					}
+					File currentDB = new File(data, currentDBPath);
+					File backupDB = new File(sd, backupDBPath);
+					FileChannel src = new FileInputStream(backupDB).getChannel();
+					FileChannel dst = new FileOutputStream(currentDB).getChannel();
+					dst.transferFrom(src, 0, src.size());
+					src.close();
+					dst.close();
+					Toast.makeText(c, "Sucesso", Toast.LENGTH_LONG).show();
+				}
+			} catch (Exception e) {
+				Toast.makeText(c, "Falha", Toast.LENGTH_LONG).show();
+			}
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 }

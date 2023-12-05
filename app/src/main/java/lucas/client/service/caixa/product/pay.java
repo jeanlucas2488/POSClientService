@@ -16,7 +16,6 @@ import lucas.client.service.caixa.*;
 import lucas.client.service.etc.*;
 import lucas.client.service.sqlite.*;
 import android.widget.TextView.*;
-import android.view.inputmethod.*;
 
 
 public class pay extends AppCompatActivity
@@ -2057,7 +2056,7 @@ public class pay extends AppCompatActivity
 						pr.setMargins(+15,+25,+5,0);
 						som1.setEms(5);
 						im1.setLayoutParams(pr);
-						im1.setImageResource(R.drawable.ouro);
+						im1.setImageResource(R.drawable.ouro_card);
 						try{
 							db = new DB(c);
 							List<util> rd;
@@ -4452,7 +4451,7 @@ public class pay extends AppCompatActivity
 						pr.setMargins(+15,+25,+5,0);
 						som2.setEms(5);
 						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.ouro);
+						im2.setImageResource(R.drawable.ouro_card);
 						try{
 							db = new DB(c);
 							List<util> rd;
@@ -6848,7 +6847,7 @@ public class pay extends AppCompatActivity
 						pr.setMargins(+15,+25,+5,0);
 						som3.setEms(5);
 						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.ouro);
+						im3.setImageResource(R.drawable.ouro_card);
 						try{
 							db = new DB(c);
 							List<util> rd;
@@ -9243,7 +9242,7 @@ public class pay extends AppCompatActivity
 						pr.setMargins(+15,+25,+5,0);
 						som4.setEms(5);
 						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.ouro);
+						im4.setImageResource(R.drawable.ouro_card);
 						try{
 							db = new DB(c);
 							List<util> rd;
@@ -11638,7 +11637,7 @@ public class pay extends AppCompatActivity
 						pr.setMargins(+15,+25,+5,0);
 						som5.setEms(5);
 						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.ouro);
+						im5.setImageResource(R.drawable.ouro_card);
 						try{
 							db = new DB(c);
 							List<util> rd;
