@@ -18,13 +18,13 @@
 			android:layout_height="wrap_content"
 			android:layout_margin="10dp">
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/som1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 
 			<ImageView
 				android:id="@+id/im1"
@@ -56,13 +56,13 @@
 			android:layout_marginRight="10dp"
 			android:orientation="horizontal">
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/pagto1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -71,15 +71,15 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/troco1"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 		</LinearLayout>
 
 		<LinearLayout
@@ -99,13 +99,13 @@
 			android:layout_height="wrap_content"
 			android:layout_margin="10dp">
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/som2"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 			<ImageView
 				android:id="@+id/im2"
 				android:layout_width="wrap_content"
@@ -136,13 +136,13 @@
 			android:layout_marginTop="-10dp"
 			android:id="@+id/lay2">
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/pagto2"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -151,15 +151,15 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/troco2"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 		</LinearLayout>
 
 		<LinearLayout
@@ -179,13 +179,13 @@
 			android:layout_height="wrap_content"
 			android:layout_margin="10dp">
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/som3"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -194,7 +194,7 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 			<ImageView
 				android:id="@+id/im3"
 				android:layout_width="wrap_content"
@@ -216,13 +216,13 @@
 			android:layout_marginTop="-10dp"
 			android:id="@+id/lay3">
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/pagto3"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -231,15 +231,15 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/troco3"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -248,7 +248,7 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 
 		</LinearLayout>
 
@@ -260,13 +260,13 @@
 			android:layout_height="wrap_content"
 			android:layout_margin="10dp">
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/som4"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -275,7 +275,7 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 			<ImageView
 				android:id="@+id/im4"
 				android:layout_width="wrap_content"
@@ -297,13 +297,13 @@
 			android:layout_marginTop="-10dp"
 			android:id="@+id/lay4">
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/pagto4"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -312,15 +312,15 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/troco4"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -329,7 +329,7 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 
 		</LinearLayout>
 
@@ -341,13 +341,13 @@
 			android:layout_height="wrap_content"
 			android:layout_margin="10dp">
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/som5"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -356,7 +356,7 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 			<ImageView
 				android:id="@+id/im5"
 				android:layout_width="wrap_content"
@@ -378,13 +378,13 @@
 			android:layout_marginTop="-10dp"
 			android:id="@+id/lay5">
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/pagto5"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -393,15 +393,15 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				app:hintTextAppearance="@style/HintTextSan"
 				>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/troco5"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -410,7 +410,7 @@
 					android:inputType="numberDecimal"
 					android:textColor="#000000" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 
 		</LinearLayout>
 <LinearLayout

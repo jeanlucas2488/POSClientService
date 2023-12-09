@@ -13,8 +13,10 @@ import lucas.client.service.*;
 import lucas.client.service.caixa.*;
 import lucas.client.service.etc.*;
 import lucas.client.service.sqlite.*;
-import android.support.design.widget.*;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 public class fechaCaixa extends AppCompatActivity
 {

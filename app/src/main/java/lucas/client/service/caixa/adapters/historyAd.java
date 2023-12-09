@@ -4,7 +4,7 @@ import android.widget.*;
 import java.util.*;
 import lucas.client.service.*;
 import android.view.*;
-import android.support.v4.view.*;
+
 import lucas.client.service.etc.*;
 
 public class historyAd extends ArrayAdapter<util>

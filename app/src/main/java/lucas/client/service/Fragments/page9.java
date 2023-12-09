@@ -5,11 +5,9 @@ import android.content.*;
 import android.graphics.*;
 import android.icu.text.*;
 import android.os.*;
-import android.support.annotation.*;
-import android.support.v4.app.*;
-import android.support.v7.widget.*;
+import androidx.annotation.*;
+import androidx.appcompat.widget.*;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
 import android.widget.TextView.*;
@@ -18,14 +16,13 @@ import java.nio.channels.*;
 import java.util.*;
 import lucas.client.service.*;
 import lucas.client.service.Fragments.adapter.productAdapter;
-import lucas.client.service.caixa.*;
 import lucas.client.service.caixa.adapters.*;
 import lucas.client.service.caixa.product.*;
 import lucas.client.service.etc.*;
 import lucas.client.service.sqlite.*;
 
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.SearchView;
 import android.view.View.OnClickListener;
 
 

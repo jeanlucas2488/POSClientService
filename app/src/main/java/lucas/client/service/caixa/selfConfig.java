@@ -1,8 +1,22 @@
 package lucas.client.service.caixa;
+import android.Manifest;
 import android.app.*;
 import android.content.*;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.*;
-import android.support.v4.app.*;
+import android.provider.Settings;
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.*;
+import androidx.core.content.ContextCompat;
+
 import java.io.*;
 import java.nio.channels.*;
 import java.util.*;
@@ -10,14 +24,16 @@ import lucas.client.service.*;
 import lucas.client.service.etc.*;
 import lucas.client.service.sqlite.*;
 
+import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
-public class selfConfig extends Activity
+public class selfConfig extends AppCompatActivity
 {
 	ProgressDialog progress;
 	Context c = this;
 	private static final int PERMISSION_REQUEST_CODE = 200;
+	private static final String TAG = "Permisssion";
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -41,9 +57,15 @@ public class selfConfig extends Activity
 							handle.sendMessage(handle.obtainMessage());
 							if (progress.getProgress() == 10) {
 								progress.setMessage("Checando Permissões...");
-								ActivityCompat.requestPermissions(selfConfig.this, new String[]{WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
-								Thread.sleep(5000);
-								progress.setMessage("Continuando configuração do POS...");
+								if(checkPermission()){
+									progress.setMessage("Continuando Configuração do POS...");
+								} else {
+									requestPermission();
+									progress.dismiss();
+									finishAffinity();
+									Thread.sleep(999999999);
+
+								}
 							}
 							
 							if(progress.getProgress() == 20){
@@ -157,5 +179,72 @@ public class selfConfig extends Activity
 			progress.incrementProgressBy(2);
 		}
 	};
-	
+	private void requestPermission(){
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+			try{
+
+				Intent it = new Intent();
+				it.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+				Uri uri = Uri.fromParts("package", this.getPackageName(), null);
+				it.setData(uri);
+				storageActivityResultLauncher.launch(it);
+			}catch (Exception e){
+
+				Intent it2 = new Intent();
+				it2.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+				storageActivityResultLauncher.launch(it2);
+			}
+		} else {
+			ActivityCompat.requestPermissions(selfConfig.this, new String[]{WRITE_EXTERNAL_STORAGE, MANAGE_EXTERNAL_STORAGE,  READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+		}
+	}
+	private ActivityResultLauncher<Intent> storageActivityResultLauncher =
+			registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+					new ActivityResultCallback<ActivityResult>(){
+
+						@Override
+						public void onActivityResult(ActivityResult o) {
+							if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+								//Android is 11 (R) or above
+								if(Environment.isExternalStorageManager()){
+									//Manage External Storage Permissions Granted
+
+									Log.d(TAG, "onActivityResult: Manage External Storage Permissions Granted");
+								}else{
+									Toast.makeText(c, "Storage Permissions Denied", Toast.LENGTH_SHORT).show();
+								}
+							}else{
+								//Below android 11
+
+							}
+						}
+					});
+
+	public boolean checkPermission(){
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+			return Environment.isExternalStorageManager();
+		} else {
+			int write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+			int read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+
+			return write == PackageManager.PERMISSION_GRANTED && read == PackageManager.PERMISSION_GRANTED;
+		}
+
+	}
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if(requestCode == PERMISSION_REQUEST_CODE){
+			if(grantResults.length > 0){
+				boolean write = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+				boolean read = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+				if(read && write){
+					Toast.makeText(c, "Storage Permissions Granted", Toast.LENGTH_SHORT).show();
+				}else{
+					Toast.makeText(c, "Storage Permissions Denied", Toast.LENGTH_SHORT).show();
+				}
+			}
+		}
+	}
 }

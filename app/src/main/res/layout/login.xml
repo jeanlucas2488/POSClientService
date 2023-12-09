@@ -13,14 +13,14 @@
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
 			android:orientation="vertical">
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="5dp"
 				app:hintTextAppearance="@style/HintText"
 			>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/usuario"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -29,16 +29,16 @@
 					android:hint="Usuário.:"
 					tools:textColorHint="#ffffff" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 			
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="5dp"
 				app:hintTextAppearance="@style/HintText"
 			>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/senha"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -48,16 +48,16 @@
 					android:inputType="textPassword"
 					android:textColorHint="#ffffff" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 			
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="5dp"
 				app:hintTextAppearance="@style/HintText"
 			>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/operador"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -66,16 +66,16 @@
 					android:hint="Operador.:"
 					android:textColorHint="#ffffff" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 			
-			<android.support.design.widget.TextInputLayout
+			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="5dp"
 				app:hintTextAppearance="@style/HintText"
 			>
 
-				<android.support.design.widget.TextInputEditText
+				<com.google.android.material.textfield.TextInputEditText
 					android:id="@+id/fundo"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
 					android:inputType="numberDecimal"
 					android:textColorHint="#ffffff" />
 
-			</android.support.design.widget.TextInputLayout>
+			</com.google.android.material.textfield.TextInputLayout>
 			
 	<LinearLayout
 		android:orientation="horizontal"

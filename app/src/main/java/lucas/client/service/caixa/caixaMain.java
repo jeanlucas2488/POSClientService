@@ -1,26 +1,22 @@
 package lucas.client.service.caixa;
 
-import android.app.*;
 import android.content.*;
 import android.graphics.*;
 import android.icu.text.*;
 import android.os.*;
-import android.support.design.widget.*;
-import android.support.v4.view.*;
-import android.support.v7.app.*;
-import android.support.v7.widget.*;
+
+import androidx.appcompat.app.*;
+import androidx.appcompat.widget.*;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
 import android.widget.AdapterView.*;
-import android.widget.TextView.*;
+
 import java.io.*;
 import java.nio.channels.*;
 import java.util.*;
 import lucas.client.service.*;
 import lucas.client.service.Fragments.*;
 import lucas.client.service.Fragments.adapter.*;
-import lucas.client.service.caixa.*;
 import lucas.client.service.caixa.adapters.*;
 import lucas.client.service.caixa.product.*;
 import lucas.client.service.caixa.setup.fechamentos.*;
@@ -29,9 +25,14 @@ import lucas.client.service.etc.*;
 import lucas.client.service.sqlite.*;
 
 import android.app.AlertDialog;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View.OnClickListener;
+
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.textfield.TextInputEditText;
 
 
 public class caixaMain extends AppCompatActivity

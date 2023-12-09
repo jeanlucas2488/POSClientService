@@ -1,5 +1,4 @@
 package lucas.client.service.caixa.setup.lancamentos;
-import android.app.*;
 import android.os.*;
 import lucas.client.service.*;
 import android.widget.*;
@@ -10,8 +9,8 @@ import android.view.*;
 import lucas.client.service.sqlite.*;
 import android.content.*;
 import lucas.client.service.etc.*;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class historico extends AppCompatActivity
 {
