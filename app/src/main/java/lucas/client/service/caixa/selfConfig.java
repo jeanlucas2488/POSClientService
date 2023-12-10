@@ -161,6 +161,7 @@ public class selfConfig extends AppCompatActivity
 								progress.setMessage("Executando Abertura do POS...");
 								Thread.sleep(2000);
 								progress.dismiss();
+								progress.cancel();
 								Intent itt = new Intent(c, Login.class);
 								startActivity(itt);
 								

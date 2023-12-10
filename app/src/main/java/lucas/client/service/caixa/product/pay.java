@@ -194,65 +194,7 @@ public class pay extends AppCompatActivity
 					return false;
 				}
 			});
-		fim.setOnClickListener(new OnClickListener(){
 
-				@Override
-				public void onClick(View p1)
-				{
-					// TODO: Implement this method
-					DB de = new DB(c);
-					de.limpaCarrinho();
-					try {
-						File sd = Environment.getExternalStorageDirectory();
-						File data = Environment.getDataDirectory();
-
-						if (sd.canWrite()) {
-							String  currentDBPath= "//data//" + c.getOpPackageName()
-								+ "//databases//" + "myDB.db";
-							String  currentDBPath2 = "//data//" + c.getOpPackageName()
-								+ "//databases//" + "myDB.db-shm";
-							String  currentDBPath3 = "//data//" + c.getOpPackageName()
-								+ "//databases//" + "myDB.db-wal";
-
-							String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-							String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-							String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-							File currentDB = new File(data, currentDBPath);
-							File currentDB2 = new File(data, currentDBPath2);
-							File currentDB3 = new File(data, currentDBPath3);
-							File backupDB = new File(sd, backupDBPath);
-							File backupDB2 = new File(sd, backupDBPath2);
-							File backupDB3 = new File(sd, backupDBPath3);
-
-							if(currentDB2.exists()){
-								FileChannel src = new FileInputStream(currentDB2).getChannel();
-								FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-								dst.transferFrom(src, 0, src.size());
-								src.close();
-								dst.close();
-							}
-							if(currentDB3.exists()){
-								FileChannel src = new FileInputStream(currentDB3).getChannel();
-								FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-								dst.transferFrom(src, 0, src.size());
-								src.close();
-								dst.close();
-							}
-							FileChannel src = new FileInputStream(currentDB).getChannel();
-							FileChannel dst = new FileOutputStream(backupDB).getChannel();
-							dst.transferFrom(src, 0, src.size());
-							src.close();
-							dst.close();
-						}
-					} catch (Exception e2) {
-
-					}
-					Intent itt = new Intent(c, caixaMain.class);
-					startActivity(itt);
-					
-				}
-			});
 		tipo.setOnClickListener(new OnClickListener(){
 
 				@Override
@@ -349,124 +291,9 @@ public class pay extends AppCompatActivity
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.money);
 						lay1.setVisibility(View.VISIBLE);
-							try{
-								db = new DB(c);
-								List<util> rd;
-								rd = db.moFind();
-								if(!rd.get(0).getMoney().equals("")){
-									String re1 = rd.get(0).getMoney();
-									String re2 = som1.getText().toString();
-									Double d0 = new Double(re1);
-									Double d1 = new Double(re2);
-									double res = d0 + d1;
-									DecimalFormatSymbols df = new DecimalFormatSymbols();
-									df.setGroupingSeparator('.');
-									df.setDecimalSeparator('.');
-									DecimalFormat dform = new DecimalFormat("####.##", df);
-									util us = new util();
-									us.setMoney(dform.format(res));
-									db.delMoney();
-									db.moneyIn(us);	
-									try {
-										File sd = Environment.getExternalStorageDirectory();
-										File data = Environment.getDataDirectory();
 
-										if (sd.canWrite()) {
-											String  currentDBPath= "//data//" + c.getOpPackageName()
-												+ "//databases//" + "myDB.db";
-											String  currentDBPath2 = "//data//" + c.getOpPackageName()
-												+ "//databases//" + "myDB.db-shm";
-											String  currentDBPath3 = "//data//" + c.getOpPackageName()
-												+ "//databases//" + "myDB.db-wal";
-
-											String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-											String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-											String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-											File currentDB = new File(data, currentDBPath);
-											File currentDB2 = new File(data, currentDBPath2);
-											File currentDB3 = new File(data, currentDBPath3);
-											File backupDB = new File(sd, backupDBPath);
-											File backupDB2 = new File(sd, backupDBPath2);
-											File backupDB3 = new File(sd, backupDBPath3);
-
-											if(currentDB2.exists()){
-												FileChannel src = new FileInputStream(currentDB2).getChannel();
-												FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-												dst.transferFrom(src, 0, src.size());
-												src.close();
-												dst.close();
-											}
-											if(currentDB3.exists()){
-												FileChannel src = new FileInputStream(currentDB3).getChannel();
-												FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-												dst.transferFrom(src, 0, src.size());
-												src.close();
-												dst.close();
-											}
-											FileChannel src = new FileInputStream(currentDB).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-									} catch (Exception e2) {
-
-									}
-								} else {}
-							}catch(Exception e){
-								util us = new util();
-								us.setMoney(som1.getText().toString());
-								DB d1 = new DB(c);
-								d1.moneyIn(us);
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							}
 					} else {lay1.setVisibility(View.GONE);}
+
 					if(opts[p3].toString().startsWith("Selecione")){
 						im1.setVisibility(View.GONE);
 						som1.setEms(7);
@@ -478,123 +305,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.elo);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.eloDFind();
-							if(!rd.get(0).getEloD().equals("")){
-								String re1 = rd.get(0).getEloD();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setEloD(dform.format(res));
-								db.delEloD();
-								db.eloDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setEloD(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.eloDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Elo Crédito")){
 						im1.setVisibility(View.VISIBLE);
@@ -603,123 +314,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.elo);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.eloCFind();
-							if(!rd.get(0).getEloC().equals("")){
-								String re1 = rd.get(0).getEloC();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setEloC(dform.format(res));
-								db.delEloC();
-								db.eloCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setEloC(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.eloCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Visa Débito")){
 						im1.setVisibility(View.VISIBLE);
@@ -728,123 +323,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.visa);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.visaDFind();
-							if(!rd.get(0).getVisaD().equals("")){
-								String re1 = rd.get(0).getVisaD();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVisaD(dform.format(res));
-								db.delVisaD();
-								db.visaDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVisaD(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.visaDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Visa Crédito")){
 						im1.setVisibility(View.VISIBLE);
@@ -853,123 +332,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.visa);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.visaCFind();
-							if(!rd.get(0).getVisaC().equals("")){
-								String re1 = rd.get(0).getVisaC();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVisaC(dform.format(res));
-								db.delVisaC();
-								db.visaCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVisaC(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.visaCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Master Débito")){
 						im1.setVisibility(View.VISIBLE);
@@ -978,123 +341,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.master);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.masterDFind();
-							if(!rd.get(0).getMasterD().equals("")){
-								String re1 = rd.get(0).getMasterD();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMasterD(dform.format(res));
-								db.delMasterD();
-								db.masterDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setMasterD(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.masterDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Master Crédito")){
 						im1.setVisibility(View.VISIBLE);
@@ -1103,123 +350,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.master);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.masterCFind();
-							if(!rd.get(0).getMasterC().equals("")){
-								String re1 = rd.get(0).getMasterC();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMasterC(dform.format(res));
-								db.delMasterC();
-								db.masterCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setMasterC(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.masterCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Hiper")){
 						im1.setVisibility(View.VISIBLE);
@@ -1228,123 +359,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(6);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.hiper);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.hiperFind();
-							if(!rd.get(0).getHiper().equals("")){
-								String re1 = rd.get(0).getHiper();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setHiper(dform.format(res));
-								db.delHiper();
-								db.hiperIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setHiper(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.hiperIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Hiper Card")){
 						im1.setVisibility(View.VISIBLE);
@@ -1353,123 +368,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.hiperc);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.hiperCFind();
-							if(!rd.get(0).getHiperC().equals("")){
-								String re1 = rd.get(0).getHiperC();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setHiperC(dform.format(res));
-								db.delHiperC();
-								db.hiperCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setHiperC(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.hiperCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Cabal")){
 						im1.setVisibility(View.VISIBLE);
@@ -1478,123 +377,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.cabal);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.cabalFind();
-							if(!rd.get(0).getCabal().equals("")){
-								String re1 = rd.get(0).getCabal();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setCabal(dform.format(res));
-								db.delCabal();
-								db.cabalIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setCabal(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.cabalIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Pix")){
 						im1.setVisibility(View.VISIBLE);
@@ -1603,123 +386,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(7);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.pix);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.pixFind();
-							if(!rd.get(0).getPix().equals("")){
-								String re1 = rd.get(0).getPix();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setPix(dform.format(res));
-								db.delPix();
-								db.pixIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setPix(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.pixIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Verde Card")){
 						im1.setVisibility(View.VISIBLE);
@@ -1728,123 +395,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(5);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.verde);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.verdeFind();
-							if(!rd.get(0).getVerde().equals("")){
-								String re1 = rd.get(0).getVerde();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVerde(dform.format(res));
-								db.delVerde();
-								db.verdeIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVerde(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.verdeIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Soro Cred")){
 						im1.setVisibility(View.VISIBLE);
@@ -1853,77 +404,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(5);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.soro);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.soroFind();
-							if(!rd.get(0).getSoro().equals("")){
-								String re1 = rd.get(0).getSoro();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setSoro(dform.format(res));
-								db.delSoro();
-								db.soroIn(us);	
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setSoro(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.soroIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Personal Card")){
 						im1.setVisibility(View.VISIBLE);
@@ -1932,123 +413,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.person);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.personFind();
-							if(!rd.get(0).getPerson().equals("")){
-								String re1 = rd.get(0).getPerson();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setPerson(dform.format(res));
-								db.delPerson();
-								db.personIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setPerson(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.personIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Ouro Card")){
 						im1.setVisibility(View.VISIBLE);
@@ -2057,123 +422,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(5);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.ouro_card);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.ouroFind();
-							if(!rd.get(0).getOuro().equals("")){
-								String re1 = rd.get(0).getOuro();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setOuro(dform.format(res));
-								db.delOuro();
-								db.ouroIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setOuro(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.ouroIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Banrisul")){
 						im1.setVisibility(View.VISIBLE);
@@ -2182,123 +431,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(5);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.banric);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banriFind();
-							if(!rd.get(0).getbanric().equals("")){
-								String re1 = rd.get(0).getbanric();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanric(dform.format(res));
-								db.delBanric();
-								db.banriIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanric(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.banriIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Banri Compras")){
 						im1.setVisibility(View.VISIBLE);
@@ -2307,123 +440,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.banrico);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banriCFind();
-							if(!rd.get(0).getBanriC().equals("")){
-								String re1 = rd.get(0).getBanriC();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanriC(dform.format(res));
-								db.delBanriC();
-								db.banriCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanriC(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.banriCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("Banes Card")){
 						im1.setVisibility(View.VISIBLE);
@@ -2432,123 +449,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.banes);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banesFind();
-							if(!rd.get(0).getBanes().equals("")){
-								String re1 = rd.get(0).getBanes();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanes(dform.format(res));
-								db.delBanes();
-								db.banesIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanes(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.banesIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 					if(opts[p3].toString().startsWith("American Express")){
 						im1.setVisibility(View.VISIBLE);
@@ -2557,123 +458,7 @@ public class pay extends AppCompatActivity
 						som1.setEms(4);
 						im1.setLayoutParams(pr);
 						im1.setImageResource(R.drawable.americ);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.ameFind();
-							if(!rd.get(0).getAmeric().equals("")){
-								String re1 = rd.get(0).getAmeric();
-								String re2 = som1.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setAmeric(dform.format(res));
-								db.delAmeric();
-								db.americIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setAmeric(som1.getText().toString());
-							DB d1 = new DB(c);
-							d1.americIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
 					} else {}
 				}
 				@Override
@@ -2683,9588 +468,3574 @@ public class pay extends AppCompatActivity
 					
 				}
 		});
-		spn2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+		spn2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-				@Override
-				public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
-				{
-					// TODO: Implement this method
-					opts2 = p3;
-					if(opts[p3].toString().startsWith("Dinheiro")){
-						lay2.setVisibility(View.VISIBLE);
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(90,85);
-						pr.setMargins(+15,+15,+10,0);
-						som2.setEms(5);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.money);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.moFind();
-							if(!rd.get(0).getMoney().equals("")){
-								String re1 = rd.get(0).getMoney();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMoney(dform.format(res));
-								db.delMoney();
-								db.moneyIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int p3, long id) {
+				if(opts[p3].toString().startsWith("Dinheiro")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(90,85);
+					pr.setMargins(+15,+15,+10,0);
+					som2.setEms(5);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.money);
+					lay2.setVisibility(View.VISIBLE);
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
+				} else {lay2.setVisibility(View.GONE);}
 
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+				if(opts[p3].toString().startsWith("Selecione")){
+					im2.setVisibility(View.GONE);
+					som2.setEms(7);
+				}
+				if(opts[p3].toString().startsWith("Elo Débito")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
+					pr.setMargins(+15,+15,+10,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.elo);
 
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
+				} else {}
+				if(opts[p3].toString().startsWith("Elo Crédito")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
+					pr.setMargins(+15,+15,+10,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.elo);
 
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
+				} else {}
+				if(opts[p3].toString().startsWith("Visa Débito")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+17,+5,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.visa);
 
-								}
-							} else {}
-						}catch(Exception e){
+				} else {}
+				if(opts[p3].toString().startsWith("Visa Crédito")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+17,+5,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.visa);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Master Débito")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+15,+5,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.master);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Master Crédito")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+15,+5,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.master);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Hiper")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(55,50);
+					pr.setMargins(+15,+30,+5,0);
+					som2.setEms(6);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.hiper);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Hiper Card")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(85,80);
+					pr.setMargins(+15,+15,+5,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.hiperc);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Cabal")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+35,+5,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.cabal);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Pix")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+15,0,0);
+					som2.setEms(7);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.pix);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Verde Card")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+20,+5,0);
+					som2.setEms(5);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.verde);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Soro Cred")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+20,+5,0);
+					som2.setEms(5);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.soro);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Personal Card")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,+5,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.person);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Ouro Card")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(70,60);
+					pr.setMargins(+15,+25,+5,0);
+					som2.setEms(5);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.ouro_card);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banrisul")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,15,+5,0);
+					som2.setEms(5);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.banric);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banri Compras")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+25,+5,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.banrico);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banes Card")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,+5,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.banes);
+
+				} else {}
+				if(opts[p3].toString().startsWith("American Express")){
+					im2.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,0,0);
+					som2.setEms(4);
+					im2.setLayoutParams(pr);
+					im2.setImageResource(R.drawable.americ);
+
+				} else {}
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
+		spn3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int p3, long id) {
+				if(opts[p3].toString().startsWith("Dinheiro")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(90,85);
+					pr.setMargins(+15,+15,+10,0);
+					som3.setEms(5);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.money);
+					lay3.setVisibility(View.VISIBLE);
+
+				} else {lay3.setVisibility(View.GONE);}
+
+				if(opts[p3].toString().startsWith("Selecione")){
+					im3.setVisibility(View.GONE);
+					som3.setEms(7);
+				}
+				if(opts[p3].toString().startsWith("Elo Débito")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
+					pr.setMargins(+15,+15,+10,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.elo);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Elo Crédito")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
+					pr.setMargins(+15,+15,+10,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.elo);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Visa Débito")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+17,+5,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.visa);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Visa Crédito")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+17,+5,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.visa);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Master Débito")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+15,+5,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.master);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Master Crédito")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+15,+5,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.master);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Hiper")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(55,50);
+					pr.setMargins(+15,+30,+5,0);
+					som3.setEms(6);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.hiper);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Hiper Card")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(85,80);
+					pr.setMargins(+15,+15,+5,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.hiperc);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Cabal")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+35,+5,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.cabal);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Pix")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+15,0,0);
+					som3.setEms(7);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.pix);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Verde Card")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+20,+5,0);
+					som3.setEms(5);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.verde);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Soro Cred")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+20,+5,0);
+					som3.setEms(5);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.soro);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Personal Card")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,+5,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.person);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Ouro Card")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(70,60);
+					pr.setMargins(+15,+25,+5,0);
+					som3.setEms(5);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.ouro_card);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banrisul")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,15,+5,0);
+					som3.setEms(5);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.banric);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banri Compras")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+25,+5,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.banrico);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banes Card")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,+5,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.banes);
+
+				} else {}
+				if(opts[p3].toString().startsWith("American Express")){
+					im3.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,0,0);
+					som3.setEms(4);
+					im3.setLayoutParams(pr);
+					im3.setImageResource(R.drawable.americ);
+
+				} else {}
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
+
+		spn4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int p3, long id) {
+				if(opts[p3].toString().startsWith("Dinheiro")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(90,85);
+					pr.setMargins(+15,+15,+10,0);
+					som4.setEms(5);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.money);
+					lay4.setVisibility(View.VISIBLE);
+
+				} else {lay4.setVisibility(View.GONE);}
+
+				if(opts[p3].toString().startsWith("Selecione")){
+					im4.setVisibility(View.GONE);
+					som4.setEms(7);
+				}
+				if(opts[p3].toString().startsWith("Elo Débito")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
+					pr.setMargins(+15,+15,+10,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.elo);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Elo Crédito")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
+					pr.setMargins(+15,+15,+10,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.elo);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Visa Débito")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+17,+5,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.visa);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Visa Crédito")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+17,+5,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.visa);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Master Débito")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+15,+5,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.master);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Master Crédito")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+15,+5,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.master);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Hiper")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(55,50);
+					pr.setMargins(+15,+30,+5,0);
+					som4.setEms(6);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.hiper);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Hiper Card")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(85,80);
+					pr.setMargins(+15,+15,+5,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.hiperc);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Cabal")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+35,+5,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.cabal);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Pix")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+15,0,0);
+					som4.setEms(7);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.pix);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Verde Card")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+20,+5,0);
+					som4.setEms(5);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.verde);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Soro Cred")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+20,+5,0);
+					som4.setEms(5);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.soro);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Personal Card")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,+5,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.person);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Ouro Card")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(70,60);
+					pr.setMargins(+15,+25,+5,0);
+					som4.setEms(5);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.ouro_card);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banrisul")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,15,+5,0);
+					som4.setEms(5);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.banric);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banri Compras")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+25,+5,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.banrico);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banes Card")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,+5,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.banes);
+
+				} else {}
+				if(opts[p3].toString().startsWith("American Express")){
+					im4.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,0,0);
+					som4.setEms(4);
+					im4.setLayoutParams(pr);
+					im4.setImageResource(R.drawable.americ);
+
+				} else {}
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
+
+		spn5.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int p3, long id) {
+				if(opts[p3].toString().startsWith("Dinheiro")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(90,85);
+					pr.setMargins(+15,+15,+10,0);
+					som5.setEms(5);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.money);
+					lay5.setVisibility(View.VISIBLE);
+
+				} else {lay5.setVisibility(View.GONE);}
+
+				if(opts[p3].toString().startsWith("Selecione")){
+					im5.setVisibility(View.GONE);
+					som5.setEms(7);
+				}
+				if(opts[p3].toString().startsWith("Elo Débito")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
+					pr.setMargins(+15,+15,+10,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.elo);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Elo Crédito")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
+					pr.setMargins(+15,+15,+10,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.elo);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Visa Débito")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+17,+5,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.visa);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Visa Crédito")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+17,+5,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.visa);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Master Débito")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+15,+5,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.master);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Master Crédito")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
+					pr.setMargins(+15,+15,+5,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.master);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Hiper")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(55,50);
+					pr.setMargins(+15,+30,+5,0);
+					som5.setEms(6);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.hiper);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Hiper Card")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(85,80);
+					pr.setMargins(+15,+15,+5,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.hiperc);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Cabal")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+35,+5,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.cabal);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Pix")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+15,0,0);
+					som5.setEms(7);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.pix);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Verde Card")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+20,+5,0);
+					som5.setEms(5);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.verde);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Soro Cred")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+20,+5,0);
+					som5.setEms(5);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.soro);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Personal Card")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,+5,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.person);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Ouro Card")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(70,60);
+					pr.setMargins(+15,+25,+5,0);
+					som5.setEms(5);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.ouro_card);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banrisul")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,15,+5,0);
+					som5.setEms(5);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.banric);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banri Compras")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
+					pr.setMargins(+15,+25,+5,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.banrico);
+
+				} else {}
+				if(opts[p3].toString().startsWith("Banes Card")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,+5,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.banes);
+
+				} else {}
+				if(opts[p3].toString().startsWith("American Express")){
+					im5.setVisibility(View.VISIBLE);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
+					pr.setMargins(+15,+25,0,0);
+					som5.setEms(4);
+					im5.setLayoutParams(pr);
+					im5.setImageResource(R.drawable.americ);
+
+				} else {}
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
+		fim.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View p1)
+			{
+				if(spn1.getSelectedItemPosition() == 19){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.ameFind();
+						if(!rd.get(0).getAmeric().equals("")){
+							String re1 = rd.get(0).getAmeric();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setMoney(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.moneyIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setAmeric(dform.format(res));
+							db.delAmeric();
+							db.americIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setAmeric(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.americIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {lay2.setVisibility(View.GONE);}
-					if(opts[p3].toString().startsWith("Selecione")){
-						im2.setVisibility(View.GONE);
-						som2.setEms(7);
 					}
-					if(opts[p3].toString().startsWith("Elo Débito")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
-						pr.setMargins(+15,+15,+10,0);
-						som2.setEms(4);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.elo);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.eloDFind();
-							if(!rd.get(0).getEloD().equals("")){
-								String re1 = rd.get(0).getEloD();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setEloD(dform.format(res));
-								db.delEloD();
-								db.eloDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setEloD(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.eloDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Elo Crédito")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
-						pr.setMargins(+15,+15,+10,0);
-						som2.setEms(4);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.elo);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.eloCFind();
-							if(!rd.get(0).getEloC().equals("")){
-								String re1 = rd.get(0).getEloC();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setEloC(dform.format(res));
-								db.delEloC();
-								db.eloCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setEloC(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.eloCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Visa Débito")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+17,+5,0);
-						som2.setEms(4);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.visa);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.visaDFind();
-							if(!rd.get(0).getVisaD().equals("")){
-								String re1 = rd.get(0).getVisaD();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVisaD(dform.format(res));
-								db.delVisaD();
-								db.visaDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVisaD(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.visaDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Visa Crédito")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+17,+5,0);
-						som2.setEms(4);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.visa);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.visaCFind();
-							if(!rd.get(0).getVisaC().equals("")){
-								String re1 = rd.get(0).getVisaC();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVisaC(dform.format(res));
-								db.delVisaC();
-								db.visaCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVisaC(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.visaCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Master Débito")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+15,+5,0);
-						som2.setEms(4);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.master);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.masterDFind();
-							if(!rd.get(0).getMasterD().equals("")){
-								String re1 = rd.get(0).getMasterD();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMasterD(dform.format(res));
-								db.delMasterD();
-								db.masterDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setMasterD(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.masterDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Master Crédito")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+15,+5,0);
-						som2.setEms(4);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.master);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.masterCFind();
-							if(!rd.get(0).getMasterC().equals("")){
-								String re1 = rd.get(0).getMasterC();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMasterC(dform.format(res));
-								db.delMasterC();
-								db.masterCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setMasterC(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.masterCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Hiper")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(55,50);
-						pr.setMargins(+15,+30,+5,0);
-						som2.setEms(6);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.hiper);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.hiperFind();
-							if(!rd.get(0).getHiper().equals("")){
-								String re1 = rd.get(0).getHiper();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setHiper(dform.format(res));
-								db.delHiper();
-								db.hiperIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setHiper(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.hiperIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Hiper Card")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(85,80);
-						pr.setMargins(+15,+15,+5,0);
-						som2.setEms(4);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.hiperc);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.hiperCFind();
-							if(!rd.get(0).getHiperC().equals("")){
-								String re1 = rd.get(0).getHiperC();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setHiperC(dform.format(res));
-								db.delHiperC();
-								db.hiperCIn(us);
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setHiperC(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.hiperCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Cabal")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+35,+5,0);
-						som2.setEms(4);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.cabal);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.cabalFind();
-							if(!rd.get(0).getCabal().equals("")){
-								String re1 = rd.get(0).getCabal();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setCabal(dform.format(res));
-								db.delCabal();
-								db.cabalIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setCabal(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.cabalIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Pix")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+15,0,0);
-						som2.setEms(7);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.pix);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.pixFind();
-							if(!rd.get(0).getPix().equals("")){
-								String re1 = rd.get(0).getPix();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setPix(dform.format(res));
-								db.delPix();
-								db.pixIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setPix(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.pixIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Verde Card")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+20,+5,0);
-						som2.setEms(5);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.verde);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.verdeFind();
-							if(!rd.get(0).getVerde().equals("")){
-								String re1 = rd.get(0).getVerde();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVerde(dform.format(res));
-								db.delVerde();
-								db.verdeIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVerde(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.verdeIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Soro Cred")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+20,+5,0);
-						som2.setEms(5);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.soro);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.soroFind();
-							if(!rd.get(0).getSoro().equals("")){
-								String re1 = rd.get(0).getSoro();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setSoro(dform.format(res));
-								db.delSoro();
-								db.soroIn(us);
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setSoro(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.soroIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Personal Card")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,+5,0);
-						som2.setEms(4);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.person);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.personFind();
-							if(!rd.get(0).getPerson().equals("")){
-								String re1 = rd.get(0).getPerson();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setPerson(dform.format(res));
-								db.delPerson();
-								db.personIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setPerson(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.personIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Ouro Card")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(70,60);
-						pr.setMargins(+15,+25,+5,0);
-						som2.setEms(5);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.ouro_card);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.ouroFind();
-							if(!rd.get(0).getOuro().equals("")){
-								String re1 = rd.get(0).getOuro();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setOuro(dform.format(res));
-								db.delOuro();
-								db.ouroIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setOuro(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.ouroIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banrisul")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,15,+5,0);
-						som2.setEms(6);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.banric);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banriFind();
-							if(!rd.get(0).getbanric().equals("")){
-								String re1 = rd.get(0).getbanric();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanric(dform.format(res));
-								db.delBanric();
-								db.banriIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanric(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.banriIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banri Compras")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+25,+5,0);
-						som2.setEms(4);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.banrico);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banriCFind();
-							if(!rd.get(0).getBanriC().equals("")){
-								String re1 = rd.get(0).getBanriC();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanriC(dform.format(res));
-								db.delBanriC();
-								db.banriCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanriC(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.banriCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banes Card")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,+5,0);
-						som2.setEms(5);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.banes);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banesFind();
-							if(!rd.get(0).getBanes().equals("")){
-								String re1 = rd.get(0).getBanes();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanes(dform.format(res));
-								db.delBanes();
-								db.banesIn(us);
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanes(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.banesIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("American Express")){
-						im2.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,0,0);
-						som2.setEms(4);
-						im2.setLayoutParams(pr);
-						im2.setImageResource(R.drawable.americ);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.ameFind();
-							if(!rd.get(0).getAmeric().equals("")){
-								String re1 = rd.get(0).getAmeric();
-								String re2 = som2.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setAmeric(dform.format(res));
-								db.delAmeric();
-								db.americIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setAmeric(som2.getText().toString());
-							DB d1 = new DB(c);
-							d1.americIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
 				}
-
-				@Override
-				public void onNothingSelected(AdapterView<?> p1)
-				{
-					// TODO: Implement this method
-					
-				}
-			});
-		spn3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
-				@Override
-				public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
-				{
-					// TODO: Implement this method
-					opts3 = p3;
-					if(opts[p3].toString().startsWith("Dinheiro")){
-						lay3.setVisibility(View.VISIBLE);
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(90,85);
-						pr.setMargins(+15,+15,+10,0);
-						som3.setEms(6);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.money);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.moFind();
-							if(!rd.get(0).getMoney().equals("")){
-								String re1 = rd.get(0).getMoney();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMoney(dform.format(res));
-								db.delMoney();
-								db.moneyIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+				if(spn1.getSelectedItemPosition() == 18){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banesFind();
+						if(!rd.get(0).getBanes().equals("")){
+							String re1 = rd.get(0).getBanes();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setMoney(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.moneyIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setBanes(dform.format(res));
+							db.delBanes();
+							db.banesIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanes(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.banesIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {lay3.setVisibility(View.GONE);}
-					if(opts[p3].toString().startsWith("Selecione")){
-						im3.setVisibility(View.GONE);
-						som3.setEms(7);
 					}
-					if(opts[p3].toString().startsWith("Elo Débito")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
-						pr.setMargins(+15,+15,+10,0);
-						som3.setEms(5);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.elo);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.eloDFind();
-							if(!rd.get(0).getEloD().equals("")){
-								String re1 = rd.get(0).getEloD();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setEloD(dform.format(res));
-								db.delEloD();
-								db.eloDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setEloD(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.eloDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Elo Crédito")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
-						pr.setMargins(+15,+15,+10,0);
-						som3.setEms(5);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.elo);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.eloCFind();
-							if(!rd.get(0).getEloC().equals("")){
-								String re1 = rd.get(0).getEloC();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setEloC(dform.format(res));
-								db.delEloC();
-								db.eloCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setEloC(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.eloCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Visa Débito")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+17,+5,0);
-						som3.setEms(5);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.visa);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.visaDFind();
-							if(!rd.get(0).getVisaD().equals("")){
-								String re1 = rd.get(0).getVisaD();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVisaD(dform.format(res));
-								db.delVisaD();
-								db.visaDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVisaD(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.visaDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Visa Crédito")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+17,+5,0);
-						som3.setEms(5);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.visa);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.visaCFind();
-							if(!rd.get(0).getVisaC().equals("")){
-								String re1 = rd.get(0).getVisaC();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVisaC(dform.format(res));
-								db.delVisaC();
-								db.visaCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVisaC(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.visaCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Master Débito")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+15,+5,0);
-						som3.setEms(5);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.master);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.masterDFind();
-							if(!rd.get(0).getMasterD().equals("")){
-								String re1 = rd.get(0).getMasterD();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMasterD(dform.format(res));
-								db.delMasterD();
-								db.masterDIn(us);
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setMasterD(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.masterDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Master Crédito")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+15,+5,0);
-						som3.setEms(5);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.master);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.masterCFind();
-							if(!rd.get(0).getMasterC().equals("")){
-								String re1 = rd.get(0).getMasterC();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMasterC(dform.format(res));
-								db.delMasterC();
-								db.masterCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setMasterC(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.masterCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Hiper")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(55,50);
-						pr.setMargins(+15,+30,+5,0);
-						som3.setEms(8);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.hiper);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.hiperFind();
-							if(!rd.get(0).getHiper().equals("")){
-								String re1 = rd.get(0).getHiper();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setHiper(dform.format(res));
-								db.delHiper();
-								db.hiperIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setHiper(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.hiperIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Hiper Card")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(85,80);
-						pr.setMargins(+15,+15,+5,0);
-						som3.setEms(6);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.hiperc);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.hiperCFind();
-							if(!rd.get(0).getHiperC().equals("")){
-								String re1 = rd.get(0).getHiperC();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setHiperC(dform.format(res));
-								db.delHiperC();
-								db.hiperCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setHiperC(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.hiperCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Cabal")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+35,+5,0);
-						som3.setEms(5);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.cabal);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.cabalFind();
-							if(!rd.get(0).getCabal().equals("")){
-								String re1 = rd.get(0).getCabal();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setCabal(dform.format(res));
-								db.delCabal();
-								db.cabalIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setCabal(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.cabalIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Pix")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+15,0,0);
-						som3.setEms(8);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.pix);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.pixFind();
-							if(!rd.get(0).getPix().equals("")){
-								String re1 = rd.get(0).getPix();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setPix(dform.format(res));
-								db.delPix();
-								db.pixIn(us);
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setPix(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.pixIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Verde Card")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+20,+5,0);
-						som3.setEms(6);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.verde);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.verdeFind();
-							if(!rd.get(0).getVerde().equals("")){
-								String re1 = rd.get(0).getVerde();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVerde(dform.format(res));
-								db.delVerde();
-								db.verdeIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVerde(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.verdeIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Soro Cred")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+20,+5,0);
-						som3.setEms(6);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.soro);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.soroFind();
-							if(!rd.get(0).getSoro().equals("")){
-								String re1 = rd.get(0).getSoro();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setSoro(dform.format(res));
-								db.delSoro();
-								db.soroIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setSoro(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.soroIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Personal Card")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,+5,0);
-						som3.setEms(5);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.person);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.personFind();
-							if(!rd.get(0).getPerson().equals("")){
-								String re1 = rd.get(0).getPerson();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setPerson(dform.format(res));
-								db.delPerson();
-								db.personIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setPerson(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.personIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Ouro Card")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(70,60);
-						pr.setMargins(+15,+25,+5,0);
-						som3.setEms(5);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.ouro_card);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.ouroFind();
-							if(!rd.get(0).getOuro().equals("")){
-								String re1 = rd.get(0).getOuro();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setOuro(dform.format(res));
-								db.delOuro();
-								db.ouroIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setOuro(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.ouroIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banrisul")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,15,+5,0);
-						som3.setEms(6);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.banric);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banriFind();
-							if(!rd.get(0).getbanric().equals("")){
-								String re1 = rd.get(0).getbanric();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanric(dform.format(res));
-								db.delBanric();
-								db.banriIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanric(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.banriIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banri Compras")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+25,+5,0);
-						som3.setEms(6);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.banrico);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banriCFind();
-							if(!rd.get(0).getBanriC().equals("")){
-								String re1 = rd.get(0).getBanriC();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanriC(dform.format(res));
-								db.delBanriC();
-								db.banriCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanriC(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.banriCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banes Card")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,+5,0);
-						som3.setEms(6);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.banes);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banesFind();
-							if(!rd.get(0).getBanes().equals("")){
-								String re1 = rd.get(0).getBanes();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanes(dform.format(res));
-								db.delBanes();
-								db.banesIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanes(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.banesIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("American Express")){
-						im3.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,0,0);
-						som3.setEms(5);
-						im3.setLayoutParams(pr);
-						im3.setImageResource(R.drawable.americ);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.ameFind();
-							if(!rd.get(0).getAmeric().equals("")){
-								String re1 = rd.get(0).getAmeric();
-								String re2 = som3.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setAmeric(dform.format(res));
-								db.delAmeric();
-								db.americIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setAmeric(som3.getText().toString());
-							DB d1 = new DB(c);
-							d1.americIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
 				}
-
-				@Override
-				public void onNothingSelected(AdapterView<?> p1)
-				{
-					// TODO: Implement this method
-				}
-			});
-		spn4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
-				@Override
-				public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
-				{
-					// TODO: Implement this method
-					opts4 = p3;
-					if(opts[p3].toString().startsWith("Dinheiro")){
-						lay4.setVisibility(View.VISIBLE);
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(90,85);
-						pr.setMargins(+15,+15,+10,0);
-						som4.setEms(6);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.money);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.moFind();
-							if(!rd.get(0).getMoney().equals("")){
-								String re1 = rd.get(0).getMoney();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMoney(dform.format(res));
-								db.delMoney();
-								db.moneyIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+				if(spn1.getSelectedItemPosition() == 17){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banriCFind();
+						if(!rd.get(0).getBanriC().equals("")){
+							String re1 = rd.get(0).getBanriC();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setMoney(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.moneyIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setBanriC(dform.format(res));
+							db.delBanriC();
+							db.banriCIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanriC(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.banriCIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {lay4.setVisibility(View.GONE);}
-					if(opts[p3].toString().startsWith("Selecione")){
-						im4.setVisibility(View.GONE);
-						som4.setEms(7);
 					}
-					if(opts[p3].toString().startsWith("Elo Débito")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
-						pr.setMargins(+15,+15,+10,0);
-						som4.setEms(5);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.elo);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.eloDFind();
-							if(!rd.get(0).getEloD().equals("")){
-								String re1 = rd.get(0).getEloD();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setEloD(dform.format(res));
-								db.delEloD();
-								db.eloDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setEloD(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.eloDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Elo Crédito")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
-						pr.setMargins(+15,+15,+10,0);
-						som4.setEms(5);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.elo);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.eloCFind();
-							if(!rd.get(0).getEloC().equals("")){
-								String re1 = rd.get(0).getEloC();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setEloC(dform.format(res));
-								db.delEloC();
-								db.eloCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setEloC(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.eloCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Visa Débito")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+17,+5,0);
-						som4.setEms(5);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.visa);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.visaDFind();
-							if(!rd.get(0).getVisaD().equals("")){
-								String re1 = rd.get(0).getVisaD();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVisaD(dform.format(res));
-								db.delVisaD();
-								db.visaDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVisaD(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.visaDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Visa Crédito")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+17,+5,0);
-						som4.setEms(5);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.visa);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.visaCFind();
-							if(!rd.get(0).getVisaC().equals("")){
-								String re1 = rd.get(0).getVisaC();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVisaC(dform.format(res));
-								db.delVisaC();
-								db.visaCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVisaC(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.visaCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Master Débito")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+15,+5,0);
-						som4.setEms(5);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.master);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.masterDFind();
-							if(!rd.get(0).getMasterD().equals("")){
-								String re1 = rd.get(0).getMasterD();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMasterD(dform.format(res));
-								db.delMasterD();
-								db.masterDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setMasterD(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.masterDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Master Crédito")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+15,+5,0);
-						som4.setEms(5);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.master);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.masterCFind();
-							if(!rd.get(0).getMasterC().equals("")){
-								String re1 = rd.get(0).getMasterC();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMasterC(dform.format(res));
-								db.delMasterC();
-								db.masterCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setMasterC(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.masterCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Hiper")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(55,50);
-						pr.setMargins(+15,+30,+5,0);
-						som4.setEms(8);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.hiper);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.hiperFind();
-							if(!rd.get(0).getHiper().equals("")){
-								String re1 = rd.get(0).getHiper();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setHiper(dform.format(res));
-								db.delHiper();
-								db.hiperIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setHiper(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.hiperIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Hiper Card")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(85,80);
-						pr.setMargins(+15,+15,+5,0);
-						som4.setEms(6);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.hiperc);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.hiperCFind();
-							if(!rd.get(0).getHiperC().equals("")){
-								String re1 = rd.get(0).getHiperC();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setHiperC(dform.format(res));
-								db.delHiperC();
-								db.hiperCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setHiperC(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.hiperCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Cabal")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+35,+5,0);
-						som4.setEms(5);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.cabal);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.cabalFind();
-							if(!rd.get(0).getCabal().equals("")){
-								String re1 = rd.get(0).getCabal();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setCabal(dform.format(res));
-								db.delCabal();
-								db.cabalIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setCabal(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.cabalIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Pix")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+15,0,0);
-						som4.setEms(8);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.pix);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.pixFind();
-							if(!rd.get(0).getPix().equals("")){
-								String re1 = rd.get(0).getPix();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setPix(dform.format(res));
-								db.delPix();
-								db.pixIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setPix(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.pixIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Verde Card")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+20,+5,0);
-						som4.setEms(6);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.verde);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.verdeFind();
-							if(!rd.get(0).getVerde().equals("")){
-								String re1 = rd.get(0).getVerde();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVerde(dform.format(res));
-								db.delVerde();
-								db.verdeIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setVerde(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.verdeIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Soro Cred")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+20,+5,0);
-						som4.setEms(6);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.soro);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.soroFind();
-							if(!rd.get(0).getSoro().equals("")){
-								String re1 = rd.get(0).getSoro();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setSoro(dform.format(res));
-								db.delSoro();
-								db.soroIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setSoro(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.soroIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Personal Card")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,+5,0);
-						som4.setEms(5);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.person);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.personFind();
-							if(!rd.get(0).getPerson().equals("")){
-								String re1 = rd.get(0).getPerson();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setPerson(dform.format(res));
-								db.delPerson();
-								db.personIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setPerson(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.personIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Ouro Card")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(70,60);
-						pr.setMargins(+15,+25,+5,0);
-						som4.setEms(5);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.ouro_card);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.ouroFind();
-							if(!rd.get(0).getOuro().equals("")){
-								String re1 = rd.get(0).getOuro();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setOuro(dform.format(res));
-								db.delOuro();
-								db.ouroIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setOuro(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.ouroIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banrisul")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,15,+5,0);
-						som4.setEms(6);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.banric);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banriFind();
-							if(!rd.get(0).getbanric().equals("")){
-								String re1 = rd.get(0).getbanric();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanric(dform.format(res));
-								db.delBanric();
-								db.banriIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanric(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.banriIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banri Compras")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+25,+5,0);
-						som4.setEms(6);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.banrico);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banriCFind();
-							if(!rd.get(0).getBanriC().equals("")){
-								String re1 = rd.get(0).getBanriC();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanriC(dform.format(res));
-								db.delBanriC();
-								db.banriCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanriC(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.banriCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banes Card")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,+5,0);
-						som4.setEms(6);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.banes);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banesFind();
-							if(!rd.get(0).getBanes().equals("")){
-								String re1 = rd.get(0).getBanes();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanes(dform.format(res));
-								db.delBanes();
-								db.banesIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanes(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.banesIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("American Express")){
-						im4.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,0,0);
-						som4.setEms(5);
-						im4.setLayoutParams(pr);
-						im4.setImageResource(R.drawable.americ);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.ameFind();
-							if(!rd.get(0).getAmeric().equals("")){
-								String re1 = rd.get(0).getAmeric();
-								String re2 = som4.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setAmeric(dform.format(res));
-								db.delAmeric();
-								db.americIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setAmeric(som4.getText().toString());
-							DB d1 = new DB(c);
-							d1.americIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
 				}
-
-				@Override
-				public void onNothingSelected(AdapterView<?> p1)
-				{
-					// TODO: Implement this method
-				}
-			});
-		spn5.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
-				@Override
-				public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
-				{
-					// TODO: Implement this method
-					opts5 = p3;
-					if(opts[p3].toString().startsWith("Dinheiro")){
-						lay5.setVisibility(View.VISIBLE);
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(90,85);
-						pr.setMargins(+15,+15,+10,0);
-						som5.setEms(6);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.money);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.moFind();
-							if(!rd.get(0).getMoney().equals("")){
-								String re1 = rd.get(0).getMoney();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMoney(dform.format(res));
-								db.delMoney();
-								db.moneyIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+				if(spn1.getSelectedItemPosition() == 16){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banriFind();
+						if(!rd.get(0).getbanric().equals("")){
+							String re1 = rd.get(0).getbanric();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setMoney(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.moneyIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setBanric(dform.format(res));
+							db.delBanric();
+							db.banriIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanric(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.banriIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {lay5.setVisibility(View.GONE);}
-					if(opts[p3].toString().startsWith("Selecione")){
-						im5.setVisibility(View.GONE);
-						som5.setEms(7);
 					}
-					if(opts[p3].toString().startsWith("Elo Débito")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
-						pr.setMargins(+15,+15,+10,0);
-						som5.setEms(5);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.elo);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.eloDFind();
-							if(!rd.get(0).getEloD().equals("")){
-								String re1 = rd.get(0).getEloD();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setEloD(dform.format(res));
-								db.delEloD();
-								db.eloDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+				}
+				if(spn1.getSelectedItemPosition() == 15){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.personFind();
+						if(!rd.get(0).getPerson().equals("")){
+							String re1 = rd.get(0).getPerson();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setEloD(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.eloDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setPerson(dform.format(res));
+							db.delPerson();
+							db.personIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setPerson(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.personIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Elo Crédito")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(100,95);
-						pr.setMargins(+15,+15,+10,0);
-						som5.setEms(5);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.elo);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.eloCFind();
-							if(!rd.get(0).getEloC().equals("")){
-								String re1 = rd.get(0).getEloC();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setEloC(dform.format(res));
-								db.delEloC();
-								db.eloCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 14){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.ouroFind();
+						if(!rd.get(0).getOuro().equals("")){
+							String re1 = rd.get(0).getOuro();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setEloC(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.eloCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setOuro(dform.format(res));
+							db.delOuro();
+							db.ouroIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setOuro(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.ouroIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Visa Débito")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+17,+5,0);
-						som5.setEms(5);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.visa);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.visaDFind();
-							if(!rd.get(0).getVisaD().equals("")){
-								String re1 = rd.get(0).getVisaD();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVisaD(dform.format(res));
-								db.delVisaD();
-								db.visaDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 13){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.soroFind();
+						if(!rd.get(0).getSoro().equals("")){
+							String re1 = rd.get(0).getSoro();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setVisaD(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.visaDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setSoro(dform.format(res));
+							db.delSoro();
+							db.soroIn(us);
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setSoro(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.soroIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Visa Crédito")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+17,+5,0);
-						som5.setEms(5);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.visa);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.visaCFind();
-							if(!rd.get(0).getVisaC().equals("")){
-								String re1 = rd.get(0).getVisaC();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVisaC(dform.format(res));
-								db.delVisaC();
-								db.visaCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 12){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.verdeFind();
+						if(!rd.get(0).getVerde().equals("")){
+							String re1 = rd.get(0).getVerde();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setVisaC(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.visaCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setVerde(dform.format(res));
+							db.delVerde();
+							db.verdeIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVerde(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.verdeIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Master Débito")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+15,+5,0);
-						som5.setEms(5);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.master);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.masterDFind();
-							if(!rd.get(0).getMasterD().equals("")){
-								String re1 = rd.get(0).getMasterD();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMasterD(dform.format(res));
-								db.delMasterD();
-								db.masterDIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 11){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.pixFind();
+						if(!rd.get(0).getPix().equals("")){
+							String re1 = rd.get(0).getPix();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setMasterD(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.masterDIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setPix(dform.format(res));
+							db.delPix();
+							db.pixIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setPix(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.pixIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Master Crédito")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(95,90);
-						pr.setMargins(+15,+15,+5,0);
-						som5.setEms(5);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.master);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.masterCFind();
-							if(!rd.get(0).getMasterC().equals("")){
-								String re1 = rd.get(0).getMasterC();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setMasterC(dform.format(res));
-								db.delMasterC();
-								db.masterCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 10){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.cabalFind();
+						if(!rd.get(0).getCabal().equals("")){
+							String re1 = rd.get(0).getCabal();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setMasterC(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.masterCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setCabal(dform.format(res));
+							db.delCabal();
+							db.cabalIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setCabal(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.cabalIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Hiper")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(55,50);
-						pr.setMargins(+15,+30,+5,0);
-						som5.setEms(8);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.hiper);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.hiperFind();
-							if(!rd.get(0).getHiper().equals("")){
-								String re1 = rd.get(0).getHiper();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setHiper(dform.format(res));
-								db.delHiper();
-								db.hiperIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 9){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.hiperCFind();
+						if(!rd.get(0).getHiperC().equals("")){
+							String re1 = rd.get(0).getHiperC();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setHiper(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.hiperIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setHiperC(dform.format(res));
+							db.delHiperC();
+							db.hiperCIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setHiperC(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.hiperCIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Hiper Card")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(85,80);
-						pr.setMargins(+15,+15,+5,0);
-						som5.setEms(6);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.hiperc);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.hiperCFind();
-							if(!rd.get(0).getHiperC().equals("")){
-								String re1 = rd.get(0).getHiperC();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setHiperC(dform.format(res));
-								db.delHiperC();
-								db.hiperCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 8){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.hiperFind();
+						if(!rd.get(0).getHiper().equals("")){
+							String re1 = rd.get(0).getHiper();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setHiperC(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.hiperCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setHiper(dform.format(res));
+							db.delHiper();
+							db.hiperIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setHiper(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.hiperIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Cabal")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+35,+5,0);
-						som5.setEms(5);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.cabal);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.cabalFind();
-							if(!rd.get(0).getCabal().equals("")){
-								String re1 = rd.get(0).getCabal();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setCabal(dform.format(res));
-								db.delCabal();
-								db.cabalIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 7){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.masterCFind();
+						if(!rd.get(0).getMasterC().equals("")){
+							String re1 = rd.get(0).getMasterC();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setCabal(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.cabalIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setMasterC(dform.format(res));
+							db.delMasterC();
+							db.masterCIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMasterC(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.masterCIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Pix")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+15,0,0);
-						som5.setEms(8);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.pix);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.pixFind();
-							if(!rd.get(0).getPix().equals("")){
-								String re1 = rd.get(0).getPix();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setPix(dform.format(res));
-								db.delPix();
-								db.pixIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 6){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.masterDFind();
+						if(!rd.get(0).getMasterD().equals("")){
+							String re1 = rd.get(0).getMasterD();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setPix(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.pixIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setMasterD(dform.format(res));
+							db.delMasterD();
+							db.masterDIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMasterD(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.masterDIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Verde Card")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+20,+5,0);
-						som5.setEms(6);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.verde);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.verdeFind();
-							if(!rd.get(0).getVerde().equals("")){
-								String re1 = rd.get(0).getVerde();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setVerde(dform.format(res));
-								db.delVerde();
-								db.verdeIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 5){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.visaCFind();
+						if(!rd.get(0).getVisaC().equals("")){
+							String re1 = rd.get(0).getVisaC();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setVerde(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.verdeIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setVisaC(dform.format(res));
+							db.delVisaC();
+							db.visaCIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVisaC(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.visaCIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Soro Cred")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+20,+5,0);
-						som5.setEms(6);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.soro);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.soroFind();
-							if(!rd.get(0).getSoro().equals("")){
-								String re1 = rd.get(0).getSoro();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setSoro(dform.format(res));
-								db.delSoro();
-								db.soroIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 4){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.visaDFind();
+						if(!rd.get(0).getVisaD().equals("")){
+							String re1 = rd.get(0).getVisaD();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setSoro(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.soroIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setVisaD(dform.format(res));
+							db.delVisaD();
+							db.visaDIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVisaD(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.visaDIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Personal Card")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,+5,0);
-						som5.setEms(5);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.person);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.personFind();
-							if(!rd.get(0).getPerson().equals("")){
-								String re1 = rd.get(0).getPerson();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setPerson(dform.format(res));
-								db.delPerson();
-								db.personIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				// TODO: Implement this method
+				if(spn1.getSelectedItemPosition() == 3){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.eloCFind();
+						if(!rd.get(0).getEloC().equals("")){
+							String re1 = rd.get(0).getEloC();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setPerson(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.personIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setEloC(dform.format(res));
+							db.delEloC();
+							db.eloCIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setEloC(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.eloCIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Ouro Card")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(70,60);
-						pr.setMargins(+15,+25,+5,0);
-						som5.setEms(5);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.ouro_card);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.ouroFind();
-							if(!rd.get(0).getOuro().equals("")){
-								String re1 = rd.get(0).getOuro();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setOuro(dform.format(res));
-								db.delOuro();
-								db.ouroIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 2){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.eloDFind();
+						if(!rd.get(0).getEloD().equals("")){
+							String re1 = rd.get(0).getEloD();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setOuro(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.ouroIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setEloD(dform.format(res));
+							db.delEloD();
+							db.eloDIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setEloD(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.eloDIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banrisul")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,15,+5,0);
-						som5.setEms(6);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.banric);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banriFind();
-							if(!rd.get(0).getbanric().equals("")){
-								String re1 = rd.get(0).getbanric();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanric(dform.format(res));
-								db.delBanric();
-								db.banriIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
+					}
+				}
+				if(spn1.getSelectedItemPosition() == 1){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.moFind();
+						if(!rd.get(0).getMoney().equals("")){
+							String re1 = rd.get(0).getMoney();
+							String re2 = som1.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
 							util us = new util();
-							us.setBanric(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.banriIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
+							us.setMoney(dform.format(res));
+							db.delMoney();
+							db.moneyIn(us);
 
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMoney(som1.getText().toString());
+						DB d1 = new DB(c);
+						d1.moneyIn(us);
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banri Compras")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(65,60);
-						pr.setMargins(+15,+25,+5,0);
-						som5.setEms(6);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.banrico);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banriCFind();
-							if(!rd.get(0).getBanriC().equals("")){
-								String re1 = rd.get(0).getBanriC();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanriC(dform.format(res));
-								db.delBanriC();
-								db.banriCIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanriC(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.banriCIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("Banes Card")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,+5,0);
-						som5.setEms(6);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.banes);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.banesFind();
-							if(!rd.get(0).getBanes().equals("")){
-								String re1 = rd.get(0).getBanes();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setBanes(dform.format(res));
-								db.delBanes();
-								db.banesIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setBanes(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.banesIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
-					if(opts[p3].toString().startsWith("American Express")){
-						im5.setVisibility(View.VISIBLE);
-						LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(75,70);
-						pr.setMargins(+15,+25,0,0);
-						som5.setEms(5);
-						im5.setLayoutParams(pr);
-						im5.setImageResource(R.drawable.americ);
-						try{
-							db = new DB(c);
-							List<util> rd;
-							rd = db.ameFind();
-							if(!rd.get(0).getAmeric().equals("")){
-								String re1 = rd.get(0).getAmeric();
-								String re2 = som5.getText().toString();
-								Double d0 = new Double(re1);
-								Double d1 = new Double(re2);
-								double res = d0 + d1;
-								DecimalFormatSymbols df = new DecimalFormatSymbols();
-								df.setGroupingSeparator('.');
-								df.setDecimalSeparator('.');
-								DecimalFormat dform = new DecimalFormat("####.##", df);
-								util us = new util();
-								us.setAmeric(dform.format(res));
-								db.delAmeric();
-								db.americIn(us);	
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
-
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
-										String  currentDBPath2 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-shm";
-										String  currentDBPath3 = "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db-wal";
-
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-										File currentDB = new File(data, currentDBPath);
-										File currentDB2 = new File(data, currentDBPath2);
-										File currentDB3 = new File(data, currentDBPath3);
-										File backupDB = new File(sd, backupDBPath);
-										File backupDB2 = new File(sd, backupDBPath2);
-										File backupDB3 = new File(sd, backupDBPath3);
-
-										if(currentDB2.exists()){
-											FileChannel src = new FileInputStream(currentDB2).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										if(currentDB3.exists()){
-											FileChannel src = new FileInputStream(currentDB3).getChannel();
-											FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-											dst.transferFrom(src, 0, src.size());
-											src.close();
-											dst.close();
-										}
-										FileChannel src = new FileInputStream(currentDB).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-								} catch (Exception e2) {
-
-								}
-							} else {}
-						}catch(Exception e){
-							util us = new util();
-							us.setAmeric(som5.getText().toString());
-							DB d1 = new DB(c);
-							d1.americIn(us);
-							try {
-								File sd = Environment.getExternalStorageDirectory();
-								File data = Environment.getDataDirectory();
-
-								if (sd.canWrite()) {
-									String  currentDBPath= "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db";
-									String  currentDBPath2 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-shm";
-									String  currentDBPath3 = "//data//" + c.getOpPackageName()
-										+ "//databases//" + "myDB.db-wal";
-
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
-
-									File currentDB = new File(data, currentDBPath);
-									File currentDB2 = new File(data, currentDBPath2);
-									File currentDB3 = new File(data, currentDBPath3);
-									File backupDB = new File(sd, backupDBPath);
-									File backupDB2 = new File(sd, backupDBPath2);
-									File backupDB3 = new File(sd, backupDBPath3);
-
-									if(currentDB2.exists()){
-										FileChannel src = new FileInputStream(currentDB2).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									if(currentDB3.exists()){
-										FileChannel src = new FileInputStream(currentDB3).getChannel();
-										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-									}
-									FileChannel src = new FileInputStream(currentDB).getChannel();
-									FileChannel dst = new FileOutputStream(backupDB).getChannel();
-									dst.transferFrom(src, 0, src.size());
-									src.close();
-									dst.close();
-								}
-							} catch (Exception e2) {
-
-							}
-						}
-					} else {}
+					}
 				}
 
-				@Override
-				public void onNothingSelected(AdapterView<?> p1)
-				{
-					// TODO: Implement this method
+				if(spn2.getSelectedItemPosition() == 19){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.ameFind();
+						if(!rd.get(0).getAmeric().equals("")){
+							String re1 = rd.get(0).getAmeric();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setAmeric(dform.format(res));
+							db.delAmeric();
+							db.americIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setAmeric(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.americIn(us);
+
+					}
 				}
-			});
-	
+				if(spn2.getSelectedItemPosition() == 18){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banesFind();
+						if(!rd.get(0).getBanes().equals("")){
+							String re1 = rd.get(0).getBanes();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanes(dform.format(res));
+							db.delBanes();
+							db.banesIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanes(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.banesIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 17){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banriCFind();
+						if(!rd.get(0).getBanriC().equals("")){
+							String re1 = rd.get(0).getBanriC();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanriC(dform.format(res));
+							db.delBanriC();
+							db.banriCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanriC(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.banriCIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 16){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banriFind();
+						if(!rd.get(0).getbanric().equals("")){
+							String re1 = rd.get(0).getbanric();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanric(dform.format(res));
+							db.delBanric();
+							db.banriIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanric(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.banriIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 15){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.personFind();
+						if(!rd.get(0).getPerson().equals("")){
+							String re1 = rd.get(0).getPerson();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setPerson(dform.format(res));
+							db.delPerson();
+							db.personIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setPerson(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.personIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 14){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.ouroFind();
+						if(!rd.get(0).getOuro().equals("")){
+							String re1 = rd.get(0).getOuro();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setOuro(dform.format(res));
+							db.delOuro();
+							db.ouroIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setOuro(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.ouroIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 13){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.soroFind();
+						if(!rd.get(0).getSoro().equals("")){
+							String re1 = rd.get(0).getSoro();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setSoro(dform.format(res));
+							db.delSoro();
+							db.soroIn(us);
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setSoro(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.soroIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 12){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.verdeFind();
+						if(!rd.get(0).getVerde().equals("")){
+							String re1 = rd.get(0).getVerde();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVerde(dform.format(res));
+							db.delVerde();
+							db.verdeIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVerde(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.verdeIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 11){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.pixFind();
+						if(!rd.get(0).getPix().equals("")){
+							String re1 = rd.get(0).getPix();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setPix(dform.format(res));
+							db.delPix();
+							db.pixIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setPix(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.pixIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 10){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.cabalFind();
+						if(!rd.get(0).getCabal().equals("")){
+							String re1 = rd.get(0).getCabal();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setCabal(dform.format(res));
+							db.delCabal();
+							db.cabalIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setCabal(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.cabalIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 9){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.hiperCFind();
+						if(!rd.get(0).getHiperC().equals("")){
+							String re1 = rd.get(0).getHiperC();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setHiperC(dform.format(res));
+							db.delHiperC();
+							db.hiperCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setHiperC(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.hiperCIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 8){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.hiperFind();
+						if(!rd.get(0).getHiper().equals("")){
+							String re1 = rd.get(0).getHiper();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setHiper(dform.format(res));
+							db.delHiper();
+							db.hiperIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setHiper(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.hiperIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 7){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.masterCFind();
+						if(!rd.get(0).getMasterC().equals("")){
+							String re1 = rd.get(0).getMasterC();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMasterC(dform.format(res));
+							db.delMasterC();
+							db.masterCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMasterC(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.masterCIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 6){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.masterDFind();
+						if(!rd.get(0).getMasterD().equals("")){
+							String re1 = rd.get(0).getMasterD();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMasterD(dform.format(res));
+							db.delMasterD();
+							db.masterDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMasterD(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.masterDIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 5){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.visaCFind();
+						if(!rd.get(0).getVisaC().equals("")){
+							String re1 = rd.get(0).getVisaC();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVisaC(dform.format(res));
+							db.delVisaC();
+							db.visaCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVisaC(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.visaCIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 4){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.visaDFind();
+						if(!rd.get(0).getVisaD().equals("")){
+							String re1 = rd.get(0).getVisaD();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVisaD(dform.format(res));
+							db.delVisaD();
+							db.visaDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVisaD(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.visaDIn(us);
+
+					}
+				}
+				// TODO: Implement this method
+				if(spn2.getSelectedItemPosition() == 3){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.eloCFind();
+						if(!rd.get(0).getEloC().equals("")){
+							String re1 = rd.get(0).getEloC();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setEloC(dform.format(res));
+							db.delEloC();
+							db.eloCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setEloC(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.eloCIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 2){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.eloDFind();
+						if(!rd.get(0).getEloD().equals("")){
+							String re1 = rd.get(0).getEloD();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setEloD(dform.format(res));
+							db.delEloD();
+							db.eloDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setEloD(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.eloDIn(us);
+
+					}
+				}
+				if(spn2.getSelectedItemPosition() == 1){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.moFind();
+						if(!rd.get(0).getMoney().equals("")){
+							String re1 = rd.get(0).getMoney();
+							String re2 = som2.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMoney(dform.format(res));
+							db.delMoney();
+							db.moneyIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMoney(som2.getText().toString());
+						DB d1 = new DB(c);
+						d1.moneyIn(us);
+
+					}
+				}
+
+				if(spn3.getSelectedItemPosition() == 19){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.ameFind();
+						if(!rd.get(0).getAmeric().equals("")){
+							String re1 = rd.get(0).getAmeric();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setAmeric(dform.format(res));
+							db.delAmeric();
+							db.americIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setAmeric(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.americIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 18){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banesFind();
+						if(!rd.get(0).getBanes().equals("")){
+							String re1 = rd.get(0).getBanes();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanes(dform.format(res));
+							db.delBanes();
+							db.banesIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanes(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.banesIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 17){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banriCFind();
+						if(!rd.get(0).getBanriC().equals("")){
+							String re1 = rd.get(0).getBanriC();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanriC(dform.format(res));
+							db.delBanriC();
+							db.banriCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanriC(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.banriCIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 16){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banriFind();
+						if(!rd.get(0).getbanric().equals("")){
+							String re1 = rd.get(0).getbanric();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanric(dform.format(res));
+							db.delBanric();
+							db.banriIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanric(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.banriIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 15){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.personFind();
+						if(!rd.get(0).getPerson().equals("")){
+							String re1 = rd.get(0).getPerson();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setPerson(dform.format(res));
+							db.delPerson();
+							db.personIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setPerson(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.personIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 14){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.ouroFind();
+						if(!rd.get(0).getOuro().equals("")){
+							String re1 = rd.get(0).getOuro();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setOuro(dform.format(res));
+							db.delOuro();
+							db.ouroIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setOuro(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.ouroIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 13){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.soroFind();
+						if(!rd.get(0).getSoro().equals("")){
+							String re1 = rd.get(0).getSoro();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setSoro(dform.format(res));
+							db.delSoro();
+							db.soroIn(us);
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setSoro(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.soroIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 12){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.verdeFind();
+						if(!rd.get(0).getVerde().equals("")){
+							String re1 = rd.get(0).getVerde();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVerde(dform.format(res));
+							db.delVerde();
+							db.verdeIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVerde(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.verdeIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 11){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.pixFind();
+						if(!rd.get(0).getPix().equals("")){
+							String re1 = rd.get(0).getPix();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setPix(dform.format(res));
+							db.delPix();
+							db.pixIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setPix(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.pixIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 10){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.cabalFind();
+						if(!rd.get(0).getCabal().equals("")){
+							String re1 = rd.get(0).getCabal();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setCabal(dform.format(res));
+							db.delCabal();
+							db.cabalIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setCabal(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.cabalIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 9){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.hiperCFind();
+						if(!rd.get(0).getHiperC().equals("")){
+							String re1 = rd.get(0).getHiperC();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setHiperC(dform.format(res));
+							db.delHiperC();
+							db.hiperCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setHiperC(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.hiperCIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 8){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.hiperFind();
+						if(!rd.get(0).getHiper().equals("")){
+							String re1 = rd.get(0).getHiper();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setHiper(dform.format(res));
+							db.delHiper();
+							db.hiperIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setHiper(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.hiperIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 7){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.masterCFind();
+						if(!rd.get(0).getMasterC().equals("")){
+							String re1 = rd.get(0).getMasterC();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMasterC(dform.format(res));
+							db.delMasterC();
+							db.masterCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMasterC(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.masterCIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 6){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.masterDFind();
+						if(!rd.get(0).getMasterD().equals("")){
+							String re1 = rd.get(0).getMasterD();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMasterD(dform.format(res));
+							db.delMasterD();
+							db.masterDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMasterD(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.masterDIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 5){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.visaCFind();
+						if(!rd.get(0).getVisaC().equals("")){
+							String re1 = rd.get(0).getVisaC();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVisaC(dform.format(res));
+							db.delVisaC();
+							db.visaCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVisaC(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.visaCIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 4){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.visaDFind();
+						if(!rd.get(0).getVisaD().equals("")){
+							String re1 = rd.get(0).getVisaD();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVisaD(dform.format(res));
+							db.delVisaD();
+							db.visaDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVisaD(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.visaDIn(us);
+
+					}
+				}
+				// TODO: Implement this method
+				if(spn3.getSelectedItemPosition() == 3){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.eloCFind();
+						if(!rd.get(0).getEloC().equals("")){
+							String re1 = rd.get(0).getEloC();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setEloC(dform.format(res));
+							db.delEloC();
+							db.eloCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setEloC(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.eloCIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 2){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.eloDFind();
+						if(!rd.get(0).getEloD().equals("")){
+							String re1 = rd.get(0).getEloD();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setEloD(dform.format(res));
+							db.delEloD();
+							db.eloDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setEloD(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.eloDIn(us);
+
+					}
+				}
+				if(spn3.getSelectedItemPosition() == 1){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.moFind();
+						if(!rd.get(0).getMoney().equals("")){
+							String re1 = rd.get(0).getMoney();
+							String re2 = som3.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMoney(dform.format(res));
+							db.delMoney();
+							db.moneyIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMoney(som3.getText().toString());
+						DB d1 = new DB(c);
+						d1.moneyIn(us);
+
+					}
+				}
+
+				if(spn4.getSelectedItemPosition() == 19){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.ameFind();
+						if(!rd.get(0).getAmeric().equals("")){
+							String re1 = rd.get(0).getAmeric();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setAmeric(dform.format(res));
+							db.delAmeric();
+							db.americIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setAmeric(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.americIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 18){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banesFind();
+						if(!rd.get(0).getBanes().equals("")){
+							String re1 = rd.get(0).getBanes();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanes(dform.format(res));
+							db.delBanes();
+							db.banesIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanes(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.banesIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 17){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banriCFind();
+						if(!rd.get(0).getBanriC().equals("")){
+							String re1 = rd.get(0).getBanriC();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanriC(dform.format(res));
+							db.delBanriC();
+							db.banriCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanriC(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.banriCIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 16){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banriFind();
+						if(!rd.get(0).getbanric().equals("")){
+							String re1 = rd.get(0).getbanric();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanric(dform.format(res));
+							db.delBanric();
+							db.banriIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanric(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.banriIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 15){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.personFind();
+						if(!rd.get(0).getPerson().equals("")){
+							String re1 = rd.get(0).getPerson();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setPerson(dform.format(res));
+							db.delPerson();
+							db.personIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setPerson(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.personIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 14){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.ouroFind();
+						if(!rd.get(0).getOuro().equals("")){
+							String re1 = rd.get(0).getOuro();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setOuro(dform.format(res));
+							db.delOuro();
+							db.ouroIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setOuro(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.ouroIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 13){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.soroFind();
+						if(!rd.get(0).getSoro().equals("")){
+							String re1 = rd.get(0).getSoro();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setSoro(dform.format(res));
+							db.delSoro();
+							db.soroIn(us);
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setSoro(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.soroIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 12){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.verdeFind();
+						if(!rd.get(0).getVerde().equals("")){
+							String re1 = rd.get(0).getVerde();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVerde(dform.format(res));
+							db.delVerde();
+							db.verdeIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVerde(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.verdeIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 11){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.pixFind();
+						if(!rd.get(0).getPix().equals("")){
+							String re1 = rd.get(0).getPix();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setPix(dform.format(res));
+							db.delPix();
+							db.pixIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setPix(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.pixIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 10){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.cabalFind();
+						if(!rd.get(0).getCabal().equals("")){
+							String re1 = rd.get(0).getCabal();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setCabal(dform.format(res));
+							db.delCabal();
+							db.cabalIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setCabal(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.cabalIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 9){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.hiperCFind();
+						if(!rd.get(0).getHiperC().equals("")){
+							String re1 = rd.get(0).getHiperC();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setHiperC(dform.format(res));
+							db.delHiperC();
+							db.hiperCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setHiperC(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.hiperCIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 8){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.hiperFind();
+						if(!rd.get(0).getHiper().equals("")){
+							String re1 = rd.get(0).getHiper();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setHiper(dform.format(res));
+							db.delHiper();
+							db.hiperIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setHiper(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.hiperIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 7){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.masterCFind();
+						if(!rd.get(0).getMasterC().equals("")){
+							String re1 = rd.get(0).getMasterC();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMasterC(dform.format(res));
+							db.delMasterC();
+							db.masterCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMasterC(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.masterCIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 6){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.masterDFind();
+						if(!rd.get(0).getMasterD().equals("")){
+							String re1 = rd.get(0).getMasterD();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMasterD(dform.format(res));
+							db.delMasterD();
+							db.masterDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMasterD(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.masterDIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 5){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.visaCFind();
+						if(!rd.get(0).getVisaC().equals("")){
+							String re1 = rd.get(0).getVisaC();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVisaC(dform.format(res));
+							db.delVisaC();
+							db.visaCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVisaC(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.visaCIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 4){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.visaDFind();
+						if(!rd.get(0).getVisaD().equals("")){
+							String re1 = rd.get(0).getVisaD();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVisaD(dform.format(res));
+							db.delVisaD();
+							db.visaDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVisaD(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.visaDIn(us);
+
+					}
+				}
+				// TODO: Implement this method
+				if(spn4.getSelectedItemPosition() == 3){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.eloCFind();
+						if(!rd.get(0).getEloC().equals("")){
+							String re1 = rd.get(0).getEloC();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setEloC(dform.format(res));
+							db.delEloC();
+							db.eloCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setEloC(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.eloCIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 2){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.eloDFind();
+						if(!rd.get(0).getEloD().equals("")){
+							String re1 = rd.get(0).getEloD();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setEloD(dform.format(res));
+							db.delEloD();
+							db.eloDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setEloD(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.eloDIn(us);
+
+					}
+				}
+				if(spn4.getSelectedItemPosition() == 1){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.moFind();
+						if(!rd.get(0).getMoney().equals("")){
+							String re1 = rd.get(0).getMoney();
+							String re2 = som4.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMoney(dform.format(res));
+							db.delMoney();
+							db.moneyIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMoney(som4.getText().toString());
+						DB d1 = new DB(c);
+						d1.moneyIn(us);
+
+					}
+				}
+
+				if(spn5.getSelectedItemPosition() == 19){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.ameFind();
+						if(!rd.get(0).getAmeric().equals("")){
+							String re1 = rd.get(0).getAmeric();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setAmeric(dform.format(res));
+							db.delAmeric();
+							db.americIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setAmeric(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.americIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 18){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banesFind();
+						if(!rd.get(0).getBanes().equals("")){
+							String re1 = rd.get(0).getBanes();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanes(dform.format(res));
+							db.delBanes();
+							db.banesIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanes(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.banesIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 17){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banriCFind();
+						if(!rd.get(0).getBanriC().equals("")){
+							String re1 = rd.get(0).getBanriC();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanriC(dform.format(res));
+							db.delBanriC();
+							db.banriCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanriC(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.banriCIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 16){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.banriFind();
+						if(!rd.get(0).getbanric().equals("")){
+							String re1 = rd.get(0).getbanric();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setBanric(dform.format(res));
+							db.delBanric();
+							db.banriIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setBanric(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.banriIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 15){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.personFind();
+						if(!rd.get(0).getPerson().equals("")){
+							String re1 = rd.get(0).getPerson();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setPerson(dform.format(res));
+							db.delPerson();
+							db.personIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setPerson(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.personIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 14){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.ouroFind();
+						if(!rd.get(0).getOuro().equals("")){
+							String re1 = rd.get(0).getOuro();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setOuro(dform.format(res));
+							db.delOuro();
+							db.ouroIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setOuro(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.ouroIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 13){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.soroFind();
+						if(!rd.get(0).getSoro().equals("")){
+							String re1 = rd.get(0).getSoro();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setSoro(dform.format(res));
+							db.delSoro();
+							db.soroIn(us);
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setSoro(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.soroIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 12){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.verdeFind();
+						if(!rd.get(0).getVerde().equals("")){
+							String re1 = rd.get(0).getVerde();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVerde(dform.format(res));
+							db.delVerde();
+							db.verdeIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVerde(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.verdeIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 11){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.pixFind();
+						if(!rd.get(0).getPix().equals("")){
+							String re1 = rd.get(0).getPix();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setPix(dform.format(res));
+							db.delPix();
+							db.pixIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setPix(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.pixIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 10){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.cabalFind();
+						if(!rd.get(0).getCabal().equals("")){
+							String re1 = rd.get(0).getCabal();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setCabal(dform.format(res));
+							db.delCabal();
+							db.cabalIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setCabal(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.cabalIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 9){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.hiperCFind();
+						if(!rd.get(0).getHiperC().equals("")){
+							String re1 = rd.get(0).getHiperC();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setHiperC(dform.format(res));
+							db.delHiperC();
+							db.hiperCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setHiperC(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.hiperCIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 8){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.hiperFind();
+						if(!rd.get(0).getHiper().equals("")){
+							String re1 = rd.get(0).getHiper();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setHiper(dform.format(res));
+							db.delHiper();
+							db.hiperIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setHiper(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.hiperIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 7){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.masterCFind();
+						if(!rd.get(0).getMasterC().equals("")){
+							String re1 = rd.get(0).getMasterC();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMasterC(dform.format(res));
+							db.delMasterC();
+							db.masterCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMasterC(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.masterCIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 6){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.masterDFind();
+						if(!rd.get(0).getMasterD().equals("")){
+							String re1 = rd.get(0).getMasterD();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMasterD(dform.format(res));
+							db.delMasterD();
+							db.masterDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMasterD(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.masterDIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 5){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.visaCFind();
+						if(!rd.get(0).getVisaC().equals("")){
+							String re1 = rd.get(0).getVisaC();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVisaC(dform.format(res));
+							db.delVisaC();
+							db.visaCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVisaC(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.visaCIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 4){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.visaDFind();
+						if(!rd.get(0).getVisaD().equals("")){
+							String re1 = rd.get(0).getVisaD();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setVisaD(dform.format(res));
+							db.delVisaD();
+							db.visaDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setVisaD(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.visaDIn(us);
+
+					}
+				}
+				// TODO: Implement this method
+				if(spn5.getSelectedItemPosition() == 3){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.eloCFind();
+						if(!rd.get(0).getEloC().equals("")){
+							String re1 = rd.get(0).getEloC();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setEloC(dform.format(res));
+							db.delEloC();
+							db.eloCIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setEloC(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.eloCIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 2){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.eloDFind();
+						if(!rd.get(0).getEloD().equals("")){
+							String re1 = rd.get(0).getEloD();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setEloD(dform.format(res));
+							db.delEloD();
+							db.eloDIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setEloD(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.eloDIn(us);
+
+					}
+				}
+				if(spn5.getSelectedItemPosition() == 1){
+					try{
+						db = new DB(c);
+						List<util> rd;
+						rd = db.moFind();
+						if(!rd.get(0).getMoney().equals("")){
+							String re1 = rd.get(0).getMoney();
+							String re2 = som5.getText().toString();
+							Double d0 = new Double(re1);
+							Double d1 = new Double(re2);
+							double res = d0 + d1;
+							DecimalFormatSymbols df = new DecimalFormatSymbols();
+							df.setGroupingSeparator('.');
+							df.setDecimalSeparator('.');
+							DecimalFormat dform = new DecimalFormat("####.##", df);
+							util us = new util();
+							us.setMoney(dform.format(res));
+							db.delMoney();
+							db.moneyIn(us);
+
+						} else {}
+					}catch(Exception e){
+						util us = new util();
+						us.setMoney(som5.getText().toString());
+						DB d1 = new DB(c);
+						d1.moneyIn(us);
+
+					}
+				}
+
+				DB de = new DB(c);
+				de.limpaCarrinho();
+				try {
+					File sd = Environment.getExternalStorageDirectory();
+					File data = Environment.getDataDirectory();
+
+					if (sd.canWrite()) {
+						String  currentDBPath= "//data//" + c.getOpPackageName()
+								+ "//databases//" + "myDB.db";
+						String  currentDBPath2 = "//data//" + c.getOpPackageName()
+								+ "//databases//" + "myDB.db-shm";
+						String  currentDBPath3 = "//data//" + c.getOpPackageName()
+								+ "//databases//" + "myDB.db-wal";
+
+						String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
+						String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
+						String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+
+						File currentDB = new File(data, currentDBPath);
+						File currentDB2 = new File(data, currentDBPath2);
+						File currentDB3 = new File(data, currentDBPath3);
+						File backupDB = new File(sd, backupDBPath);
+						File backupDB2 = new File(sd, backupDBPath2);
+						File backupDB3 = new File(sd, backupDBPath3);
+
+						if(currentDB2.exists()){
+							FileChannel src = new FileInputStream(currentDB2).getChannel();
+							FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+							dst.transferFrom(src, 0, src.size());
+							src.close();
+							dst.close();
+						}
+						if(currentDB3.exists()){
+							FileChannel src = new FileInputStream(currentDB3).getChannel();
+							FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+							dst.transferFrom(src, 0, src.size());
+							src.close();
+							dst.close();
+						}
+						FileChannel src = new FileInputStream(currentDB).getChannel();
+						FileChannel dst = new FileOutputStream(backupDB).getChannel();
+						dst.transferFrom(src, 0, src.size());
+						src.close();
+						dst.close();
+					}
+				} catch (Exception e2) {
+
+				}
+				Intent itt = new Intent(c, caixaMain.class);
+				startActivity(itt);
+
+			}
+		});
 		AlertDialog.Builder b = new AlertDialog.Builder(c, R.style.dialog);
 		b.setTitle("Fechar Conta");
 		b.setView(r);
