@@ -735,7 +735,7 @@ Context c = this;
 		View r = li.inflate(R.layout.product_added, null);
 		ad = new productAdapter(c, car);
 		ListView lp = r.findViewById(R.id.list);
-		//lp.setEmptyView(findViewById(android.R.id.empty));
+		lp.setEmptyView(r.findViewById(android.R.id.empty));
 		lp.setAdapter(ad);
 		AlertDialog.Builder ap = new AlertDialog.Builder(c);
 		ap.setTitle("Carrinho de Compras!");
