@@ -1055,27 +1055,137 @@ public class fechaCaixa extends AppCompatActivity
 											
 											util us = new util();
 											us.setData(data.getText().toString());
-											us.setOp(operador_.getText().toString());
-											us.setFundo(fundo_.getText().toString());
-											us.setMoney(money_.getText().toString());
-											us.setEloD(eloD_.getText().toString());
-											us.setEloC(eloC_.getText().toString());
-											us.setVisaD(visaD_.getText().toString());
-											us.setVisaC(visaC_.getText().toString());
-											us.setMasterD(masterD_.getText().toString());
-											us.setMasterC(masterC_.getText().toString());
-											us.setHiper(hiper_.getText().toString());
-											us.setHiperC(hiperC_.getText().toString());
-											us.setCabal(cabal_.getText().toString());
-											us.setPix(pix_.getText().toString());
-											us.setVerde(verde_.getText().toString());
-											us.setSoro(soro_.getText().toString());
-											us.setPerson(person_.getText().toString());
-											us.setOuro(ouro_.getText().toString());
-											us.setBanric(banric_.getText().toString());
-											us.setBanriC(banrico_.getText().toString());
-											us.setBanes(banes_.getText().toString());
-											us.setAmeric(americ_.getText().toString());
+											us.setNfe("<html>"+
+													"<head>"+
+													"<body>"+
+													"<style>"+
+													"body{"+
+													"height:auto;"+
+													"margin:5px;"+
+													"}"+
+													".nav2 {"+
+													"margin-top:5px;"+
+													"height:auto;"+
+													"text-align:center;"+
+													"padding:20px 20px 20px;"+
+													"background:#eeff1566;"+
+													"}"+
+													".nav {"+
+													"margin-top:10px;"+
+													"margin:auto;"+
+													"height:auto;"+
+													"text-align:center;"+
+													"padding:20px 20px 20px;"+
+													"background:#eeff1566;"+
+													"}"+
+													"#bor{"+
+													"text-align:left;"+
+													"}"+
+													"#bor_{"+
+													"margin-top:-20px;"+
+													"text-align:left;"+
+													"}"+
+													"#dat{"+
+													"margin-left:20px;"+
+													"}"+
+													"#cx{"+
+													"margin-top:-36px;"+
+													"text-align:right;"+
+													"}"+
+													"#cx2{"+
+													"margin-top:20px;"+
+													"margin-right:5px;"+
+													"text-align:right;"+
+													"}"+
+													"#ln {"+
+													"text-align:left;"+
+													"margin-top:-20px;"+
+													"}"+
+													"#ln2 {"+
+													"text-align:right;"+
+													"margin-top:-35px;"+
+													"}"+
+													".bo {"+
+													"margin:10px;"+
+													"}"+
+													"#mot{"+
+													"color:#fff;"+
+													"padding:15px 50px 15px;"+
+													"background:#7015ff;"+
+													"}"+
+													"#val{"+
+													"color:#fff;"+
+													"padding:15px 50px 15px;"+
+													"background:#ff3400;"+
+													"}"+
+													"#clM{"+
+													"background:#f4aaff;"+
+													"padding:10px;"+
+													"}"+
+													"#clS{"+
+													"background:#00cc46;"+
+													"padding:10px;"+
+													"}"+
+													"#clL{"+
+													"color:#fff;"+
+													"background:#ff1f00;"+
+													"padding:10px;"+
+													"}"+
+													"#clso{"+
+													"background:#86ff6a68;"+
+													"padding:10px;"+
+													"}"+
+													"#clu{"+
+													"color:#fff;"+
+													"background:#ff340089;"+
+													"padding:10px;"+
+													"}"+
+													"#clVal{"+
+													"background:#90ff2b;"+
+													"padding:10px;"+
+													"}"+
+													".san{"+
+													"padding:15px;"+
+													"margin:10px;"+
+													"color:#fff;"+
+													"margin-bottom:0;"+
+													"background:#e32bff;"+
+													"}"+
+													"</style>"+
+													"</head>"+
+													"<div class='nav'>Cupom Fiscal NFe</div>"+
+													"<div class='nav2'><p id='bor'>Lucas Informática <br/><br/>Rua Colombo, 504 - Petrópolis <br/>CEP: 89208-890 - Joinville SC<br/><u>Data: " + dateTime.toString() + "</u></p><h4>+------------------------------------+</h4>REDUÇÃO Z:<h4>+------------------------------------+</h4>"+
+													"<br/>" +
+													"<br/>"+
+													"<b style='float:left;margin-left:10px;'>Operador:</b> <b style='float:right;margin-right:10px;'>" + operador_.getText().toString() + "</b>"+
+													"<br/>"+
+													"<br/>"+
+													"<b style='float:left;margin-left:10px;'>Fundo:</b> <b style='float:right;margin-right:10px;'>R$" + fundo_.getText().toString()+ "</b>"+
+													"<br/>"+
+													"<br/>"+
+													"<br/>"+
+													moneyRes.toString() +
+													SupResult.toString() +
+													sanResult.toString() +
+													eloDRes.toString() +
+													eloCRes.toString() +
+													visaDRes.toString() +
+													visaCRes.toString() +
+													masterDRes.toString() +
+													masterCRes.toString() +
+													hiperRes.toString() +
+													hiperCRes.toString() +
+													cabalRes.toString() +
+													pixRes.toString() +
+													verdeRes.toString() +
+													soroRes.toString() +
+													personRes.toString() +
+													ouroRes.toString() +
+													banriRes.toString() +
+													banricRes.toString() +
+													banesRes.toString() +
+													americRes.toString() +
+													"</div></body></html>");
 											DB post = new DB(c);
 											post.insertFecha(us);
 										}

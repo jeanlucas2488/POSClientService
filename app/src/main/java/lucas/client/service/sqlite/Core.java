@@ -7,7 +7,7 @@ public class Core extends SQLiteOpenHelper
 	public static String name = "myDB.db";
 	
 	public Core(Context c){
-		super(c, name, null, 1);
+		super(c, name, null, 2);
 	}
 	@Override
 	public void onCreate(SQLiteDatabase db)
@@ -39,12 +39,9 @@ public class Core extends SQLiteOpenHelper
 		
 		db.execSQL("CREATE TABLE Suprimentos" +
 		           "(id integer primary key, suprimento_val text, suprimento_mot text);");
-		
+
 		db.execSQL("CREATE TABLE Fechamento" +
-		           "(id integer primary key, data text, operador text, fundo text, dinheiro text," +
-				   "eloD text, eloC text, visaD text, visaC text, masterD text, masterC text, hiper text, hiperc text, cabal text," +
-				   "pix text, verde text, person text, soro text, ouro text, banrisul text, banric text, banes text, americ text);");
-		
+				"(id integer primary key, data text, NfeHtml text);");
 		db.execSQL("CREATE TABLE carrinho" +
 		           "(id integer primary key, produto text, quantd text, valores text, imagem blob);");
 		

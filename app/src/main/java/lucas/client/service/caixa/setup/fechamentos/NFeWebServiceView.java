@@ -25,6 +25,8 @@ public class NFeWebServiceView extends Activity
 		dateTime2 = simpleDateFormat2.format(calendar2.getTime()).toString();
 		File root = new File(Environment.getExternalStorageDirectory(), "pdvMain/data/lucas.client.service/.fechamentos/fechamento_" + dateTime2 + ".html");
 		Uri url = Uri.fromFile(root);
+		wb.getSettings().setAllowFileAccess(true);
+		wb.getSettings().setAllowFileAccessFromFileURLs(true);
 		wb.loadUrl(url.toString());
 	}
 	

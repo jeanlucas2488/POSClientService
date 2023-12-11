@@ -18,28 +18,7 @@ public class DB
 	public void insertFecha(util us){
 		ContentValues cv = new ContentValues();
 		cv.put("data", us.getData());
-		cv.put("operador", us.getOp());
-		cv.put("fundo", us.getFundo());
-		
-		cv.put("dinheiro", us.getMoney());
-		cv.put("eloD", us.getEloD());
-		cv.put("eloC", us.getEloC());
-		cv.put("visaD", us.getVisaD());
-		cv.put("visaC", us.getVisaC());
-		cv.put("masterD", us.getMasterD());
-		cv.put("masterC", us.getMasterC());
-		cv.put("hiper", us.getHiper());
-		cv.put("hiperc", us.getHiperC());
-		cv.put("cabal", us.getCabal());
-		cv.put("pix", us.getPix());
-		cv.put("verde", us.getVerde());
-		cv.put("person", us.getPerson());
-		cv.put("soro", us.getSoro());
-		cv.put("ouro", us.getSoro());
-		cv.put("banrisul", us.getbanric());
-		cv.put("banric", us.getBanriC());
-		cv.put("banes", us.getBanes());
-		cv.put("americ", us.getAmeric());
+		cv.put("NfeHtml", us.getNfe());
 		db.insert("Fechamento", null, cv);
 	}
 	public void sanInsert(util us){

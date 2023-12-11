@@ -4,7 +4,7 @@ import javax.security.auth.callback.*;
 public class util
 {
 	
-	public String eCod, eProd, eQuant, eForn, eDataIn, eDataOut, eValor, eTotal, eTipo;
+	public String eCod, eProd, eQuant, eForn, eDataIn, eDataOut, eValor, eTotal, eTipo, nfe;
 	public long  eId, supId;
 	public String sangria_val, cat,sangria_mot, op, sangria, fundo;
 	public String loc;
@@ -64,7 +64,13 @@ public class util
 	public String banriC;
 	public String banes;
 	public String americ;
-	
+
+	public String getNfe(){
+		return nfe;
+	}
+	public void setNfe(String nf){
+		this.nfe = nf;
+	}
 	public long getUserId(){
 		return userId;
 	}
