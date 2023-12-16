@@ -65,6 +65,21 @@ public class util
 	public String banes;
 	public String americ;
 
+	public String senha_supervisor;
+	public long supervisor_id;
+
+	public long getSupervisor_id(){
+		return supervisor_id;
+	}
+	public void setSupervisor_id(long id){
+		this.supervisor_id = id;
+	}
+	public String getSenhaSuperVisor(){
+		return senha_supervisor;
+	}
+	public void setSenhaSuperVisor(String sup){
+		this.senha_supervisor = sup;
+	}
 	public String getNfe(){
 		return nfe;
 	}

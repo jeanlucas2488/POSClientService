@@ -3,10 +3,8 @@ import android.content.*;
 import android.database.*;
 import android.database.sqlite.*;
 import java.util.*;
-import android.app.*;
+
 import lucas.client.service.etc.*;
-import lucas.client.service.caixa.*;
-import lucas.client.service.Fragments.adapter.*;
 
 public class DB
 {
@@ -111,15 +109,40 @@ public class DB
 	public void delAmeric(){
 		db.execSQL("delete from americ");
 	}
-	public util getUser(long id){
+
+	public util getSuperVisor(long id){
+		util us2 = new util();
+		Cursor cs = db.rawQuery("select * from supervisor WHERE id ="+id+"", null);
+		if(cs.moveToFirst()){
+			do {
+				us2.setSupervisor_id(cs.getLong(cs.getColumnIndex("id")));
+				us2.setSenhaSuperVisor(cs.getString(cs.getColumnIndex("superV")));
+			} while(cs.moveToNext());
+		}
+		return us2;
+	}
+	public util getUserCM(long id){
 		util us = new util();
-		Cursor cs = db.rawQuery("select * from senhas WHERE userId="+id+"", null);
+		Cursor cs = db.rawQuery("select * from senhaCM WHERE userId="+id+"", null);
 		if(cs.moveToFirst()){
 			do{
 				us.setUserId(cs.getLong(cs.getColumnIndex("userId")));
 				us.setUser(cs.getString(cs.getColumnIndex("usuario")));
 				us.setSenha(cs.getString(cs.getColumnIndex("senha")));
 				
+			}while(cs.moveToNext());
+		}
+		return us;
+	}
+	public util getUserMCR(long id){
+		util us = new util();
+		Cursor cs = db.rawQuery("select * from senhaMCR WHERE userId="+id+"", null);
+		if(cs.moveToFirst()){
+			do{
+				us.setUserId(cs.getLong(cs.getColumnIndex("userId")));
+				us.setUser(cs.getString(cs.getColumnIndex("usuario")));
+				us.setSenha(cs.getString(cs.getColumnIndex("senha")));
+
 			}while(cs.moveToNext());
 		}
 		return us;

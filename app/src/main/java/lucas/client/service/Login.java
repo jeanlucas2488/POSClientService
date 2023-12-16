@@ -69,7 +69,7 @@ public class Login extends AppCompatActivity
 				{
 					// TODO: Implement this method
 					DB db_ = new DB(c);
-					util use = db_.getUser(1);
+					util use = db_.getUserCM(1);
 					
 					if(!user.getText().toString().equals("")){
 						if(user.getText().toString().equals(use.getUser())){

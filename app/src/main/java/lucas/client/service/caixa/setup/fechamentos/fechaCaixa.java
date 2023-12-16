@@ -1052,7 +1052,14 @@ public class fechaCaixa extends AppCompatActivity
 										}
 										if(progress.getProgress() == 30){
 											progress.setMessage("Salvando NF-e da Redução Z...");
-											
+											String dateTime2;
+											Calendar calendar2 = Calendar.getInstance();
+											SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd.MM.yyyy");
+											dateTime2 = simpleDateFormat2.format(calendar2.getTime()).toString();
+											String dateTime;
+											Calendar calendar = Calendar.getInstance();
+											SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+											dateTime = simpleDateFormat.format(calendar.getTime()).toString();
 											util us = new util();
 											us.setData(data.getText().toString());
 											us.setNfe("<html>"+
