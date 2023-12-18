@@ -11,6 +11,8 @@ import java.io.*;
 import java.nio.channels.*;
 import lucas.client.service.caixa.*;
 import lucas.client.service.etc.*;
+import lucas.client.service.mercearia.MerceariaMain;
+import lucas.client.service.mercearia.databases.SQLiteControl;
 import lucas.client.service.sqlite.*;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -70,7 +72,7 @@ public class Login extends AppCompatActivity
 					// TODO: Implement this method
 					DB db_ = new DB(c);
 					util use = db_.getUserCM(1);
-					
+					util use2 = db_.getUserMCR(1);
 					if(!user.getText().toString().equals("")){
 						if(user.getText().toString().equals(use.getUser())){
 							user.setTextColor(Color.GREEN);
@@ -112,8 +114,29 @@ public class Login extends AppCompatActivity
 							}
 						} else {
 							//user errado
-							user.getText().clear();
-							user.setTextColor(Color.RED);
+							if(user.getText().toString().equals(use2.getUser())){
+								if(senha.getText().toString().equals(use2.getSenha())){
+									user.setTextColor(Color.GREEN);
+									senha.setTextColor(Color.GREEN);
+
+									util us = new util();
+									us.setOp(operador.getText().toString());
+									util us2 = new util();
+									us2.setFundo(fundo.getText().toString());
+
+									SQLiteControl db = new SQLiteControl(c);
+									db.opIn(us);
+									db.funIn(us2);
+
+									Intent itt = new Intent(c, MerceariaMain.class);
+									startActivity(itt);
+									finish();
+								} else {
+									Toast.makeText(c, "Senha inseria está incorreta!", Toast.LENGTH_SHORT).show();
+								}
+							} else {
+								Toast.makeText(c, "Usuário incorreto ou não cadastrado!", Toast.LENGTH_SHORT).show();
+							}
 						}
 					} else {
 						//user vazio

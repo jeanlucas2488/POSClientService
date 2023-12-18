@@ -658,7 +658,6 @@ Context c = this;
 				public void onClick(DialogInterface p1, int p2)
 				{
 					// TODO: Implement this method
-
 					try{
 						DB d1 = new DB(c);
 						util carRw1 = d1.getCarRw(1);
@@ -775,12 +774,12 @@ Context c = this;
 					df.setDecimalSeparator('.');
 					DecimalFormat dform = new DecimalFormat("####.##", df);
 					String result = dform.format(res_);
-					Intent it = new Intent(c, pay.class);
-					Bundle b = new Bundle();
-					b.putString("valor", result);
-					it.putExtras(b);
-					startActivity(it);
 
+						Intent it = new Intent(c, pay.class);
+						Bundle b = new Bundle();
+						b.putString("valor", result);
+						it.putExtras(b);
+						startActivity(it);
 				}
 			});
 		ap.setNegativeButton("Cancelar!", null);

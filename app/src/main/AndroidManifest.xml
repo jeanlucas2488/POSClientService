@@ -37,7 +37,12 @@
             android:label="@string/app_name" >
 
         </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".mercearia.MerceariaMain"
+            android:label="POS - Mercearia" >
 
+        </activity>
         <activity
             android:theme="@style/dialog"
             android:name=".caixa.product.productActivity"
