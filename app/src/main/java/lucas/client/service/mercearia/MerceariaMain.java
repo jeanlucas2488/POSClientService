@@ -27,19 +27,19 @@ import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 import java.util.List;
 
-import lucas.client.service.Fragments.Page1;
-import lucas.client.service.Fragments.Page2;
 import lucas.client.service.Fragments.adapter.FragmentAd;
 import lucas.client.service.Fragments.adapter.productAdapter;
-import lucas.client.service.Fragments.page10;
-import lucas.client.service.Fragments.page3;
-import lucas.client.service.Fragments.page4;
-import lucas.client.service.Fragments.page5;
-import lucas.client.service.Fragments.page6;
-import lucas.client.service.Fragments.page7;
-import lucas.client.service.Fragments.page8;
-import lucas.client.service.Fragments.page9;
-import lucas.client.service.Login;
+import lucas.client.service.mercearia.Fragments.Page1;
+import lucas.client.service.mercearia.Fragments.Page2;
+import lucas.client.service.mercearia.Fragments.Page3;
+import lucas.client.service.mercearia.Fragments.Page4;
+import lucas.client.service.mercearia.Fragments.Page5;
+import lucas.client.service.mercearia.Fragments.Page6;
+import lucas.client.service.mercearia.Fragments.Page7;
+import lucas.client.service.mercearia.Fragments.Page8;
+import lucas.client.service.mercearia.Fragments.Page9;
+import lucas.client.service.mercearia.Fragments.Page10;
+
 import lucas.client.service.R;
 import lucas.client.service.caixa.adapters.gridAd;
 import lucas.client.service.caixa.adapters.mainAd;
@@ -48,7 +48,6 @@ import lucas.client.service.caixa.setup.fechamentos.fechaCaixa;
 import lucas.client.service.caixa.setup.lancamentos.historico;
 import lucas.client.service.etc.util;
 import lucas.client.service.mercearia.databases.SQLiteControl;
-import lucas.client.service.sqlite.DB;
 
 public class MerceariaMain extends AppCompatActivity {
     AlertDialog aler, ale;
@@ -105,7 +104,7 @@ public class MerceariaMain extends AppCompatActivity {
             if(!us.getCategory().toString().equals("")){
                 try{
                     if(!prd.get(0).getProd1().toString().equals("")){
-                        ad.adicionar(new page3(), us.getCategory());
+                        ad.adicionar(new Page3(), us.getCategory());
                     }
                 }catch(Exception e){}
             }
@@ -117,7 +116,7 @@ public class MerceariaMain extends AppCompatActivity {
             if(!us.getCategory().toString().equals("")){
                 try{
                     if(!prd.get(0).getProd1().toString().equals("")){
-                        ad.adicionar(new page4(), us.getCategory());
+                        ad.adicionar(new Page4(), us.getCategory());
                     }
                 }catch(Exception e){}
             }
@@ -129,7 +128,7 @@ public class MerceariaMain extends AppCompatActivity {
             if(!us.getCategory().toString().equals("")){
                 try{
                     if(!prd.get(0).getProd1().toString().equals("")){
-                        ad.adicionar(new page5(), us.getCategory());
+                        ad.adicionar(new Page5(), us.getCategory());
                     }
                 }catch(Exception e){}
             }
@@ -141,7 +140,7 @@ public class MerceariaMain extends AppCompatActivity {
             if(!us.getCategory().toString().equals("")){
                 try{
                     if(!prd.get(0).getProd1().toString().equals("")){
-                        ad.adicionar(new page6(), us.getCategory());
+                        ad.adicionar(new Page6(), us.getCategory());
                     }
                 }catch(Exception e){}
             }
@@ -153,7 +152,7 @@ public class MerceariaMain extends AppCompatActivity {
             if(!us.getCategory().toString().equals("")){
                 try{
                     if(!prd.get(0).getProd1().toString().equals("")){
-                        ad.adicionar(new page7(), us.getCategory());
+                        ad.adicionar(new Page7(), us.getCategory());
                     }
                 }catch(Exception e){}
             }
@@ -165,7 +164,7 @@ public class MerceariaMain extends AppCompatActivity {
             if(!us.getCategory().toString().equals("")){
                 try{
                     if(!prd.get(0).getProd1().toString().equals("")){
-                        ad.adicionar(new page8(), us.getCategory());
+                        ad.adicionar(new Page8(), us.getCategory());
                     }
                 }catch(Exception e){}
             }
@@ -177,7 +176,7 @@ public class MerceariaMain extends AppCompatActivity {
             if(!us.getCategory().toString().equals("")){
                 try{
                     if(!prd.get(0).getProd1().toString().equals("")){
-                        ad.adicionar(new page9(), us.getCategory());
+                        ad.adicionar(new Page9(), us.getCategory());
                     }
                 }catch(Exception e){}
             }
@@ -189,7 +188,7 @@ public class MerceariaMain extends AppCompatActivity {
             if(!us.getCategory().toString().equals("")){
                 try{
                     if(!prd.get(0).getProd1().toString().equals("")){
-                        ad.adicionar(new page10(), us.getCategory());
+                        ad.adicionar(new Page10(), us.getCategory());
                     }
                 }catch(Exception e){}
             }
