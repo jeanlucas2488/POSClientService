@@ -101,12 +101,7 @@ public class pay extends AppCompatActivity
 		Intent it = getIntent();
 		Bundle b2 = it.getExtras();
 		String val = b2.getString("valor");
-		if(!val.toString().endsWith("0")){
-			som1.setText(val.toString());
-		} else {
-			Toast.makeText(c, "Não há produtos adiconadps ao carrinho para cobrar!", Toast.LENGTH_SHORT).show();
-			finish();
-		}
+		som1.setText(val.toString());
 
 		spn1.setAdapter(new ArrayAdapter<String>(c, android.R.layout.simple_dropdown_item_1line, opts));
 		spn2.setAdapter(new ArrayAdapter<String>(c, android.R.layout.simple_dropdown_item_1line, opts));

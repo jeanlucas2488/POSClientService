@@ -155,6 +155,41 @@ public class selfConfig extends AppCompatActivity
 									progress.dismiss();
 									Thread.sleep(99999999);
 								}
+								try {
+									File sd = Environment.getExternalStorageDirectory();
+									File data = Environment.getDataDirectory();
+
+									if (sd.canWrite()) {
+										String  currentDBPath= "//data//" + c.getOpPackageName()
+												+ "//databases//" + "MCRDB.db";
+										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+										File dbshm = new File(data, currentDBPath + "-shm");
+										File dbwal = new File(data, currentDBPath + "-wal");
+										if (dbshm.exists()) {
+											dbshm.delete();
+										}
+										if (dbwal.exists()) {
+											dbwal.delete();
+										}
+										File currentDB = new File(data, currentDBPath);
+										File backupDB = new File(sd, backupDBPath);
+										FileChannel src = new FileInputStream(backupDB).getChannel();
+										FileChannel dst = new FileOutputStream(currentDB).getChannel();
+										dst.transferFrom(src, 0, src.size());
+										src.close();
+										dst.close();
+										progress.setMessage("Banco de Dados Importado!");
+									}
+								} catch (Exception e) {
+									progress.setMessage("Falha ao Importar SQLite!");
+									Thread.sleep(2000);
+									Intent launchIntent = getPackageManager().getLaunchIntentForPackage("lucas.client.service.pos.admin");
+									if (launchIntent != null) {
+										startActivity(launchIntent);//null pointer check in case package name was not found
+									}
+									progress.dismiss();
+									Thread.sleep(99999999);
+								}
 							}
 							
 							if(progress.getProgress() == 70){

@@ -9,6 +9,8 @@ import android.icu.text.DecimalFormat;
 import android.icu.text.DecimalFormatSymbols;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -85,149 +88,266 @@ public class Page1 extends Fragment
             {
                 // TODO: Implement this method
                 lm = lt.get(p3).getImage();
+                if(lt.get(p3).getProd1().startsWith("Pão")){
+                    View r = getActivity().getLayoutInflater().inflate(R.layout.add_product, null);
+                    ImageView imp = r.findViewById(R.id.imP);
+                    final EditText prod = r.findViewById(R.id.prod);
+                    final EditText quan = r.findViewById(R.id.quant);
+                    final TextView tvq = r.findViewById(R.id.tvQ);
+                    final EditText valor = r.findViewById(R.id.valor);
+                    final ImageButton bt_sub = r.findViewById(R.id.sub);
+                    final ImageButton bt_add = r.findViewById(R.id.add);
+                    bt_sub.setVisibility(View.GONE);
+                    bt_add.setVisibility(View.GONE);
+                    quan.setEms(5);
+                    quan.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                        @Override
+                        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                          if(actionId == EditorInfo.IME_ACTION_DONE){
+                              Toast.makeText(getActivity(), "Teste", Toast.LENGTH_SHORT).show();
 
-                View r = getActivity().getLayoutInflater().inflate(R.layout.add_product, null);
-                ImageView imp = r.findViewById(R.id.imP);
-                final EditText prod = r.findViewById(R.id.prod);
-                final EditText quan = r.findViewById(R.id.quant);
-                final EditText valor = r.findViewById(R.id.valor);
-                final ImageButton bt_sub = r.findViewById(R.id.sub);
-                final ImageButton bt_add = r.findViewById(R.id.add);
-                bt_sub.setOnClickListener(new View.OnClickListener(){
+                          }
+                            return false;
+                        }
+                    });
+                    byte[] im = lt.get(p3).getImage();
+                    Bitmap bt = BitmapFactory.decodeByteArray(im, 0, im.length);
+                    imp.setImageBitmap(bt);
+                    prod.setText(lt.get(p3).getProd1());
 
-                    @Override
-                    public void onClick(View p1)
-                    {
-                        // TODO: Implement this method
-                        if(quan.getText().toString().equals("1")){
-                            bt_sub.setEnabled(false);
-                        }else {
+
+                    quan.setOnEditorActionListener(new TextView.OnEditorActionListener(){
+
+                        @Override
+                        public boolean onEditorAction(TextView p1, int p2, KeyEvent p3)
+                        {
+                            // TODO: Implement this method
+
+                            return false;
+                        }
+                    });
+                    valor.setText(lt.get(p3).getValor1());
+                    AlertDialog.Builder adp = new AlertDialog.Builder(getActivity());
+                    adp.setTitle("Adicionar ao Carrinho!");
+                    adp.setView(r);
+                    adp.setPositiveButton("Adicionar", new DialogInterface.OnClickListener(){
+
+                        @Override
+                        public void onClick(DialogInterface p1, int p2)
+                        {
+                            // TODO: Implement this method
+                            util us = new util();
+                            us.setProd2(lt.get(p3).getProd1());
+                            us.setQuant2(quan.getText().toString() + "x");
+                            us.setValor2(valor.getText().toString());
+                            us.setImage2(lm);
+                            DB d = new DB(getActivity());
+                            d.carIn(us);
+                            try {
+                                File sd = Environment.getExternalStorageDirectory();
+                                File data = Environment.getDataDirectory();
+
+                                if (sd.canWrite()) {
+                                    String  currentDBPath= "//data//" + getActivity().getOpPackageName()
+                                            + "//databases//" + "MCRDB.db";
+                                    String  currentDBPath2 = "//data//" + getActivity().getOpPackageName()
+                                            + "//databases//" + "MCRDB.db-shm";
+                                    String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
+                                            + "//databases//" + "MCRDB.db-wal";
+
+                                    String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+                                    String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-shm";
+                                    String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-wal";
+
+                                    File currentDB = new File(data, currentDBPath);
+                                    File currentDB2 = new File(data, currentDBPath2);
+                                    File currentDB3 = new File(data, currentDBPath3);
+                                    File backupDB = new File(sd, backupDBPath);
+                                    File backupDB2 = new File(sd, backupDBPath2);
+                                    File backupDB3 = new File(sd, backupDBPath3);
+
+                                    if(currentDB2.exists()){
+                                        FileChannel src = new FileInputStream(currentDB2).getChannel();
+                                        FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+                                        dst.transferFrom(src, 0, src.size());
+                                        src.close();
+                                        dst.close();
+                                    }
+                                    if(currentDB3.exists()){
+                                        FileChannel src = new FileInputStream(currentDB3).getChannel();
+                                        FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+                                        dst.transferFrom(src, 0, src.size());
+                                        src.close();
+                                        dst.close();
+                                    }
+                                    FileChannel src = new FileInputStream(currentDB).getChannel();
+                                    FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                                    dst.transferFrom(src, 0, src.size());
+                                    src.close();
+                                    dst.close();
+                                }
+                            } catch (Exception e2) {
+
+                            }
+                        }
+                    });
+                    adp.setNegativeButton("Cancelar", null);
+                    adp.create();
+                    adp.show();
+                }else {
+                    View r = getActivity().getLayoutInflater().inflate(R.layout.add_product, null);
+                    ImageView imp = r.findViewById(R.id.imP);
+                    final EditText prod = r.findViewById(R.id.prod);
+                    final EditText quan = r.findViewById(R.id.quant);
+                    final EditText valor = r.findViewById(R.id.valor);
+                    final ImageButton bt_sub = r.findViewById(R.id.sub);
+                    final ImageButton bt_add = r.findViewById(R.id.add);
+                    bt_sub.setOnClickListener(new View.OnClickListener(){
+
+                        @Override
+                        public void onClick(View p1)
+                        {
+                            // TODO: Implement this method
+                            if(quan.getText().toString().equals("1")){
+                                bt_sub.setEnabled(false);
+                            }else {
+                                Double v1 = new Double(quan.getText().toString());
+                                double res = v1 - 1;
+                                DecimalFormatSymbols df2 = new DecimalFormatSymbols();
+
+                                DecimalFormat dform2 = new DecimalFormat("##", df2);
+                                quan.setText(dform2.format(res));
+                                Double sub1 = new Double(valor.getText().toString());
+                                Double sub2 = new Double(lt.get(p3).getValor1());
+                                double res2 = sub1 - sub2;
+                                DecimalFormatSymbols df = new DecimalFormatSymbols();
+                                df.setGroupingSeparator('.');
+                                df.setDecimalSeparator('.');
+                                DecimalFormat dform = new DecimalFormat("####.00", df);
+                                valor.getText().clear();
+                                valor.setText(dform.format(res2));
+                            }
+                        }
+                    });
+                    bt_add.setOnClickListener(new View.OnClickListener(){
+
+                        @Override
+                        public void onClick(View p1)
+                        {
+                            // TODO: Implement this method
+                            bt_sub.setEnabled(true);
                             Double v1 = new Double(quan.getText().toString());
-                            double res = v1 - 1;
+                            double res0 = v1  +1;
                             DecimalFormatSymbols df2 = new DecimalFormatSymbols();
 
                             DecimalFormat dform2 = new DecimalFormat("##", df2);
-                            quan.setText(dform2.format(res));
-                            Double sub1 = new Double(valor.getText().toString());
-                            Double sub2 = new Double(lt.get(p3).getValor1());
-                            double res2 = sub1 - sub2;
+                            quan.setText(dform2.format(res0));
+                            Double quant = new Double(quan.getText().toString());
+                            Double val = new Double(lt.get(p3).getValor1());
+                            double res = val * quant;
                             DecimalFormatSymbols df = new DecimalFormatSymbols();
                             df.setGroupingSeparator('.');
                             df.setDecimalSeparator('.');
                             DecimalFormat dform = new DecimalFormat("####.00", df);
                             valor.getText().clear();
-                            valor.setText(dform.format(res2));
+                            valor.setText(dform.format(res));
                         }
-                    }
-                });
-                bt_add.setOnClickListener(new View.OnClickListener(){
+                    });
+                    byte[] im = lt.get(p3).getImage();
+                    Bitmap bt = BitmapFactory.decodeByteArray(im, 0, im.length);
+                    imp.setImageBitmap(bt);
+                    prod.setText(lt.get(p3).getProd1());
 
-                    @Override
-                    public void onClick(View p1)
-                    {
-                        // TODO: Implement this method
-                        bt_sub.setEnabled(true);
-                        Double v1 = new Double(quan.getText().toString());
-                        double res0 = v1  +1;
-                        DecimalFormatSymbols df2 = new DecimalFormatSymbols();
+                    quan.setText("1");
+                    quan.setOnEditorActionListener(new TextView.OnEditorActionListener(){
 
-                        DecimalFormat dform2 = new DecimalFormat("##", df2);
-                        quan.setText(dform2.format(res0));
-                        Double quant = new Double(quan.getText().toString());
-                        Double val = new Double(lt.get(p3).getValor1());
-                        double res = val * quant;
-                        DecimalFormatSymbols df = new DecimalFormatSymbols();
-                        df.setGroupingSeparator('.');
-                        df.setDecimalSeparator('.');
-                        DecimalFormat dform = new DecimalFormat("####.00", df);
-                        valor.getText().clear();
-                        valor.setText(dform.format(res));
-                    }
-                });
-                byte[] im = lt.get(p3).getImage();
-                Bitmap bt = BitmapFactory.decodeByteArray(im, 0, im.length);
-                imp.setImageBitmap(bt);
-                prod.setText(lt.get(p3).getProd1());
+                        @Override
+                        public boolean onEditorAction(TextView p1, int p2, KeyEvent p3)
+                        {
+                            // TODO: Implement this method
 
-                quan.setText("1");
-                quan.setOnEditorActionListener(new TextView.OnEditorActionListener(){
+                            return false;
+                        }
+                    });
+                    valor.setText(lt.get(p3).getValor1());
+                    AlertDialog.Builder adp = new AlertDialog.Builder(getActivity());
+                    adp.setTitle("Adicionar ao Carrinho!");
+                    adp.setView(r);
+                    adp.setPositiveButton("Adicionar", new DialogInterface.OnClickListener(){
 
-                    @Override
-                    public boolean onEditorAction(TextView p1, int p2, KeyEvent p3)
-                    {
-                        // TODO: Implement this method
+                        @Override
+                        public void onClick(DialogInterface p1, int p2)
+                        {
+                            // TODO: Implement this method
+                            util us = new util();
+                            us.setProd2(lt.get(p3).getProd1());
+                            us.setQuant2(quan.getText().toString() + "x");
+                            us.setValor2(valor.getText().toString());
+                            us.setImage2(lm);
+                            DB d = new DB(getActivity());
+                            d.carIn(us);
+                            try {
+                                File sd = Environment.getExternalStorageDirectory();
+                                File data = Environment.getDataDirectory();
 
-                        return false;
-                    }
-                });
-                valor.setText(lt.get(p3).getValor1());
-                AlertDialog.Builder adp = new AlertDialog.Builder(getActivity());
-                adp.setTitle("Adicionar ao Carrinho!");
-                adp.setView(r);
-                adp.setPositiveButton("Adicionar", new DialogInterface.OnClickListener(){
+                                if (sd.canWrite()) {
+                                    String  currentDBPath= "//data//" + getActivity().getOpPackageName()
+                                            + "//databases//" + "MCRDB.db";
+                                    String  currentDBPath2 = "//data//" + getActivity().getOpPackageName()
+                                            + "//databases//" + "MCRDB.db-shm";
+                                    String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
+                                            + "//databases//" + "MCRDB.db-wal";
 
-                    @Override
-                    public void onClick(DialogInterface p1, int p2)
-                    {
-                        // TODO: Implement this method
-                        util us = new util();
-                        us.setProd2(lt.get(p3).getProd1());
-                        us.setQuant2(quan.getText().toString() + "x");
-                        us.setValor2(valor.getText().toString());
-                        us.setImage2(lm);
-                        DB d = new DB(getActivity());
-                        d.carIn(us);
-                        try {
-                            File sd = Environment.getExternalStorageDirectory();
-                            File data = Environment.getDataDirectory();
+                                    String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+                                    String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-shm";
+                                    String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-wal";
 
-                            if (sd.canWrite()) {
-                                String  currentDBPath= "//data//" + getActivity().getOpPackageName()
-                                        + "//databases//" + "MCRDB.db";
-                                String  currentDBPath2 = "//data//" + getActivity().getOpPackageName()
-                                        + "//databases//" + "MCRDB.db-shm";
-                                String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
-                                        + "//databases//" + "MCRDB.db-wal";
+                                    File currentDB = new File(data, currentDBPath);
+                                    File currentDB2 = new File(data, currentDBPath2);
+                                    File currentDB3 = new File(data, currentDBPath3);
+                                    File backupDB = new File(sd, backupDBPath);
+                                    File backupDB2 = new File(sd, backupDBPath2);
+                                    File backupDB3 = new File(sd, backupDBPath3);
 
-                                String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
-                                String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-shm";
-                                String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-wal";
-
-                                File currentDB = new File(data, currentDBPath);
-                                File currentDB2 = new File(data, currentDBPath2);
-                                File currentDB3 = new File(data, currentDBPath3);
-                                File backupDB = new File(sd, backupDBPath);
-                                File backupDB2 = new File(sd, backupDBPath2);
-                                File backupDB3 = new File(sd, backupDBPath3);
-
-                                if(currentDB2.exists()){
-                                    FileChannel src = new FileInputStream(currentDB2).getChannel();
-                                    FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+                                    if(currentDB2.exists()){
+                                        FileChannel src = new FileInputStream(currentDB2).getChannel();
+                                        FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+                                        dst.transferFrom(src, 0, src.size());
+                                        src.close();
+                                        dst.close();
+                                    }
+                                    if(currentDB3.exists()){
+                                        FileChannel src = new FileInputStream(currentDB3).getChannel();
+                                        FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+                                        dst.transferFrom(src, 0, src.size());
+                                        src.close();
+                                        dst.close();
+                                    }
+                                    FileChannel src = new FileInputStream(currentDB).getChannel();
+                                    FileChannel dst = new FileOutputStream(backupDB).getChannel();
                                     dst.transferFrom(src, 0, src.size());
                                     src.close();
                                     dst.close();
                                 }
-                                if(currentDB3.exists()){
-                                    FileChannel src = new FileInputStream(currentDB3).getChannel();
-                                    FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-                                    dst.transferFrom(src, 0, src.size());
-                                    src.close();
-                                    dst.close();
-                                }
-                                FileChannel src = new FileInputStream(currentDB).getChannel();
-                                FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                                dst.transferFrom(src, 0, src.size());
-                                src.close();
-                                dst.close();
+                            } catch (Exception e2) {
+
                             }
-                        } catch (Exception e2) {
-
                         }
-                    }
-                });
-                adp.setNegativeButton("Cancelar", null);
-                adp.create();
-                adp.show();
+                    });
+                    adp.setNegativeButton("Cancelar", null);
+                    adp.create();
+                    adp.show();
+                }
+                if(lt.get(p3).getProd1().startsWith("Biscoitinho")){
+
+                }else {
+
+                }
+                if(lt.get(p3).getProd1().startsWith("Bolo")){
+
+                } else {
+
+                }
             }
         });
         return rootView;
@@ -238,6 +358,7 @@ public class Page1 extends Fragment
 
         try{
             if(!car.get(0).getProd2().toString().equals("")){
+
                 View r = getActivity().getLayoutInflater().inflate(R.layout.product_added, null);
                 ad = new productAdapter(getActivity(), car);
                 ListView lp = r.findViewById(R.id.list);
