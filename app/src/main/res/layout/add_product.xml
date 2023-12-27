@@ -62,11 +62,10 @@
 		android:layout_height="30dp" />
 	<TextView
 		android:textSize="16dp"
-		android:id="@+id/tvQ"
-		android:layout_marginTop="30dp"
+		android:id="@+id/tvQ"		android:layout_marginTop="30dp"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Qtd.:" />
+		android:text="Qtd KG.:" />
 		<EditText
 			android:layout_width="wrap_content"
 			android:ems="2"

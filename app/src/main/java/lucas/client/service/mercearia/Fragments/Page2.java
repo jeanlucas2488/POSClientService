@@ -58,10 +58,10 @@ public class Page2 extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //setHasOptionsMenu(true);
         View rootView=inflater.inflate(R.layout.fragment_view,null);
-        SQLiteControl db = new SQLiteControl(getActivity());
-        lt = db.findP1();
+        SQLiteControl SQLiteControl = new SQLiteControl(getActivity());
+        lt = SQLiteControl.findP2();
         List<util> op;
-        op = db.opFind();
+        op = SQLiteControl.opFind();
         TextView tv = rootView.findViewById(R.id.barOp);
         tv.setText("Operador(a): " + op.get(0).getOp());
         ImageButton cr = rootView.findViewById(R.id.finish);
@@ -175,7 +175,7 @@ public class Page2 extends Fragment
                         us.setQuant2(quan.getText().toString() + "x");
                         us.setValor2(valor.getText().toString());
                         us.setImage2(lm);
-                        DB d = new DB(getActivity());
+                        SQLiteControl d = new SQLiteControl(getActivity());
                         d.carIn(us);
                         try {
                             File sd = Environment.getExternalStorageDirectory();

@@ -88,7 +88,8 @@ public class Page1 extends Fragment
             {
                 // TODO: Implement this method
                 lm = lt.get(p3).getImage();
-                if(lt.get(p3).getProd1().startsWith("Pão")){
+                if(lt.get(p3).getProd1().startsWith("Pão") || lt.get(p3).getProd1().startsWith("Bolo") || lt.get(p3).getProd1().startsWith("Biscoitinho") || lt.get(p3).getProd1().startsWith("Orelha de Gato") || lt.get(p3).getProd1().endsWith("Mineirinho")) {
+
                     View r = getActivity().getLayoutInflater().inflate(R.layout.add_product, null);
                     ImageView imp = r.findViewById(R.id.imP);
                     final EditText prod = r.findViewById(R.id.prod);
@@ -99,13 +100,21 @@ public class Page1 extends Fragment
                     final ImageButton bt_add = r.findViewById(R.id.add);
                     bt_sub.setVisibility(View.GONE);
                     bt_add.setVisibility(View.GONE);
+                    quan.setText("0");
                     quan.setEms(5);
                     quan.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                         @Override
                         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                           if(actionId == EditorInfo.IME_ACTION_DONE){
-                              Toast.makeText(getActivity(), "Teste", Toast.LENGTH_SHORT).show();
-
+                              Double v1 = new Double(lt.get(p3).getValor1());
+                              Double v2 = new Double(quan.getText().toString());
+                              double res = v1 * v2;
+                              DecimalFormatSymbols df = new DecimalFormatSymbols();
+                              df.setGroupingSeparator('.');
+                              df.setDecimalSeparator('.');
+                              DecimalFormat dform = new DecimalFormat("####.##", df);
+                              valor.setText(dform.format(res));
+                              return true;
                           }
                             return false;
                         }
@@ -114,18 +123,6 @@ public class Page1 extends Fragment
                     Bitmap bt = BitmapFactory.decodeByteArray(im, 0, im.length);
                     imp.setImageBitmap(bt);
                     prod.setText(lt.get(p3).getProd1());
-
-
-                    quan.setOnEditorActionListener(new TextView.OnEditorActionListener(){
-
-                        @Override
-                        public boolean onEditorAction(TextView p1, int p2, KeyEvent p3)
-                        {
-                            // TODO: Implement this method
-
-                            return false;
-                        }
-                    });
                     valor.setText(lt.get(p3).getValor1());
                     AlertDialog.Builder adp = new AlertDialog.Builder(getActivity());
                     adp.setTitle("Adicionar ao Carrinho!");
@@ -197,11 +194,13 @@ public class Page1 extends Fragment
                 }else {
                     View r = getActivity().getLayoutInflater().inflate(R.layout.add_product, null);
                     ImageView imp = r.findViewById(R.id.imP);
+                    final TextView tvq = r.findViewById(R.id.tvQ);
                     final EditText prod = r.findViewById(R.id.prod);
                     final EditText quan = r.findViewById(R.id.quant);
                     final EditText valor = r.findViewById(R.id.valor);
                     final ImageButton bt_sub = r.findViewById(R.id.sub);
                     final ImageButton bt_add = r.findViewById(R.id.add);
+                    tvq.setVisibility(View.GONE);
                     bt_sub.setOnClickListener(new View.OnClickListener(){
 
                         @Override
@@ -338,16 +337,7 @@ public class Page1 extends Fragment
                     adp.create();
                     adp.show();
                 }
-                if(lt.get(p3).getProd1().startsWith("Biscoitinho")){
 
-                }else {
-
-                }
-                if(lt.get(p3).getProd1().startsWith("Bolo")){
-
-                } else {
-
-                }
             }
         });
         return rootView;
@@ -384,7 +374,7 @@ public class Page1 extends Fragment
                             CarRw1 = "0";
                         }
                         try{
-                            DB d2 = new DB(getActivity());
+                            SQLiteControl d2 = new SQLiteControl(getActivity());
                             util carRw2 = d2.getCarRw(2);
                             if(!carRw2.getValor2().equals("")){
                                 CarRw2 = carRw2.getValor2();
@@ -393,7 +383,7 @@ public class Page1 extends Fragment
                             CarRw2 = "0";
                         }
                         try{
-                            DB d3 = new DB(getActivity());
+                            SQLiteControl d3 = new SQLiteControl(getActivity());
                             util carRw3 = d3.getCarRw(3);
                             if(!carRw3.getValor2().equals("")){
                                 CarRw3 = carRw3.getValor2();
@@ -402,7 +392,7 @@ public class Page1 extends Fragment
                             CarRw3 = "0";
                         }
                         try{
-                            DB d4 = new DB(getActivity());
+                            SQLiteControl d4 = new SQLiteControl(getActivity());
                             util carRw4 = d4.getCarRw(4);
                             if(!carRw4.getValor2().equals("")){
                                 CarRw4 = carRw4.getValor2();
@@ -411,7 +401,7 @@ public class Page1 extends Fragment
                             CarRw4 = "0";
                         }
                         try{
-                            DB d5 = new DB(getActivity());
+                            SQLiteControl d5 = new SQLiteControl(getActivity());
                             util carRw5 = d5.getCarRw(5);
                             if(!carRw5.getValor2().equals("")){
                                 CarRw5 = carRw5.getValor2();
@@ -420,7 +410,7 @@ public class Page1 extends Fragment
                             CarRw5 = "0";
                         }
                         try{
-                            DB d6 = new DB(getActivity());
+                            SQLiteControl d6 = new SQLiteControl(getActivity());
                             util carRw6 = d6.getCarRw(6);
                             if(!carRw6.getValor2().equals("")){
                                 CarRw6 = carRw6.getValor2();
@@ -429,7 +419,7 @@ public class Page1 extends Fragment
                             CarRw6 = "0";
                         }
                         try{
-                            DB d7 = new DB(getActivity());
+                            SQLiteControl d7 = new SQLiteControl(getActivity());
                             util carRw7 = d7.getCarRw(7);
                             if(!carRw7.getValor2().equals("")){
                                 CarRw7 = carRw7.getValor2();
@@ -438,7 +428,7 @@ public class Page1 extends Fragment
                             CarRw7 = "0";
                         }
                         try{
-                            DB d8 = new DB(getActivity());
+                            SQLiteControl d8 = new SQLiteControl(getActivity());
                             util carRw8 = d8.getCarRw(8);
                             if(!carRw8.getValor2().equals("")){
                                 CarRw8 = carRw8.getValor2();
@@ -447,7 +437,7 @@ public class Page1 extends Fragment
                             CarRw8 = "0";
                         }
                         try{
-                            DB d9 = new DB(getActivity());
+                            SQLiteControl d9 = new SQLiteControl(getActivity());
                             util carRw9 = d9.getCarRw(9);
                             if(!carRw9.getValor2().equals("")){
                                 CarRw9 = carRw9.getValor2();
@@ -456,7 +446,7 @@ public class Page1 extends Fragment
                             CarRw9 = "0";
                         }
                         try{
-                            DB d10 = new DB(getActivity());
+                            SQLiteControl d10 = new SQLiteControl(getActivity());
                             util carRw10 = d10.getCarRw(10);
                             if(!carRw10.getValor2().equals("")){
                                 CarRw10 = carRw10.getValor2();
@@ -465,7 +455,7 @@ public class Page1 extends Fragment
                             CarRw10 = "0";
                         }
                         try{
-                            DB d11 = new DB(getActivity());
+                            SQLiteControl d11 = new SQLiteControl(getActivity());
                             util carRw11 = d11.getCarRw(11);
                             if(!carRw11.getValor2().equals("")){
                                 CarRw11 = carRw11.getValor2();
