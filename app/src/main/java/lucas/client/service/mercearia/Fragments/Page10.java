@@ -397,7 +397,7 @@ public class Page10 extends Fragment
                             us.setQuant2(quan.getText().toString() + "x");
                             us.setValor2(valor.getText().toString());
                             us.setImage2(lm);
-                            DB d = new DB(getActivity());
+                            SQLiteControl d = new SQLiteControl(getActivity());
                             d.carIn(us);
                             try {
                                 File sd = Environment.getExternalStorageDirectory();
