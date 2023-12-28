@@ -48,6 +48,7 @@ import lucas.client.service.caixa.setup.fechamentos.fechaCaixa;
 import lucas.client.service.caixa.setup.lancamentos.historico;
 import lucas.client.service.etc.util;
 import lucas.client.service.mercearia.databases.SQLiteControl;
+import lucas.client.service.mercearia.setup.fechamento;
 
 public class MerceariaMain extends AppCompatActivity {
     AlertDialog aler, ale;
@@ -252,7 +253,7 @@ public class MerceariaMain extends AppCompatActivity {
 
                     if(lc[p3].toString().startsWith("F")){
 
-                        Intent itr = new Intent(c, fechaCaixa.class);
+                        Intent itr = new Intent(c, fechamento.class);
                         startActivity(itr);
                         finish();
                     }

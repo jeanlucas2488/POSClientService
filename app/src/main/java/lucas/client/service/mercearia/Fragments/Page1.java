@@ -9,8 +9,7 @@ import android.icu.text.DecimalFormat;
 import android.icu.text.DecimalFormatSymbols;
 import android.os.Bundle;
 import android.os.Environment;
-import android.text.Editable;
-import android.text.TextWatcher;
+
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,15 +40,16 @@ import java.util.List;
 import lucas.client.service.Fragments.adapter.productAdapter;
 import lucas.client.service.R;
 import lucas.client.service.caixa.adapters.gridAd;
-import lucas.client.service.caixa.product.pay;
 import lucas.client.service.etc.util;
+import lucas.client.service.mercearia.Fragments.adapters.prodAd;
+import lucas.client.service.mercearia.Fragments.payment.pay_;
 import lucas.client.service.mercearia.databases.SQLiteControl;
 import lucas.client.service.sqlite.DB;
 
 public class Page1 extends Fragment
 {
     byte[] lm;
-    productAdapter ad;
+    prodAd ad;
     gridAd ad2;
     List<util> lt, car;
     String CarRw1, CarRw2, CarRw3, CarRw4, CarRw5, CarRw6, CarRw7, CarRw8, CarRw9, CarRw10, CarRw11;
@@ -88,8 +88,48 @@ public class Page1 extends Fragment
             {
                 // TODO: Implement this method
                 lm = lt.get(p3).getImage();
-                if(lt.get(p3).getProd1().startsWith("Pão") || lt.get(p3).getProd1().startsWith("Bolo") || lt.get(p3).getProd1().startsWith("Biscoitinho") || lt.get(p3).getProd1().startsWith("Orelha de Gato") || lt.get(p3).getProd1().endsWith("Mineirinho")) {
-
+                if(lt.get(p3).getProd1().startsWith("Pão")
+                        || lt.get(p3).getProd1().startsWith("Bolo")
+                        || lt.get(p3).getProd1().startsWith("Biscoitinho")
+                        || lt.get(p3).getProd1().startsWith("Orelha de Gato")
+                        || lt.get(p3).getProd1().endsWith("Mineirinho")
+                        || lt.get(p3).getProd1().startsWith("Torta")
+                        || lt.get(p3).getProd1().startsWith("Tomate")
+                        || lt.get(p3).getProd1().startsWith("Cebola")
+                        || lt.get(p3).getProd1().startsWith("Pepino")
+                        || lt.get(p3).getProd1().startsWith("Coco")
+                        || lt.get(p3).getProd1().startsWith("Coco Verde")
+                        || lt.get(p3).getProd1().startsWith("Alho Solto")
+                        || lt.get(p3).getProd1().startsWith("Alface")
+                        || lt.get(p3).getProd1().startsWith("Pimentão")
+                        || lt.get(p3).getProd1().startsWith("Laranja")
+                        || lt.get(p3).getProd1().startsWith("Maçã")
+                        || lt.get(p3).getProd1().startsWith("Rabanete")
+                        || lt.get(p3).getProd1().startsWith("Pêra")
+                        || lt.get(p3).getProd1().startsWith("Manga")
+                        || lt.get(p3).getProd1().startsWith("Framboesa")
+                        || lt.get(p3).getProd1().startsWith("Limão")
+                        || lt.get(p3).getProd1().startsWith("Beringela")
+                        || lt.get(p3).getProd1().startsWith("Tangerina")
+                        || lt.get(p3).getProd1().startsWith("Melância")
+                        || lt.get(p3).getProd1().startsWith("Banana")
+                        || lt.get(p3).getProd1().startsWith("Abacaxi")
+                        || lt.get(p3).getProd1().startsWith("Kiwi")
+                        || lt.get(p3).getProd1().startsWith("Caqui")
+                        || lt.get(p3).getProd1().startsWith("Abacate")
+                        || lt.get(p3).getProd1().startsWith("Jambo")
+                        || lt.get(p3).getProd1().startsWith("Jaca")
+                        || lt.get(p3).getProd1().startsWith("Ameixa")
+                        || lt.get(p3).getProd1().startsWith("Mamão")
+                        || lt.get(p3).getProd1().startsWith("Melão")
+                        || lt.get(p3).getProd1().startsWith("Beterraba")
+                        || lt.get(p3).getProd1().startsWith("Cenoura")
+                        || lt.get(p3).getProd1().startsWith("Repolho")
+                        || lt.get(p3).getProd1().startsWith("Batata")
+                        || lt.get(p3).getProd1().startsWith("Couve Flor")
+                        || lt.get(p3).getProd1().startsWith("Goiaba")
+                        || lt.get(p3).getProd1().startsWith("Uva")
+                        || lt.get(p3).getProd1().startsWith("Carne")) {
                     View r = getActivity().getLayoutInflater().inflate(R.layout.add_product, null);
                     ImageView imp = r.findViewById(R.id.imP);
                     final EditText prod = r.findViewById(R.id.prod);
@@ -133,59 +173,114 @@ public class Page1 extends Fragment
                         public void onClick(DialogInterface p1, int p2)
                         {
                             // TODO: Implement this method
-                            util us = new util();
-                            us.setProd2(lt.get(p3).getProd1());
-                            us.setQuant2(quan.getText().toString() + "x");
-                            us.setValor2(valor.getText().toString());
-                            us.setImage2(lm);
-                            DB d = new DB(getActivity());
-                            d.carIn(us);
-                            try {
-                                File sd = Environment.getExternalStorageDirectory();
-                                File data = Environment.getDataDirectory();
+                           if(lt.get(p3).getProd1().startsWith("Pão") || lt.get(p3).getProd1().startsWith("Bolo") || lt.get(p3).getProd1().startsWith("Mineirinho")){
+                               util us = new util();
+                               us.setProd2(lt.get(p3).getProd1());
+                               us.setQuant2(quan.getText().toString() + " KG");
+                               us.setValor2(valor.getText().toString());
+                               us.setImage2(lm);
+                               SQLiteControl d = new SQLiteControl(getActivity());
+                               d.carIn(us);
+                               try {
+                                   File sd = Environment.getExternalStorageDirectory();
+                                   File data = Environment.getDataDirectory();
 
-                                if (sd.canWrite()) {
-                                    String  currentDBPath= "//data//" + getActivity().getOpPackageName()
-                                            + "//databases//" + "MCRDB.db";
-                                    String  currentDBPath2 = "//data//" + getActivity().getOpPackageName()
-                                            + "//databases//" + "MCRDB.db-shm";
-                                    String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
-                                            + "//databases//" + "MCRDB.db-wal";
+                                   if (sd.canWrite()) {
+                                       String  currentDBPath= "//data//" + getActivity().getOpPackageName()
+                                               + "//databases//" + "MCRDB.db";
+                                       String  currentDBPath2 = "//data//" + getActivity().getOpPackageName()
+                                               + "//databases//" + "MCRDB.db-shm";
+                                       String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
+                                               + "//databases//" + "MCRDB.db-wal";
 
-                                    String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
-                                    String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-shm";
-                                    String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-wal";
+                                       String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+                                       String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-shm";
+                                       String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-wal";
 
-                                    File currentDB = new File(data, currentDBPath);
-                                    File currentDB2 = new File(data, currentDBPath2);
-                                    File currentDB3 = new File(data, currentDBPath3);
-                                    File backupDB = new File(sd, backupDBPath);
-                                    File backupDB2 = new File(sd, backupDBPath2);
-                                    File backupDB3 = new File(sd, backupDBPath3);
+                                       File currentDB = new File(data, currentDBPath);
+                                       File currentDB2 = new File(data, currentDBPath2);
+                                       File currentDB3 = new File(data, currentDBPath3);
+                                       File backupDB = new File(sd, backupDBPath);
+                                       File backupDB2 = new File(sd, backupDBPath2);
+                                       File backupDB3 = new File(sd, backupDBPath3);
 
-                                    if(currentDB2.exists()){
-                                        FileChannel src = new FileInputStream(currentDB2).getChannel();
-                                        FileChannel dst = new FileOutputStream(backupDB2).getChannel();
-                                        dst.transferFrom(src, 0, src.size());
-                                        src.close();
-                                        dst.close();
-                                    }
-                                    if(currentDB3.exists()){
-                                        FileChannel src = new FileInputStream(currentDB3).getChannel();
-                                        FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-                                        dst.transferFrom(src, 0, src.size());
-                                        src.close();
-                                        dst.close();
-                                    }
-                                    FileChannel src = new FileInputStream(currentDB).getChannel();
-                                    FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                                    dst.transferFrom(src, 0, src.size());
-                                    src.close();
-                                    dst.close();
-                                }
-                            } catch (Exception e2) {
+                                       if(currentDB2.exists()){
+                                           FileChannel src = new FileInputStream(currentDB2).getChannel();
+                                           FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+                                           dst.transferFrom(src, 0, src.size());
+                                           src.close();
+                                           dst.close();
+                                       }
+                                       if(currentDB3.exists()){
+                                           FileChannel src = new FileInputStream(currentDB3).getChannel();
+                                           FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+                                           dst.transferFrom(src, 0, src.size());
+                                           src.close();
+                                           dst.close();
+                                       }
+                                       FileChannel src = new FileInputStream(currentDB).getChannel();
+                                       FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                                       dst.transferFrom(src, 0, src.size());
+                                       src.close();
+                                       dst.close();
+                                   }
+                               } catch (Exception e2) {
 
-                            }
+                               }
+                           }else {
+                               util us = new util();
+                               us.setProd2(lt.get(p3).getProd1());
+                               us.setQuant2(quan.getText().toString() + "x");
+                               us.setValor2(valor.getText().toString());
+                               us.setImage2(lm);
+                               SQLiteControl d = new SQLiteControl(getActivity());
+                               d.carIn(us);
+                               try {
+                                   File sd = Environment.getExternalStorageDirectory();
+                                   File data = Environment.getDataDirectory();
+
+                                   if (sd.canWrite()) {
+                                       String  currentDBPath= "//data//" + getActivity().getOpPackageName()
+                                               + "//databases//" + "MCRDB.db";
+                                       String  currentDBPath2 = "//data//" + getActivity().getOpPackageName()
+                                               + "//databases//" + "MCRDB.db-shm";
+                                       String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
+                                               + "//databases//" + "MCRDB.db-wal";
+
+                                       String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+                                       String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-shm";
+                                       String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-wal";
+
+                                       File currentDB = new File(data, currentDBPath);
+                                       File currentDB2 = new File(data, currentDBPath2);
+                                       File currentDB3 = new File(data, currentDBPath3);
+                                       File backupDB = new File(sd, backupDBPath);
+                                       File backupDB2 = new File(sd, backupDBPath2);
+                                       File backupDB3 = new File(sd, backupDBPath3);
+
+                                       if(currentDB2.exists()){
+                                           FileChannel src = new FileInputStream(currentDB2).getChannel();
+                                           FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+                                           dst.transferFrom(src, 0, src.size());
+                                           src.close();
+                                           dst.close();
+                                       }
+                                       if(currentDB3.exists()){
+                                           FileChannel src = new FileInputStream(currentDB3).getChannel();
+                                           FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+                                           dst.transferFrom(src, 0, src.size());
+                                           src.close();
+                                           dst.close();
+                                       }
+                                       FileChannel src = new FileInputStream(currentDB).getChannel();
+                                       FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                                       dst.transferFrom(src, 0, src.size());
+                                       src.close();
+                                       dst.close();
+                                   }
+                               } catch (Exception e2) {
+                               }
+                           }
                         }
                     });
                     adp.setNegativeButton("Cancelar", null);
@@ -343,14 +438,13 @@ public class Page1 extends Fragment
         return rootView;
     }
     public void runCarrinho(){
-        DB srv = new DB(getActivity());
+        SQLiteControl srv = new SQLiteControl(getActivity());
         car = srv.carrinho();
 
         try{
             if(!car.get(0).getProd2().toString().equals("")){
-
                 View r = getActivity().getLayoutInflater().inflate(R.layout.product_added, null);
-                ad = new productAdapter(getActivity(), car);
+                ad = new prodAd(getActivity(), car);
                 ListView lp = r.findViewById(R.id.list);
                 lp.setEmptyView(r.findViewById(android.R.id.empty));
                 lp.setAdapter(ad);
@@ -364,8 +458,8 @@ public class Page1 extends Fragment
                     {
                         // TODO: Implement this method
 
-                        try{
-                            DB d1 = new DB(getActivity());
+                          try{
+                            SQLiteControl d1 = new SQLiteControl(getActivity());
                             util carRw1 = d1.getCarRw(1);
                             if(!carRw1.getValor2().equals("")){
                                 CarRw1 = carRw1.getValor2();
@@ -480,7 +574,7 @@ public class Page1 extends Fragment
                         df.setDecimalSeparator('.');
                         DecimalFormat dform = new DecimalFormat("####.##", df);
                         String result = dform.format(res_);
-                        Intent it = new Intent(getActivity(), pay.class);
+                        Intent it = new Intent(getActivity(), pay_.class);
                         Bundle b = new Bundle();
                         b.putString("valor", result);
                         it.putExtras(b);

@@ -25,7 +25,11 @@
             </intent-filter>
 
         </activity>
-        
+        <activity
+            android:theme="@style/dialog"
+            android:name=".mercearia.Fragments.payment.pay_"
+            android:label="@string/app_pdv" >
+        </activity>
         <activity
             android:theme="@style/dialog"
             android:name=".Login"
