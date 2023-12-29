@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.*;
 import androidx.core.content.ContextCompat;
@@ -58,75 +59,26 @@ public class selfConfig extends AppCompatActivity
 							if (progress.getProgress() == 10) {
 								progress.setMessage("Checando Permissões...");
 								if(checkPermission()){
+									Thread.sleep(5000);
 									progress.setMessage("Continuando Configuração do POS...");
 								} else {
 									requestPermission();
 									progress.dismiss();
 									finishAffinity();
 									Thread.sleep(999999999);
-
 								}
 							}
 							
 							if(progress.getProgress() == 20){
-								progress.setMessage("Fechando Apps em Segundo Plano...");
-								Runtime.getRuntime().exec("am kill");
-								Runtime.getRuntime().exec("am kill-all");
-								Thread.sleep(1000);
-								progress.setMessage("Concluído!!");
-								Thread.sleep(1000);
-								progress.setMessage("Verificando algumas coisas 😊...");
-								Thread.sleep(7000);
-							}
-							if(progress.getProgress() == 60){
-								progress.setMessage("Verificando se há vendas no POS...");
-								Thread.sleep(2000);
-								try{
-									DB db = new DB(c);
-									
-									List<util> check = db.moFind();
-									if(!check.get(0).getMoney().equals("")){
-										progress.setMessage("Ops! Há vendas em aberto 🧐!!");
-										Thread.sleep(1000);
-										progress.setMessage("Carregando POS...");
-										progress.dismiss();
-										
-										Intent itt = new Intent(c, caixaMain.class);
-										startActivity(itt);
-										Thread.sleep(99999999);
-										
-									} else{}
-								}catch(Exception e){
-									try{
-										DB db = new DB(c);
-										List<util> carrinho = db.carrinho();
-										if(!carrinho.get(0).getProd2().equals("")){
-											progress.setMessage("Ops! Não Terminaste a Venda!");
-											Thread.sleep(2000);
-											
-											Intent it = new Intent(c, caixaMain.class);
-											Bundle b = new Bundle();
-											String val = "1";
-											b.putString("key", val);
-											it.putExtras(b);
-											startActivity(it);
-											Thread.sleep(99999999);
-										} 
-									}catch(Exception e2){
-										progress.setMessage("Nenhuma venda Realizada!!");
-									}
-								}
-							}
-							if(progress.getProgress() == 40){
-								progress.setMessage("Importando Banco de dados....");
-								Thread.sleep(3000);
+								progress.setMessage("Importando dados do PDV");
+								Thread.sleep(5000);
 								try {
 									File sd = Environment.getExternalStorageDirectory();
 									File data = Environment.getDataDirectory();
 
 									if (sd.canWrite()) {
 										String  currentDBPath= "//data//" + c.getOpPackageName()
-											+ "//databases//" + "myDB.db";
+												+ "//databases//" + "myDB.db";
 										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
 										File dbshm = new File(data, currentDBPath + "-shm");
 										File dbwal = new File(data, currentDBPath + "-wal");
@@ -149,7 +101,7 @@ public class selfConfig extends AppCompatActivity
 									progress.setMessage("Falha ao Importar SQLite!");
 									Thread.sleep(2000);
 									Intent launchIntent = getPackageManager().getLaunchIntentForPackage("lucas.client.service.pos.admin");
-									if (launchIntent != null) { 
+									if (launchIntent != null) {
 										startActivity(launchIntent);//null pointer check in case package name was not found
 									}
 									progress.dismiss();
@@ -191,7 +143,69 @@ public class selfConfig extends AppCompatActivity
 									Thread.sleep(99999999);
 								}
 							}
-							
+							if(progress.getProgress() == 30){
+								progress.setMessage("Verificando algumas coisas...");
+								try{
+									DB db = new DB(c);
+									util pag1 = db.getCategory(1);
+									if(!pag1.getCategory().toString().equals("")){
+										List<util> res = db.findP1();
+										if(!res.get(0).getProd1().toString().equals("")){
+											util user1 = db.getUserCM(1);
+											util user2 = db.getUserMCR(1);
+											util user3 = db.getSuperVisor(1);
+											if(!user1.getUser().toString().equals("")){
+												if(user2.getUser().toString().equals("")){
+													if(user3.getSenhaSuperVisor().toString().equals("")){
+														progress.setMessage("Verificação concluída!");
+														Thread.sleep(3000);
+													} else {
+
+													}
+												}else {
+
+												}
+											} else {
+
+											}
+										} else {
+
+										}
+									} else {
+
+									}
+								} catch (Exception e){
+									AlertDialog.Builder b = new AlertDialog.Builder(c);
+									b.setTitle("Atenção!");
+									b.setMessage("O POS não foi configurado corretamente. Abra o Aplicativo retaguarda e configure o POS!");
+									b.setPositiveButton("Vamos lá", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											Intent launchIntent = getPackageManager().getLaunchIntentForPackage("lucas.client.service.pos.admin");
+											if (launchIntent != null) {
+												startActivity(launchIntent);//null pointer check in case package name was not found
+											}
+										}
+									});
+									b.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											progress.dismiss();
+											progress.cancel();
+											finishAffinity();
+										}
+									});
+									b.create();
+									b.show();
+									Thread.sleep(999999999);
+
+								}
+							}
+							if(progress.getProgress() == 40){
+								progress.setMessage("Verficando se háa vendas no POS..."){
+
+								}
+							}
 							if(progress.getProgress() == 70){
 								progress.setMessage("Executando Abertura do POS...");
 								Thread.sleep(2000);
