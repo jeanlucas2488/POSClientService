@@ -156,10 +156,15 @@ public class selfConfig extends AppCompatActivity
 										List<util> res = db.findP1();
 										if(!res.get(0).getProd1().toString().equals("")){
 											util user1 = db.getUserCM(1);
+											util user2 = db.getUserMCR(1);
 											util user3 = db.getSuperVisor(1);
 											if(!user1.getUser().toString().equals("")){
-												if(user3.getSenhaSuperVisor().toString().equals("")){
-													progress.setMessage("Verificação concluída!");
+												if(user2.getUser().toString().equals("")){
+													if(user3.getSenhaSuperVisor().toString().equals("")){
+														progress.setMessage("Verificação concluída!");
+													} else {
+
+													}
 												} else {
 
 												}
