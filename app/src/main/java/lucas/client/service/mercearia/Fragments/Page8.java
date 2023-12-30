@@ -27,6 +27,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -38,6 +39,7 @@ import java.nio.channels.FileChannel;
 import java.util.List;
 
 import lucas.client.service.Fragments.adapter.productAdapter;
+import lucas.client.service.Login;
 import lucas.client.service.R;
 import lucas.client.service.caixa.adapters.gridAd;
 import lucas.client.service.etc.util;
@@ -678,6 +680,16 @@ public class Page8 extends Fragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.util_product, menu);
         MenuItem mSearchMenuItem = menu.findItem(R.id.search);
+        MenuItem mSearchMenuItem2 = menu.findItem(R.id.logout);
+        mSearchMenuItem2.getActionView();
+        mSearchMenuItem2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                getActivity().finishAffinity();
+                startActivity(new Intent(getActivity(), Login.class));
+                return false;
+            }
+        });
         SearchView sc = (SearchView) mSearchMenuItem.getActionView();
         sc.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

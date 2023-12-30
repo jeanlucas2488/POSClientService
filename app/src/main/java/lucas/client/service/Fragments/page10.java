@@ -386,6 +386,16 @@ public class page10 extends Fragment
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.util_product, menu);
 		MenuItem mSearchMenuItem = menu.findItem(R.id.search);
+		MenuItem mSearchMenuItem2 = menu.findItem(R.id.logout);
+		mSearchMenuItem2.getActionView();
+		mSearchMenuItem2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(@NonNull MenuItem item) {
+				getActivity().finishAffinity();
+				startActivity(new Intent(getActivity(), Login.class));
+				return false;
+			}
+		});
 		SearchView sc = (SearchView) mSearchMenuItem.getActionView();
 		sc.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 				@Override
