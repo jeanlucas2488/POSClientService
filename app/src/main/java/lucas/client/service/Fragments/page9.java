@@ -73,6 +73,8 @@ public class page9 extends Fragment
 					final EditText valor = r.findViewById(R.id.valor);
 					final ImageButton bt_sub = r.findViewById(R.id.sub);
 					final ImageButton bt_add = r.findViewById(R.id.add);
+					final TextView tvq = r.findViewById(R.id.tvQ);
+					tvq.setVisibility(View.GONE);
 					bt_sub.setOnClickListener(new OnClickListener(){
 
 							@Override

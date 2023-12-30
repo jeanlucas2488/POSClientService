@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.*;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -23,6 +24,7 @@ import java.nio.channels.*;
 import java.util.*;
 import lucas.client.service.*;
 import lucas.client.service.etc.*;
+import lucas.client.service.mercearia.databases.SQLiteControl;
 import lucas.client.service.sqlite.*;
 
 import static android.Manifest.permission.MANAGE_EXTERNAL_STORAGE;
@@ -144,7 +146,9 @@ public class selfConfig extends AppCompatActivity
 								}
 							}
 							if(progress.getProgress() == 30){
-								progress.setMessage("Verificando algumas coisas...");
+								progress.setMessage("Verificando a integridade do POS 1/2...");
+								Thread.sleep(5000);
+
 								try{
 									DB db = new DB(c);
 									util pag1 = db.getCategory(1);
@@ -152,17 +156,11 @@ public class selfConfig extends AppCompatActivity
 										List<util> res = db.findP1();
 										if(!res.get(0).getProd1().toString().equals("")){
 											util user1 = db.getUserCM(1);
-											util user2 = db.getUserMCR(1);
 											util user3 = db.getSuperVisor(1);
 											if(!user1.getUser().toString().equals("")){
-												if(user2.getUser().toString().equals("")){
-													if(user3.getSenhaSuperVisor().toString().equals("")){
-														progress.setMessage("Verificação concluída!");
-														Thread.sleep(3000);
-													} else {
-
-													}
-												}else {
+												if(user3.getSenhaSuperVisor().toString().equals("")){
+													progress.setMessage("Verificação concluída!");
+												} else {
 
 												}
 											} else {
@@ -198,26 +196,97 @@ public class selfConfig extends AppCompatActivity
 									b.create();
 									b.show();
 									Thread.sleep(999999999);
-
 								}
 							}
 							if(progress.getProgress() == 40){
-								progress.setMessage("Verficando se háa vendas no POS..."){
+								progress.setMessage("Verificando a integridade do POS 2/2...");
+								Thread.sleep(3000);
 
+								try{
+									SQLiteControl db = new SQLiteControl(c);
+									util pag1 = db.getCategory(1);
+									if(!pag1.getCategory().toString().equals("")){
+										List<util> res = db.findP1();
+										if(!res.get(0).getProd1().toString().equals("")){
+											progress.setMessage("Verificação Concluída....");
+										} else {
+										}
+									} else {
+
+									}
+								} catch (Exception e){
+									AlertDialog.Builder b = new AlertDialog.Builder(c);
+									b.setTitle("Atenção!");
+									b.setMessage("O POS não foi configurado corretamente. Abra o Aplicativo retaguarda e configure o POS!");
+									b.setPositiveButton("Vamos lá", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											Intent launchIntent = getPackageManager().getLaunchIntentForPackage("lucas.client.service.pos.admin");
+											if (launchIntent != null) {
+												startActivity(launchIntent);//null pointer check in case package name was not found
+											}
+										}
+									});
+									b.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											progress.dismiss();
+											progress.cancel();
+											finishAffinity();
+										}
+									});
+									b.create();
+									b.show();
+									Thread.sleep(999999999);
 								}
 							}
-							if(progress.getProgress() == 70){
+							if(progress.getProgress() == 50){
+								progress.setMessage("Verificando se há vendas no POS 1/2");
+								Thread.sleep(3000);
+								DB db = new DB(c);
+								try {
+									List<util> res = db.moFind();
+									if(!res.get(0).getMoney().toString().equals("")){
+										progress.setMessage("Ops, há vendas em Aberto!");
+										Thread.sleep(3000);
+										startActivity(new Intent(c, caixaMain.class));
+										Thread.sleep(9999999);
+									} else {
+
+									}
+								} catch (Exception e){
+									progress.setMessage("Não há vendas em aberto POS 1/2...");
+									Thread.sleep(3000);
+									progress.setMessage("Verificando se há vendas no POS 2/2");
+									Thread.sleep(3000);
+									SQLiteControl d = new SQLiteControl(c);
+									try {
+										List<util> res = db.moFind();
+										if(!res.get(0).getMoney().toString().equals("")){
+											progress.setMessage("Ops, há vendas em Aberto!");
+											Thread.sleep(3000);
+											startActivity(new Intent(c, caixaMain.class));
+											Thread.sleep(9999999);
+										} else {
+
+										}
+								} catch(Exception e2){
+										progress.setMessage("Não há vendas em Aberto!");
+									}
+							}
+						}
+							if(progress.getProgress() == 60){
 								progress.setMessage("Executando Abertura do POS...");
 								Thread.sleep(2000);
 								progress.dismiss();
 								progress.cancel();
 								Intent itt = new Intent(c, Login.class);
 								startActivity(itt);
-								
+								Thread.sleep(99999999);
 							}
 						}
-					} catch (Exception e) {
-						e.printStackTrace();
+					} catch (Exception e6) {
+						e6.printStackTrace();
 					}
 				}
 			}).start();
