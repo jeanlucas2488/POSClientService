@@ -339,8 +339,8 @@ public class fechamento extends AppCompatActivity {
             visaDResult = "";
         }
         try{
-            SQLiteControl db20 = new SQLiteControl(c);
-            eloC = db.eloCFind();
+            SQLiteControl db21 = new SQLiteControl(c);
+            eloC = db21.eloCFind();
             if(!eloC.get(0).getEloC().equals("")){
                 trancard.setVisibility(View.VISIBLE);
                 elocid.setVisibility(View.VISIBLE);
@@ -351,8 +351,8 @@ public class fechamento extends AppCompatActivity {
             eloCResult = "";
         }
         try{
-            SQLiteControl db21 = new SQLiteControl(c);
-            eloD = db21.eloDFind();
+            SQLiteControl db22 = new SQLiteControl(c);
+            eloD = db22.eloDFind();
             if(!eloD.get(0).getEloD().equals("")){
                 trancard.setVisibility(View.VISIBLE);
                 elodid.setVisibility(View.VISIBLE);
@@ -364,8 +364,8 @@ public class fechamento extends AppCompatActivity {
 
         }
         try{
-            SQLiteControl db22 = new SQLiteControl(c);
-            money = db22.moFind();
+            SQLiteControl db23 = new SQLiteControl(c);
+            money = db23.moFind();
             if(!money.get(0).getMoney().equals("")){
                 moneyid.setVisibility(View.VISIBLE);
                 moneyResult = money.get(0).getMoney();
