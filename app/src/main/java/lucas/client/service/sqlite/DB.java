@@ -408,9 +408,9 @@ public class DB
 		Cursor cs = db.rawQuery("select * from VendasA WHERE id ="+id+"", null);
 		if(cs.moveToFirst()){
 			do{
-				us.setProd1(cs.getString(cs.getColumnIndex("prod")));
-				us.setQuant1(cs.getString(cs.getColumnIndex("quant")));
-				us.setValor1(cs.getString(cs.getColumnIndex("valor")));
+				us.setProd3(cs.getString(cs.getColumnIndex("prod")));
+				us.setQuant3(cs.getString(cs.getColumnIndex("quant")));
+				us.setValor3(cs.getString(cs.getColumnIndex("valor")));
 				us.setImage(cs.getBlob(cs.getColumnIndex("imagem")));
 			}while(cs.moveToNext());
 		}
@@ -421,9 +421,9 @@ public class DB
 		Cursor cs = db.rawQuery("select * from VendasB WHERE id ="+id+"", null);
 		if(cs.moveToFirst()){
 			do{
-				us.setProd1(cs.getString(cs.getColumnIndex("prod")));
-				us.setQuant1(cs.getString(cs.getColumnIndex("quant")));
-				us.setValor1(cs.getString(cs.getColumnIndex("valor")));
+				us.setProd3(cs.getString(cs.getColumnIndex("prod")));
+				us.setQuant3(cs.getString(cs.getColumnIndex("quant")));
+				us.setValor3(cs.getString(cs.getColumnIndex("valor")));
 				us.setImage(cs.getBlob(cs.getColumnIndex("imagem")));
 			}while(cs.moveToNext());
 		}
@@ -434,9 +434,9 @@ public class DB
 		Cursor cs = db.rawQuery("select * from VendasC WHERE id ="+id+"", null);
 		if(cs.moveToFirst()){
 			do{
-				us.setProd1(cs.getString(cs.getColumnIndex("prod")));
-				us.setQuant1(cs.getString(cs.getColumnIndex("quant")));
-				us.setValor1(cs.getString(cs.getColumnIndex("valor")));
+				us.setProd3(cs.getString(cs.getColumnIndex("prod")));
+				us.setQuant3(cs.getString(cs.getColumnIndex("quant")));
+				us.setValor3(cs.getString(cs.getColumnIndex("valor")));
 				us.setImage(cs.getBlob(cs.getColumnIndex("imagem")));
 			}while(cs.moveToNext());
 		}
@@ -447,9 +447,9 @@ public class DB
 		Cursor cs = db.rawQuery("select * from VendasD WHERE id ="+id+"", null);
 		if(cs.moveToFirst()){
 			do{
-				us.setProd1(cs.getString(cs.getColumnIndex("prod")));
-				us.setQuant1(cs.getString(cs.getColumnIndex("quant")));
-				us.setValor1(cs.getString(cs.getColumnIndex("valor")));
+				us.setProd3(cs.getString(cs.getColumnIndex("prod")));
+				us.setQuant3(cs.getString(cs.getColumnIndex("quant")));
+				us.setValor3(cs.getString(cs.getColumnIndex("valor")));
 				us.setImage(cs.getBlob(cs.getColumnIndex("imagem")));
 			}while(cs.moveToNext());
 		}
@@ -499,25 +499,25 @@ public class DB
 	}
 	public void vendasBIn(util us){
 		ContentValues ct = new ContentValues();
-		ct.put("prod", us.getProd1());
-		ct.put("quant", us.getQuant1());
-		ct.put("valor", us.getValor1());
+		ct.put("prod", us.getProd3());
+		ct.put("quant", us.getQuant3());
+		ct.put("valor", us.getValor3());
 		ct.put("imagem", us.getImage());
 		db.insert("VendasB", null, ct);
 	}
 	public void vendasCIn(util us){
 		ContentValues ct = new ContentValues();
-		ct.put("prod", us.getProd1());
-		ct.put("quant", us.getQuant1());
-		ct.put("valor", us.getValor1());
+		ct.put("prod", us.getProd3());
+		ct.put("quant", us.getQuant3());
+		ct.put("valor", us.getValor3());
 		ct.put("imagem", us.getImage());
 		db.insert("VendasC", null, ct);
 	}
 	public void vendasDIn(util us){
 		ContentValues ct = new ContentValues();
-		ct.put("prod", us.getProd1());
-		ct.put("quant", us.getQuant1());
-		ct.put("valor", us.getValor1());
+		ct.put("prod", us.getProd3());
+		ct.put("quant", us.getQuant3());
+		ct.put("valor", us.getValor3());
 		ct.put("imagem", us.getImage());
 		db.insert("VendasD", null, ct);
 	}
@@ -661,12 +661,26 @@ public class DB
 		}
 		return arr;
 	}
+
 	public util getCarRw(long id){
 		util us = new util();
 		Cursor cs = db.rawQuery("select valores from carrinho WHERE id ="+id+"", null);
 		if(cs.moveToFirst()){
 			do{
 				us.setValor2(cs.getString(cs.getColumnIndex("valores")));
+			}while(cs.moveToNext());
+		}
+		return us;
+	}
+	public util getCarR(long id){
+		util us = new util();
+		Cursor cs = db.rawQuery("select * from carrinho WHERE id ="+id+"", null);
+		if(cs.moveToFirst()){
+			do{
+				us.setProd2(cs.getString(cs.getColumnIndex("produto")));
+				us.setQuant2(cs.getString(cs.getColumnIndex("quantd")));
+				us.setValor2(cs.getString(cs.getColumnIndex("valores")));
+				us.setImage2(cs.getBlob(cs.getColumnIndex("imagem")));
 			}while(cs.moveToNext());
 		}
 		return us;

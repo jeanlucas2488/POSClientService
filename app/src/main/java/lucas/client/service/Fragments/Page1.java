@@ -506,7 +506,7 @@ public class Page1 extends Fragment
 												} catch (Exception e){
 													try{
 														DB dd2 = new DB(getActivity());
-														util carWh1 = dd2.getCarRw(1);
+														util carWh1 = dd2.getCarR(1);
 														if(!carWh1.getValor2().toString().equals("")){
 															String dateTime;
 															Calendar calendar = Calendar.getInstance();
@@ -530,7 +530,7 @@ public class Page1 extends Fragment
 													}
 													try{
 														DB d2 = new DB(getActivity());
-														util carWh1 = d2.getCarRw(2);
+														util carWh1 = d2.getCarR(2);
 														if(!carWh1.getValor2().toString().equals("")){
 															util post = new util();
 															post.setProd1(carWh1.getProd2());
@@ -544,7 +544,7 @@ public class Page1 extends Fragment
 													}
 													try{
 														DB d2 = new DB(getActivity());
-														util carWh1 = d2.getCarRw(3);
+														util carWh1 = d2.getCarR(3);
 														if(!carWh1.getValor2().toString().equals("")){
 															util post = new util();
 															post.setProd1(carWh1.getProd2());
@@ -558,7 +558,7 @@ public class Page1 extends Fragment
 													}
 													try{
 														DB d2 = new DB(getActivity());
-														util carWh1 = d2.getCarRw(4);
+														util carWh1 = d2.getCarR(4);
 														if(!carWh1.getValor2().toString().equals("")){
 															util post = new util();
 															post.setProd1(carWh1.getProd2());
@@ -572,7 +572,7 @@ public class Page1 extends Fragment
 													}
 													try{
 														DB d2 = new DB(getActivity());
-														util carWh1 = d2.getCarRw(5);
+														util carWh1 = d2.getCarR(5);
 														if(!carWh1.getValor2().toString().equals("")){
 															util post = new util();
 															post.setProd1(carWh1.getProd2());
@@ -586,7 +586,7 @@ public class Page1 extends Fragment
 													}
 													try{
 														DB d2 = new DB(getActivity());
-														util carWh1 = d2.getCarRw(6);
+														util carWh1 = d2.getCarR(6);
 														if(!carWh1.getValor2().toString().equals("")){
 															util post = new util();
 															post.setProd1(carWh1.getProd2());
@@ -600,7 +600,7 @@ public class Page1 extends Fragment
 													}
 													try{
 														DB d2 = new DB(getActivity());
-														util carWh1 = d2.getCarRw(7);
+														util carWh1 = d2.getCarR(7);
 														if(!carWh1.getValor2().toString().equals("")){
 															util post = new util();
 															post.setProd1(carWh1.getProd2());
@@ -614,7 +614,7 @@ public class Page1 extends Fragment
 													}
 													try{
 														DB d2 = new DB(getActivity());
-														util carWh1 = d2.getCarRw(8);
+														util carWh1 = d2.getCarR(8);
 														if(!carWh1.getValor2().toString().equals("")){
 															util post = new util();
 															post.setProd1(carWh1.getProd2());
@@ -628,7 +628,7 @@ public class Page1 extends Fragment
 													}
 													try{
 														DB d2 = new DB(getActivity());
-														util carWh1 = d2.getCarRw(9);
+														util carWh1 = d2.getCarR(9);
 														if(!carWh1.getValor2().toString().equals("")){
 															util post = new util();
 															post.setProd1(carWh1.getProd2());
@@ -642,7 +642,7 @@ public class Page1 extends Fragment
 													}
 													try{
 														DB d2 = new DB(getActivity());
-														util carWh1 = d2.getCarRw(10);
+														util carWh1 = d2.getCarR(10);
 														if(!carWh1.getValor2().toString().equals("")){
 															util post = new util();
 															post.setProd1(carWh1.getProd2());
@@ -656,7 +656,7 @@ public class Page1 extends Fragment
 													}
 													try{
 														DB d2 = new DB(getActivity());
-														util carWh1 = d2.getCarRw(11);
+														util carWh1 = d2.getCarR(11);
 														if(!carWh1.getValor2().toString().equals("")){
 															util post = new util();
 															post.setProd1(carWh1.getProd2());
@@ -667,6 +667,52 @@ public class Page1 extends Fragment
 														}else{
 														}
 													}catch (Exception e2){
+													}
+													try {
+														File sd = Environment.getExternalStorageDirectory();
+														File data = Environment.getDataDirectory();
+
+														if (sd.canWrite()) {
+															String  currentDBPath= "//data//" + getActivity().getOpPackageName()
+																	+ "//databases//" + "myDB.db";
+															String  currentDBPath2 = "//data//" + getActivity().getOpPackageName()
+																	+ "//databases//" + "myDB.db-shm";
+															String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
+																	+ "//databases//" + "myDB.db-wal";
+
+															String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
+															String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
+															String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+
+															File currentDB = new File(data, currentDBPath);
+															File currentDB2 = new File(data, currentDBPath2);
+															File currentDB3 = new File(data, currentDBPath3);
+															File backupDB = new File(sd, backupDBPath);
+															File backupDB2 = new File(sd, backupDBPath2);
+															File backupDB3 = new File(sd, backupDBPath3);
+
+															if(currentDB2.exists()){
+																FileChannel src = new FileInputStream(currentDB2).getChannel();
+																FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+																dst.transferFrom(src, 0, src.size());
+																src.close();
+																dst.close();
+															}
+															if(currentDB3.exists()){
+																FileChannel src = new FileInputStream(currentDB3).getChannel();
+																FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+																dst.transferFrom(src, 0, src.size());
+																src.close();
+																dst.close();
+															}
+															FileChannel src = new FileInputStream(currentDB).getChannel();
+															FileChannel dst = new FileOutputStream(backupDB).getChannel();
+															dst.transferFrom(src, 0, src.size());
+															src.close();
+															dst.close();
+														}
+													} catch (Exception e2) {
+
 													}
 												}
 											} else {
@@ -674,7 +720,7 @@ public class Page1 extends Fragment
 										}catch (Exception e){
 											try{
 												DB d1 = new DB(getActivity());
-												util carWh1 = d1.getCarRw(1);
+												util carWh1 = d1.getCarR(1);
 												if(!carWh1.getValor2().toString().equals("")){
 													String dateTime;
 													Calendar calendar = Calendar.getInstance();
@@ -698,7 +744,7 @@ public class Page1 extends Fragment
 											}
 											try{
 												DB d2 = new DB(getActivity());
-												util carWh1 = d2.getCarRw(2);
+												util carWh1 = d2.getCarR(2);
 												if(!carWh1.getValor2().toString().equals("")){
 													util post = new util();
 													post.setProd1(carWh1.getProd2());
@@ -712,7 +758,7 @@ public class Page1 extends Fragment
 											}
 											try{
 												DB d3 = new DB(getActivity());
-												util carWh1 = d3.getCarRw(3);
+												util carWh1 = d3.getCarR(3);
 												if(!carWh1.getValor2().toString().equals("")){
 													util post = new util();
 													post.setProd1(carWh1.getProd2());
@@ -726,7 +772,7 @@ public class Page1 extends Fragment
 											}
 											try{
 												DB d4 = new DB(getActivity());
-												util carWh1 = d4.getCarRw(4);
+												util carWh1 = d4.getCarR(4);
 												if(!carWh1.getValor2().toString().equals("")){
 													util post = new util();
 													post.setProd1(carWh1.getProd2());
@@ -740,7 +786,7 @@ public class Page1 extends Fragment
 											}
 											try{
 												DB d5 = new DB(getActivity());
-												util carWh1 = d5.getCarRw(5);
+												util carWh1 = d5.getCarR(5);
 												if(!carWh1.getValor2().toString().equals("")){
 													util post = new util();
 													post.setProd1(carWh1.getProd2());
@@ -754,7 +800,7 @@ public class Page1 extends Fragment
 											}
 											try{
 												DB d6 = new DB(getActivity());
-												util carWh1 = d6.getCarRw(6);
+												util carWh1 = d6.getCarR(6);
 												if(!carWh1.getValor2().toString().equals("")){
 													util post = new util();
 													post.setProd1(carWh1.getProd2());
@@ -768,7 +814,7 @@ public class Page1 extends Fragment
 											}
 											try{
 												DB d7 = new DB(getActivity());
-												util carWh1 = d7.getCarRw(7);
+												util carWh1 = d7.getCarR(7);
 												if(!carWh1.getValor2().toString().equals("")){
 													util post = new util();
 													post.setProd1(carWh1.getProd2());
@@ -782,7 +828,7 @@ public class Page1 extends Fragment
 											}
 											try{
 												DB d8 = new DB(getActivity());
-												util carWh1 = d8.getCarRw(8);
+												util carWh1 = d8.getCarR(8);
 												if(!carWh1.getValor2().toString().equals("")){
 													util post = new util();
 													post.setProd1(carWh1.getProd2());
@@ -796,7 +842,7 @@ public class Page1 extends Fragment
 											}
 											try{
 												DB d9 = new DB(getActivity());
-												util carWh1 = d9.getCarRw(9);
+												util carWh1 = d9.getCarR(9);
 												if(!carWh1.getValor2().toString().equals("")){
 													util post = new util();
 													post.setProd1(carWh1.getProd2());
@@ -810,7 +856,7 @@ public class Page1 extends Fragment
 											}
 											try{
 												DB d10 = new DB(getActivity());
-												util carWh1 = d10.getCarRw(10);
+												util carWh1 = d10.getCarR(10);
 												if(!carWh1.getValor2().toString().equals("")){
 													util post = new util();
 													post.setProd1(carWh1.getProd2());
@@ -824,7 +870,7 @@ public class Page1 extends Fragment
 											}
 											try{
 												DB d11 = new DB(getActivity());
-												util carWh1 = d11.getCarRw(11);
+												util carWh1 = d11.getCarR(11);
 												if(!carWh1.getValor2().toString().equals("")){
 													util post = new util();
 													post.setProd1(carWh1.getProd2());
@@ -836,12 +882,58 @@ public class Page1 extends Fragment
 												}
 											}catch (Exception e2){
 											}
+											try {
+												File sd = Environment.getExternalStorageDirectory();
+												File data = Environment.getDataDirectory();
+
+												if (sd.canWrite()) {
+													String  currentDBPath= "//data//" + getActivity().getOpPackageName()
+															+ "//databases//" + "myDB.db";
+													String  currentDBPath2 = "//data//" + getActivity().getOpPackageName()
+															+ "//databases//" + "myDB.db-shm";
+													String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
+															+ "//databases//" + "myDB.db-wal";
+
+													String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
+													String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
+													String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+
+													File currentDB = new File(data, currentDBPath);
+													File currentDB2 = new File(data, currentDBPath2);
+													File currentDB3 = new File(data, currentDBPath3);
+													File backupDB = new File(sd, backupDBPath);
+													File backupDB2 = new File(sd, backupDBPath2);
+													File backupDB3 = new File(sd, backupDBPath3);
+
+													if(currentDB2.exists()){
+														FileChannel src = new FileInputStream(currentDB2).getChannel();
+														FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+														dst.transferFrom(src, 0, src.size());
+														src.close();
+														dst.close();
+													}
+													if(currentDB3.exists()){
+														FileChannel src = new FileInputStream(currentDB3).getChannel();
+														FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+														dst.transferFrom(src, 0, src.size());
+														src.close();
+														dst.close();
+													}
+													FileChannel src = new FileInputStream(currentDB).getChannel();
+													FileChannel dst = new FileOutputStream(backupDB).getChannel();
+													dst.transferFrom(src, 0, src.size());
+													src.close();
+													dst.close();
+												}
+											} catch (Exception e2) {
+
+											}
 										}
 									}
 								} catch (Exception e){
 									try{
 										DB db2 = new DB(getActivity());
-										util carWh1 = db.getCarRw(1);
+										util carWh1 = db.getCarR(1);
 										if(!carWh1.getValor2().toString().equals("")){
 											String dateTime;
 											Calendar calendar = Calendar.getInstance();
@@ -865,7 +957,7 @@ public class Page1 extends Fragment
 									}
 									try{
 										DB db3 = new DB(getActivity());
-										util carWh1 = db3.getCarRw(2);
+										util carWh1 = db3.getCarR(2);
 										if(!carWh1.getValor2().toString().equals("")){
 											util post = new util();
 											post.setProd1(carWh1.getProd2());
@@ -879,7 +971,7 @@ public class Page1 extends Fragment
 									}
 									try{
 										DB db4 = new DB(getActivity());
-										util carWh1 = db4.getCarRw(3);
+										util carWh1 = db4.getCarR(3);
 										if(!carWh1.getValor2().toString().equals("")){
 											util post = new util();
 											post.setProd1(carWh1.getProd2());
@@ -893,7 +985,7 @@ public class Page1 extends Fragment
 									}
 									try{
 										DB db5 = new DB(getActivity());
-										util carWh1 = db5.getCarRw(4);
+										util carWh1 = db5.getCarR(4);
 										if(!carWh1.getValor2().toString().equals("")){
 											util post = new util();
 											post.setProd1(carWh1.getProd2());
@@ -907,7 +999,7 @@ public class Page1 extends Fragment
 									}
 									try{
 										DB db6 = new DB(getActivity());
-										util carWh1 = db6.getCarRw(5);
+										util carWh1 = db6.getCarR(5);
 										if(!carWh1.getValor2().toString().equals("")){
 											util post = new util();
 											post.setProd1(carWh1.getProd2());
@@ -921,7 +1013,7 @@ public class Page1 extends Fragment
 									}
 									try{
 										DB db7 = new DB(getActivity());
-										util carWh1 = db7.getCarRw(6);
+										util carWh1 = db7.getCarR(6);
 										if(!carWh1.getValor2().toString().equals("")){
 											util post = new util();
 											post.setProd1(carWh1.getProd2());
@@ -935,7 +1027,7 @@ public class Page1 extends Fragment
 									}
 									try{
 										DB db8 = new DB(getActivity());
-										util carWh1 = db8.getCarRw(7);
+										util carWh1 = db8.getCarR(7);
 										if(!carWh1.getValor2().toString().equals("")){
 											util post = new util();
 											post.setProd1(carWh1.getProd2());
@@ -949,7 +1041,7 @@ public class Page1 extends Fragment
 									}
 									try{
 										DB db9 = new DB(getActivity());
-										util carWh1 = db9.getCarRw(8);
+										util carWh1 = db9.getCarR(8);
 										if(!carWh1.getValor2().toString().equals("")){
 											util post = new util();
 											post.setProd1(carWh1.getProd2());
@@ -963,7 +1055,7 @@ public class Page1 extends Fragment
 									}
 									try{
 										DB db10 = new DB(getActivity());
-										util carWh1 = db10.getCarRw(9);
+										util carWh1 = db10.getCarR(9);
 										if(!carWh1.getValor2().toString().equals("")){
 											util post = new util();
 											post.setProd1(carWh1.getProd2());
@@ -977,7 +1069,7 @@ public class Page1 extends Fragment
 									}
 									try{
 										DB db11 = new DB(getActivity());
-										util carWh1 = db11.getCarRw(10);
+										util carWh1 = db11.getCarR(10);
 										if(!carWh1.getValor2().toString().equals("")){
 											util post = new util();
 											post.setProd1(carWh1.getProd2());
@@ -991,7 +1083,7 @@ public class Page1 extends Fragment
 									}
 									try{
 										DB db12 = new DB(getActivity());
-										util carWh1 = db12.getCarRw(11);
+										util carWh1 = db12.getCarR(11);
 										if(!carWh1.getValor2().toString().equals("")){
 											util post = new util();
 											post.setProd1(carWh1.getProd2());
@@ -1003,18 +1095,65 @@ public class Page1 extends Fragment
 										}
 									}catch (Exception e2){
 									}
+									try {
+										File sd = Environment.getExternalStorageDirectory();
+										File data = Environment.getDataDirectory();
+
+										if (sd.canWrite()) {
+											String  currentDBPath= "//data//" + getActivity().getOpPackageName()
+													+ "//databases//" + "myDB.db";
+											String  currentDBPath2 = "//data//" + getActivity().getOpPackageName()
+													+ "//databases//" + "myDB.db-shm";
+											String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
+													+ "//databases//" + "myDB.db-wal";
+
+											String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
+											String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
+											String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+
+											File currentDB = new File(data, currentDBPath);
+											File currentDB2 = new File(data, currentDBPath2);
+											File currentDB3 = new File(data, currentDBPath3);
+											File backupDB = new File(sd, backupDBPath);
+											File backupDB2 = new File(sd, backupDBPath2);
+											File backupDB3 = new File(sd, backupDBPath3);
+
+											if(currentDB2.exists()){
+												FileChannel src = new FileInputStream(currentDB2).getChannel();
+												FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+												dst.transferFrom(src, 0, src.size());
+												src.close();
+												dst.close();
+											}
+											if(currentDB3.exists()){
+												FileChannel src = new FileInputStream(currentDB3).getChannel();
+												FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+												dst.transferFrom(src, 0, src.size());
+												src.close();
+												dst.close();
+											}
+											FileChannel src = new FileInputStream(currentDB).getChannel();
+											FileChannel dst = new FileOutputStream(backupDB).getChannel();
+											dst.transferFrom(src, 0, src.size());
+											src.close();
+											dst.close();
+										}
+									} catch (Exception e2) {
+
+									}
 								}
 							}else {
 							}
 						}catch (Exception e){
 							try{
 								DB db = new DB(getActivity());
-								util carWh1 = db.getCarRw(1);
+								util carWh1 = db.getCarR(1);
 								if(!carWh1.getValor2().toString().equals("")){
 									String dateTime;
 									Calendar calendar = Calendar.getInstance();
 									SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 									dateTime = simpleDateFormat.format(calendar.getTime()).toString();
+
 									util post = new util();
 									post.setProd1(carWh1.getProd2());
 									post.setQuant1(carWh1.getQuant2());
@@ -1026,6 +1165,7 @@ public class Page1 extends Fragment
 									post2.setProd1(carWh1.getProd2());
 									post2.setValor1(result);
 									db.vendasIn(post2);
+
 									db.vendasAIn(post);
 								}else{
 								}
@@ -1033,7 +1173,7 @@ public class Page1 extends Fragment
 							}
 							try{
 								DB db = new DB(getActivity());
-								util carWh1 = db.getCarRw(2);
+								util carWh1 = db.getCarR(2);
 								if(!carWh1.getValor2().toString().equals("")){
 									util post = new util();
 									post.setProd1(carWh1.getProd2());
@@ -1047,7 +1187,7 @@ public class Page1 extends Fragment
 							}
 							try{
 								DB db = new DB(getActivity());
-								util carWh1 = db.getCarRw(3);
+								util carWh1 = db.getCarR(3);
 								if(!carWh1.getValor2().toString().equals("")){
 									util post = new util();
 									post.setProd1(carWh1.getProd2());
@@ -1061,7 +1201,7 @@ public class Page1 extends Fragment
 							}
 							try{
 								DB db = new DB(getActivity());
-								util carWh1 = db.getCarRw(4);
+								util carWh1 = db.getCarR(4);
 								if(!carWh1.getValor2().toString().equals("")){
 									util post = new util();
 									post.setProd1(carWh1.getProd2());
@@ -1075,7 +1215,7 @@ public class Page1 extends Fragment
 							}
 							try{
 								DB db = new DB(getActivity());
-								util carWh1 = db.getCarRw(5);
+								util carWh1 = db.getCarR(5);
 								if(!carWh1.getValor2().toString().equals("")){
 									util post = new util();
 									post.setProd1(carWh1.getProd2());
@@ -1089,7 +1229,7 @@ public class Page1 extends Fragment
 							}
 							try{
 								DB db = new DB(getActivity());
-								util carWh1 = db.getCarRw(6);
+								util carWh1 = db.getCarR(6);
 								if(!carWh1.getValor2().toString().equals("")){
 									util post = new util();
 									post.setProd1(carWh1.getProd2());
@@ -1103,7 +1243,7 @@ public class Page1 extends Fragment
 							}
 							try{
 								DB db = new DB(getActivity());
-								util carWh1 = db.getCarRw(7);
+								util carWh1 = db.getCarR(7);
 								if(!carWh1.getValor2().toString().equals("")){
 									util post = new util();
 									post.setProd1(carWh1.getProd2());
@@ -1117,7 +1257,7 @@ public class Page1 extends Fragment
 							}
 							try{
 								DB db = new DB(getActivity());
-								util carWh1 = db.getCarRw(8);
+								util carWh1 = db.getCarR(8);
 								if(!carWh1.getValor2().toString().equals("")){
 									util post = new util();
 									post.setProd1(carWh1.getProd2());
@@ -1131,7 +1271,7 @@ public class Page1 extends Fragment
 							}
 							try{
 								DB db = new DB(getActivity());
-								util carWh1 = db.getCarRw(9);
+								util carWh1 = db.getCarR(9);
 								if(!carWh1.getValor2().toString().equals("")){
 									util post = new util();
 									post.setProd1(carWh1.getProd2());
@@ -1145,7 +1285,7 @@ public class Page1 extends Fragment
 							}
 							try{
 								DB db = new DB(getActivity());
-								util carWh1 = db.getCarRw(10);
+								util carWh1 = db.getCarR(10);
 								if(!carWh1.getValor2().toString().equals("")){
 									util post = new util();
 									post.setProd1(carWh1.getProd2());
@@ -1159,7 +1299,7 @@ public class Page1 extends Fragment
 							}
 							try{
 								DB db = new DB(getActivity());
-								util carWh1 = db.getCarRw(11);
+								util carWh1 = db.getCarR(11);
 								if(!carWh1.getValor2().toString().equals("")){
 									util post = new util();
 									post.setProd1(carWh1.getProd2());
@@ -1170,8 +1310,56 @@ public class Page1 extends Fragment
 								}else{
 								}
 							}catch (Exception e2){
+							}
+							try {
+								File sd = Environment.getExternalStorageDirectory();
+								File data = Environment.getDataDirectory();
+
+								if (sd.canWrite()) {
+									String  currentDBPath= "//data//" + getActivity().getOpPackageName()
+											+ "//databases//" + "myDB.db";
+									String  currentDBPath2 = "//data//" + getActivity().getOpPackageName()
+											+ "//databases//" + "myDB.db-shm";
+									String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
+											+ "//databases//" + "myDB.db-wal";
+
+									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
+									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
+									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+
+									File currentDB = new File(data, currentDBPath);
+									File currentDB2 = new File(data, currentDBPath2);
+									File currentDB3 = new File(data, currentDBPath3);
+									File backupDB = new File(sd, backupDBPath);
+									File backupDB2 = new File(sd, backupDBPath2);
+									File backupDB3 = new File(sd, backupDBPath3);
+
+									if(currentDB2.exists()){
+										FileChannel src = new FileInputStream(currentDB2).getChannel();
+										FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+										dst.transferFrom(src, 0, src.size());
+										src.close();
+										dst.close();
+									}
+									if(currentDB3.exists()){
+										FileChannel src = new FileInputStream(currentDB3).getChannel();
+										FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+										dst.transferFrom(src, 0, src.size());
+										src.close();
+										dst.close();
+									}
+									FileChannel src = new FileInputStream(currentDB).getChannel();
+									FileChannel dst = new FileOutputStream(backupDB).getChannel();
+									dst.transferFrom(src, 0, src.size());
+									src.close();
+									dst.close();
+								}
+							} catch (Exception e2) {
+
 							}
 						}
+						DB db = new DB(getActivity());
+						db.limpaCarrinho();
 					}
 				});
 				ap.setNegativeButton("Cancelar!", null);
