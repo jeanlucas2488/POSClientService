@@ -23,6 +23,7 @@ import lucas.client.service.caixa.adapters.mainAd;
 import lucas.client.service.caixa.product.*;
 import lucas.client.service.caixa.setup.fechamentos.*;
 import lucas.client.service.caixa.setup.lancamentos.*;
+import lucas.client.service.caixa.setup.system.RecuperarVenda;
 import lucas.client.service.etc.*;
 import lucas.client.service.sqlite.*;
 
@@ -211,7 +212,7 @@ Context c = this;
 		try{
 			Intent it = getIntent();
 			Bundle b = it.getExtras();
-			String res = b.getString("key");
+			String res = b.getString("chave");
 			if(!res.toString().equals("")){
 				runCarrinho();
 			} else {
@@ -226,7 +227,7 @@ Context c = this;
 		// TODO: Implement this method
 		if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
 			final String[] lc = new String[]
-					{"Fechamento de Caixa", "Sangria", "Suprimento de Caixa"};
+					{"Fechamento de Caixa", "Sangria", "Suprimento de Caixa", "Recuperar Venda"};
 
 			LayoutInflater li = getLayoutInflater();
 			View r = li.inflate(R.layout.list_ad, null);
@@ -238,7 +239,10 @@ Context c = this;
 				public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4)
 				{
 					// TODO: Implement this method
+					if(lc[p3].toString().startsWith("R")){
+						startActivity(new Intent(c, RecuperarVenda.class));
 
+					}
 					if(lc[p3].toString().startsWith("F")){
 
 						Intent itr = new Intent(c, fechaCaixa.class);

@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.icu.text.DecimalFormat;
 import android.icu.text.DecimalFormatSymbols;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -36,6 +37,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
+import java.util.Calendar;
 import java.util.List;
 
 import lucas.client.service.Fragments.adapter.productAdapter;
@@ -664,6 +666,7 @@ public class Page1 extends Fragment
                     }
                 });
                 ap.setNegativeButton("Cancelar!", null);
+
                 ale = ap.create();
                 ale = ap.show();
             }

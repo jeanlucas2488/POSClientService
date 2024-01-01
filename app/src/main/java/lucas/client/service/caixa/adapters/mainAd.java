@@ -23,6 +23,9 @@ public class mainAd extends ArrayAdapter<String>
 		ImageView im = r.findViewById(R.id.im);
 		TextView tv = r.findViewById(R.id.tv);
 		tv.setText(lt[position]);
+		if(lt[position].startsWith("R")){
+			im.setImageResource(R.drawable.recuperar);
+		}
 		if(lt[position].startsWith("H")){
 			im.setImageResource(R.drawable.sales);
 		}

@@ -7,7 +7,7 @@ public class Core extends SQLiteOpenHelper
 	public static String name = "myDB.db";
 	
 	public Core(Context c){
-		super(c, name, null, 4);
+		super(c, name, null, 5);
 	}
 	@Override
 	public void onCreate(SQLiteDatabase db)
@@ -54,7 +54,17 @@ public class Core extends SQLiteOpenHelper
 				"(id integer primary key, data text, NfeHtml text);");
 		db.execSQL("CREATE TABLE carrinho" +
 		           "(id integer primary key, produto text, quantd text, valores text, imagem blob);");
-		
+		db.execSQL("CREATE TABLE Vendas" +
+				   "(id integer primary key, data text, prod text, total text);");
+		db.execSQL("CREATE TABLE VendasA" +
+				   "(id integer primary key, prod text, quant text, valor text, imagem blob);");
+		db.execSQL("CREATE TABLE VendasB" +
+				"(id integer primary key, prod text, quant text, valor text, imagem blob);");
+		db.execSQL("CREATE TABLE VendasC" +
+				"(id integer primary key, prod text, quant text, valor text, imagem blob);");
+		db.execSQL("CREATE TABLE VendasD" +
+				"(id integer primary key, prod text, quant text, valor text, imagem blob);");
+
 		db.execSQL("CREATE TABLE Paginas" +
 		           "(id integer primary key, paginas text);");
 		db.execSQL("CREATE TABLE paginaOne" +
@@ -77,9 +87,6 @@ public class Core extends SQLiteOpenHelper
 		           "(id integer primary key, prod text, quant text, valor text, image blob, forn text, dataIn text, dataOut text, etotal text, tipo text);");
 		db.execSQL("CREATE TABLE paginaTen" +
 		           "(id integer primary key, prod text, quant text, valor text, image blob, forn text, dataIn text, dataOut text, etotal text, tipo text);");
-		
-		db.execSQL("CREATE TABLE produtos " +
-		           "(id integer primary key autoincrement, loc TEXT, prod TEXT, quant TEXT, valor TEXT, payType TEXT, pagto TEXT, troco TEXT);");
 
 		db.execSQL("CREATE TABLE dinheiro (id integer primary key autoincrement, money TEXT);");
 		db.execSQL("CREATE TABLE operador (id integer primary key autoincrement, operador TEXT);");
