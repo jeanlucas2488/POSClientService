@@ -1360,6 +1360,51 @@ public class Page1 extends Fragment
 						}
 						DB db = new DB(getActivity());
 						db.limpaCarrinho();
+						try {
+							File sd = Environment.getExternalStorageDirectory();
+							File data = Environment.getDataDirectory();
+
+							if (sd.canWrite()) {
+								String  currentDBPath= "//data//" + getActivity().getOpPackageName()
+										+ "//databases//" + "myDB.db";
+								String  currentDBPath2 = "//data//" + getActivity().getOpPackageName()
+										+ "//databases//" + "myDB.db-shm";
+								String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
+										+ "//databases//" + "myDB.db-wal";
+
+								String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
+								String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
+								String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+
+								File currentDB = new File(data, currentDBPath);
+								File currentDB2 = new File(data, currentDBPath2);
+								File currentDB3 = new File(data, currentDBPath3);
+								File backupDB = new File(sd, backupDBPath);
+								File backupDB2 = new File(sd, backupDBPath2);
+								File backupDB3 = new File(sd, backupDBPath3);
+
+								if(currentDB2.exists()){
+									FileChannel src = new FileInputStream(currentDB2).getChannel();
+									FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+									dst.transferFrom(src, 0, src.size());
+									src.close();
+									dst.close();
+								}
+								if(currentDB3.exists()){
+									FileChannel src = new FileInputStream(currentDB3).getChannel();
+									FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+									dst.transferFrom(src, 0, src.size());
+									src.close();
+									dst.close();
+								}
+								FileChannel src = new FileInputStream(currentDB).getChannel();
+								FileChannel dst = new FileOutputStream(backupDB).getChannel();
+								dst.transferFrom(src, 0, src.size());
+								src.close();
+								dst.close();
+							}
+						} catch (Exception e2) {
+						}
 					}
 				});
 				ap.setNegativeButton("Cancelar!", null);
