@@ -8,7 +8,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static String name = "MCRDB.db";
 
     public SQLiteHelper(Context c){
-        super(c, name, null, 2);
+        super(c, name, null, 3);
     }
     @Override
     public void onCreate(SQLiteDatabase db)
@@ -53,6 +53,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE carrinho" +
                 "(id integer primary key, produto text, quantd text, valores text, imagem blob);");
+
+        db.execSQL("CREATE TABLE Vendas" +
+                "(id integer primary key, data text, prod text, total text);");
+        db.execSQL("CREATE TABLE VendasA" +
+                "(id integer primary key, prod text, quant text, valor text, imagem blob);");
+        db.execSQL("CREATE TABLE VendasB" +
+                "(id integer primary key, prod text, quant text, valor text, imagem blob);");
+        db.execSQL("CREATE TABLE VendasC" +
+                "(id integer primary key, prod text, quant text, valor text, imagem blob);");
+        db.execSQL("CREATE TABLE VendasD" +
+                "(id integer primary key, prod text, quant text, valor text, imagem blob);");
 
         db.execSQL("CREATE TABLE Paginas" +
                 "(id integer primary key, paginas text);");

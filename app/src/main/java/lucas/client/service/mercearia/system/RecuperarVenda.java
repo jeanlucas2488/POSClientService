@@ -1,4 +1,4 @@
-package lucas.client.service.caixa.setup.system;
+package lucas.client.service.mercearia.system;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,9 +24,9 @@ import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
 import lucas.client.service.R;
-import lucas.client.service.caixa.caixaMain;
 import lucas.client.service.etc.util;
-import lucas.client.service.sqlite.DB;
+import lucas.client.service.mercearia.MerceariaMain;
+import lucas.client.service.mercearia.databases.*;
 
 
 public class RecuperarVenda extends Activity {
@@ -81,12 +81,12 @@ public class RecuperarVenda extends Activity {
                 b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DB db2 = new DB(c);
+                        SQLiteControl db2 = new SQLiteControl(c);
                         util us2 = db2.getSuperVisor(1);
                         if(!sup.getText().toString().equals("")){
                             if(sup.getText().toString().equals(us2.getSenhaSuperVisor())){
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaA(1);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -101,7 +101,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaA(2);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -116,7 +116,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaA(3);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -131,7 +131,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaA(4);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -146,7 +146,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaA(5);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -161,7 +161,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaA(6);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -176,7 +176,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaA(7);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -191,7 +191,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaA(8);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -206,7 +206,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaA(9);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -221,7 +221,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaA(10);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -236,7 +236,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaA(11);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -249,7 +249,7 @@ public class RecuperarVenda extends Activity {
                                     }
                                 }catch (Exception e){
                                 }
-                                DB db = new DB(c);
+                                SQLiteControl db = new SQLiteControl(c);
                                 db.delVenda(1);
                                 db.limpaVendasA();
                                 try {
@@ -258,15 +258,15 @@ public class RecuperarVenda extends Activity {
 
                                     if (sd.canWrite()) {
                                         String  currentDBPath= "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db";
+                                                + "//databases//" + "MCRDB.db";
                                         String  currentDBPath2 = "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db-shm";
+                                                + "//databases//" + "MCRDB.db-shm";
                                         String  currentDBPath3 = "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db-wal";
+                                                + "//databases//" + "MCRDB.db-wal";
 
-                                        String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-                                        String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-                                        String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+                                        String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+                                        String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-shm";
+                                        String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-wal";
 
                                         File currentDB = new File(data, currentDBPath);
                                         File currentDB2 = new File(data, currentDBPath2);
@@ -297,7 +297,7 @@ public class RecuperarVenda extends Activity {
                                     }
                                 } catch (Exception e2) {
                                 }
-                                Intent it = new Intent(c, caixaMain.class);
+                                Intent it = new Intent(c, MerceariaMain.class);
                                 Bundle bun = new Bundle();
                                 String key = "1";
                                 bun.putString("chave", key);
@@ -329,12 +329,12 @@ public class RecuperarVenda extends Activity {
                 b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DB db2 = new DB(c);
+                        SQLiteControl db2 = new SQLiteControl(c);
                         util us2 = db2.getSuperVisor(1);
                         if(!sup.getText().toString().equals("")){
                             if(sup.getText().toString().equals(us2.getSenhaSuperVisor())){
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaB(1);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -349,7 +349,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaB(2);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -364,7 +364,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaB(3);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -379,7 +379,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaB(4);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -394,7 +394,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaB(5);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -409,7 +409,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaB(6);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -424,7 +424,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaB(7);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -439,7 +439,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaB(8);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -454,7 +454,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaB(9);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -469,7 +469,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaB(10);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -484,7 +484,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaB(11);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -498,7 +498,7 @@ public class RecuperarVenda extends Activity {
                                 }catch (Exception e){
 
                                 }
-                                DB db = new DB(c);
+                                SQLiteControl db = new SQLiteControl(c);
                                 db.delVenda(2);
                                 db.limpaVendasB();
                                 try {
@@ -507,15 +507,15 @@ public class RecuperarVenda extends Activity {
 
                                     if (sd.canWrite()) {
                                         String  currentDBPath= "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db";
+                                                + "//databases//" + "MCRDB.db";
                                         String  currentDBPath2 = "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db-shm";
+                                                + "//databases//" + "MCRDB.db-shm";
                                         String  currentDBPath3 = "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db-wal";
+                                                + "//databases//" + "MCRDB.db-wal";
 
-                                        String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-                                        String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-                                        String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+                                        String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+                                        String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-shm";
+                                        String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-wal";
 
                                         File currentDB = new File(data, currentDBPath);
                                         File currentDB2 = new File(data, currentDBPath2);
@@ -546,7 +546,7 @@ public class RecuperarVenda extends Activity {
                                     }
                                 } catch (Exception e2) {
                                 }
-                                Intent it = new Intent(c, caixaMain.class);
+                                Intent it = new Intent(c, MerceariaMain.class);
                                 Bundle bun = new Bundle();
                                 String key = "1";
                                 bun.putString("chave", key);
@@ -578,12 +578,12 @@ public class RecuperarVenda extends Activity {
                 b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DB db2 = new DB(c);
+                        SQLiteControl db2 = new SQLiteControl(c);
                         util us2 = db2.getSuperVisor(1);
                         if(!sup.getText().toString().equals("")){
                             if(sup.getText().toString().equals(us2.getSenhaSuperVisor())){
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaC(1);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -598,7 +598,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaC(2);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -613,7 +613,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaC(3);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -628,7 +628,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaC(4);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -643,7 +643,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaC(5);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -658,7 +658,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaC(6);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -673,7 +673,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaC(7);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -688,7 +688,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaC(8);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -703,7 +703,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaC(9);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -718,7 +718,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaC(10);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -733,7 +733,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaC(11);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -747,7 +747,7 @@ public class RecuperarVenda extends Activity {
                                 }catch (Exception e){
 
                                 }
-                                DB db = new DB(c);
+                                SQLiteControl db = new SQLiteControl(c);
                                 db.delVenda(3);
                                 db.limpaVendasC();
                                 try {
@@ -756,15 +756,15 @@ public class RecuperarVenda extends Activity {
 
                                     if (sd.canWrite()) {
                                         String  currentDBPath= "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db";
+                                                + "//databases//" + "MCRDB.db";
                                         String  currentDBPath2 = "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db-shm";
+                                                + "//databases//" + "MCRDB.db-shm";
                                         String  currentDBPath3 = "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db-wal";
+                                                + "//databases//" + "MCRDB.db-wal";
 
-                                        String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-                                        String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-                                        String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+                                        String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+                                        String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-shm";
+                                        String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-wal";
 
                                         File currentDB = new File(data, currentDBPath);
                                         File currentDB2 = new File(data, currentDBPath2);
@@ -796,7 +796,7 @@ public class RecuperarVenda extends Activity {
                                 } catch (Exception e2) {
 
                                 }
-                                Intent it = new Intent(c, caixaMain.class);
+                                Intent it = new Intent(c, MerceariaMain.class);
                                 Bundle bun = new Bundle();
                                 String key = "1";
                                 bun.putString("chave", key);
@@ -828,12 +828,12 @@ public class RecuperarVenda extends Activity {
                 b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DB db2 = new DB(c);
+                        SQLiteControl db2 = new SQLiteControl(c);
                         util us2 = db2.getSuperVisor(1);
                         if(!sup.getText().toString().equals("")){
                             if(sup.getText().toString().equals(us2.getSenhaSuperVisor())){
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaD(1);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -848,7 +848,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaD(2);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -863,7 +863,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaD(3);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -878,7 +878,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaD(4);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -893,7 +893,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaD(5);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -908,7 +908,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaD(6);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -923,7 +923,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaD(7);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -938,7 +938,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaD(8);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -953,7 +953,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaD(9);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -968,7 +968,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaD(10);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -983,7 +983,7 @@ public class RecuperarVenda extends Activity {
 
                                 }
                                 try{
-                                    DB db = new DB(c);
+                                    SQLiteControl db = new SQLiteControl(c);
                                     util us = db.getVendaD(11);
                                     if(!us.getProd1().toString().equals("")){
                                         util post = new util();
@@ -997,7 +997,7 @@ public class RecuperarVenda extends Activity {
                                 }catch (Exception e){
 
                                 }
-                                DB db = new DB(c);
+                                SQLiteControl db = new SQLiteControl(c);
                                 db.delVenda(4);
                                 db.limpaVendasD();
                                 try {
@@ -1006,15 +1006,15 @@ public class RecuperarVenda extends Activity {
 
                                     if (sd.canWrite()) {
                                         String  currentDBPath= "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db";
+                                                + "//databases//" + "MCRDB.db";
                                         String  currentDBPath2 = "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db-shm";
+                                                + "//databases//" + "MCRDB.db-shm";
                                         String  currentDBPath3 = "//data//" + c.getOpPackageName()
-                                                + "//databases//" + "myDB.db-wal";
+                                                + "//databases//" + "MCRDB.db-wal";
 
-                                        String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-                                        String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-                                        String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+                                        String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+                                        String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-shm";
+                                        String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-wal";
 
                                         File currentDB = new File(data, currentDBPath);
                                         File currentDB2 = new File(data, currentDBPath2);
@@ -1046,7 +1046,7 @@ public class RecuperarVenda extends Activity {
                                 } catch (Exception e2) {
 
                                 }
-                                Intent it = new Intent(c, caixaMain.class);
+                                Intent it = new Intent(c, MerceariaMain.class);
                                 Bundle bun = new Bundle();
                                 String key = "1";
                                 bun.putString("chave", key);
@@ -1068,7 +1068,7 @@ public class RecuperarVenda extends Activity {
         });
 
         try{
-            DB db = new DB(c);
+            SQLiteControl db = new SQLiteControl(c);
             util us = db.getVenda(1);
             if(!us.getData().toString().equals("")){
                 l1.setVisibility(View.VISIBLE);
@@ -1082,7 +1082,7 @@ public class RecuperarVenda extends Activity {
             l1.setVisibility(View.GONE);
         }
         try{
-            DB db = new DB(c);
+            SQLiteControl db = new SQLiteControl(c);
             util us = db.getVenda(2);
             if(!us.getData().toString().equals("")){
                 l2.setVisibility(View.VISIBLE);
@@ -1096,7 +1096,7 @@ public class RecuperarVenda extends Activity {
             l2.setVisibility(View.GONE);
         }
         try{
-            DB db = new DB(c);
+            SQLiteControl db = new SQLiteControl(c);
             util us = db.getVenda(3);
             if(!us.getData().toString().equals("")){
                 l3.setVisibility(View.VISIBLE);
@@ -1110,7 +1110,7 @@ public class RecuperarVenda extends Activity {
             l3.setVisibility(View.GONE);
         }
         try{
-            DB db = new DB(c);
+            SQLiteControl db = new SQLiteControl(c);
             util us = db.getVenda(4);
             if(!us.getData().toString().equals("")){
                 l4.setVisibility(View.VISIBLE);

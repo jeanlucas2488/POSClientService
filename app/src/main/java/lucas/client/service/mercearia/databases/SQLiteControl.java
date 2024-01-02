@@ -424,16 +424,136 @@ public class SQLiteControl {
         db.insert("suprimento", null, ct);
     }
 
-    public void prodIn(util us){
+    public void vendasIn(util us){
         ContentValues ct = new ContentValues();
-        ct.put("loc", us.getLoc());
+        ct.put("data", us.getData());
+        ct.put("prod", us.getProd1());
+        ct.put("total", us.getValor1());
+        db.insert("Vendas", null, ct);
+    }
+    public void vendasAIn(util us){
+        ContentValues ct = new ContentValues();
         ct.put("prod", us.getProd1());
         ct.put("quant", us.getQuant1());
         ct.put("valor", us.getValor1());
-        ct.put("payType", us.getPay1());
-        ct.put("pagto", us.getP1());
-        ct.put("troco", us.getT1());
-        db.insert("produtos", null, ct);
+        ct.put("imagem", us.getImage());
+        db.insert("VendasA", null, ct);
+    }
+    public void vendasBIn(util us){
+        ContentValues ct = new ContentValues();
+        ct.put("prod", us.getProd1());
+        ct.put("quant", us.getQuant1());
+        ct.put("valor", us.getValor1());
+        ct.put("imagem", us.getImage());
+        db.insert("VendasB", null, ct);
+    }
+    public void vendasCIn(util us){
+        ContentValues ct = new ContentValues();
+        ct.put("prod", us.getProd1());
+        ct.put("quant", us.getQuant1());
+        ct.put("valor", us.getValor1());
+        ct.put("imagem", us.getImage());
+        db.insert("VendasC", null, ct);
+    }
+    public void vendasDIn(util us){
+        ContentValues ct = new ContentValues();
+        ct.put("prod", us.getProd1());
+        ct.put("quant", us.getQuant1());
+        ct.put("valor", us.getValor1());
+        ct.put("imagem", us.getImage());
+        db.insert("VendasD", null, ct);
+    }
+    public void limpaVendasA(){
+        db.execSQL("delete from VendasA");
+    }
+    public void limpaVendasB(){
+        db.execSQL("delete from VendasB");
+    }
+    public void limpaVendasC(){
+        db.execSQL("delete from VendasC");
+    }
+    public void limpaVendasD(){
+        db.execSQL("delete from VendasD");
+    }
+    public void delVenda(long id){
+        db.delete("Vendas", "id = ?", new String[]{String.valueOf(id)});
+    }
+    public util getCarR(long id){
+        util us = new util();
+        Cursor cs = db.rawQuery("select * from carrinho WHERE id ="+id+"", null);
+        if(cs.moveToFirst()){
+            do{
+                us.setProd2(cs.getString(cs.getColumnIndex("produto")));
+                us.setQuant2(cs.getString(cs.getColumnIndex("quantd")));
+                us.setValor2(cs.getString(cs.getColumnIndex("valores")));
+                us.setImage2(cs.getBlob(cs.getColumnIndex("imagem")));
+            }while(cs.moveToNext());
+        }
+        return us;
+    }
+    public util getVendaA(long id){
+        util us = new util();
+        Cursor cs = db.rawQuery("select * from VendasA WHERE id ="+id+"", null);
+        if(cs.moveToFirst()){
+            do{
+                us.setProd1(cs.getString(cs.getColumnIndex("prod")));
+                us.setQuant1(cs.getString(cs.getColumnIndex("quant")));
+                us.setValor1(cs.getString(cs.getColumnIndex("valor")));
+                us.setImage(cs.getBlob(cs.getColumnIndex("imagem")));
+            }while(cs.moveToNext());
+        }
+        return us;
+    }
+    public util getVendaB(long id){
+        util us = new util();
+        Cursor cs = db.rawQuery("select * from VendasB WHERE id ="+id+"", null);
+        if(cs.moveToFirst()){
+            do{
+                us.setProd1(cs.getString(cs.getColumnIndex("prod")));
+                us.setQuant1(cs.getString(cs.getColumnIndex("quant")));
+                us.setValor1(cs.getString(cs.getColumnIndex("valor")));
+                us.setImage(cs.getBlob(cs.getColumnIndex("imagem")));
+            }while(cs.moveToNext());
+        }
+        return us;
+    }
+    public util getVendaC(long id){
+        util us = new util();
+        Cursor cs = db.rawQuery("select * from VendasC WHERE id ="+id+"", null);
+        if(cs.moveToFirst()){
+            do{
+                us.setProd1(cs.getString(cs.getColumnIndex("prod")));
+                us.setQuant1(cs.getString(cs.getColumnIndex("quant")));
+                us.setValor1(cs.getString(cs.getColumnIndex("valor")));
+                us.setImage(cs.getBlob(cs.getColumnIndex("imagem")));
+            }while(cs.moveToNext());
+        }
+        return us;
+    }
+    public util getVendaD(long id){
+        util us = new util();
+        Cursor cs = db.rawQuery("select * from VendasD WHERE id ="+id+"", null);
+        if(cs.moveToFirst()){
+            do{
+                us.setProd1(cs.getString(cs.getColumnIndex("prod")));
+                us.setQuant1(cs.getString(cs.getColumnIndex("quant")));
+                us.setValor1(cs.getString(cs.getColumnIndex("valor")));
+                us.setImage(cs.getBlob(cs.getColumnIndex("imagem")));
+            }while(cs.moveToNext());
+        }
+        return us;
+    }
+    public util getVenda(long id){
+        util us = new util();
+        Cursor cs = db.rawQuery("select * from Vendas WHERE id ="+id+"", null);
+        if(cs.moveToFirst()){
+            do{
+                us.setData(cs.getString(cs.getColumnIndex("data")));
+                us.setProd1(cs.getString(cs.getColumnIndex("prod")));
+                us.setValor1(cs.getString(cs.getColumnIndex("total")));
+            }while(cs.moveToNext());
+        }
+        return us;
     }
     public void saIn(util us){
         ContentValues ct = new ContentValues();
