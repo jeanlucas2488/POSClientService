@@ -155,6 +155,7 @@ public class selfConfig extends AppCompatActivity
 												if(user2.getUser().toString().equals("")){
 													if(user3.getSenhaSuperVisor().toString().equals("")){
 														progress.setMessage("Verificação concluída!");
+														Thread.sleep(2000);
 													} else {
 
 													}
@@ -189,6 +190,7 @@ public class selfConfig extends AppCompatActivity
 											util user2 = dtes.getUserMCR(1);
 											if(!user2.getUser().toString().equals("")){
 												progress.setMessage("Verificação Concluída!");
+												Thread.sleep(2000);
 											} else {
 
 											}
@@ -224,6 +226,7 @@ public class selfConfig extends AppCompatActivity
 										util venda = db.getVenda(1);
 										if(!venda.getData().toString().equals("")){
 											progress.setMessage("Ops! Tem venda Arquivada pra finalizar!");
+											Thread.sleep(2000);
 											Intent it = new Intent(c, caixaMain.class);
 											Bundle bun = new Bundle();
 											String res = "1";
@@ -252,6 +255,7 @@ public class selfConfig extends AppCompatActivity
 												util venda2 = sql.getVenda(1);
 												if(!venda2.getData().toString().equals("")){
 													progress.setMessage("Ops! Tem venda Arquivada pra finalizar!");
+													Thread.sleep(2000);
 													Intent it = new Intent(c, MerceariaMain.class);
 													Bundle bun = new Bundle();
 													String res = "1";
