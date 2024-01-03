@@ -27,6 +27,11 @@
         </activity>
         <activity
             android:theme="@style/dialog"
+            android:name=".mercearia.system.RecuperarVenda"
+            android:label="@string/app_pdv" >
+        </activity>
+        <activity
+            android:theme="@style/dialog"
             android:name=".caixa.setup.system.RecuperarVenda"
             android:label="@string/app_pdv" >
         </activity>

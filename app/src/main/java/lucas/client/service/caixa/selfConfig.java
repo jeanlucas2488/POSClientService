@@ -82,41 +82,11 @@ public class selfConfig extends AppCompatActivity
 										String  currentDBPath= "//data//" + c.getOpPackageName()
 												+ "//databases//" + "myDB.db";
 										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										File dbshm = new File(data, currentDBPath + "-shm");
-										File dbwal = new File(data, currentDBPath + "-wal");
-										if (dbshm.exists()) {
-											dbshm.delete();
-										}
-										if (dbwal.exists()) {
-											dbwal.delete();
-										}
-										File currentDB = new File(data, currentDBPath);
-										File backupDB = new File(sd, backupDBPath);
-										FileChannel src = new FileInputStream(backupDB).getChannel();
-										FileChannel dst = new FileOutputStream(currentDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-										progress.setMessage("Banco de Dados Importado!");
-									}
-								} catch (Exception e) {
-									progress.setMessage("Falha ao Importar SQLite!");
-									Thread.sleep(2000);
-									Intent launchIntent = getPackageManager().getLaunchIntentForPackage("lucas.client.service.pos.admin");
-									if (launchIntent != null) {
-										startActivity(launchIntent);//null pointer check in case package name was not found
-									}
-									progress.dismiss();
-									Thread.sleep(99999999);
-								}
-								try {
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
+										String  currentDBPath2= "//data//" + c.getOpPackageName()
 												+ "//databases//" + "MCRDB.db";
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+
 										File dbshm = new File(data, currentDBPath + "-shm");
 										File dbwal = new File(data, currentDBPath + "-wal");
 										if (dbshm.exists()) {
@@ -125,13 +95,32 @@ public class selfConfig extends AppCompatActivity
 										if (dbwal.exists()) {
 											dbwal.delete();
 										}
+										File dbshm2 = new File(data, currentDBPath2 + "-shm");
+										File dbwal2 = new File(data, currentDBPath2 + "-wal");
+										if (dbshm2.exists()) {
+											dbshm2.delete();
+										}
+										if (dbwal2.exists()) {
+											dbwal2.delete();
+										}
 										File currentDB = new File(data, currentDBPath);
 										File backupDB = new File(sd, backupDBPath);
+
 										FileChannel src = new FileInputStream(backupDB).getChannel();
 										FileChannel dst = new FileOutputStream(currentDB).getChannel();
 										dst.transferFrom(src, 0, src.size());
 										src.close();
 										dst.close();
+
+										File currentDB2 = new File(data, currentDBPath2);
+										File backupDB2 = new File(sd, backupDBPath2);
+
+										FileChannel src2 = new FileInputStream(backupDB2).getChannel();
+										FileChannel dst2 = new FileOutputStream(currentDB2).getChannel();
+										dst2.transferFrom(src2, 0, src2.size());
+										src2.close();
+										dst2.close();
+
 										progress.setMessage("Banco de Dados Importado!");
 									}
 								} catch (Exception e) {
@@ -178,72 +167,15 @@ public class selfConfig extends AppCompatActivity
 
 									}
 								} catch (Exception e){
-									AlertDialog.Builder b = new AlertDialog.Builder(c);
-									b.setTitle("Atenção!");
-									b.setMessage("O POS não foi configurado corretamente. Abra o Aplicativo retaguarda e configure o POS!");
-									b.setPositiveButton("Vamos lá", new DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											Intent launchIntent = getPackageManager().getLaunchIntentForPackage("lucas.client.service.pos.admin");
-											if (launchIntent != null) {
-												startActivity(launchIntent);//null pointer check in case package name was not found
-											}
-										}
-									});
-									b.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											progress.dismiss();
-											progress.cancel();
-											finishAffinity();
-										}
-									});
-									b.create();
-									b.show();
+									progress.setMessage("POS 1/2 Não configurado corretamente!");
+									progress.cancel();
+									progress.dismiss();
 									Thread.sleep(999999999);
 								}
 							}
 							if(progress.getProgress() == 40){
 								progress.setMessage("Verificando a integridade do POS 2/2...");
 								Thread.sleep(3000);
-
-								try{
-									SQLiteControl db = new SQLiteControl(c);
-									util pag1 = db.getCategory(1);
-									if(!pag1.getCategory().toString().equals("")){
-										List<util> res = db.findP1();
-										if(!res.get(0).getProd1().toString().equals("")){
-											progress.setMessage("Verificação Concluída....");
-										} else {
-										}
-									} else {
-
-									}
-								} catch (Exception e){
-									AlertDialog.Builder b = new AlertDialog.Builder(c);
-									b.setTitle("Atenção!");
-									b.setMessage("O POS não foi configurado corretamente. Abra o Aplicativo retaguarda e configure o POS!");
-									b.setPositiveButton("Vamos lá", new DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											Intent launchIntent = getPackageManager().getLaunchIntentForPackage("lucas.client.service.pos.admin");
-											if (launchIntent != null) {
-												startActivity(launchIntent);//null pointer check in case package name was not found
-											}
-										}
-									});
-									b.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											progress.dismiss();
-											progress.cancel();
-											finishAffinity();
-										}
-									});
-									b.create();
-									b.show();
-									Thread.sleep(999999999);
-								}
 							}
 							if(progress.getProgress() == 50){
 								progress.setMessage("Verificando se há vendas no POS 1/2");

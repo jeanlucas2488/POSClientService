@@ -51,6 +51,7 @@ import lucas.client.service.caixa.setup.lancamentos.historico;
 import lucas.client.service.etc.util;
 import lucas.client.service.mercearia.databases.SQLiteControl;
 import lucas.client.service.mercearia.setup.fechamento;
+import lucas.client.service.mercearia.system.RecuperarVenda;
 
 public class MerceariaMain extends AppCompatActivity {
     AlertDialog aler, ale;
@@ -251,7 +252,7 @@ public class MerceariaMain extends AppCompatActivity {
         // TODO: Implement this method
         if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
             final String[] lc = new String[]
-                    {"Fechamento de Caixa", "Sangria", "Suprimento de Caixa"};
+                    {"Fechamento de Caixa", "Sangria", "Suprimento de Caixa", "Recuperar Venda"};
 
             LayoutInflater li = getLayoutInflater();
             View r = li.inflate(R.layout.list_ad, null);
@@ -263,9 +264,11 @@ public class MerceariaMain extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4)
                 {
                     // TODO: Implement this method
-
+                    if(lc[p3].toString().startsWith("R")){
+                        Intent itr = new Intent(c, RecuperarVenda.class);
+                        startActivity(itr);
+                    }
                     if(lc[p3].toString().startsWith("F")){
-
                         Intent itr = new Intent(c, fechamento.class);
                         startActivity(itr);
                         finish();

@@ -27,6 +27,7 @@ import lucas.client.service.R;
 import lucas.client.service.etc.util;
 import lucas.client.service.mercearia.MerceariaMain;
 import lucas.client.service.mercearia.databases.*;
+import lucas.client.service.sqlite.DB;
 
 
 public class RecuperarVenda extends Activity {
@@ -81,7 +82,7 @@ public class RecuperarVenda extends Activity {
                 b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SQLiteControl db2 = new SQLiteControl(c);
+                        DB db2 = new DB(c);
                         util us2 = db2.getSuperVisor(1);
                         if(!sup.getText().toString().equals("")){
                             if(sup.getText().toString().equals(us2.getSenhaSuperVisor())){
@@ -329,7 +330,7 @@ public class RecuperarVenda extends Activity {
                 b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SQLiteControl db2 = new SQLiteControl(c);
+                        DB db2 = new DB(c);
                         util us2 = db2.getSuperVisor(1);
                         if(!sup.getText().toString().equals("")){
                             if(sup.getText().toString().equals(us2.getSenhaSuperVisor())){

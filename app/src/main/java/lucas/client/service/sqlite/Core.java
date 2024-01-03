@@ -7,7 +7,7 @@ public class Core extends SQLiteOpenHelper
 	public static String name = "myDB.db";
 	
 	public Core(Context c){
-		super(c, name, null, 5);
+		super(c, name, null, 6);
 	}
 	@Override
 	public void onCreate(SQLiteDatabase db)
