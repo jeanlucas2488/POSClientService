@@ -218,6 +218,17 @@ Context c = this;
 
 			}
 		} catch(Exception e){}
+
+		try{
+			Intent it = getIntent();
+			Bundle b = it.getExtras();
+			String res = b.getString("chave2");
+			if(!res.toString().equals("")){
+				runVendas();
+			} else {
+
+			}
+		} catch(Exception e){}
 	}
 
 	@Override
@@ -1831,5 +1842,9 @@ Context c = this;
 		ap.setNegativeButton("Cancelar!", null);
 		ale = ap.create();
 		ale = ap.show();
+	}
+	public void runVendas(){
+		Intent it = new Intent(c, RecuperarVenda.class);
+		startActivity(it);
 	}
 }

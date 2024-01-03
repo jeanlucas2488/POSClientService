@@ -24,6 +24,7 @@ import java.nio.channels.*;
 import java.util.*;
 import lucas.client.service.*;
 import lucas.client.service.etc.*;
+import lucas.client.service.mercearia.MerceariaMain;
 import lucas.client.service.mercearia.databases.SQLiteControl;
 import lucas.client.service.sqlite.*;
 
@@ -175,7 +176,30 @@ public class selfConfig extends AppCompatActivity
 							}
 							if(progress.getProgress() == 40){
 								progress.setMessage("Verificando a integridade do POS 2/2...");
-								Thread.sleep(3000);
+								try{
+									SQLiteControl db = new SQLiteControl(c);
+									util pag1 = db.getCategory(1);
+									if(!pag1.getCategory().toString().equals("")){
+										List<util> res = db.findP1();
+										if(!res.get(0).getProd1().toString().equals("")){
+											util user2 = db.getUserMCR(1);
+											if(!user2.getUser().toString().equals("")){
+												progress.setMessage("Verificação Concluída!");
+											} else {
+
+											}
+											} else {
+
+											}
+										} else {
+
+										}
+								} catch (Exception e){
+									progress.setMessage("POS 1/2 Não configurado corretamente!");
+									progress.cancel();
+									progress.dismiss();
+									Thread.sleep(999999999);
+								}
 							}
 							if(progress.getProgress() == 50){
 								progress.setMessage("Verificando se há vendas no POS 1/2");
@@ -192,23 +216,52 @@ public class selfConfig extends AppCompatActivity
 
 									}
 								} catch (Exception e){
-									progress.setMessage("Não há vendas em aberto POS 1/2...");
-									Thread.sleep(3000);
-									progress.setMessage("Verificando se há vendas no POS 2/2");
-									Thread.sleep(3000);
-									SQLiteControl d = new SQLiteControl(c);
-									try {
-										List<util> res = db.moFind();
-										if(!res.get(0).getMoney().toString().equals("")){
-											progress.setMessage("Ops, há vendas em Aberto!");
-											Thread.sleep(3000);
-											startActivity(new Intent(c, caixaMain.class));
-											Thread.sleep(9999999);
-										} else {
-
+									try{
+										util venda = db.getVenda(1);
+										if(!venda.getData().toString().equals("")){
+											progress.setMessage("Ops! Tem venda Arquivada pra finalizar!");
+											Intent it = new Intent(c, caixaMain.class);
+											Bundle bun = new Bundle();
+											String res = "1";
+											bun.putString("chave2", res);
+											it.putExtras(bun);
+											startActivity(it);
+											progress.cancel();
+											Thread.sleep(999999999);
+										}else {
 										}
-								} catch(Exception e2){
-										progress.setMessage("Não há vendas em Aberto!");
+									} catch (Exception i){
+										SQLiteControl d = new SQLiteControl(c);
+										try {
+											List<util> res = db.moFind();
+											if(!res.get(0).getMoney().toString().equals("")){
+												progress.setMessage("Ops, há vendas em Aberto!");
+												Thread.sleep(3000);
+												startActivity(new Intent(c, caixaMain.class));
+												Thread.sleep(9999999);
+											} else {
+
+											}
+										} catch(Exception e2){
+											try{
+												SQLiteControl sql = new SQLiteControl(c);
+												util venda2 = sql.getVenda(1);
+												if(!venda2.getData().toString().equals("")){
+													progress.setMessage("Ops! Tem venda Arquivada pra finalizar!");
+													Intent it = new Intent(c, MerceariaMain.class);
+													Bundle bun = new Bundle();
+													String res = "1";
+													bun.putString("chave2", res);
+													it.putExtras(bun);
+													startActivity(it);
+													progress.cancel();
+													Thread.sleep(999999999);
+												}else {
+												}
+											}catch (Exception i2){
+												progress.setMessage("Não há vendas em Aberto!");
+											}
+										}
 									}
 							}
 						}
