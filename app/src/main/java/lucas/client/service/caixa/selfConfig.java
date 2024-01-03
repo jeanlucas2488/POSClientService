@@ -75,6 +75,9 @@ public class selfConfig extends AppCompatActivity
 							if(progress.getProgress() == 20){
 								progress.setMessage("Importando dados do PDV");
 								Thread.sleep(5000);
+								DB sqltest = new DB(c);
+								SQLiteControl sqltest2 = new SQLiteControl(c);
+
 								try {
 									File sd = Environment.getExternalStorageDirectory();
 									File data = Environment.getDataDirectory();
