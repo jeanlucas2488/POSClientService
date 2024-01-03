@@ -185,7 +185,8 @@ public class selfConfig extends AppCompatActivity
 									if(!pag1.getCategory().toString().equals("")){
 										List<util> res = db.findP1();
 										if(!res.get(0).getProd1().toString().equals("")){
-											util user2 = db.getUserMCR(1);
+											DB dtes = new DB(c);
+											util user2 = dtes.getUserMCR(1);
 											if(!user2.getUser().toString().equals("")){
 												progress.setMessage("Verificação Concluída!");
 											} else {
@@ -198,7 +199,7 @@ public class selfConfig extends AppCompatActivity
 
 										}
 								} catch (Exception e){
-									progress.setMessage("POS 1/2 Não configurado corretamente!");
+									progress.setMessage("POS 2/2 Não configurado corretamente!");
 									progress.cancel();
 									progress.dismiss();
 									Thread.sleep(999999999);
