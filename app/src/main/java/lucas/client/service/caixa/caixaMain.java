@@ -255,9 +255,18 @@ Context c = this;
 					}
 					if(lc[p3].toString().startsWith("F")){
 
-						Intent itr = new Intent(c, fechaCaixa.class);
-						startActivity(itr);
-						finish();
+						try{
+							DB db = new DB(c);
+							List<util> test = db.getVedaS();
+							if(!test.get(0).getData().toString().equals("")){
+								Toast.makeText(c, "Você precisa finalizar a venda que está arquivada pra fechar o POS!", Toast.LENGTH_SHORT).show();
+							} else {
+							}
+						} catch (Exception e){
+							Intent itr = new Intent(c, fechaCaixa.class);
+							startActivity(itr);
+							finish();
+						}
 					}
 					if(lc[p3].toString().startsWith("H")){
 						Intent itr = new Intent(c, historico.class);

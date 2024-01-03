@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -52,6 +53,7 @@ import lucas.client.service.etc.util;
 import lucas.client.service.mercearia.databases.SQLiteControl;
 import lucas.client.service.mercearia.setup.fechamento;
 import lucas.client.service.mercearia.system.RecuperarVenda;
+import lucas.client.service.sqlite.DB;
 
 public class MerceariaMain extends AppCompatActivity {
     AlertDialog aler, ale;
@@ -279,9 +281,18 @@ public class MerceariaMain extends AppCompatActivity {
                         startActivity(itr);
                     }
                     if(lc[p3].toString().startsWith("F")){
-                        Intent itr = new Intent(c, fechamento.class);
-                        startActivity(itr);
-                        finish();
+                        try{
+                            SQLiteControl db = new SQLiteControl(c);
+                            List<util> test = db.getVedaS();
+                            if(!test.get(0).getData().toString().equals("")){
+                                Toast.makeText(c, "Você precisa finalizar a venda que está arquivada pra fechar o POS!", Toast.LENGTH_SHORT).show();
+                            } else {
+                            }
+                        } catch (Exception e){
+                            Intent itr = new Intent(c, fechaCaixa.class);
+                            startActivity(itr);
+                            finish();
+                        }
                     }
                     if(lc[p3].toString().startsWith("H")){
                         Intent itr = new Intent(c, historico.class);

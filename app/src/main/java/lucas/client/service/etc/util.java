@@ -64,10 +64,17 @@ public class util
 	public String banriC;
 	public String banes;
 	public String americ;
-
 	public String senha_supervisor;
+	public long vendaId;
 	public long supervisor_id;
 
+
+	public long getVendaId(){
+		return vendaId;
+	}
+	public void setVendaId(long id){
+		this.vendaId = id;
+	}
 	public long getSupervisor_id(){
 		return supervisor_id;
 	}

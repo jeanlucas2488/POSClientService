@@ -2,6 +2,8 @@ package lucas.client.service.sqlite;
 import android.content.*;
 import android.database.*;
 import android.database.sqlite.*;
+
+import java.lang.reflect.Array;
 import java.util.*;
 
 import lucas.client.service.etc.*;
@@ -684,6 +686,23 @@ public class DB
 			}while(cs.moveToNext());
 		}
 		return us;
+	}
+	public List<util> getVedaS(){
+		ArrayList<util> arr = new ArrayList<util>();
+		String[] colunm = {"id", "data", "prod", "total"};
+		Cursor cs = db.query("Vendas", colunm, null, null, null, null, "data ASC");
+		if(cs.getCount() >0){
+			cs.moveToFirst();
+			do {
+				util us = new util();
+				us.setVendaId(Integer.parseInt(cs.getString(0)));
+				us.setData(cs.getString(1));
+				us.setProd1(cs.getString(2));
+				us.setValor1(cs.getString(3));
+				arr.add(us);
+			}  while (cs.moveToNext());
+		}
+		return arr;
 	}
 	public util getCarR(long id){
 		util us = new util();

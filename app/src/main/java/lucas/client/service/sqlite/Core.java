@@ -54,8 +54,10 @@ public class Core extends SQLiteOpenHelper
 				"(id integer primary key, data text, NfeHtml text);");
 		db.execSQL("CREATE TABLE carrinho" +
 		           "(id integer primary key, produto text, quantd text, valores text, imagem blob);");
+
 		db.execSQL("CREATE TABLE Vendas" +
 				   "(id integer primary key, data text, prod text, total text);");
+
 		db.execSQL("CREATE TABLE VendasA" +
 				   "(id integer primary key, prod text, quant text, valor text, imagem blob);");
 		db.execSQL("CREATE TABLE VendasB" +

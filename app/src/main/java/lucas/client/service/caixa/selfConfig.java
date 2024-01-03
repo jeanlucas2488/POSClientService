@@ -75,6 +75,7 @@ public class selfConfig extends AppCompatActivity
 							if(progress.getProgress() == 20){
 								progress.setMessage("Importando dados do PDV");
 								Thread.sleep(5000);
+
 								DB sqltest = new DB(c);
 								SQLiteControl sqltest2 = new SQLiteControl(c);
 
@@ -93,12 +94,14 @@ public class selfConfig extends AppCompatActivity
 
 										File dbshm = new File(data, currentDBPath + "-shm");
 										File dbwal = new File(data, currentDBPath + "-wal");
+
 										if (dbshm.exists()) {
 											dbshm.delete();
 										}
 										if (dbwal.exists()) {
 											dbwal.delete();
 										}
+
 										File dbshm2 = new File(data, currentDBPath2 + "-shm");
 										File dbwal2 = new File(data, currentDBPath2 + "-wal");
 										if (dbshm2.exists()) {
