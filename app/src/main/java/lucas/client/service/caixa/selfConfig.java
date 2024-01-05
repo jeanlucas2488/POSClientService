@@ -57,7 +57,7 @@ public class selfConfig extends AppCompatActivity
 					try {
 						while (progress.getProgress() <= progress
 							   .getMax()) {
-							Thread.sleep(800);
+							Thread.sleep(900);
 							handle.sendMessage(handle.obtainMessage());
 							if (progress.getProgress() == 10) {
 								progress.setMessage("Checando Permissões...");
@@ -73,13 +73,12 @@ public class selfConfig extends AppCompatActivity
 							}
 							
 							if(progress.getProgress() == 20){
-								progress.setMessage("Importando dados do PDV");
+								progress.setMessage("Importando dados do PDV 1/2...");
 								Thread.sleep(5000);
 
-								DB sqltest = new DB(c);
-								SQLiteControl sqltest2 = new SQLiteControl(c);
-
 								try {
+
+									Thread.sleep(2000);
 									File sd = Environment.getExternalStorageDirectory();
 									File data = Environment.getDataDirectory();
 
@@ -87,10 +86,6 @@ public class selfConfig extends AppCompatActivity
 										String  currentDBPath= "//data//" + c.getOpPackageName()
 												+ "//databases//" + "myDB.db";
 										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-
-										String  currentDBPath2= "//data//" + c.getOpPackageName()
-												+ "//databases//" + "MCRDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
 
 										File dbshm = new File(data, currentDBPath + "-shm");
 										File dbwal = new File(data, currentDBPath + "-wal");
@@ -102,14 +97,6 @@ public class selfConfig extends AppCompatActivity
 											dbwal.delete();
 										}
 
-										File dbshm2 = new File(data, currentDBPath2 + "-shm");
-										File dbwal2 = new File(data, currentDBPath2 + "-wal");
-										if (dbshm2.exists()) {
-											dbshm2.delete();
-										}
-										if (dbwal2.exists()) {
-											dbwal2.delete();
-										}
 										File currentDB = new File(data, currentDBPath);
 										File backupDB = new File(sd, backupDBPath);
 
@@ -118,15 +105,6 @@ public class selfConfig extends AppCompatActivity
 										dst.transferFrom(src, 0, src.size());
 										src.close();
 										dst.close();
-
-										File currentDB2 = new File(data, currentDBPath2);
-										File backupDB2 = new File(sd, backupDBPath2);
-
-										FileChannel src2 = new FileInputStream(backupDB2).getChannel();
-										FileChannel dst2 = new FileOutputStream(currentDB2).getChannel();
-										dst2.transferFrom(src2, 0, src2.size());
-										src2.close();
-										dst2.close();
 
 										progress.setMessage("Banco de Dados Importado!");
 									}
@@ -142,6 +120,52 @@ public class selfConfig extends AppCompatActivity
 								}
 							}
 							if(progress.getProgress() == 30){
+								progress.setMessage("Importando dados do PDV 2/2...");
+								Thread.sleep(3000);
+
+								try {
+
+									Thread.sleep(2000);
+									File sd = Environment.getExternalStorageDirectory();
+									File data = Environment.getDataDirectory();
+
+									if (sd.canWrite()) {
+										String  currentDBPath= "//data//" + c.getOpPackageName()
+												+ "//databases//" + "MCRDB.db";
+										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+
+										File dbshm = new File(data, currentDBPath + "-shm");
+										File dbwal = new File(data, currentDBPath + "-wal");
+
+										if (dbshm.exists()) {
+											dbshm.delete();
+										}
+										if (dbwal.exists()) {
+											dbwal.delete();
+										}
+
+										File currentDB = new File(data, currentDBPath);
+										File backupDB = new File(sd, backupDBPath);
+
+										FileChannel src = new FileInputStream(backupDB).getChannel();
+										FileChannel dst = new FileOutputStream(currentDB).getChannel();
+										dst.transferFrom(src, 0, src.size());
+										src.close();
+										dst.close();
+										progress.setMessage("Banco de Dados Importado!");
+									}
+								} catch (Exception e) {
+									progress.setMessage("Falha ao Importar SQLite!");
+									Thread.sleep(2000);
+									Intent launchIntent = getPackageManager().getLaunchIntentForPackage("lucas.client.service.pos.admin");
+									if (launchIntent != null) {
+										startActivity(launchIntent);//null pointer check in case package name was not found
+									}
+									progress.dismiss();
+									Thread.sleep(99999999);
+								}
+							}
+							if(progress.getProgress() == 40){
 								progress.setMessage("Verificando a integridade do POS 1/2...");
 								Thread.sleep(5000);
 
@@ -181,7 +205,7 @@ public class selfConfig extends AppCompatActivity
 									Thread.sleep(999999999);
 								}
 							}
-							if(progress.getProgress() == 40){
+							if(progress.getProgress() == 50){
 								progress.setMessage("Verificando a integridade do POS 2/2...");
 								try{
 									SQLiteControl db = new SQLiteControl(c);
@@ -210,7 +234,7 @@ public class selfConfig extends AppCompatActivity
 									Thread.sleep(999999999);
 								}
 							}
-							if(progress.getProgress() == 50){
+							if(progress.getProgress() == 60){
 								progress.setMessage("Verificando se há vendas no POS 1/2");
 								Thread.sleep(3000);
 								DB db = new DB(c);
@@ -296,7 +320,7 @@ public class selfConfig extends AppCompatActivity
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
-			progress.incrementProgressBy(2);
+			progress.incrementProgressBy(1);
 		}
 	};
 	private void requestPermission(){
