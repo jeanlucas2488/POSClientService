@@ -29,7 +29,7 @@
                android:id="@+id/im"
                android:layout_width="50dp"
                android:layout_height="60dp"
-               android:src="@drawable/rec_icon_list" />
+               android:src="@drawable/recuperar" />
 
            <TextView
                android:id="@+id/tvProd"
@@ -95,7 +95,7 @@
                 android:id="@+id/im2"
                 android:layout_width="50dp"
                 android:layout_height="60dp"
-                android:src="@drawable/rec_icon_list" />
+                android:src="@drawable/recuperar" />
 
             <TextView
                 android:id="@+id/tvProd2"
@@ -161,7 +161,7 @@
                 android:id="@+id/im3"
                 android:layout_width="50dp"
                 android:layout_height="60dp"
-                android:src="@drawable/rec_icon_list" />
+                android:src="@drawable/recuperar" />
 
             <TextView
                 android:id="@+id/tvProd3"
@@ -227,7 +227,7 @@
                 android:id="@+id/im4"
                 android:layout_width="50dp"
                 android:layout_height="60dp"
-                android:src="@drawable/rec_icon_list" />
+                android:src="@drawable/recuperar" />
 
             <TextView
                 android:id="@+id/tvProd4"

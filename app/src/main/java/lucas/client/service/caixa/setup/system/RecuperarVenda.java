@@ -125,6 +125,9 @@ public class RecuperarVenda extends Activity {
             @Override
             public void onClick(View v) {
                 if(ch1.isChecked()){
+                    if(ch2.isChecked()){
+                        ch2.clearComposingText();
+                    }
                     LayoutInflater li = (LayoutInflater) c.getSystemService(c.LAYOUT_INFLATER_SERVICE);
                     View r = li.inflate(R.layout.supervisor_view, null);
                     TextInputEditText sup = r.findViewById(R.id.supervisor);

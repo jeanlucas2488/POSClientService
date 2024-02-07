@@ -74,6 +74,7 @@ public class selfConfig extends AppCompatActivity
 							
 							if(progress.getProgress() == 20){
 								progress.setMessage("Importando dados do PDV 1/2...");
+
 								Thread.sleep(5000);
 
 								try {
@@ -300,7 +301,7 @@ public class selfConfig extends AppCompatActivity
 									}
 							}
 						}
-							if(progress.getProgress() == 60){
+							if(progress.getProgress() == 80){
 								progress.setMessage("Executando Abertura do POS...");
 								Thread.sleep(2000);
 								progress.dismiss();
