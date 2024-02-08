@@ -9,8 +9,8 @@
 
 	<ImageView
 		android:id="@+id/im"
-		android:layout_width="80dp"
-		android:layout_height="75dp"
+		android:layout_width="150dp"
+		android:layout_height="100dp"
 		android:layout_gravity="center"
 		android:layout_marginTop="15dp"/>
 
@@ -25,13 +25,14 @@
 		>
 
 		<TextView
-			android:ellipsize="end"
+
 			android:singleLine="true"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceSmall"
 			android:layout_gravity="center"
 			android:id="@+id/tv"
+			android:textSize="18dp"
 			android:textColor="#FFFFFF"/>
 
 	</LinearLayout>

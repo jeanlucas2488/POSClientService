@@ -65,6 +65,9 @@ public class RecuperarVenda extends Activity {
         final TextView tvData4 = r.findViewById(R.id.tvData4);
         final TextView tvValor4 = r.findViewById(R.id.tvValor4);
 
+        if (ch1.isChecked()){
+            ch2.setSelected(false);
+        }
         try{
             DB db = new DB(c);
             util us = db.getVenda(1);
@@ -125,9 +128,6 @@ public class RecuperarVenda extends Activity {
             @Override
             public void onClick(View v) {
                 if(ch1.isChecked()){
-                    if(ch2.isChecked()){
-                        ch2.clearComposingText();
-                    }
                     LayoutInflater li = (LayoutInflater) c.getSystemService(c.LAYOUT_INFLATER_SERVICE);
                     View r = li.inflate(R.layout.supervisor_view, null);
                     TextInputEditText sup = r.findViewById(R.id.supervisor);
