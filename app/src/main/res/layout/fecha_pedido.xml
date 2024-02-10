@@ -17,22 +17,44 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content" >
 			<TextView
-				android:id="@+id/valTotal"
+				android:id="@+id/total"
+				android:textColor="#000000"
 				android:textSize="17dp"
 				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:text="Valor Total:"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				/>
+			<TextView
+				android:layout_toRightOf="@+id/total"
+				android:id="@+id/valTotal"
+				android:textColor="#0000ff"
+				android:textSize="17dp"
+				android:layout_marginRight="10dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				/>
 
 			<TextView
+				android:textColor="#000000"
+				android:textSize="17dp"
+				android:layout_marginRight="10dp"
+				android:layout_toLeftOf="@+id/valRestante"
+				android:text="Valor Restante:"
+				android:layout_centerInParent="true"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				 />
+			<TextView
 				android:id="@+id/valRestante"
+				android:textColor="#FF0000"
 				android:textSize="17dp"
 				android:layout_alignParentRight="true"
 				android:layout_marginRight="10dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				 />
-
+				/>
 		</RelativeLayout>
 		<LinearLayout
 			android:layout_marginLeft="10dp"
@@ -42,8 +64,9 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content">
 			<TextView
+				android:textColor="#000000"
 				android:textSize="18dp"
-				android:layout_marginTop="15dp"
+				android:layout_marginTop="20dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="Escolha a Forma de Pagamento: "
@@ -59,6 +82,7 @@
 			android:orientation="vertical">
 
 			<RelativeLayout
+				android:id="@+id/dinLayout"
 				android:layout_margin="10dp"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content">
@@ -68,6 +92,7 @@
 					android:layout_height="50dp"
 					android:src="@drawable/money" />
 				<TextView
+					android:id="@+id/tvDinheiro"
 					android:layout_marginTop="10dp"
 					android:layout_marginLeft="5dp"
 					android:textSize="16dp"
@@ -86,6 +111,7 @@
 			</RelativeLayout>
 
 			<RelativeLayout
+				android:id="@+id/debLayout"
 				android:layout_margin="10dp"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content">
@@ -95,6 +121,7 @@
 					android:layout_height="50dp"
 					android:src="@drawable/cartao" />
 				<TextView
+					android:id="@+id/tvCarD"
 					android:layout_marginTop="10dp"
 					android:layout_marginLeft="5dp"
 					android:textSize="16dp"
@@ -113,6 +140,7 @@
 			</RelativeLayout>
 
 			<RelativeLayout
+				android:id="@+id/credLayout"
 				android:layout_margin="10dp"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content">
@@ -122,6 +150,7 @@
 					android:layout_height="50dp"
 					android:src="@drawable/cartao" />
 				<TextView
+					android:id="@+id/tvCarC"
 					android:layout_marginTop="10dp"
 					android:layout_marginLeft="5dp"
 					android:textSize="16dp"
@@ -140,6 +169,7 @@
 			</RelativeLayout>
 
 			<RelativeLayout
+				android:id="@+id/pixLayout"
 				android:layout_margin="10dp"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content">
@@ -149,6 +179,7 @@
 					android:layout_height="50dp"
 					android:src="@drawable/pix" />
 				<TextView
+					android:id="@+id/tvPix"
 					android:layout_marginTop="10dp"
 					android:layout_marginLeft="5dp"
 					android:textSize="16dp"
