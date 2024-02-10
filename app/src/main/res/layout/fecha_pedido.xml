@@ -9,433 +9,163 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="fill_parent"
+		android:layout_height="match_parent"
 		android:orientation="vertical">
+		<RelativeLayout
 
-		<LinearLayout
-			android:orientation="horizontal"
+			android:layout_marginTop="20dp"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_margin="10dp">
-
-			<com.google.android.material.textfield.TextInputLayout
+			android:layout_height="wrap_content" >
+			<TextView
+				android:id="@+id/valTotal"
+				android:textSize="17dp"
+				android:layout_marginLeft="10dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
+				/>
 
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/som1"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="7"
-					android:hint="Soma.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-
-			<ImageView
-				android:id="@+id/im1"
+			<TextView
+				android:id="@+id/valRestante"
+				android:textSize="17dp"
+				android:layout_alignParentRight="true"
+				android:layout_marginRight="10dp"
 				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-			<Spinner
-				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:id="@+id/spn1"
-				android:layout_marginLeft="5dp"/>
+				 />
 
-		</LinearLayout>
-
+		</RelativeLayout>
 		<LinearLayout
-			android:id="@+id/lay1"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10dp"
-			android:layout_marginTop="-10dp"
-			android:layout_marginRight="10dp"
-			android:orientation="horizontal">
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/pagto1"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="7"
-					android:hint="Pagto.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/troco1"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="12"
-					android:hint="Troco.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_marginTop="-10dp"
-			android:id="@+id/spnlay2"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_margin="10dp">
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/som2"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="7"
-					android:hint="Soma.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			<ImageView
-				android:id="@+id/im2"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-			<Spinner
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/spn2"
-				android:layout_marginLeft="5dp"/>
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
 			android:layout_marginLeft="10dp"
 			android:layout_marginRight="10dp"
-			android:layout_marginTop="-10dp"
-			android:id="@+id/lay2">
-
-			<com.google.android.material.textfield.TextInputLayout
+			android:layout_marginTop="20dp"
+			android:background="@drawable/fecha_pedido_layout_border"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+			<TextView
+				android:textSize="18dp"
+				android:layout_marginTop="15dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/pagto2"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="7"
-					android:hint="Pagto.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/troco2"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="12"
-					android:hint="Troco.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
+				android:text="Escolha a Forma de Pagamento: "
 		</LinearLayout>
 
 		<LinearLayout
-			android:layout_marginTop="-10dp"
-			android:id="@+id/spnlay3"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_margin="10dp">
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/som3"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="7"
-					android:hint="Soma.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			<ImageView
-				android:id="@+id/im3"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-			<Spinner
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/spn3"
-				android:layout_marginLeft="5dp"/>
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10dp"
+			android:layout_marginTop="20dp"
+			android:background="@drawable/fecha_pedido_listview_layout_border"
 			android:layout_marginRight="10dp"
-			android:layout_marginTop="-10dp"
-			android:id="@+id/lay3">
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/pagto3"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="7"
-					android:hint="Pagto.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/troco3"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="12"
-					android:hint="Troco.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_marginTop="-10dp"
-			android:id="@+id/spnlay4"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_margin="10dp">
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/som4"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="7"
-					android:hint="Soma.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			<ImageView
-				android:id="@+id/im4"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-			<Spinner
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/spn4"
-				android:layout_marginLeft="5dp"/>
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
 			android:layout_marginLeft="10dp"
-			android:layout_marginRight="10dp"
-			android:layout_marginTop="-10dp"
-			android:id="@+id/lay4">
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/pagto4"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="7"
-					android:hint="Pagto.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/troco4"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="12"
-					android:hint="Troco.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:layout_marginTop="-10dp"
-			android:id="@+id/spnlay5"
-			android:orientation="horizontal"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_margin="10dp">
+			android:orientation="vertical">
 
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/som5"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="7"
-					android:hint="Soma.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			<ImageView
-				android:id="@+id/im5"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-			<Spinner
+			<RelativeLayout
+				android:layout_margin="10dp"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/spn5"
-				android:layout_marginLeft="5dp"/>
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10dp"
-			android:layout_marginRight="10dp"
-			android:layout_marginTop="-10dp"
-			android:id="@+id/lay5">
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/pagto5"
+				android:layout_height="wrap_content">
+				<ImageView
+					android:id="@+id/dinheiro"
+					android:layout_width="40dp"
+					android:layout_height="50dp"
+					android:src="@drawable/money" />
+				<TextView
+					android:layout_marginTop="10dp"
+					android:layout_marginLeft="5dp"
+					android:textSize="16dp"
+					android:layout_toRightOf="@+id/dinheiro"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:ems="7"
-					android:hint="Pagto.:"
+					android:text="Dinheiro: " />
+
+				<EditText
+					android:layout_width="wrap_content"
+					android:ems="4"
 					android:inputType="numberDecimal"
-					android:textColor="#000000" />
+					android:layout_alignParentRight="true"
+					android:layout_height="wrap_content"
+					android:id="@+id/money" />
+			</RelativeLayout>
 
-			</com.google.android.material.textfield.TextInputLayout>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				app:hintTextAppearance="@style/HintTextSan"
-				>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/troco5"
+			<RelativeLayout
+				android:layout_margin="10dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+				<ImageView
+					android:id="@+id/dinheiro"
+					android:layout_width="40dp"
+					android:layout_height="50dp"
+					android:src="@drawable/cartao" />
+				<TextView
+					android:layout_marginTop="10dp"
+					android:layout_marginLeft="5dp"
+					android:textSize="16dp"
+					android:layout_toRightOf="@+id/dinheiro"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:ems="12"
-					android:hint="Troco.:"
+					android:text="Cartão de Débito: " />
+
+				<EditText
+					android:layout_width="wrap_content"
+					android:ems="4"
 					android:inputType="numberDecimal"
-					android:textColor="#000000" />
+					android:layout_alignParentRight="true"
+					android:layout_height="wrap_content"
+					android:id="@+id/carD" />
+			</RelativeLayout>
 
-			</com.google.android.material.textfield.TextInputLayout>
+			<RelativeLayout
+				android:layout_margin="10dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+				<ImageView
+					android:id="@+id/dinheiro"
+					android:layout_width="40dp"
+					android:layout_height="50dp"
+					android:src="@drawable/cartao" />
+				<TextView
+					android:layout_marginTop="10dp"
+					android:layout_marginLeft="5dp"
+					android:textSize="16dp"
+					android:layout_toRightOf="@+id/dinheiro"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Cartão de Crédito: " />
 
+				<EditText
+					android:layout_width="wrap_content"
+					android:ems="4"
+					android:inputType="numberDecimal"
+					android:layout_alignParentRight="true"
+					android:layout_height="wrap_content"
+					android:id="@+id/carC" />
+			</RelativeLayout>
+
+			<RelativeLayout
+				android:layout_margin="10dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+				<ImageView
+					android:id="@+id/dinheiro"
+					android:layout_width="40dp"
+					android:layout_height="50dp"
+					android:src="@drawable/pix" />
+				<TextView
+					android:layout_marginTop="10dp"
+					android:layout_marginLeft="5dp"
+					android:textSize="16dp"
+					android:layout_toRightOf="@+id/dinheiro"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Pix: " />
+
+				<EditText
+					android:layout_width="wrap_content"
+					android:ems="4"
+					android:inputType="numberDecimal"
+					android:layout_alignParentRight="true"
+					android:layout_height="wrap_content"
+					android:id="@+id/pix" />
+			</RelativeLayout>
 		</LinearLayout>
-<LinearLayout
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content">
-	<Button
-		android:id="@+id/canc"
-		android:layout_width="wrap_content"
-		style="?android:attr/buttonBarButtonStyle"
-		android:layout_height="wrap_content"
-		android:text="Cancelar"/>
-		<Button
-			android:id="@+id/finish"
-			android:layout_width="wrap_content"
-			style="?android:attr/buttonBarButtonStyle"
-			android:layout_height="wrap_content"
-			android:text="Finalizar"/>
-		<Button
-			android:id="@+id/tipo"
-			android:gravity="right"
-			android:layout_width="wrap_content"
-			style="?android:attr/buttonBarButtonStyle"
-			android:layout_height="wrap_content"
-			android:text="+1 Tipo"/>
-</LinearLayout>
 	</LinearLayout>
 
 </ScrollView>

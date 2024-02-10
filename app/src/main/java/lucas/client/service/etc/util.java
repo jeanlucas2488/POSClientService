@@ -1,613 +1,653 @@
 package lucas.client.service.etc;
 import javax.security.auth.callback.*;
 
-public class util
-{
-	
+public class util {
+
+	public String carD, carC, pix;
 	public String eCod, eProd, eQuant, eForn, eDataIn, eDataOut, eValor, eTotal, eTipo, nfe;
-	public long  eId, supId;
-	public String sangria_val, cat,sangria_mot, op, sangria, fundo;
+	public long eId, supId;
+	public String sangria_val, cat, sangria_mot, op, sangria, fundo;
 	public String loc;
 	public String money, data, table, user, pass;
 	public String prod;
 	public byte[] image, image2;
-	
+    public long carD_ID, carC_ID, pix_ID;
+
 	public String quant;
 	public String valor, pagto, pagto2, pagto3, pagto4, pagto5;
 	public String payType;
 	public String troco, supVal, supDesc;
-	
+
 	public String loc2;
 	public String prod2;
 	public String quant2;
 	public String valor2;
 	public String payType2;
 	public String troco2;
-	
+
 	public String loc3;
 	public String prod3;
 	public String quant3;
 	public String valor3;
 	public String payType3;
 	public String troco3;
-	
+
 	public String loc4;
 	public String prod4;
 	public String quant4;
 	public String valor4;
 	public String payType4;
 	public String troco4;
-	
-	public long id, idP2, id2,  idPro, userId;
+
+	public long id, idP2, id2, idPro, userId;
 	public String loc5;
 	public String prod5;
 	public String quant5;
 	public String valor5;
 	public String payType5;
 	public String troco5;
-	
-	public String eloD;
-	public String eloC;
-	public String visaD;
-	public String visaC;
-	public String masterD;
-	public String masterC;
-	public String cabal;
-	public String pix;
-	public String hiper;
-	public String hiperC;
-	public String ouro;
-	public String verde;
-	public String soro;
-	public String person;
-	public String banrisul;
-	public String banriC;
-	public String banes;
-	public String americ;
+
+
 	public String senha_supervisor;
 	public long vendaId;
 	public long supervisor_id;
 
-
-	public long getVendaId(){
+	public long getCarD_ID(){
+		return carD_ID;
+	}
+	public void setCarD_ID(long cd){
+		this.carD_ID = cd;
+	}
+	public long getCarC_ID(){
+		return carC_ID;
+	}
+	public void setCarC_ID(long cd){
+		this.carC_ID = cd;
+	}
+	public long getPix_ID(){
+		return pix_ID;
+	}
+	public void setPix_ID(long cd){
+		this.pix_ID = cd;
+	}
+	public long getVendaId() {
 		return vendaId;
 	}
-	public void setVendaId(long id){
+
+	public void setVendaId(long id) {
 		this.vendaId = id;
 	}
-	public long getSupervisor_id(){
+
+	public long getSupervisor_id() {
 		return supervisor_id;
 	}
-	public void setSupervisor_id(long id){
+
+	public void setSupervisor_id(long id) {
 		this.supervisor_id = id;
 	}
-	public String getSenhaSuperVisor(){
+
+	public String getSenhaSuperVisor() {
 		return senha_supervisor;
 	}
-	public void setSenhaSuperVisor(String sup){
+
+	public void setSenhaSuperVisor(String sup) {
 		this.senha_supervisor = sup;
 	}
-	public String getNfe(){
+
+	public String getNfe() {
 		return nfe;
 	}
-	public void setNfe(String nf){
+
+	public void setNfe(String nf) {
 		this.nfe = nf;
 	}
-	public long getUserId(){
+
+	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(long id){
+
+	public void setUserId(long id) {
 		this.userId = id;
 	}
-	public String getUser(){
+
+	public String getUser() {
 		return user;
 	}
-	public void setUser(String tb){
+
+	public void setUser(String tb) {
 		this.user = tb;
 	}
-	
-	public String getSenha(){
+
+	public String getSenha() {
 		return pass;
 	}
-	public void setSenha(String tb){
+
+	public void setSenha(String tb) {
 		this.pass = tb;
 	}
-	
-	public String getTable(){
+
+	public String getTable() {
 		return table;
 	}
-	public void setTable(String tb){
+
+	public void setTable(String tb) {
 		this.table = tb;
 	}
-	
-	public String getData(){
+
+	public String getData() {
 		return data;
 	}
-	public void setData(String data){
+
+	public void setData(String data) {
 		this.data = data;
 	}
-	public String getCategory(){
+
+	public String getCategory() {
 		return cat;
 	}
-	public void setCategory(String cat){
+
+	public void setCategory(String cat) {
 		this.cat = cat;
 	}
-	public long getIdP2(){
+
+	public long getIdP2() {
 		return idP2;
 	}
-	public void setIdP2(long id){
+
+	public void setIdP2(long id) {
 		this.idP2 = id;
-	} 
-	public byte[] getImage2(){
+	}
+
+	public byte[] getImage2() {
 		return image2;
 	}
-	public void setImage2(byte[] im){
+
+	public void setImage2(byte[] im) {
 		this.image2 = im;
 	}
-	public byte[] getImage(){
+
+	public byte[] getImage() {
 		return image;
 	}
-	public void setImage(byte[] im){
+
+	public void setImage(byte[] im) {
 		this.image = im;
 	}
-	public long getIdP(){
+
+	public long getIdP() {
 		return id2;
 	}
-	public void setIdP(long id){
+
+	public void setIdP(long id) {
 		this.id2 = id;
-	} 
-	public long getSupId(){
+	}
+
+	public long getSupId() {
 		return supId;
 	}
-	public void setSupId(long id){
+
+	public void setSupId(long id) {
 		this.supId = id;
-	} 
-	public long getEId(){
+	}
+
+	public long getEId() {
 		return eId;
 	}
-	public void setEId(long id){
+
+	public void setEId(long id) {
 		this.eId = id;
-	} 
-	public String getSupDesc(){
+	}
+
+	public String getSupDesc() {
 		return supDesc;
 	}
-	public void setSupDesc(String in){
+
+	public void setSupDesc(String in) {
 		this.supDesc = in;
 	}
-	public String getSupVal(){
+
+	public String getSupVal() {
 		return supVal;
 	}
-	public void setSupVal(String in){
+
+	public void setSupVal(String in) {
 		this.supVal = in;
 	}
-	public String getETipo(){
+
+	public String getETipo() {
 		return eTipo;
 	}
-	public void setETipo(String in){
+
+	public void setETipo(String in) {
 		this.eTipo = in;
 	}
-	
-	public String getETotal(){
+
+	public String getETotal() {
 		return eTotal;
 	}
-	public void setETotal(String in){
+
+	public void setETotal(String in) {
 		this.eTotal = in;
 	}
-	
-	public String getEVal(){
+
+	public String getEVal() {
 		return eValor;
 	}
-	public void setEVal(String val){
+
+	public void setEVal(String val) {
 		this.eValor = val;
 	}
-	
-	public String getDataOut(){
+
+	public String getDataOut() {
 		return eDataOut;
 	}
-	public void setDataOut(String out){
+
+	public void setDataOut(String out) {
 		this.eDataOut = out;
 	}
-	
-	public String getDataIn(){
+
+	public String getDataIn() {
 		return eDataIn;
 	}
-	public void setDataIn(String in){
+
+	public void setDataIn(String in) {
 		this.eDataIn = in;
 	}
-	
-	public String getEForn(){
+
+	public String getEForn() {
 		return eForn;
 	}
-	public void setEForn(String forn){
+
+	public void setEForn(String forn) {
 		this.eForn = forn;
 	}
-	
-	public String getEQuant(){
+
+	public String getEQuant() {
 		return eQuant;
 	}
-	public void setEQuant(String quant){
+
+	public void setEQuant(String quant) {
 		this.eQuant = quant;
 	}
-	
-	public String getEProd(){
+
+	public String getEProd() {
 		return eProd;
 	}
-	public void setEProd(String prod){
+
+	public void setEProd(String prod) {
 		this.eProd = prod;
 	}
-	
-	public String getECod(){
+
+	public String getECod() {
 		return eCod;
 	}
-	public void setECod(String cod){
+
+	public void setECod(String cod) {
 		this.eCod = cod;
 	}
-	
-	public String getFundo(){
+
+	public String getFundo() {
 		return fundo;
 	}
-	public void setFundo(String fun){
+
+	public void setFundo(String fun) {
 		this.fundo = fun;
 	}
-	public String getSangria(){
+
+	public String getSangria() {
 		return sangria;
 	}
-	public void setSangria(String san){
+
+	public void setSangria(String san) {
 		this.sangria = san;
 	}
-	public long getProId(){
+
+	public long getProId() {
 		return idPro;
 	}
-	public void setProId(long id){
+
+	public void setProId(long id) {
 		this.idPro = id;
 	}
-	public long id(){
+
+	public long id() {
 		return id;
 	}
-	public void setSanId(long id){
+
+	public void setSanId(long id) {
 		this.id = id;
 	}
-	public String getOp(){
+
+	public String getOp() {
 		return op;
 	}
-	public void setOp(String op){
+
+	public void setOp(String op) {
 		this.op = op;
 	}
-	public String getSanMot(){
+
+	public String getSanMot() {
 		return sangria_mot;
 	}
-	public void setSanMot(String mot){
+
+	public void setSanMot(String mot) {
 		this.sangria_mot = mot;
 	}
-	public String getSanVal(){
+
+	public String getSanVal() {
 		return sangria_val;
 	}
-	public void setSanVal(String val){
+
+	public void setSanVal(String val) {
 		this.sangria_val = val;
 	}
-	public String getP5(){
+
+	public String getP5() {
 		return pagto5;
 	}
-	public void setP5(String p5){
+
+	public void setP5(String p5) {
 		this.pagto5 = p5;
 	}
-	public String getP4(){
+
+	public String getP4() {
 		return pagto4;
 	}
-	public void setP4(String p4){
+
+	public void setP4(String p4) {
 		this.pagto4 = p4;
 	}
-	public String getP3(){
+
+	public String getP3() {
 		return pagto3;
 	}
-	public void setP3(String p3){
+
+	public void setP3(String p3) {
 		this.pagto3 = p3;
 	}
-	public String getP2(){
+
+	public String getP2() {
 		return pagto2;
 	}
-	public void setP2(String p2){
+
+	public void setP2(String p2) {
 		this.pagto2 = p2;
 	}
-	public String getP1(){
+
+	public String getP1() {
 		return pagto;
 	}
-	public void setP1(String p1){
+
+	public void setP1(String p1) {
 		this.pagto = p1;
 	}
-	public String getT5(){
+
+	public String getT5() {
 		return troco5;
 	}
-	public void setT5(String t5){
+
+	public void setT5(String t5) {
 		this.troco5 = t5;
 	}
-	public String getT4(){
+
+	public String getT4() {
 		return troco4;
 	}
-	public void setT4(String t4){
+
+	public void setT4(String t4) {
 		this.troco4 = t4;
 	}
-	public String getT3(){
+
+	public String getT3() {
 		return troco3;
 	}
-	public void setT3(String t3){
+
+	public void setT3(String t3) {
 		this.troco3 = t3;
 	}
-	public String getT2(){
+
+	public String getT2() {
 		return troco2;
 	}
-	public void setT2(String t2){
+
+	public void setT2(String t2) {
 		this.troco2 = t2;
 	}
-	public String getT1(){
+
+	public String getT1() {
 		return troco;
 	}
-	public void setT1(String t1){
+
+	public void setT1(String t1) {
 		this.troco = t1;
 	}
-	public String getPay5(){
+
+	public String getPay5() {
 		return payType5;
 	}
-	public void setPay5(String p5){
+
+	public void setPay5(String p5) {
 		this.payType5 = p5;
 	}
-	public String getPay4(){
+
+	public String getPay4() {
 		return payType4;
 	}
-	public void setPay4(String p4){
+
+	public void setPay4(String p4) {
 		this.payType4 = p4;
 	}
-	public String getPay3(){
+
+	public String getPay3() {
 		return payType3;
 	}
-	public void setPay3(String p3){
+
+	public void setPay3(String p3) {
 		this.payType3 = p3;
 	}
-	public String getPay2(){
+
+	public String getPay2() {
 		return payType2;
 	}
-	public void setPay2(String p2){
+
+	public void setPay2(String p2) {
 		this.payType2 = p2;
 	}
-	public String getPay1(){
+
+	public String getPay1() {
 		return payType;
 	}
-	public void setPay1(String p1){
+
+	public void setPay1(String p1) {
 		this.payType = p1;
 	}
-	public String getValor5(){
+
+	public String getValor5() {
 		return valor5;
 	}
-	public void setValor5(String v5){
+
+	public void setValor5(String v5) {
 		this.valor5 = v5;
 	}
-	public String getValor4(){
+
+	public String getValor4() {
 		return valor4;
 	}
-	public void setValor4(String v4){
+
+	public void setValor4(String v4) {
 		this.valor4 = v4;
 	}
-	public String getValor3(){
+
+	public String getValor3() {
 		return valor3;
 	}
-	public void setValor3(String v3){
+
+	public void setValor3(String v3) {
 		this.valor3 = v3;
 	}
-	public String getValor2(){
+
+	public String getValor2() {
 		return valor2;
 	}
-	public void setValor2(String v2){
+
+	public void setValor2(String v2) {
 		this.valor2 = v2;
 	}
-	public String getValor1(){
+
+	public String getValor1() {
 		return valor;
 	}
-	public void setValor1(String v1){
+
+	public void setValor1(String v1) {
 		this.valor = v1;
 	}
-	public String getQuant5(){
+
+	public String getQuant5() {
 		return quant5;
 	}
-	public void setQuant5(String qn5){
+
+	public void setQuant5(String qn5) {
 		this.quant5 = qn5;
 	}
-	public String getQuant4(){
+
+	public String getQuant4() {
 		return quant4;
 	}
-	public void setQuant4(String qn4){
+
+	public void setQuant4(String qn4) {
 		this.quant4 = qn4;
 	}
-	public String getQuant3(){
+
+	public String getQuant3() {
 		return quant3;
 	}
-	public void setQuant3(String qn3){
+
+	public void setQuant3(String qn3) {
 		this.quant3 = qn3;
 	}
-	public String getQuant2(){
+
+	public String getQuant2() {
 		return quant2;
 	}
-	public void setQuant2(String qn2){
+
+	public void setQuant2(String qn2) {
 		this.quant2 = qn2;
 	}
-	public String getQuant1(){
+
+	public String getQuant1() {
 		return quant;
 	}
-	public void setQuant1(String qn1){
+
+	public void setQuant1(String qn1) {
 		this.quant = qn1;
 	}
-	public String getProd5(){
+
+	public String getProd5() {
 		return prod5;
 	}
-	public void setProd5(String pro5){
+
+	public void setProd5(String pro5) {
 		this.prod5 = pro5;
 	}
-	public String getProd4(){
+
+	public String getProd4() {
 		return prod4;
 	}
-	public void setProd4(String pro4){
+
+	public void setProd4(String pro4) {
 		this.prod4 = pro4;
 	}
-	public String getProd3(){
+
+	public String getProd3() {
 		return prod3;
 	}
-	public void setProd3(String pro3){
+
+	public void setProd3(String pro3) {
 		this.prod3 = pro3;
 	}
-	public String getProd2(){
+
+	public String getProd2() {
 		return prod2;
 	}
-	public void setProd2(String pro2){
+
+	public void setProd2(String pro2) {
 		this.prod2 = pro2;
 	}
-	public String getProd1(){
+
+	public String getProd1() {
 		return prod;
 	}
-	public void setProd1(String pro1){
+
+	public void setProd1(String pro1) {
 		this.prod = pro1;
 	}
-	public String getMoney(){
+
+	public String getMoney() {
 		return money;
 	}
-	public void setMoney(String mo){
+
+	public void setMoney(String mo) {
 		this.money = mo;
 	}
-	public String getLoc(){
-		return loc;
+	public String getCarD() {
+		return carD;
 	}
-	public void setLoc(String loc){
-		this.loc = loc;
+
+	public void setCarD(String mo) {
+		this.carD = mo;
 	}
-	public String getLoc2(){
-		return loc2;
+	public String getCarC() {
+		return carC;
 	}
-	public void setLoc2(String loc2){
-		this.loc2 = loc2;
+
+	public void setCarC(String mo) {
+		this.carC = mo;
 	}
-	public String getLoc3(){
-		return loc3;
-	}
-	public void setLoc3(String loc3){
-		this.loc3 = loc3;
-	}
-	public String getLoc4(){
-		return loc4;
-	}
-	public void setLoc4(String loc4){
-		this.loc4 = loc4;
-	}
-	public String getLoc5(){
-		return loc5;
-	}
-	public void setLoc5(String loc5){
-		this.loc5 = loc5;
-	}
-	
-	public String getEloD(){
-		return eloD;
-	}
-	public void setEloD(String eloD){
-		this.eloD = eloD;
-	}
-	public String getEloC(){
-		return eloC;
-	}
-	public void setEloC(String eloC){
-		this.eloC = eloC;
-	}
-	public String getVisaD(){
-		return visaD;
-	}
-	public void setVisaD(String visaD){
-		this.visaD = visaD;
-	}
-	public String getVisaC(){
-		return visaC;
-	}
-	public void setVisaC(String visaC){
-		this.visaC = visaC;
-	}
-	public String getMasterD(){
-		return masterD;
-	}
-	public void setMasterD(String masterD){
-		this.masterD = masterD;
-	}
-	public String getMasterC(){
-		return masterC;
-	}
-	public void setMasterC(String masterC){
-		this.masterC = masterC;
-	}
-	public String getHiper(){
-		return hiper;
-	}
-	public void setHiper(String hiper){
-		this.hiper = hiper;
-	}
-	public String getHiperC(){
-		return hiperC;
-	}
-	public void setHiperC(String hiperC){
-		this.hiperC = hiperC;
-	}
-	public String getCabal(){
-		return cabal;
-	}
-	public void setCabal(String cabal){
-		this.cabal = cabal;
-	}
-	public String getPix(){
+	public String getPix() {
 		return pix;
 	}
-	public void setPix(String pix){
-		this.pix = pix;
+
+	public void setPix(String mo) {
+		this.pix = mo;
 	}
-	public String getOuro(){
-		return ouro;
+	public String getLoc() {
+		return loc;
 	}
-	public void setOuro(String ouro){
-		this.ouro = ouro;
+
+	public void setLoc(String loc) {
+		this.loc = loc;
 	}
-	public String getVerde(){
-		return verde;
+
+	public String getLoc2() {
+		return loc2;
 	}
-	public void setVerde(String verde){
-		this.verde = verde;
+
+	public void setLoc2(String loc2) {
+		this.loc2 = loc2;
 	}
-	public String getSoro(){
-		return soro;
+
+	public String getLoc3() {
+		return loc3;
 	}
-	public void setSoro(String soro){
-		this.soro = soro;
+
+	public void setLoc3(String loc3) {
+		this.loc3 = loc3;
 	}
-	public String getPerson(){
-		return person;
+
+	public String getLoc4() {
+		return loc4;
 	}
-	public void setPerson(String person){
-		this.person = person;
+
+	public void setLoc4(String loc4) {
+		this.loc4 = loc4;
 	}
-	public String getbanric(){
-		return banrisul;
+
+	public String getLoc5() {
+		return loc5;
 	}
-	public void setBanric(String banric){
-		this.banrisul = banric;
-	}
-	public String getBanriC(){
-		return banriC;
-	}
-	public void setBanriC(String banriC){
-		this.banriC = banriC;
-	}
-	public String getBanes(){
-		return banes;
-	}
-	public void setBanes(String banes){
-		this.banes = banes;
-	}
-	public String getAmeric(){
-		return americ;
-	}
-	public void setAmeric(String americ){
-		this.americ = americ;
+
+	public void setLoc5(String loc5) {
+		this.loc5 = loc5;
 	}
 }
+
