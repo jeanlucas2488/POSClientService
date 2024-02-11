@@ -64,7 +64,7 @@ public class DB
 	public void delCarC(){
 		db.execSQL("delete from cartaoC");
 	}
-	public void Pix(){
+	public void delPix(){
 		db.execSQL("delete from Pix");
 	}
 	public void delVenda(long id){

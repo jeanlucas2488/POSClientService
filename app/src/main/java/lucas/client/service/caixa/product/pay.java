@@ -4,18 +4,29 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.icu.text.DecimalFormat;
+import android.icu.text.DecimalFormatSymbols;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 import lucas.client.service.R;
+import lucas.client.service.etc.util;
+import lucas.client.service.sqlite.DB;
 
 
 public class pay extends Activity {
+    String result;
+    AlertDialog root;
     TextView tvTotal, tvRestante, tvDinheiro, tvCarD, tvCarC, tvPix;
     EditText dinheiro, carD, carC, pix;
     RelativeLayout dinLayout, debLayout, credLayout, pixLayout;
@@ -25,6 +36,11 @@ public class pay extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent it = getIntent();
+        Bundle b = it.getExtras();
+        result = b.getString("valor");
+
         LayoutInflater li = getLayoutInflater();
         View r = li.inflate(R.layout.fecha_pedido, null);
         tvTotal = r.findViewById(R.id.valTotal);
@@ -44,64 +60,248 @@ public class pay extends Activity {
         credLayout = r.findViewById(R.id.credLayout);
         pixLayout = r.findViewById(R.id.pixLayout);
 
-        dinheiro.setEnabled(false);
-        carD.setEnabled(false);
-        carC.setEnabled(false);
-        pix.setEnabled(false);
+        dinheiro.setVisibility(View.GONE);
+        carD.setVisibility(View.GONE);
+        carC.setVisibility(View.GONE);
+        pix.setVisibility(View.GONE);
+
+        tvTotal.setText(result.toString());
+        tvRestante.setText(result.toString());
 
         dinLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                dinLayout.setBackgroundColor(Color.parseColor("#0000ff"));
-               dinheiro.setEnabled(true);
+               dinheiro.setVisibility(View.VISIBLE);
+               dinheiro.setText(result.toString());
                tvDinheiro.setTextColor(Color.WHITE);
+
+                debLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                carD.setVisibility(View.GONE);
+                carD.clearFocus();
+                tvCarD.setTextColor(Color.BLACK);
+
+                credLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                carC.setVisibility(View.GONE);
+                carC.clearFocus();
+                tvCarC.setTextColor(Color.BLACK);
+
+                pixLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                pix.setVisibility(View.GONE);
+                pix.clearFocus();
+                tvPix.setTextColor(Color.BLACK);
             }
         });
         debLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 debLayout.setBackgroundColor(Color.parseColor("#0000ff"));
-                carD.setEnabled(true);
+                carD.setVisibility(View.VISIBLE);
+                carD.setText(result.toString());
                 tvCarD.setTextColor(Color.WHITE);
+
+                dinLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                dinheiro.setVisibility(View.GONE);
+                dinheiro.clearFocus();
+                tvDinheiro.setTextColor(Color.BLACK);
+
+                credLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                carC.setVisibility(View.GONE);
+                carC.clearFocus();
+                tvCarC.setTextColor(Color.BLACK);
+
+                pixLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                pix.setVisibility(View.GONE);
+                pix.clearFocus();
+                tvPix.setTextColor(Color.BLACK);
             }
         });
         credLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 credLayout.setBackgroundColor(Color.parseColor("#0000ff"));
-                carC.setEnabled(true);
+                carC.setVisibility(View.VISIBLE);
+                carC.setText(result.toString());
                 tvCarC.setTextColor(Color.WHITE);
+
+                dinLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                dinheiro.setVisibility(View.GONE);
+                dinheiro.clearFocus();
+                tvDinheiro.setTextColor(Color.BLACK);
+
+                debLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                carD.setVisibility(View.GONE);
+                carD.clearFocus();
+                tvCarD.setTextColor(Color.BLACK);
+
+                pixLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                pix.setVisibility(View.GONE);
+                pix.clearFocus();
+                tvPix.setTextColor(Color.BLACK);
             }
         });
         pixLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pixLayout.setBackgroundColor(Color.parseColor("#0000ff"));
-                pix.setEnabled(true);
-                tvPix.setTextColor(Color.WHITE);
+                pix.setVisibility(View.VISIBLE);
+                pix.setText(result.toString());
+                tvPix.setTextColor(Color.BLACK);
+
+                dinLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                dinheiro.setVisibility(View.GONE);
+                dinheiro.clearFocus();
+                tvDinheiro.setTextColor(Color.BLACK);
+
+                debLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                carD.setVisibility(View.GONE);
+                carD.clearFocus();
+                tvCarD.setTextColor(Color.BLACK);
+
+                credLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                carC.setVisibility(View.GONE);
+                carC.clearFocus();
+                tvCarC.setTextColor(Color.BLACK);
+
             }
         });
 
+        dinheiro.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+
+                    return true;
+                }
+                return false;
+            }
+        });
         AlertDialog.Builder bs = new AlertDialog.Builder(c);
         bs.setTitle("Fechar Pedido:");
         bs.setView(r);
-        bs.setPositiveButton("Finalizar", new DialogInterface.OnClickListener() {
+        bs.setPositiveButton("  Finalizar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if(!dinheiro.getText().toString().equals("")){
+                if(!tvRestante.toString().equals("")){
 
                 } else {
-                    if(!carD.getText().toString().equals("")){
+                    if(!dinheiro.getText().toString().equals("")){
+                        try{
+                            DB db  = new DB(c);
+                            List<util> rd;
+                            rd = db.moFind();
+                            if(!rd.get(0).getMoney().equals("")){
+                                String re1 = rd.get(0).getMoney();
+                                String re2 = dinheiro.getText().toString();
+                                Double d0 = new Double(re1);
+                                Double d1 = new Double(re2);
+                                double res = d0 + d1;
+                                DecimalFormatSymbols df = new DecimalFormatSymbols();
+                                df.setGroupingSeparator('.');
+                                df.setDecimalSeparator('.');
+                                DecimalFormat dform = new DecimalFormat("####.##", df);
+                                util us = new util();
+                                us.setMoney(dform.format(res));
+                                db.delMoney();
+                                db.moneyIn(us);
 
+                            } else {}
+                        }catch(Exception e){
+                            util us = new util();
+                            us.setMoney(dinheiro.getText().toString());
+                            DB d1 = new DB(c);
+                            d1.moneyIn(us);
+
+                        }
                     } else {
-                        if(!carC.getText().toString().equals("")){
+                        if(!carD.getText().toString().equals("")){
+                            try{
+                                DB db  = new DB(c);
+                                List<util> rd;
+                                rd = db.getCarD();
+                                if(!rd.get(0).getCarD().equals("")){
+                                    String re1 = rd.get(0).getCarD();
+                                    String re2 = carD.getText().toString();
+                                    Double d0 = new Double(re1);
+                                    Double d1 = new Double(re2);
+                                    double res = d0 + d1;
+                                    DecimalFormatSymbols df = new DecimalFormatSymbols();
+                                    df.setGroupingSeparator('.');
+                                    df.setDecimalSeparator('.');
+                                    DecimalFormat dform = new DecimalFormat("####.##", df);
+                                    util us = new util();
+                                    us.setCarD(dform.format(res));
+                                    db.delCarD();
+                                    db.carDIn(us);
 
+                                } else {}
+                            }catch(Exception e){
+                                util us = new util();
+                                us.setCarD(carD.getText().toString());
+                                DB d1 = new DB(c);
+                                d1.carDIn(us);
+
+                            }
                         } else {
-                            if(!pix.getText().toString().equals("")){
+                            if(!carC.getText().toString().equals("")){
+                                try{
+                                    DB db  = new DB(c);
+                                    List<util> rd;
+                                    rd = db.getCarC();
+                                    if(!rd.get(0).getCarC().equals("")){
+                                        String re1 = rd.get(0).getCarC();
+                                        String re2 = carC.getText().toString();
+                                        Double d0 = new Double(re1);
+                                        Double d1 = new Double(re2);
+                                        double res = d0 + d1;
+                                        DecimalFormatSymbols df = new DecimalFormatSymbols();
+                                        df.setGroupingSeparator('.');
+                                        df.setDecimalSeparator('.');
+                                        DecimalFormat dform = new DecimalFormat("####.##", df);
+                                        util us = new util();
+                                        us.setCarC(dform.format(res));
+                                        db.delCarC();
+                                        db.carCIn(us);
 
+                                    } else {}
+                                }catch(Exception e){
+                                    util us = new util();
+                                    us.setCarC(carC.getText().toString());
+                                    DB d1 = new DB(c);
+                                    d1.carCIn(us);
+                                }
                             } else {
+                                if(!pix.getText().toString().equals("")){
+                                    try{
+                                        DB db  = new DB(c);
+                                        List<util> rd;
+                                        rd = db.getPix();
+                                        if(!rd.get(0).getPix().equals("")){
+                                            String re1 = rd.get(0).getPix();
+                                            String re2 = pix.getText().toString();
+                                            Double d0 = new Double(re1);
+                                            Double d1 = new Double(re2);
+                                            double res = d0 + d1;
+                                            DecimalFormatSymbols df = new DecimalFormatSymbols();
+                                            df.setGroupingSeparator('.');
+                                            df.setDecimalSeparator('.');
+                                            DecimalFormat dform = new DecimalFormat("####.##", df);
+                                            util us = new util();
+                                            us.setPix(dform.format(res));
+                                            db.delPix();
+                                            db.PixIn(us);
 
+                                        } else {}
+                                    }catch(Exception e){
+                                        util us = new util();
+                                        us.setPix(pix.getText().toString());
+                                        DB d1 = new DB(c);
+                                        d1.PixIn(us);
+                                    }
+                                } else {
+
+                                }
                             }
                         }
                     }
@@ -109,13 +309,8 @@ public class pay extends Activity {
             }
         });
         bs.setNegativeButton("Cancelar", null);
-        bs.setNeutralButton("+1 Tipo", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
-        bs.create();
-        bs.show();
+       root = bs.create();
+       root = bs.show();
     }
 }
