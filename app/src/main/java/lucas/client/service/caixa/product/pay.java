@@ -16,6 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -73,23 +74,8 @@ public class pay extends Activity {
             public void onClick(View v) {
                dinLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                dinheiro.setVisibility(View.VISIBLE);
-               dinheiro.setText(result.toString());
                tvDinheiro.setTextColor(Color.WHITE);
 
-                debLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                carD.setVisibility(View.GONE);
-                carD.clearFocus();
-                tvCarD.setTextColor(Color.BLACK);
-
-                credLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                carC.setVisibility(View.GONE);
-                carC.clearFocus();
-                tvCarC.setTextColor(Color.BLACK);
-
-                pixLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                pix.setVisibility(View.GONE);
-                pix.clearFocus();
-                tvPix.setTextColor(Color.BLACK);
             }
         });
         debLayout.setOnClickListener(new View.OnClickListener() {
@@ -97,23 +83,8 @@ public class pay extends Activity {
             public void onClick(View v) {
                 debLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                 carD.setVisibility(View.VISIBLE);
-                carD.setText(result.toString());
                 tvCarD.setTextColor(Color.WHITE);
 
-                dinLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                dinheiro.setVisibility(View.GONE);
-                dinheiro.clearFocus();
-                tvDinheiro.setTextColor(Color.BLACK);
-
-                credLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                carC.setVisibility(View.GONE);
-                carC.clearFocus();
-                tvCarC.setTextColor(Color.BLACK);
-
-                pixLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                pix.setVisibility(View.GONE);
-                pix.clearFocus();
-                tvPix.setTextColor(Color.BLACK);
             }
         });
         credLayout.setOnClickListener(new View.OnClickListener() {
@@ -121,23 +92,8 @@ public class pay extends Activity {
             public void onClick(View v) {
                 credLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                 carC.setVisibility(View.VISIBLE);
-                carC.setText(result.toString());
                 tvCarC.setTextColor(Color.WHITE);
 
-                dinLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                dinheiro.setVisibility(View.GONE);
-                dinheiro.clearFocus();
-                tvDinheiro.setTextColor(Color.BLACK);
-
-                debLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                carD.setVisibility(View.GONE);
-                carD.clearFocus();
-                tvCarD.setTextColor(Color.BLACK);
-
-                pixLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                pix.setVisibility(View.GONE);
-                pix.clearFocus();
-                tvPix.setTextColor(Color.BLACK);
             }
         });
         pixLayout.setOnClickListener(new View.OnClickListener() {
@@ -145,24 +101,7 @@ public class pay extends Activity {
             public void onClick(View v) {
                 pixLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                 pix.setVisibility(View.VISIBLE);
-                pix.setText(result.toString());
                 tvPix.setTextColor(Color.BLACK);
-
-                dinLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                dinheiro.setVisibility(View.GONE);
-                dinheiro.clearFocus();
-                tvDinheiro.setTextColor(Color.BLACK);
-
-                debLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                carD.setVisibility(View.GONE);
-                carD.clearFocus();
-                tvCarD.setTextColor(Color.BLACK);
-
-                credLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                carC.setVisibility(View.GONE);
-                carC.clearFocus();
-                tvCarC.setTextColor(Color.BLACK);
-
             }
         });
 
@@ -170,7 +109,77 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_ACTION_DONE){
+                    Double v1 = new Double(tvRestante.getText().toString());
+                    Double v2 = new Double(dinheiro.getText().toString());
 
+                    double res = v2 - v1;
+
+                    DecimalFormatSymbols df = new DecimalFormatSymbols();
+                    df.setGroupingSeparator('.');
+                    df.setDecimalSeparator('.');
+                    DecimalFormat dform = new DecimalFormat("####.##", df);
+
+                    tvRestante.setText(dform.format(res));
+                    return true;
+                }
+                return false;
+            }
+        });
+        carD.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+                    Double v1 = new Double(tvRestante.getText().toString());
+                    Double v2 = new Double(carD.getText().toString());
+
+                    double res = v2 - v1;
+
+                    DecimalFormatSymbols df = new DecimalFormatSymbols();
+                    df.setGroupingSeparator('.');
+                    df.setDecimalSeparator('.');
+                    DecimalFormat dform = new DecimalFormat("####.##", df);
+
+                    tvRestante.setText(dform.format(res));
+                    return true;
+                }
+                return false;
+            }
+        });
+        carC.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+                    Double v1 = new Double(tvRestante.getText().toString());
+                    Double v2 = new Double(carC.getText().toString());
+
+                    double res = v2 - v1;
+
+                    DecimalFormatSymbols df = new DecimalFormatSymbols();
+                    df.setGroupingSeparator('.');
+                    df.setDecimalSeparator('.');
+                    DecimalFormat dform = new DecimalFormat("####.##", df);
+
+                    tvRestante.setText(dform.format(res));
+                    return true;
+                }
+                return false;
+            }
+        });
+        pix.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+                    Double v1 = new Double(tvRestante.getText().toString());
+                    Double v2 = new Double(pix.getText().toString());
+
+                    double res = v2 - v1;
+
+                    DecimalFormatSymbols df = new DecimalFormatSymbols();
+                    df.setGroupingSeparator('.');
+                    df.setDecimalSeparator('.');
+                    DecimalFormat dform = new DecimalFormat("####.##", df);
+
+                    tvRestante.setText(dform.format(res));
                     return true;
                 }
                 return false;
@@ -183,8 +192,8 @@ public class pay extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if(!tvRestante.toString().equals("")){
-
+                if(!tvRestante.getText().toString().equals("00.00")){
+                    Toast.makeText(c, "Há valores pendentes para finalinar a compra.", Toast.LENGTH_LONG).show();
                 } else {
                     if(!dinheiro.getText().toString().equals("")){
                         try{
