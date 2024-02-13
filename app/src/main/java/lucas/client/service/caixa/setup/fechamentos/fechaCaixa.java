@@ -23,18 +23,14 @@ public class fechaCaixa extends AppCompatActivity
 	Button canc, fecha;
 	List<util> opf, fpf;
 	Context c = this;
-	String sanResult,SupResult, supRes,  moneyRes, eloDRes, eloCRes, visaDRes, visaCRes, masterDRes, masterCRes, hiperRes, hiperCRes, cabalRes, pixRes,
-	verdeRes, soroRes, personRes, ouroRes, banriRes, banricRes, banesRes, americRes;
+	String sanResult,SupResult, supRes,  moneyRes, carDRes, carCRes, pixResul;
 	ProgressDialog progress;
-	String supR1, supR2, supR3, supR4, supR5, supR6, sanR1, sanR2, sanR3, sanR4, sanR5, sanR6;
-	LinearLayout trancard, moneyid,sanid, elodid, elocid, visadid, visacid, masterdid, mastercid, hiperid, hipercid, cabalid, pixid, verdeid,
-	             soroid, personid, ouroid, banricid, banricoid, banesid, americid;
-	String moneyResult,sangRes, eloDResult, eloCResult, visaDResult, visaCResult, masterDResult, masterCResult, hiperResult, HiperCResult,
-	       cabalResult, pixResult, verdeResult, personResult, soroResult, ouroResult, banriResult, banricoResult, banesResult, americResult;
-  TextInputEditText sangria_,operador_, data, fundo_, money_, eloD_, eloC_, visaD_, visaC_, masterD_, masterC_,
-	hiper_, hiperC_, cabal_, pix_, verde_, soro_, person_, ouro_, banric_, banrico_, banes_, americ_;
-    List<util> operador, sangria, supS, sup,  fundo, money, eloD, eloC, visaD, visaC, masterD, masterC,
-    hiper, hiperC, cabal, pix, verde, soro, person, ouro, banric, banrico, banes, americ;
+	String sangRes, supR1, supR2, supR3, supR4, supR5, supR6, sanR1, sanR2, sanR3, sanR4, sanR5, sanR6;
+	LinearLayout moneyid, carDID, carCID, pixID;
+
+  TextInputEditText sangria_, suprimento_, operador_, data, fundo_, money_, carD_, carC_, pix_;
+
+    List<util> operador, sangria, supS, sup,  fundo, money, carD, carC, Pix;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -45,48 +41,20 @@ public class fechaCaixa extends AppCompatActivity
 		View r = li.inflate(R.layout.fecha_caixa, null);
 		data = r.findViewById(R.id.data);
 		moneyid = r.findViewById(R.id.money_ID);
-		trancard = r.findViewById(R.id.trancard);
-		trancard.setVisibility(View.GONE);
-		elodid = r.findViewById(R.id.eloD_ID);
-		elocid = r.findViewById(R.id.eloC_ID);
-		visadid = r.findViewById(R.id.visaD_ID);
-		visacid = r.findViewById(R.id.visaC_ID);
-		masterdid = r.findViewById(R.id.masterD_ID);
-		mastercid = r.findViewById(R.id.masterC_ID);
-		hiperid = r.findViewById(R.id.hiper_ID);
-		hipercid = r.findViewById(R.id.hiperC_ID);
-		cabalid = r.findViewById(R.id.cabal_ID);
-		pixid = r.findViewById(R.id.pix_ID);
-		verdeid = r.findViewById(R.id.verde_ID);
-		soroid = r.findViewById(R.id.soro_ID);
-		personid = r.findViewById(R.id.person_ID);
-		ouroid = r.findViewById(R.id.ouro_ID);
-		banricid = r.findViewById(R.id.banric_ID);
-		banricoid = r.findViewById(R.id.banrico_ID);
-		banesid = r.findViewById(R.id.banes_ID);
-		americid = r.findViewById(R.id.americ_ID);
+		carDID = r.findViewById(R.id.carD_ID);
+		carCID = r.findViewById(R.id.carC_ID);
+		pixID = r.findViewById(R.id.pix_ID);
+
 		fundo_ = r.findViewById(R.id.fundo);
 		sangria_ = r.findViewById(R.id.sangria);
+		suprimento_ = r.findViewById(R.id.suprimento);
 		operador_ = r.findViewById(R.id.operador);
-		money_ = r.findViewById(R.id.dinheiro);
-		eloD_ = r.findViewById(R.id.eloD);
-		eloC_ = r.findViewById(R.id.eloC);
-		visaD_ = r.findViewById(R.id.visaD);
-		visaC_ = r.findViewById(R.id.visaC);
-		masterD_ = r.findViewById(R.id.masterD);
-		masterC_ = r.findViewById(R.id.masterC);
-		hiper_ = r.findViewById(R.id.hiper);
-		hiperC_ = r.findViewById(R.id.hiperc);
-		cabal_ = r.findViewById(R.id.cabal);
+
+		money_ = r.findViewById(R.id.money);
+		carD_ = r.findViewById(R.id.carD);
+		carC_ = r.findViewById(R.id.carC);
 		pix_ = r.findViewById(R.id.pix);
-		verde_ = r.findViewById(R.id.verde);
-		soro_ = r.findViewById(R.id.soro);
-		person_ = r.findViewById(R.id.person);
-		ouro_ = r.findViewById(R.id.ouro);
-		banric_ = r.findViewById(R.id.banrisul);
-		banrico_ = r.findViewById(R.id.banrico);
-		banes_ = r.findViewById(R.id.banes);
-		americ_ = r.findViewById(R.id.americ);
+
 		canc = r.findViewById(R.id.canc);
 		fecha = r.findViewById(R.id.fecha);
 		DB db1 = new DB(c);
@@ -99,6 +67,7 @@ public class fechaCaixa extends AppCompatActivity
 		SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd.MM.yyyy"); 
 		dateTime2 = simpleDateFormat2.format(calendar2.getTime()).toString(); 
 		data.setText(dateTime2.toString());
+
 		try{
 			DB db = new DB(c);
 			supS = db.suFind();
@@ -110,9 +79,10 @@ public class fechaCaixa extends AppCompatActivity
 				double res = v1 + v2;
 				fundo_.setText(String.valueOf(res));
 				supRes = supS.get(0).getSupVal();
-				
+				suprimento_.setVisibility(View.VISIBLE);
 			} 
 		}catch(Exception e){
+			suprimento_.setVisibility(View.GONE);
 			DB db2 = new DB(c);
 			fpf = db2.funFind();
 			fundo_.setText(fpf.get(0).getFundo());
@@ -130,234 +100,52 @@ public class fechaCaixa extends AppCompatActivity
 			sangRes = "0";
 			sangria_.setVisibility(View.GONE);
 		}
-		try{
-			DB db = new DB(c);
-			americ = db.ameFind();
-			if(!americ.get(0).getAmeric().equals("")){
-				americid.setVisibility(View.VISIBLE);
-				trancard.setVisibility(View.VISIBLE);
-			    americResult = americ.get(0).getAmeric();
-			} 
-		}catch(Exception e){
-			americid.setVisibility(View.GONE);
-			americResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			banes = db.banesFind();
-			if(!banes.get(0).getBanes().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				banesid.setVisibility(View.VISIBLE);
-			    banesResult = banes.get(0).getBanes();
-			} 
-		}catch(Exception e){
-			banesid.setVisibility(View.GONE);
-			banesResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			banrico = db.banriCFind();
-			if(!banrico.get(0).getBanriC().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				banricoid.setVisibility(View.VISIBLE);
-			    banricoResult = banrico.get(0).getBanriC();
-			} 
-		}catch(Exception e){
-			banricoid.setVisibility(View.GONE);
-			banricoResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			banric = db.banriFind();
-			if(!banric.get(0).getbanric().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				banricid.setVisibility(View.VISIBLE);
-			    banriResult = banric.get(0).getbanric();
-			} 
-		}catch(Exception e){
-			banricid.setVisibility(View.GONE);
-			banriResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			ouro = db.ouroFind();
-			if(!ouro.get(0).getOuro().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				ouroid.setVisibility(View.VISIBLE);
-			    ouroResult = ouro.get(0).getOuro();
-			} 
-		}catch(Exception e){
-			ouroid.setVisibility(View.GONE);
-			ouroResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			person = db.personFind();
-			if(!person.get(0).getPerson().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				personid.setVisibility(View.VISIBLE);
-			    personResult = person.get(0).getPerson();
-			} 
-		}catch(Exception e){
-			personid.setVisibility(View.GONE);
-			personResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			soro = db.soroFind();
-			if(!soro.get(0).getSoro().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				soroid.setVisibility(View.VISIBLE);
-			    soroResult = soro.get(0).getSoro();
-			} 
-		}catch(Exception e){
-			soroid.setVisibility(View.GONE);
-			soroResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			verde = db.verdeFind();
-			if(!verde.get(0).getVerde().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				verdeid.setVisibility(View.VISIBLE);
-			    verdeResult = verde.get(0).getVerde();
-			} 
-		}catch(Exception e){
-			verdeid.setVisibility(View.GONE);
-			verdeResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			pix = db.pixFind();
-			if(!pix.get(0).getPix().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				pixid.setVisibility(View.VISIBLE);
-			    pixResult = pix.get(0).getPix();
-			} 
-		}catch(Exception e){
-			pixid.setVisibility(View.GONE);
-			pixResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			cabal = db.cabalFind();
-			if(!cabal.get(0).getCabal().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				cabalid.setVisibility(View.VISIBLE);
-			    cabalResult = cabal.get(0).getCabal();
-			} 
-		}catch(Exception e){
-			cabalid.setVisibility(View.GONE);
-			cabalResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			hiperC = db.hiperCFind();
-			if(!hiperC.get(0).getHiperC().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				hipercid.setVisibility(View.VISIBLE);
-			    HiperCResult = hiperC.get(0).getHiperC();
-			} 
-		}catch(Exception e){
-			hipercid.setVisibility(View.GONE);
-			HiperCResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			hiper = db.hiperFind();
-			if(!hiper.get(0).getHiper().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				hiperid.setVisibility(View.VISIBLE);
-			    hiperResult = hiper.get(0).getHiper();
-			} 
-		}catch(Exception e){
-			hiperid.setVisibility(View.GONE);
-			hiperResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			masterC = db.masterCFind();
-			if(!masterC.get(0).getMasterC().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				mastercid.setVisibility(View.VISIBLE);
-			    masterCResult = masterC.get(0).getMasterC();
-			} 
-		}catch(Exception e){
-			mastercid.setVisibility(View.GONE);
-			masterCResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			masterD = db.masterDFind();
-			if(!masterD.get(0).getMasterD().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				masterdid.setVisibility(View.VISIBLE);
-			    masterDResult = masterD.get(0).getMasterD();
-			} 
-		}catch(Exception e){
-			masterdid.setVisibility(View.GONE);
-			masterDResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			visaC = db.visaCFind();
-			if(!visaC.get(0).getVisaC().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				visacid.setVisibility(View.VISIBLE);
-			    visaCResult = visaC.get(0).getVisaC();
-			} 
-		}catch(Exception e){
-			visacid.setVisibility(View.GONE);
-			visaCResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			visaD = db.visaDFind();
-			if(!visaD.get(0).getVisaD().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				visadid.setVisibility(View.VISIBLE);
-			    visaDResult = visaD.get(0).getVisaD();
-			} 
-		}catch(Exception e){
-			visadid.setVisibility(View.GONE);
-			visaDResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			eloC = db.eloCFind();
-			if(!eloC.get(0).getEloC().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				elocid.setVisibility(View.VISIBLE);
-				eloCResult = eloC.get(0).getEloC();
-			} 
-		}catch(Exception e){
-			elocid.setVisibility(View.GONE);
-			eloCResult = "";
-		}
-		try{
-			DB db = new DB(c);
-			eloD = db.eloDFind();
-			if(!eloD.get(0).getEloD().equals("")){
-				trancard.setVisibility(View.VISIBLE);
-				elodid.setVisibility(View.VISIBLE);
-				eloDResult = eloD.get(0).getEloD();
-			} 
-		}catch(Exception e){
-			elodid.setVisibility(View.GONE);
-			eloDResult = "";
-			
-		}
+
 		try{
 			DB db = new DB(c);
 			money = db.moFind();
 			if(!money.get(0).getMoney().equals("")){
-				moneyid.setVisibility(View.VISIBLE);
-				moneyResult = money.get(0).getMoney();
-			} 
+				moneyRes = money.get(0).getMoney();
+				money_.setVisibility(View.VISIBLE);
+			}
 		}catch(Exception e){
-			moneyid.setVisibility(View.GONE);
-			moneyResult = "";
+			moneyRes = "0";
+			money_.setVisibility(View.GONE);
 		}
+		try{
+			DB db = new DB(c);
+			carD = db.getCarD();
+			if(!carD.get(0).getCarD().equals("")){
+				carDRes = carD.get(0).getCarD();
+				carD_.setVisibility(View.VISIBLE);
+			}
+		}catch(Exception e){
+			carDRes = "0";
+			carD_.setVisibility(View.GONE);
+		}
+		try{
+			DB db = new DB(c);
+			carC = db.getCarC();
+			if(!carC.get(0).getCarC().equals("")){
+				carCRes = carC.get(0).getCarC();
+				carC_.setVisibility(View.VISIBLE);
+			}
+		}catch(Exception e){
+			carCRes = "0";
+			carC_.setVisibility(View.GONE);
+		}
+		try{
+			DB db = new DB(c);
+			Pix = db.getPix();
+			if(!Pix.get(0).getPix().equals("")){
+				pixResul = Pix.get(0).getPix();
+				pix_.setVisibility(View.VISIBLE);
+			}
+		}catch(Exception e){
+			pixResul = "0";
+			pix_.setVisibility(View.GONE);
+		}
+
 		fecha.setOnClickListener(new OnClickListener(){
 
 				@Override

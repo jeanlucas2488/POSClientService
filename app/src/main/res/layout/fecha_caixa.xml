@@ -90,273 +90,29 @@
 				android:textColor="#000000" />
 
 		</com.google.android.material.textfield.TextInputLayout>
-		
+
+		<com.google.android.material.textfield.TextInputLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="5dp"
+			android:textColorHint="#000000"
+			app:hintTextAppearance="@style/HintText"
+			>
+
+			<com.google.android.material.textfield.TextInputEditText
+				android:id="@+id/suprimento"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="10dp"
+				android:ems="30"
+				android:hint="Suprimento em Dinheiro.:"
+				android:inputType="numberDecimal"
+				android:textColor="#000000" />
+
+		</com.google.android.material.textfield.TextInputLayout>
+
 		<LinearLayout
 			android:id="@+id/money_ID"
-			android:orientation="vertical"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent">
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/dinheiro"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_margin="10dp"
-					android:ems="30"
-					android:hint="Transações em Dinheiro.:"
-					android:inputType="numberDecimal"
-					android:textColor="#000000" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/trancard"
-			android:orientation="vertical"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="15dp"
-			android:layout_marginLeft="15dp"
-			android:layout_marginRight="15dp">
-
-			<TextView
-				android:textColor="#000000"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/transações_com_cartão"
-				android:textSize="18sp"/>
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/eloD_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="10dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="15dp"
-				android:src="@drawable/elo"
-				android:layout_width="57dp"
-				android:layout_height="60dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/eloD"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="30"
-					android:hint="Elo Débito.:"
-
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/eloC_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="5dp"
-			android:layout_marginLeft="10dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="15dp"
-				android:src="@drawable/elo"
-				android:layout_width="57dp"
-				android:layout_height="60dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-
-				<com.google.android.material.textfield.TextInputEditText
-					android:id="@+id/eloC"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ems="30"
-					android:hint="Elo Crédito.:"
-
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/visaD_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="5dp"
-			android:layout_marginLeft="10dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="15dp"
-				android:src="@drawable/visa"
-				android:layout_width="50dp"
-				android:layout_height="45dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/visaD"
-
-					android:layout_height="wrap_content"
-					android:hint="Visa Débito.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/visaC_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="10dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="15dp"
-				android:src="@drawable/visa"
-				android:layout_width="50dp"
-				android:layout_height="45dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/visaC"
-
-					android:layout_height="wrap_content"
-					android:hint="Visa Crédito.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/masterD_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="10dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="15dp"
-				android:src="@drawable/master"
-				android:layout_width="50dp"
-				android:layout_height="45dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/masterD"
-
-					android:layout_height="wrap_content"
-					android:hint="Master Débito.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/masterC_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="10dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="15dp"
-				android:src="@drawable/master"
-				android:layout_width="50dp"
-				android:layout_height="45dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/masterC"
-
-					android:layout_height="wrap_content"
-					android:hint="Master Crédito.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/hiper_ID"
 			android:orientation="horizontal"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
@@ -366,69 +122,32 @@
 
 			<ImageView
 				android:layout_marginTop="20dp"
-				android:src="@drawable/hiper"
-				android:layout_width="35dp"
-				android:layout_height="30dp"/>
+				android:src="@drawable/money"
+				android:layout_width="50dp"
+				android:layout_height="50dp"/>
 
 			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="5dp"
+				android:layout_marginLeft="10dp"
 				android:textColorHint="#000000"
 				app:hintTextAppearance="@style/HintText"
-			>
+				>
 				<com.google.android.material.textfield.TextInputEditText
 					android:layout_width="wrap_content"
 					android:ems="30"
 					android:inputType="numberDecimal"
 					tools:textColorHint="#ffffff"
-					android:id="@+id/hiper"
-
+					android:id="@+id/money"
 					android:layout_height="wrap_content"
-					android:hint="Hiper.:" />
+					android:hint="Dinheiro.:" />
 
 			</com.google.android.material.textfield.TextInputLayout>
-			
+
 		</LinearLayout>
-
 		<LinearLayout
-			android:id="@+id/hiperC_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="15dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="20dp"
-				android:src="@drawable/hiperc"
-				android:layout_width="40dp"
-				android:layout_height="35dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/hiperc"
-
-					android:layout_height="wrap_content"
-					android:hint="Hiper Card.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/cabal_ID"
+			android:id="@+id/carD_ID"
 			android:orientation="horizontal"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
@@ -438,14 +157,15 @@
 
 			<ImageView
 				android:layout_marginTop="20dp"
-				android:src="@drawable/cabal"
-				android:layout_width="35dp"
-				android:layout_height="30dp"/>
+				android:src="@drawable/cartao"
+				android:layout_width="50dp"
+				android:layout_height="50dp"/>
 
 			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="5dp"
+				android:layout_marginLeft="10dp"
 				android:textColorHint="#000000"
 				app:hintTextAppearance="@style/HintText"
 			>
@@ -454,15 +174,48 @@
 					android:ems="30"
 					android:inputType="numberDecimal"
 					tools:textColorHint="#ffffff"
-					android:id="@+id/cabal"
-
+					android:id="@+id/carD"
 					android:layout_height="wrap_content"
-					android:hint="Cabal Débito.:" />
+					android:hint="Cartão de Débito.:" />
 
 			</com.google.android.material.textfield.TextInputLayout>
 			
 		</LinearLayout>
+		<LinearLayout
+			android:id="@+id/carC_ID"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="10dp">
 
+			<ImageView
+				android:layout_marginTop="20dp"
+				android:src="@drawable/cartao"
+				android:layout_width="50dp"
+				android:layout_height="50dp"/>
+
+			<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp"
+				android:layout_marginLeft="10dp"
+				android:textColorHint="#000000"
+				app:hintTextAppearance="@style/HintText"
+				>
+				<com.google.android.material.textfield.TextInputEditText
+					android:layout_width="wrap_content"
+					android:ems="30"
+					android:inputType="numberDecimal"
+					tools:textColorHint="#ffffff"
+					android:id="@+id/carC"
+					android:layout_height="wrap_content"
+					android:hint="Cartão de Crédito.:" />
+
+			</com.google.android.material.textfield.TextInputLayout>
+
+		</LinearLayout>
 		<LinearLayout
 			android:id="@+id/pix_ID"
 			android:orientation="horizontal"
@@ -475,295 +228,6 @@
 			<ImageView
 				android:layout_marginTop="20dp"
 				android:src="@drawable/pix"
-				android:layout_width="35dp"
-				android:layout_height="30dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/pix"
-
-					android:layout_height="wrap_content"
-					android:hint="Pix.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/verde_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="20dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="20dp"
-				android:src="@drawable/verde"
-				android:layout_width="35dp"
-				android:layout_height="30dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/verde"
-
-					android:layout_height="wrap_content"
-					android:hint="Verde Card.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/soro_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="20dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="20dp"
-				android:src="@drawable/soro"
-				android:layout_width="35dp"
-				android:layout_height="30dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/soro"
-
-					android:layout_height="wrap_content"
-					android:hint="Soro Cred.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/person_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="20dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="20dp"
-				android:src="@drawable/person"
-				android:layout_width="35dp"
-				android:layout_height="30dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/person"
-
-					android:layout_height="wrap_content"
-					android:hint="Personal Card.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/ouro_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="20dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="20dp"
-				android:src="@drawable/ouro_card"
-				android:layout_width="35dp"
-				android:layout_height="30dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/ouro"
-
-					android:layout_height="wrap_content"
-					android:hint="Ouro Card.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/banric_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="20dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="20dp"
-				android:src="@drawable/banric"
-				android:layout_width="35dp"
-				android:layout_height="30dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/banrisul"
-
-					android:layout_height="wrap_content"
-					android:hint="Banrisul.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/banrico_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="20dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="20dp"
-				android:src="@drawable/banrico"
-				android:layout_width="35dp"
-				android:layout_height="30dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/banrico"
-
-					android:layout_height="wrap_content"
-					android:hint="Banri Compras.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/banes_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="20dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="20dp"
-				android:src="@drawable/banes"
-				android:layout_width="50dp"
-				android:layout_height="40dp"/>
-
-			<com.google.android.material.textfield.TextInputLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="5dp"
-				android:textColorHint="#000000"
-				app:hintTextAppearance="@style/HintText"
-			>
-				<com.google.android.material.textfield.TextInputEditText
-					android:layout_width="wrap_content"
-					android:ems="30"
-					android:inputType="numberDecimal"
-					tools:textColorHint="#ffffff"
-					android:id="@+id/banes"
-
-					android:layout_height="wrap_content"
-					android:hint="Banes Card.:" />
-
-			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
-
-		<LinearLayout
-			android:id="@+id/americ_ID"
-			android:orientation="horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_marginTop="10dp"
-			android:layout_marginLeft="20dp"
-			android:layout_marginRight="10dp">
-
-			<ImageView
-				android:layout_marginTop="20dp"
-				android:src="@drawable/americ"
 				android:layout_width="50dp"
 				android:layout_height="50dp"/>
 
@@ -771,23 +235,22 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="5dp"
+				android:layout_marginLeft="10dp"
 				android:textColorHint="#000000"
 				app:hintTextAppearance="@style/HintText"
-			>
+				>
 				<com.google.android.material.textfield.TextInputEditText
 					android:layout_width="wrap_content"
 					android:ems="30"
 					android:inputType="numberDecimal"
 					tools:textColorHint="#ffffff"
-					android:id="@+id/americ"
-
+					android:id="@+id/pix"
 					android:layout_height="wrap_content"
-					android:hint="American Express.:" />
+					android:hint="Pix.:" />
 
 			</com.google.android.material.textfield.TextInputLayout>
-			
-		</LinearLayout>
 
+		</LinearLayout>
 		<LinearLayout
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content">
