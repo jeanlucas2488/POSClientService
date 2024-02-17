@@ -66,8 +66,8 @@ public class pay extends Activity {
         carC.setVisibility(View.GONE);
         pix.setVisibility(View.GONE);
 
-        tvTotal.setText(result.toString());
-        tvRestante.setText(result.toString());
+        tvTotal.setText("R$ " + result.toString());
+        tvRestante.setText("R$ " + result.toString());
 
         dinLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +75,7 @@ public class pay extends Activity {
                dinLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                dinheiro.setVisibility(View.VISIBLE);
                tvDinheiro.setTextColor(Color.WHITE);
-
+               dinheiro.setHintTextColor(Color.WHITE);
             }
         });
         debLayout.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +84,7 @@ public class pay extends Activity {
                 debLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                 carD.setVisibility(View.VISIBLE);
                 tvCarD.setTextColor(Color.WHITE);
-
+                carD.setHintTextColor(Color.WHITE);
             }
         });
         credLayout.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +93,7 @@ public class pay extends Activity {
                 credLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                 carC.setVisibility(View.VISIBLE);
                 tvCarC.setTextColor(Color.WHITE);
-
+                carC.setHintTextColor(Color.WHITE);
             }
         });
         pixLayout.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +102,7 @@ public class pay extends Activity {
                 pixLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                 pix.setVisibility(View.VISIBLE);
                 tvPix.setTextColor(Color.BLACK);
+                pix.setHintTextColor(Color.WHITE);
             }
         });
 

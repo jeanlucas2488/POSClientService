@@ -11,6 +11,7 @@ import java.nio.channels.*;
 import java.util.*;
 import lucas.client.service.*;
 import lucas.client.service.caixa.*;
+import lucas.client.service.caixa.setup.fechamentos.NFeWebServiceView;
 import lucas.client.service.etc.*;
 import lucas.client.service.mercearia.databases.SQLiteControl;
 import lucas.client.service.sqlite.*;
