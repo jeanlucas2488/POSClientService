@@ -13,21 +13,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE supervisor" +
-                "(id integer primary key, superV text);");
-
         db.execSQL("CREATE TABLE ContasReceber" +
                 "(id integer primary key, docto text, cliente text, dataCadastro text, valRecebido text, valDoc text, desconto text, acrescimo text, saldo text, status text);");
+
         db.execSQL("CREATE TABLE BaixaBoletos" +
                 "(id integer primary key, data text, vencimento text, valor text, tipo text, status text, descricao text, imagem blob);");
 
         // TODO: Implement this method
         db.execSQL("CREATE TABLE Boletos" +
                 "(id integer primary key, data text, vencimento text, valor text, tipo text, status text, descricao text, imagem blob);");
-        db.execSQL("CREATE TABLE ContasPagar" +
-                "(id integer primary key, codigo text, classificacao text, valor_pagar text, data_vencimento text, empresa text, " +
-                "conta_bancaria text, valor_pagar_ag text, data_ag text, pessoa text, data_comp text, desc_ag text, " +
-                "comentarios text, status text, valor_pago text, saldo_pagar text);");
 
         // TODO: Implement this method
         db.execSQL("CREATE TABLE ContasPagar" +
@@ -37,10 +31,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE supervisor" +
                 "(id integer primary key, superV text);");
+
         db.execSQL("CREATE TABLE retPass" +
                 "(id integer primary key, usuario text, senha text);");
+
         db.execSQL("CREATE TABLE senhaCM" +
                 "(userId integer primary key, usuario text, senha text);");
+
         db.execSQL("CREATE TABLE senhaMCR" +
                 "(userId integer primary key, usuario text, senha text);");
 
@@ -53,6 +50,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE Fechamento" +
                 "(id integer primary key, data text, NfeHtml text);");
+
         db.execSQL("CREATE TABLE carrinho" +
                 "(id integer primary key, produto text, quantd text, valores text, imagem blob);");
 
@@ -61,10 +59,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE VendasA" +
                 "(id integer primary key, prod text, quant text, valor text, imagem blob);");
+
         db.execSQL("CREATE TABLE VendasB" +
                 "(id integer primary key, prod text, quant text, valor text, imagem blob);");
+
         db.execSQL("CREATE TABLE VendasC" +
                 "(id integer primary key, prod text, quant text, valor text, imagem blob);");
+
         db.execSQL("CREATE TABLE VendasD" +
                 "(id integer primary key, prod text, quant text, valor text, imagem blob);");
 
@@ -102,6 +103,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE cartaoD (id integer primary key, carD text);");
         db.execSQL("CREATE TABLE cartaoC (id integer primary key, carC text);");
         db.execSQL("CREATE TABLE Pix (id integer primary key, pix text);");
+
     }
 
     @Override
