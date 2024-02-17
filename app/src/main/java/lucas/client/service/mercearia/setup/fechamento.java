@@ -1,56 +1,38 @@
 package lucas.client.service.mercearia.setup;
-
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.icu.text.DecimalFormat;
-import android.icu.text.DecimalFormatSymbols;
-import android.icu.text.SimpleDateFormat;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.app.*;
+import android.content.*;
+import android.icu.text.*;
+import android.os.*;
+import android.view.*;
+import android.view.View.*;
+import android.widget.*;
+import java.io.*;
+import java.nio.channels.*;
+import java.util.*;
+import lucas.client.service.*;
+import lucas.client.service.caixa.*;
+import lucas.client.service.etc.*;
+import lucas.client.service.mercearia.databases.SQLiteControl;
+import lucas.client.service.sqlite.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.util.Calendar;
-import java.util.List;
-
-import lucas.client.service.R;
-import lucas.client.service.caixa.caixaMain;
-import lucas.client.service.caixa.setup.fechamentos.NFeWebServiceView;
-import lucas.client.service.etc.util;
-import lucas.client.service.mercearia.databases.*;
-
-public class fechamento extends AppCompatActivity {
+public class fechamento extends AppCompatActivity
+{
     Button canc, fecha;
     List<util> opf, fpf;
     Context c = this;
-    String sanResult,SupResult, supRes,  moneyRes, eloDRes, eloCRes, visaDRes, visaCRes, masterDRes, masterCRes, hiperRes, hiperCRes, cabalRes, pixRes,
-            verdeRes, soroRes, personRes, ouroRes, banriRes, banricRes, banesRes, americRes;
+    String sanResult,SupResult, supRes,  moneyRes, carDRes, carCRes, pixResul,
+            cdRes, ccRes, pRes;
     ProgressDialog progress;
-    String supR1, supR2, supR3, supR4, supR5, supR6, sanR1, sanR2, sanR3, sanR4, sanR5, sanR6;
-    LinearLayout trancard, moneyid,sanid, elodid, elocid, visadid, visacid, masterdid, mastercid, hiperid, hipercid, cabalid, pixid, verdeid,
-            soroid, personid, ouroid, banricid, banricoid, banesid, americid;
-    String moneyResult,sangRes, eloDResult, eloCResult, visaDResult, visaCResult, masterDResult, masterCResult, hiperResult, HiperCResult,
-            cabalResult, pixResult, verdeResult, personResult, soroResult, ouroResult, banriResult, banricoResult, banesResult, americResult;
-    TextInputEditText sangria_,operador_, data, fundo_, money_, eloD_, eloC_, visaD_, visaC_, masterD_, masterC_,
-            hiper_, hiperC_, cabal_, pix_, verde_, soro_, person_, ouro_, banric_, banrico_, banes_, americ_;
-    List<util> operador, sangria, supS, sup,  fundo, money, eloD, eloC, visaD, visaC, masterD, masterC,
-            hiper, hiperC, cabal, pix, verde, soro, person, ouro, banric, banrico, banes, americ;
+    String sangRes, supR1, supR2, supR3, supR4, supR5, supR6, sanR1, sanR2, sanR3, sanR4, sanR5, sanR6;
+    LinearLayout moneyid, carDID, carCID, pixID;
+
+    TextInputEditText sangria_, suprimento_, operador_, data, fundo_, money_, carD_, carC_, pix_;
+
+    List<util> operador, sangria, supS, sup,  fundo, money, carD, carC, Pix;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -61,52 +43,24 @@ public class fechamento extends AppCompatActivity {
         View r = li.inflate(R.layout.fecha_caixa, null);
         data = r.findViewById(R.id.data);
         moneyid = r.findViewById(R.id.money_ID);
-        trancard = r.findViewById(R.id.trancard);
-        trancard.setVisibility(View.GONE);
-        elodid = r.findViewById(R.id.eloD_ID);
-        elocid = r.findViewById(R.id.eloC_ID);
-        visadid = r.findViewById(R.id.visaD_ID);
-        visacid = r.findViewById(R.id.visaC_ID);
-        masterdid = r.findViewById(R.id.masterD_ID);
-        mastercid = r.findViewById(R.id.masterC_ID);
-        hiperid = r.findViewById(R.id.hiper_ID);
-        hipercid = r.findViewById(R.id.hiperC_ID);
-        cabalid = r.findViewById(R.id.cabal_ID);
-        pixid = r.findViewById(R.id.pix_ID);
-        verdeid = r.findViewById(R.id.verde_ID);
-        soroid = r.findViewById(R.id.soro_ID);
-        personid = r.findViewById(R.id.person_ID);
-        ouroid = r.findViewById(R.id.ouro_ID);
-        banricid = r.findViewById(R.id.banric_ID);
-        banricoid = r.findViewById(R.id.banrico_ID);
-        banesid = r.findViewById(R.id.banes_ID);
-        americid = r.findViewById(R.id.americ_ID);
+        carDID = r.findViewById(R.id.carD_ID);
+        carCID = r.findViewById(R.id.carC_ID);
+        pixID = r.findViewById(R.id.pix_ID);
+
         fundo_ = r.findViewById(R.id.fundo);
         sangria_ = r.findViewById(R.id.sangria);
+        suprimento_ = r.findViewById(R.id.suprimento);
         operador_ = r.findViewById(R.id.operador);
-        money_ = r.findViewById(R.id.dinheiro);
-        eloD_ = r.findViewById(R.id.eloD);
-        eloC_ = r.findViewById(R.id.eloC);
-        visaD_ = r.findViewById(R.id.visaD);
-        visaC_ = r.findViewById(R.id.visaC);
-        masterD_ = r.findViewById(R.id.masterD);
-        masterC_ = r.findViewById(R.id.masterC);
-        hiper_ = r.findViewById(R.id.hiper);
-        hiperC_ = r.findViewById(R.id.hiperc);
-        cabal_ = r.findViewById(R.id.cabal);
+
+        money_ = r.findViewById(R.id.money);
+        carD_ = r.findViewById(R.id.carD);
+        carC_ = r.findViewById(R.id.carC);
         pix_ = r.findViewById(R.id.pix);
-        verde_ = r.findViewById(R.id.verde);
-        soro_ = r.findViewById(R.id.soro);
-        person_ = r.findViewById(R.id.person);
-        ouro_ = r.findViewById(R.id.ouro);
-        banric_ = r.findViewById(R.id.banrisul);
-        banrico_ = r.findViewById(R.id.banrico);
-        banes_ = r.findViewById(R.id.banes);
-        americ_ = r.findViewById(R.id.americ);
+
         canc = r.findViewById(R.id.canc);
         fecha = r.findViewById(R.id.fecha);
-        SQLiteControl db  = new SQLiteControl(c);
-        opf = db.opFind();
+        SQLiteControl db1 = new SQLiteControl(c);
+        opf = db1.opFind();
 
         operador_.setText(opf.get(0).getOp());
 
@@ -115,20 +69,22 @@ public class fechamento extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd.MM.yyyy");
         dateTime2 = simpleDateFormat2.format(calendar2.getTime()).toString();
         data.setText(dateTime2.toString());
+
         try{
-            SQLiteControl db2 = new SQLiteControl(c);
-            supS = db2.suFind();
+            SQLiteControl db = new SQLiteControl(c);
+            supS = db.suFind();
             if(!supS.get(0).getSupVal().equals("")){
-                SQLiteControl db3 = new SQLiteControl(c);
-                fpf = db3.funFind();
+                SQLiteControl db2 = new SQLiteControl(c);
+                fpf = db2.funFind();
                 Double v1 = new Double(fpf.get(0).getFundo());
                 Double v2 = new Double(supS.get(0).getSupVal());
                 double res = v1 + v2;
                 fundo_.setText(String.valueOf(res));
                 supRes = supS.get(0).getSupVal();
-
+                suprimento_.setVisibility(View.VISIBLE);
             }
         }catch(Exception e){
+            suprimento_.setVisibility(View.GONE);
             SQLiteControl db2 = new SQLiteControl(c);
             fpf = db2.funFind();
             fundo_.setText(fpf.get(0).getFundo());
@@ -136,8 +92,8 @@ public class fechamento extends AppCompatActivity {
 
         }
         try{
-            SQLiteControl db5 = new SQLiteControl(c);
-            sangria = db5.saFind();
+            SQLiteControl db = new SQLiteControl(c);
+            sangria = db.saFind();
             if(!sangria.get(0).getSangria().equals("")){
                 sangRes = sangria.get(0).getSangria();
                 sangria_.setVisibility(View.VISIBLE);
@@ -146,235 +102,53 @@ public class fechamento extends AppCompatActivity {
             sangRes = "0";
             sangria_.setVisibility(View.GONE);
         }
-        try{
-            SQLiteControl db6 = new SQLiteControl(c);
-            americ = db6.ameFind();
-            if(!americ.get(0).getAmeric().equals("")){
-                americid.setVisibility(View.VISIBLE);
-                trancard.setVisibility(View.VISIBLE);
-                americResult = americ.get(0).getAmeric();
-            }
-        }catch(Exception e){
-            americid.setVisibility(View.GONE);
-            americResult = "";
-        }
-        try{
-            SQLiteControl db7 = new SQLiteControl(c);
-            banes = db7.banesFind();
-            if(!banes.get(0).getBanes().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                banesid.setVisibility(View.VISIBLE);
-                banesResult = banes.get(0).getBanes();
-            }
-        }catch(Exception e){
-            banesid.setVisibility(View.GONE);
-            banesResult = "";
-        }
-        try{
-            SQLiteControl db8 = new SQLiteControl(c);
-            banrico = db8.banriCFind();
-            if(!banrico.get(0).getBanriC().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                banricoid.setVisibility(View.VISIBLE);
-                banricoResult = banrico.get(0).getBanriC();
-            }
-        }catch(Exception e){
-            banricoid.setVisibility(View.GONE);
-            banricoResult = "";
-        }
-        try{
-            SQLiteControl db9 = new SQLiteControl(c);
-            banric = db9.banriFind();
-            if(!banric.get(0).getbanric().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                banricid.setVisibility(View.VISIBLE);
-                banriResult = banric.get(0).getbanric();
-            }
-        }catch(Exception e){
-            banricid.setVisibility(View.GONE);
-            banriResult = "";
-        }
-        try{
-            SQLiteControl db9 = new SQLiteControl(c);
-            ouro = db9.ouroFind();
-            if(!ouro.get(0).getOuro().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                ouroid.setVisibility(View.VISIBLE);
-                ouroResult = ouro.get(0).getOuro();
-            }
-        }catch(Exception e){
-            ouroid.setVisibility(View.GONE);
-            ouroResult = "";
-        }
-        try{
-            SQLiteControl db10 = new SQLiteControl(c);
-            person = db10.personFind();
-            if(!person.get(0).getPerson().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                personid.setVisibility(View.VISIBLE);
-                personResult = person.get(0).getPerson();
-            }
-        }catch(Exception e){
-            personid.setVisibility(View.GONE);
-            personResult = "";
-        }
-        try{
-            SQLiteControl db11 = new SQLiteControl(c);
-            soro = db11.soroFind();
-            if(!soro.get(0).getSoro().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                soroid.setVisibility(View.VISIBLE);
-                soroResult = soro.get(0).getSoro();
-            }
-        }catch(Exception e){
-            soroid.setVisibility(View.GONE);
-            soroResult = "";
-        }
-        try{
-            SQLiteControl db12 = new SQLiteControl(c);
-            verde = db12.verdeFind();
-            if(!verde.get(0).getVerde().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                verdeid.setVisibility(View.VISIBLE);
-                verdeResult = verde.get(0).getVerde();
-            }
-        }catch(Exception e){
-            verdeid.setVisibility(View.GONE);
-            verdeResult = "";
-        }
-        try{
-            SQLiteControl db13 = new SQLiteControl(c);
-            pix = db13.pixFind();
-            if(!pix.get(0).getPix().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                pixid.setVisibility(View.VISIBLE);
-                pixResult = pix.get(0).getPix();
-            }
-        }catch(Exception e){
-            pixid.setVisibility(View.GONE);
-            pixResult = "";
-        }
-        try{
-            SQLiteControl db14 = new SQLiteControl(c);
-            cabal = db14.cabalFind();
-            if(!cabal.get(0).getCabal().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                cabalid.setVisibility(View.VISIBLE);
-                cabalResult = cabal.get(0).getCabal();
-            }
-        }catch(Exception e){
-            cabalid.setVisibility(View.GONE);
-            cabalResult = "";
-        }
-        try{
-            SQLiteControl db15 = new SQLiteControl(c);
-            hiperC = db15.hiperCFind();
-            if(!hiperC.get(0).getHiperC().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                hipercid.setVisibility(View.VISIBLE);
-                HiperCResult = hiperC.get(0).getHiperC();
-            }
-        }catch(Exception e){
-            hipercid.setVisibility(View.GONE);
-            HiperCResult = "";
-        }
-        try{
-            SQLiteControl db16 = new SQLiteControl(c);
-            hiper = db16.hiperFind();
-            if(!hiper.get(0).getHiper().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                hiperid.setVisibility(View.VISIBLE);
-                hiperResult = hiper.get(0).getHiper();
-            }
-        }catch(Exception e){
-            hiperid.setVisibility(View.GONE);
-            hiperResult = "";
-        }
-        try{
-            SQLiteControl db17 = new SQLiteControl(c);
-            masterC = db17.masterCFind();
-            if(!masterC.get(0).getMasterC().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                mastercid.setVisibility(View.VISIBLE);
-                masterCResult = masterC.get(0).getMasterC();
-            }
-        }catch(Exception e){
-            mastercid.setVisibility(View.GONE);
-            masterCResult = "";
-        }
-        try{
-            SQLiteControl db18 = new SQLiteControl(c);
-            masterD = db18.masterDFind();
-            if(!masterD.get(0).getMasterD().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                masterdid.setVisibility(View.VISIBLE);
-                masterDResult = masterD.get(0).getMasterD();
-            }
-        }catch(Exception e){
-            masterdid.setVisibility(View.GONE);
-            masterDResult = "";
-        }
-        try{
-            SQLiteControl db19 = new SQLiteControl(c);
-            visaC = db19.visaCFind();
-            if(!visaC.get(0).getVisaC().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                visacid.setVisibility(View.VISIBLE);
-                visaCResult = visaC.get(0).getVisaC();
-            }
-        }catch(Exception e){
-            visacid.setVisibility(View.GONE);
-            visaCResult = "";
-        }
-        try{
-            SQLiteControl db20 = new SQLiteControl(c);
-            visaD = db20.visaDFind();
-            if(!visaD.get(0).getVisaD().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                visadid.setVisibility(View.VISIBLE);
-                visaDResult = visaD.get(0).getVisaD();
-            }
-        }catch(Exception e){
-            visadid.setVisibility(View.GONE);
-            visaDResult = "";
-        }
-        try{
-            SQLiteControl db21 = new SQLiteControl(c);
-            eloC = db21.eloCFind();
-            if(!eloC.get(0).getEloC().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                elocid.setVisibility(View.VISIBLE);
-                eloCResult = eloC.get(0).getEloC();
-            }
-        }catch(Exception e){
-            elocid.setVisibility(View.GONE);
-            eloCResult = "";
-        }
-        try{
-            SQLiteControl db22 = new SQLiteControl(c);
-            eloD = db22.eloDFind();
-            if(!eloD.get(0).getEloD().equals("")){
-                trancard.setVisibility(View.VISIBLE);
-                elodid.setVisibility(View.VISIBLE);
-                eloDResult = eloD.get(0).getEloD();
-            }
-        }catch(Exception e){
-            elodid.setVisibility(View.GONE);
-            eloDResult = "";
 
-        }
         try{
-            SQLiteControl db23 = new SQLiteControl(c);
-            money = db23.moFind();
+            SQLiteControl db = new SQLiteControl(c);
+            money = db.moFind();
             if(!money.get(0).getMoney().equals("")){
-                moneyid.setVisibility(View.VISIBLE);
-                moneyResult = money.get(0).getMoney();
+                moneyRes = money.get(0).getMoney();
+                money_.setVisibility(View.VISIBLE);
             }
         }catch(Exception e){
-            moneyid.setVisibility(View.GONE);
-            moneyResult = "";
+            moneyRes = "0";
+            money_.setVisibility(View.GONE);
         }
-        fecha.setOnClickListener(new View.OnClickListener(){
+        try{
+            SQLiteControl db = new SQLiteControl(c);
+            carD = db.getCarD();
+            if(!carD.get(0).getCarD().equals("")){
+                carDRes = carD.get(0).getCarD();
+                carD_.setVisibility(View.VISIBLE);
+            }
+        }catch(Exception e){
+            carDRes = "0";
+            carD_.setVisibility(View.GONE);
+        }
+        try{
+            SQLiteControl db = new SQLiteControl(c);
+            carC = db.getCarC();
+            if(!carC.get(0).getCarC().equals("")){
+                carCRes = carC.get(0).getCarC();
+                carC_.setVisibility(View.VISIBLE);
+            }
+        }catch(Exception e){
+            carCRes = "0";
+            carC_.setVisibility(View.GONE);
+        }
+        try{
+            SQLiteControl db = new SQLiteControl(c);
+            Pix = db.getPix();
+            if(!Pix.get(0).getPix().equals("")){
+                pixResul = Pix.get(0).getPix();
+                pix_.setVisibility(View.VISIBLE);
+            }
+        }catch(Exception e){
+            pixResul = "0";
+            pix_.setVisibility(View.GONE);
+        }
+
+        fecha.setOnClickListener(new OnClickListener(){
 
             @Override
             public void onClick(View p1)
@@ -604,8 +378,8 @@ public class fechamento extends AppCompatActivity {
                                         sanResult = "";
                                     }
                                     try{
-                                        if(!moneyResult.toString().equals("")){
-                                            Double somaMoney = new Double(moneyResult);
+                                        if(!moneyRes.toString().equals("")){
+                                            Double somaMoney = new Double(moneyRes);
                                             Double compRes = new Double(money_.getText().toString());
                                             Double compSan = new Double(sangRes);
                                             double borderoRes = somaMoney - compSan;
@@ -627,295 +401,55 @@ public class fechamento extends AppCompatActivity {
                                     try{
                                         List<util> lt;
                                         SQLiteControl db = new SQLiteControl(c);
-                                        lt = db.eloDFind();
-                                        if(!lt.get(0).getEloD().equals("")){
-                                            Double somaEloD = new Double(eloDResult);
-                                            Double compRes = new Double(eloD_.getText().toString());
+                                        lt = db.getCarD();
+                                        if(!lt.get(0).getCarD().equals("")){
+                                            Double somaEloD = new Double(carDRes);
+                                            Double compRes = new Double(carD_.getText().toString());
                                             double res = somaEloD - compRes;
                                             DecimalFormatSymbols df4 = new DecimalFormatSymbols();
                                             df4.setGroupingSeparator('.');
                                             df4.setDecimalSeparator('.');
                                             DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                            eloDRes = "<div><p style='text-align:left;'>"+
-                                                    "<b style='text-align:left;'>Elo Débito: R$" + eloDResult.toString() + "</b>"+
-                                                    "<b style='float:right;'>R$" + eloD_.getText().toString() + "</b><br/>"+
+                                            cdRes = "<div><p style='text-align:left;'>"+
+                                                    "<b style='text-align:left;'>Cartão Débito: R$" + carDRes.toString() + "</b>"+
+                                                    "<b style='float:right;'>R$" + carD_.getText().toString() + "</b><br/>"+
                                                     "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
                                                     "</p></div>";
                                         } else {}
                                     }catch(Exception e){
-                                        eloDRes = "";
+                                        cdRes = "";
                                     }
-                                    if(!eloCResult.toString().equals("")){
-                                        Double somaEloC = new Double(eloCResult);
-                                        Double compRes = new Double(eloC_.getText().toString());
+                                    if(!carCRes.toString().equals("")){
+                                        Double somaEloC = new Double(carCRes);
+                                        Double compRes = new Double(carC_.getText().toString());
                                         double res = somaEloC - compRes;
                                         DecimalFormatSymbols df4 = new DecimalFormatSymbols();
                                         df4.setGroupingSeparator('.');
                                         df4.setDecimalSeparator('.');
                                         DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        eloCRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>Elo Crédito: R$" + eloCResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + eloC_.getText().toString() + "</b><br/>"+
+                                        ccRes = "<br/><div><p style='text-align:left;'>"+
+                                                "<b style='text-align:left;'>Cartão Crédito: R$" + carCRes.toString() + "</b>"+
+                                                "<b style='float:right;'>R$" + carC_.getText().toString() + "</b><br/>"+
                                                 "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
                                                 "</p></div>";
                                     } else {
-                                        eloCRes = "";
+                                        ccRes = "";
                                     }
-                                    if(!visaDResult.toString().equals("")){
-                                        Double somaVisaD = new Double(visaDResult);
-                                        Double compRes = new Double(visaD_.getText().toString());
+                                    if(!pixResul.toString().equals("")){
+                                        Double somaVisaD = new Double(pixResul);
+                                        Double compRes = new Double(pix_.getText().toString());
                                         double res = somaVisaD - compRes;
                                         DecimalFormatSymbols df4 = new DecimalFormatSymbols();
                                         df4.setGroupingSeparator('.');
                                         df4.setDecimalSeparator('.');
                                         DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        visaDRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>Visa Débito: R$" + visaDResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + visaD_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        visaDRes = "";
-                                    }
-                                    if(!visaCResult.toString().equals("")){
-                                        Double somaVisaC = new Double(visaCResult);
-                                        Double compRes = new Double(visaC_.getText().toString());
-                                        double res = somaVisaC - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        visaCRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>Visa Crédito: R$" + visaCResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + visaC_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        visaCRes = "";
-                                    }
-                                    if(!masterDResult.toString().equals("")){
-                                        Double somaMasterD = new Double(masterDResult);
-                                        Double compRes = new Double(masterD_.getText().toString());
-                                        double res = somaMasterD - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        masterDRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>Master Débito: R$" + masterDResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + masterD_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        masterDRes = "";
-                                    }
-                                    if(!masterCResult.toString().equals("")){
-                                        Double somaMasterC = new Double(masterCResult);
-                                        Double compRes = new Double(masterC_.getText().toString());
-                                        double res = somaMasterC - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        masterCRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>Master Crédito: R$" + masterCResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + masterC_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        masterCRes = "";
-                                    }
-                                    if(!hiperResult.toString().equals("")){
-                                        Double somaHiper = new Double(hiperResult);
-                                        Double compRes = new Double(hiper_.getText().toString());
-                                        double res = somaHiper - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        hiperRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>Hiper: R$" + hiperResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + hiper_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        hiperRes = "";
-                                    }
-                                    if(!HiperCResult.toString().equals("")){
-                                        Double somaHiperC = new Double(HiperCResult);
-                                        Double compRes = new Double(hiperC_.getText().toString());
-                                        double res = somaHiperC - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        hiperCRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>HiperCard: R$" + HiperCResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + hiperC_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        hiperCRes = "";
-                                    }
-                                    if(!cabalResult.toString().equals("")){
-                                        Double somaCabal = new Double(cabalResult);
-                                        Double compRes = new Double(cabal_.getText().toString());
-                                        double res = somaCabal - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        cabalRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>Cabal Débito: R$" + cabalResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + cabal_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        cabalRes = "";
-                                    }
-                                    if(!pixResult.toString().equals("")){
-                                        Double somaPix = new Double(pixResult);
-                                        Double compRes = new Double(pix_.getText().toString());
-                                        double res = somaPix - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        pixRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>Pix: R$" + pixResult.toString() + "</b>"+
+                                        pRes = "<br/><div><p style='text-align:left;'>"+
+                                                "<b style='text-align:left;'>Pix: R$" + pixResul.toString() + "</b>"+
                                                 "<b style='float:right;'>R$" + pix_.getText().toString() + "</b><br/>"+
                                                 "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
                                                 "</p></div>";
                                     } else {
-                                        pixRes = "";
-                                    }
-                                    if(!verdeResult.toString().equals("")){
-                                        Double somaVerde = new Double(verdeResult);
-                                        Double compRes = new Double(verde_.getText().toString());
-                                        double res = somaVerde - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        verdeRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>VerdeCard: R$" + verdeResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + verde_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        verdeRes = "";
-                                    }
-                                    if(!soroResult.toString().equals("")){
-                                        Double somaSoro = new Double(soroResult);
-                                        Double compRes = new Double(soro_.getText().toString());
-                                        double res = somaSoro - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        soroRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>SoroCred: R$" + soroResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + soro_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        soroRes = "";
-                                    }
-                                    if(!personResult.toString().equals("")){
-                                        Double somaPerson = new Double(personResult);
-                                        Double compRes = new Double(person_.getText().toString());
-                                        double res = somaPerson - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        personRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>Personal Card: R$" + personResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + person_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        personRes = "";
-                                    }
-                                    if(!ouroResult.toString().equals("")){
-                                        Double somaOuro = new Double(ouroResult);
-                                        Double compRes = new Double(ouro_.getText().toString());
-                                        double res = somaOuro - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        ouroRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>OuroCard: R$" + ouroResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + ouro_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        ouroRes = "";
-                                    }
-                                    if(!banriResult.toString().equals("")){
-                                        Double somaBanri = new Double(banriResult);
-                                        Double compRes = new Double(banric_.getText().toString());
-                                        double res = somaBanri - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        banriRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>BanriSul: R$" + banriResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + banric_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        banriRes = "";
-                                    }
-                                    if(!banricoResult.toString().equals("")){
-                                        Double somaBanric = new Double(banricoResult);
-                                        Double compRes = new Double(banrico_.getText().toString());
-                                        double res = somaBanric - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        banricRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>BanriCompras: R$" + banricoResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + banrico_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        banricRes = "";
-                                    }
-                                    if(!banesResult.toString().equals("")){
-                                        Double somaBanes = new Double(banesResult);
-                                        Double compRes = new Double(banes_.getText().toString());
-                                        double res = somaBanes - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        banesRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>BanesCard: R$" + banesResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + banes_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        banesRes = "";
-                                    }
-                                    if(!americResult.toString().equals("")){
-                                        Double somaAmeric = new Double(americResult);
-                                        Double compRes = new Double(americ_.getText().toString());
-                                        double res = somaAmeric - compRes;
-                                        DecimalFormatSymbols df4 = new DecimalFormatSymbols();
-                                        df4.setGroupingSeparator('.');
-                                        df4.setDecimalSeparator('.');
-                                        DecimalFormat dform4 = new DecimalFormat("####.##", df4);
-                                        americRes = "<br/><div><p style='text-align:left;'>"+
-                                                "<b style='text-align:left;'>American Express: R$" + americResult.toString() + "</b>"+
-                                                "<b style='float:right;'>R$" + americ_.getText().toString() + "</b><br/>"+
-                                                "<b style='float:right;'>---------</b><br/><b style='float:right;'>R$" + dform4.format(res) + "</b>"+
-                                                "</p></div>";
-                                    } else {
-                                        americRes = "";
+                                        pRes = "";
                                     }
                                     try{
                                         String dateTime2;
@@ -1041,24 +575,9 @@ public class fechamento extends AppCompatActivity {
                                                         moneyRes.toString() +
                                                         SupResult.toString() +
                                                         sanResult.toString() +
-                                                        eloDRes.toString() +
-                                                        eloCRes.toString() +
-                                                        visaDRes.toString() +
-                                                        visaCRes.toString() +
-                                                        masterDRes.toString() +
-                                                        masterCRes.toString() +
-                                                        hiperRes.toString() +
-                                                        hiperCRes.toString() +
-                                                        cabalRes.toString() +
-                                                        pixRes.toString() +
-                                                        verdeRes.toString() +
-                                                        soroRes.toString() +
-                                                        personRes.toString() +
-                                                        ouroRes.toString() +
-                                                        banriRes.toString() +
-                                                        banricRes.toString() +
-                                                        banesRes.toString() +
-                                                        americRes.toString() +
+                                                        carDRes.toString() +
+                                                        carCRes.toString() +
+                                                        pixResul.toString() +
                                                         "</div></body></html>");
                                         fw.flush();
                                         fw.close();
@@ -1190,24 +709,10 @@ public class fechamento extends AppCompatActivity {
                                             moneyRes.toString() +
                                             SupResult.toString() +
                                             sanResult.toString() +
-                                            eloDRes.toString() +
-                                            eloCRes.toString() +
-                                            visaDRes.toString() +
-                                            visaCRes.toString() +
-                                            masterDRes.toString() +
-                                            masterCRes.toString() +
-                                            hiperRes.toString() +
-                                            hiperCRes.toString() +
-                                            cabalRes.toString() +
-                                            pixRes.toString() +
-                                            verdeRes.toString() +
-                                            soroRes.toString() +
-                                            personRes.toString() +
-                                            ouroRes.toString() +
-                                            banriRes.toString() +
-                                            banricRes.toString() +
-                                            banesRes.toString() +
-                                            americRes.toString() +
+                                            carDRes.toString() +
+                                            carCRes.toString() +
+                                            pixResul.toString() +
+
                                             "</div></body></html>");
                                     SQLiteControl post = new SQLiteControl(c);
                                     post.insertFecha(us);
@@ -1222,26 +727,12 @@ public class fechamento extends AppCompatActivity {
                                     try{db.delSaldo();}catch(Exception e){}
                                     try{db.delSangSaldo();}catch(Exception e){}
                                     try{db.delSang();}catch(Exception e){}
-                                    try{db.delEloD();}catch(Exception e){}
-                                    try{db.delEloC();}catch(Exception e){}
-                                    try{db.delVisaD();}catch(Exception e){}
-                                    try{db.delVisaC();}catch(Exception e){}
-                                    try{db.delMasterD();}catch(Exception e){}
-                                    try{db.delMasterC();}catch(Exception e){}
-                                    try{db.delHiper();}catch(Exception e){}
-                                    try{db.delHiperC();}catch(Exception e){}
-                                    try{db.delCabal();}catch(Exception e){}
+                                    try{db.delCarD();}catch(Exception e){}
+                                    try{db.delCarC();}catch(Exception e){}
                                     try{db.delPix();}catch(Exception e){}
-                                    try{db.delVerde();}catch(Exception e){}
-                                    try{db.delSoro();}catch(Exception e){}
-                                    try{db.delPerson();}catch(Exception e){}
-                                    try{db.delOuro();}catch(Exception e){}
-                                    try{db.delBanric();}catch(Exception e){}
-                                    try{db.delBanriC();}catch(Exception e){}
-                                    try{db.delBanes();}catch(Exception e){}
-                                    try{db.delAmeric();}catch(Exception e){}
+
                                 }
-                                if (progress.getProgress() == 50) {
+                                if(progress.getProgress() == 50) {
                                     progress.setMessage("Zerando Lançamentos...");
                                     SQLiteControl db = new SQLiteControl(c);
                                     try{db.delHis();}catch(Exception e){}
@@ -1260,11 +751,11 @@ public class fechamento extends AppCompatActivity {
 
                                         if (sd.canWrite()) {
                                             String  currentDBPath= "//data//" + c.getOpPackageName()
-                                                    + "//databases//" + "MCRDB.db";
+                                                    + "//databases//" + "myDB.db";
                                             String  currentDBPath2 = "//data//" + c.getOpPackageName()
-                                                    + "//databases//" + "MCRDB.db-shm";
+                                                    + "//databases//" + "myDB.db-shm";
                                             String  currentDBPath3 = "//data//" + c.getOpPackageName()
-                                                    + "//databases//" + "MCRDB.db-wal";
+                                                    + "//databases//" + "myDB.db-wal";
 
                                             String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
                                             String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db-shm";
@@ -1325,7 +816,7 @@ public class fechamento extends AppCompatActivity {
                 }
             };
         });
-        canc.setOnClickListener(new View.OnClickListener(){
+        canc.setOnClickListener(new OnClickListener(){
 
             @Override
             public void onClick(View p1)
@@ -1343,5 +834,4 @@ public class fechamento extends AppCompatActivity {
         br.create();
         br.show();
     }
-
 }
