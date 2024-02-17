@@ -75,7 +75,7 @@ public class pay extends Activity {
                dinLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                dinheiro.setVisibility(View.VISIBLE);
                tvDinheiro.setTextColor(Color.WHITE);
-               dinheiro.setHintTextColor(Color.WHITE);
+
             }
         });
         debLayout.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +84,7 @@ public class pay extends Activity {
                 debLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                 carD.setVisibility(View.VISIBLE);
                 tvCarD.setTextColor(Color.WHITE);
-                carD.setHintTextColor(Color.WHITE);
+                carD.setTextColor(Color.WHITE);
             }
         });
         credLayout.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +93,7 @@ public class pay extends Activity {
                 credLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                 carC.setVisibility(View.VISIBLE);
                 tvCarC.setTextColor(Color.WHITE);
-                carC.setHintTextColor(Color.WHITE);
+                carC.setTextColor(Color.WHITE);
             }
         });
         pixLayout.setOnClickListener(new View.OnClickListener() {
@@ -102,18 +102,18 @@ public class pay extends Activity {
                 pixLayout.setBackgroundColor(Color.parseColor("#0000ff"));
                 pix.setVisibility(View.VISIBLE);
                 tvPix.setTextColor(Color.BLACK);
-                pix.setHintTextColor(Color.WHITE);
+                pix.setTextColor(Color.WHITE);
             }
         });
 
         dinheiro.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_DONE){
-                    Double v1 = new Double(tvRestante.getText().toString());
+                if(actionId == EditorInfo.IME_NULL){
+                    Double v1 = new Double(result);
                     Double v2 = new Double(dinheiro.getText().toString());
 
-                    double res = v2 - v1;
+                    double res = v1 - v2;
 
                     DecimalFormatSymbols df = new DecimalFormatSymbols();
                     df.setGroupingSeparator('.');
@@ -129,11 +129,11 @@ public class pay extends Activity {
         carD.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_DONE){
-                    Double v1 = new Double(tvRestante.getText().toString());
+                if(actionId == EditorInfo.IME_NULL){
+                    Double v1 = new Double(result);
                     Double v2 = new Double(carD.getText().toString());
 
-                    double res = v2 - v1;
+                    double res = v1 - v2;
 
                     DecimalFormatSymbols df = new DecimalFormatSymbols();
                     df.setGroupingSeparator('.');
@@ -149,11 +149,11 @@ public class pay extends Activity {
         carC.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_DONE){
-                    Double v1 = new Double(tvRestante.getText().toString());
+                if(actionId == EditorInfo.IME_NULL){
+                    Double v1 = new Double(result);
                     Double v2 = new Double(carC.getText().toString());
 
-                    double res = v2 - v1;
+                    double res = v1 - v2;
 
                     DecimalFormatSymbols df = new DecimalFormatSymbols();
                     df.setGroupingSeparator('.');
@@ -169,11 +169,11 @@ public class pay extends Activity {
         pix.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_DONE){
-                    Double v1 = new Double(tvRestante.getText().toString());
+                if(actionId == EditorInfo.IME_NULL){
+                    Double v1 = new Double(result);
                     Double v2 = new Double(pix.getText().toString());
 
-                    double res = v2 - v1;
+                    double res = v1 - v2;
 
                     DecimalFormatSymbols df = new DecimalFormatSymbols();
                     df.setGroupingSeparator('.');

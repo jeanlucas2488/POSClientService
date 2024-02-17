@@ -104,6 +104,7 @@
 				<EditText
 					android:layout_width="wrap_content"
 					android:ems="4"
+					android:textColor="#ffffff"
 					android:singleLine="true"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"
@@ -135,6 +136,7 @@
 				<EditText
 					android:layout_width="wrap_content"
 					android:ems="4"
+					android:textColor="#ffffff"
 					android:singleLine="true"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"
@@ -166,6 +168,7 @@
 				<EditText
 					android:layout_width="wrap_content"
 					android:ems="4"
+					android:textColor="#ffffff"
 					android:singleLine="true"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"
@@ -197,6 +200,7 @@
 				<EditText
 					android:layout_width="wrap_content"
 					android:ems="4"
+					android:textColor="#ffffff"
 					android:singleLine="true"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"

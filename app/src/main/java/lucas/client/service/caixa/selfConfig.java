@@ -183,7 +183,7 @@ public class selfConfig extends AppCompatActivity
 												if(user2.getUser().toString().equals("")){
 													if(user3.getSenhaSuperVisor().toString().equals("")){
 														progress.setMessage("Verificação concluída!");
-														Thread.sleep(2000);
+														Thread.sleep(4000);
 													} else {
 
 													}
