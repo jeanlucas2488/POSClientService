@@ -28,8 +28,8 @@ import lucas.client.service.sqlite.DB;
 public class pay extends Activity {
     String result;
     AlertDialog root;
-    TextView tvTotal, tvRestante, tvDinheiro, tvCarD, tvCarC, tvPix;
-    EditText dinheiro, carD, carC, pix;
+    TextView tvDinheiro, tvCarD, tvCarC, tvPix;
+    EditText dinheiro, tvTotal, tvRestante, carD, carC, pix;
     RelativeLayout dinLayout, debLayout, credLayout, pixLayout;
 
     Context c = this;
@@ -72,7 +72,7 @@ public class pay extends Activity {
         dinLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               dinLayout.setBackgroundColor(Color.parseColor("#0000ff"));
+               dinLayout.setBackgroundColor(Color.parseColor("#495550"));
                dinheiro.setVisibility(View.VISIBLE);
                tvDinheiro.setTextColor(Color.WHITE);
 
@@ -81,28 +81,26 @@ public class pay extends Activity {
         debLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                debLayout.setBackgroundColor(Color.parseColor("#0000ff"));
+                debLayout.setBackgroundColor(Color.parseColor("#495550"));
                 carD.setVisibility(View.VISIBLE);
                 tvCarD.setTextColor(Color.WHITE);
-                carD.setTextColor(Color.WHITE);
             }
         });
         credLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                credLayout.setBackgroundColor(Color.parseColor("#0000ff"));
+                credLayout.setBackgroundColor(Color.parseColor("#495550"));
                 carC.setVisibility(View.VISIBLE);
                 tvCarC.setTextColor(Color.WHITE);
-                carC.setTextColor(Color.WHITE);
+
             }
         });
         pixLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pixLayout.setBackgroundColor(Color.parseColor("#0000ff"));
+                pixLayout.setBackgroundColor(Color.parseColor("#495550"));
                 pix.setVisibility(View.VISIBLE);
                 tvPix.setTextColor(Color.BLACK);
-                pix.setTextColor(Color.WHITE);
             }
         });
 
@@ -110,11 +108,11 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
-                    Double v1 = new Double(result);
+
+                    Double v1 = new Double(tvRestante.getText().toString());
                     Double v2 = new Double(dinheiro.getText().toString());
 
                     double res = v1 - v2;
-
                     DecimalFormatSymbols df = new DecimalFormatSymbols();
                     df.setGroupingSeparator('.');
                     df.setDecimalSeparator('.');
@@ -130,8 +128,8 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
-                    Double v1 = new Double(result);
-                    Double v2 = new Double(carD.getText().toString());
+                    Double v1 = Double.parseDouble(tvRestante.getText().toString());
+                    Double v2 = Double.parseDouble(carD.getText().toString());
 
                     double res = v1 - v2;
 
@@ -150,8 +148,8 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
-                    Double v1 = new Double(result);
-                    Double v2 = new Double(carC.getText().toString());
+                    Double v1 = Double.parseDouble(tvRestante.getText().toString());
+                    Double v2 = Double.parseDouble(carC.getText().toString());
 
                     double res = v1 - v2;
 
@@ -170,8 +168,8 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
-                    Double v1 = new Double(result);
-                    Double v2 = new Double(pix.getText().toString());
+                    Double v1 = Double.parseDouble(tvRestante.getText().toString());
+                    Double v2 = Double.parseDouble(pix.getText().toString());
 
                     double res = v1 - v2;
 

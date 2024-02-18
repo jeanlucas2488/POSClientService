@@ -3,15 +3,15 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
 	android:orientation="vertical">
 	<ScrollView
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
 		<LinearLayout
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:orientation="vertical">
 			<com.google.android.material.textfield.TextInputLayout
 				android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_margin="10dp"
-					android:ems="30"
+					android:ems="90"
 					android:hint="Usuário.:"
 					tools:textColorHint="#ffffff" />
 
@@ -43,7 +43,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_margin="10dp"
-					android:ems="30"
+					android:ems="90"
 					android:hint="Senha.:"
 					android:inputType="textPassword"
 					android:textColorHint="#ffffff" />
@@ -62,7 +62,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_margin="10dp"
-					android:ems="30"
+					android:ems="90"
 					android:hint="Operador.:"
 					android:textColorHint="#ffffff" />
 
@@ -80,14 +80,14 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_margin="10dp"
-					android:ems="30"
+					android:ems="90"
 					android:hint="Fundo.:"
 					android:inputType="numberDecimal"
 					android:textColorHint="#ffffff" />
 
 			</com.google.android.material.textfield.TextInputLayout>
 			
-	<LinearLayout
+	<RelativeLayout
 		android:orientation="horizontal"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -103,6 +103,7 @@
 			android:id="@+id/cancel"/>
 
 		<Button
+			android:layout_alignParentRight="true"
 			android:layout_width="100dp"
 			style="?android:attr/buttonBarButtonStyle"
 			android:layout_height="wrap_content"
@@ -112,7 +113,7 @@
 			android:layout_marginRight="10dp"
 			android:id="@+id/login"/>
 
-	</LinearLayout>
+	</RelativeLayout>
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>

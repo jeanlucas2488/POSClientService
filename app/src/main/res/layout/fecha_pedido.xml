@@ -26,11 +26,13 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				/>
-			<TextView
+			<EditText
 				android:layout_toRightOf="@+id/total"
 				android:id="@+id/valTotal"
 				android:textColor="#0000ff"
 				android:textSize="17dp"
+				android:ems="3"
+				android:layout_marginTop="-15dp"
 				android:layout_marginRight="10dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -46,10 +48,12 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				 />
-			<TextView
+			<EditText
 				android:id="@+id/valRestante"
 				android:textColor="#FF0000"
 				android:textSize="17dp"
+				android:ems="3"
+				android:layout_marginTop="-15dp"
 				android:layout_alignParentRight="true"
 				android:layout_marginRight="10dp"
 				android:layout_width="wrap_content"
@@ -104,8 +108,10 @@
 				<EditText
 					android:layout_width="wrap_content"
 					android:ems="4"
-					android:textColor="#ffffff"
+					android:background="#ffffff"
+					android:textColor="#000000"
 					android:singleLine="true"
+					android:padding="5dp"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"
 					android:layout_alignParentRight="true"
@@ -136,8 +142,10 @@
 				<EditText
 					android:layout_width="wrap_content"
 					android:ems="4"
-					android:textColor="#ffffff"
+					android:background="#ffffff"
+					android:textColor="#000000"
 					android:singleLine="true"
+					android:padding="5dp"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"
 					android:layout_alignParentRight="true"
@@ -168,7 +176,9 @@
 				<EditText
 					android:layout_width="wrap_content"
 					android:ems="4"
-					android:textColor="#ffffff"
+					android:background="#ffffff"
+					android:textColor="#000000"
+					android:padding="5dp"
 					android:singleLine="true"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"
@@ -200,7 +210,9 @@
 				<EditText
 					android:layout_width="wrap_content"
 					android:ems="4"
-					android:textColor="#ffffff"
+					android:background="#ffffff"
+					android:textColor="#000000"
+					android:padding="5dp"
 					android:singleLine="true"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"
