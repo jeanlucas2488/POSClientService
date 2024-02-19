@@ -356,6 +356,11 @@ public class Page1 extends Fragment
 							df.setDecimalSeparator('.');
 							DecimalFormat dform = new DecimalFormat("####.##", df);
 							String result = dform.format(res_);
+							util us = new util();
+							us.setTemp(result);
+							DB db = new DB(getActivity());
+							db.setTemp(us);
+
 							Intent it = new Intent(getActivity(), pay.class);
 							Bundle b = new Bundle();
 							b.putString("valor", result);

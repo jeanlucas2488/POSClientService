@@ -15,6 +15,16 @@ public class DB
 		Core cor = new Core(c);
 		db = cor.getWritableDatabase();
 	}
+	public void setTemp(util us){
+		ContentValues ct = new ContentValues();
+		ct.put("valRest", us.getTemp());
+		db.insert("temp", null, ct);
+	}
+	public void upTemp(util us){
+		ContentValues ct = new ContentValues();
+		ct.put("valRest", us.getTemp());
+		db.update("temp", ct, "id = ?", new String[]{String.valueOf(us.getTempId())});
+	}
 	public void insertFecha(util us){
 		ContentValues cv = new ContentValues();
 		cv.put("data", us.getData());
@@ -80,6 +90,18 @@ public class DB
 			} while(cs.moveToNext());
 		}
 		return us2;
+	}
+	public util getTemp(long id){
+		util us = new util();
+		Cursor cs = db.rawQuery("select * from temp WHERE id="+id+"", null);
+		if(cs.moveToFirst()){
+			do{
+				us.setTempId(cs.getLong(cs.getColumnIndex("id")));
+				us.setTemp(cs.getString(cs.getColumnIndex("valRest")));
+
+			}while(cs.moveToNext());
+		}
+		return us;
 	}
 	public util getUserCM(long id){
 		util us = new util();

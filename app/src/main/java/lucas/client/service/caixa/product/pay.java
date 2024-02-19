@@ -26,7 +26,7 @@ import lucas.client.service.sqlite.DB;
 
 
 public class pay extends Activity {
-    String result;
+    String result, resD;
     AlertDialog root;
     TextView tvDinheiro, tvCarD, tvCarC, tvPix;
     EditText dinheiro, tvTotal, tvRestante, carD, carC, pix;
@@ -108,8 +108,10 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
+                    DB db = new DB(c);
+                    util val = db.getTemp(1);
 
-                    Double v1 = new Double(tvRestante.getText().toString());
+                    Double v1 = new Double(result);
                     Double v2 = new Double(dinheiro.getText().toString());
 
                     double res = v1 - v2;
@@ -118,7 +120,14 @@ public class pay extends Activity {
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
+                    util valR = new util();
+                    valR.setTempId(val.getTempId());
+                    valR.setTemp(dform.format(res));
+
+                    DB in = new DB(c);
+                    in.setTemp(valR);
                     tvRestante.setText(dform.format(res));
+                    resD = dform.format(res);
                     return true;
                 }
                 return false;
@@ -128,7 +137,10 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
-                    Double v1 = Double.parseDouble(tvRestante.getText().toString());
+                    DB db = new DB(c);
+                    util val = db.getTemp(1);
+
+                    Double v1 = Double.parseDouble(resD);
                     Double v2 = Double.parseDouble(carD.getText().toString());
 
                     double res = v1 - v2;
@@ -139,6 +151,7 @@ public class pay extends Activity {
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
                     tvRestante.setText(dform.format(res));
+                    resD = dform.format(res);
                     return true;
                 }
                 return false;
@@ -148,7 +161,7 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
-                    Double v1 = Double.parseDouble(tvRestante.getText().toString());
+                    Double v1 = Double.parseDouble(resD);
                     Double v2 = Double.parseDouble(carC.getText().toString());
 
                     double res = v1 - v2;
@@ -159,6 +172,7 @@ public class pay extends Activity {
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
                     tvRestante.setText(dform.format(res));
+                    resD = dform.format(res);
                     return true;
                 }
                 return false;
@@ -168,7 +182,7 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
-                    Double v1 = Double.parseDouble(tvRestante.getText().toString());
+                    Double v1 = Double.parseDouble(resD);
                     Double v2 = Double.parseDouble(pix.getText().toString());
 
                     double res = v1 - v2;

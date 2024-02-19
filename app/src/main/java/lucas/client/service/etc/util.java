@@ -3,7 +3,7 @@ import javax.security.auth.callback.*;
 
 public class util {
 
-	public String carD, carC, pix;
+	public String carD, carC, pix, temp;
 	public String eCod, eProd, eQuant, eForn, eDataIn, eDataOut, eValor, eTotal, eTipo, nfe;
 	public long eId, supId;
 	public String sangria_val, cat, sangria_mot, op, sangria, fundo;
@@ -46,8 +46,20 @@ public class util {
 	public String valor5;
 	public String payType5;
 	public String troco5;
+	public long tempId;
 
-
+	public long getTempId(){
+		return tempId;
+	}
+	public void setTempId(long id){
+		this.tempId = id;
+	}
+public String getTemp(){
+	return temp;
+}
+public void setTemp(String tm){
+	this.temp = tm;
+}
 	public String senha_supervisor;
 	public long vendaId;
 	public long supervisor_id;
