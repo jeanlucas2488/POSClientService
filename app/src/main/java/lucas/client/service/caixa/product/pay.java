@@ -100,7 +100,7 @@ public class pay extends Activity {
             public void onClick(View v) {
                 pixLayout.setBackgroundColor(Color.parseColor("#495550"));
                 pix.setVisibility(View.VISIBLE);
-                tvPix.setTextColor(Color.BLACK);
+                tvPix.setTextColor(Color.WHITE);
             }
         });
 
@@ -126,7 +126,7 @@ public class pay extends Activity {
 
                     DB in = new DB(c);
                     in.setTemp(valR);
-                    tvRestante.setText(dform.format(res));
+                    tvRestante.setText("R$ " + dform.format(res));
                     resD = dform.format(res);
                     return true;
                 }
@@ -150,7 +150,7 @@ public class pay extends Activity {
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
-                    tvRestante.setText(dform.format(res));
+                    tvRestante.setText("R$ " + dform.format(res));
                     resD = dform.format(res);
                     return true;
                 }
@@ -171,7 +171,7 @@ public class pay extends Activity {
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
-                    tvRestante.setText(dform.format(res));
+                    tvRestante.setText("R$ " + dform.format(res));
                     resD = dform.format(res);
                     return true;
                 }
@@ -192,7 +192,7 @@ public class pay extends Activity {
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
-                    tvRestante.setText(dform.format(res));
+                    tvRestante.setText("R$ " + dform.format(res));
                     return true;
                 }
                 return false;
