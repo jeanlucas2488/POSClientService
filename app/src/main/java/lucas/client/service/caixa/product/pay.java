@@ -121,12 +121,12 @@ public class pay extends Activity {
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
                     util valR = new util();
-                    valR.setTempId(val.getTempId());
                     valR.setTemp(dform.format(res));
 
                     DB in = new DB(c);
+                    in.delTemp();
                     in.setTemp(valR);
-                    tvRestante.setText("R$ " + dform.format(res));
+                    tvRestante.setText("R$ " + val.getTemp());
                     resD = dform.format(res);
                     return true;
                 }

@@ -15,6 +15,9 @@ public class DB
 		Core cor = new Core(c);
 		db = cor.getWritableDatabase();
 	}
+	public void delTemp(){
+		db.execSQL("delete from temp");
+	}
 	public void setTemp(util us){
 		ContentValues ct = new ContentValues();
 		ct.put("valRest", us.getTemp());
