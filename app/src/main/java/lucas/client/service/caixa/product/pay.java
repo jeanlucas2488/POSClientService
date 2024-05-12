@@ -128,6 +128,7 @@ public class pay extends Activity {
                     in.setTemp(valR);
                     tvRestante.setText("R$ " + val.getTemp());
                     resD = dform.format(res);
+
                     return true;
                 }
                 return false;
@@ -140,7 +141,7 @@ public class pay extends Activity {
                     DB db = new DB(c);
                     util val = db.getTemp(1);
 
-                    Double v1 = Double.parseDouble(resD);
+                    Double v1 = Double.parseDouble(val.getTemp());
                     Double v2 = Double.parseDouble(carD.getText().toString());
 
                     double res = v1 - v2;
@@ -150,8 +151,17 @@ public class pay extends Activity {
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
-                    tvRestante.setText("R$ " + dform.format(res));
-                    resD = dform.format(res);
+
+
+                    util valR = new util();
+                    valR.setTemp(dform.format(res));
+
+                    DB in = new DB(c);
+                    in.delTemp();
+                    in.setTemp(valR);
+
+
+                    tvRestante.setText("R$ " + val.getTemp());
                     return true;
                 }
                 return false;
@@ -205,7 +215,7 @@ public class pay extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if(!tvRestante.getText().toString().equals("00.00")){
+                if(tvRestante.getText().toString().endsWith("0")){
                     Toast.makeText(c, "Há valores pendentes para finalinar a compra.", Toast.LENGTH_LONG).show();
                 } else {
                     if(!dinheiro.getText().toString().equals("")){
