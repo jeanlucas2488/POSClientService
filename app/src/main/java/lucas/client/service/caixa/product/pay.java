@@ -129,11 +129,8 @@ public class pay extends Activity {
                     valR.setTemp(dform.format(res));
 
                     DB in = new DB(c);
-                    in.delTemp();
                     in.setTemp(valR);
                     tvRestante.setText("R$ " + val.getTemp());
-                    resD = dform.format(res);
-
                     return true;
                 }
                 return false;
@@ -143,6 +140,7 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
+
                     DB db = new DB(c);
                     util val = db.getTemp(1);
 
@@ -156,63 +154,24 @@ public class pay extends Activity {
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
-
-
                     util valR = new util();
+                    valR.setTempId(val.getTempId());
                     valR.setTemp(dform.format(res));
 
-                    DB in = new DB(c);
-                    in.delTemp();
-                    in.setTemp(valR);
-
-
-                    tvRestante.setText("R$ " + val.getTemp());
-                    return true;
-                }
-                return false;
-            }
-        });
-        carC.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_NULL){
-                    Double v1 = Double.parseDouble(resD);
-                    Double v2 = Double.parseDouble(carC.getText().toString());
-
-                    double res = v1 - v2;
-
-                    DecimalFormatSymbols df = new DecimalFormatSymbols();
-                    df.setGroupingSeparator('.');
-                    df.setDecimalSeparator('.');
-                    DecimalFormat dform = new DecimalFormat("####.##", df);
-
-                    tvRestante.setText("R$ " + dform.format(res));
-                    resD = dform.format(res);
-                    return true;
-                }
-                return false;
-            }
-        });
-        pix.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_NULL){
-                    Double v1 = Double.parseDouble(resD);
-                    Double v2 = Double.parseDouble(pix.getText().toString());
-
-                    double res = v1 - v2;
-
-                    DecimalFormatSymbols df = new DecimalFormatSymbols();
-                    df.setGroupingSeparator('.');
-                    df.setDecimalSeparator('.');
-                    DecimalFormat dform = new DecimalFormat("####.##", df);
-
+                    if(!valR.getTemp().equals("")){
+                        DB in = new DB(c);
+                        in.upTemp(valR);
+                    } else {
+                        DB in = new DB(c);
+                        in.setTemp(valR);
+                    }
                     tvRestante.setText("R$ " + dform.format(res));
                     return true;
                 }
                 return false;
             }
         });
+
         AlertDialog.Builder bs = new AlertDialog.Builder(c);
         bs.setTitle("Fechar Pedido:");
         bs.setView(r);
@@ -220,6 +179,7 @@ public class pay extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 DB root = new DB(c);
+
                 util result = root.getTemp(1);
                 if(!result.getTemp().equals("0")){
                     Toast.makeText(c, "Há valores pendentes para finalinar a compra.", Toast.LENGTH_LONG).show();
