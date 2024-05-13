@@ -57,7 +57,7 @@ public class selfConfig extends AppCompatActivity
 					try {
 						while (progress.getProgress() <= progress
 							   .getMax()) {
-							Thread.sleep(900);
+							Thread.sleep(400);
 							handle.sendMessage(handle.obtainMessage());
 							if (progress.getProgress() == 10) {
 								progress.setMessage("Checando Permissões...");

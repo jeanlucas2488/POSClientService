@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.icu.text.DecimalFormat;
 import android.icu.text.DecimalFormatSymbols;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
 import java.util.List;
 
 import lucas.client.service.R;
@@ -214,8 +219,9 @@ public class pay extends Activity {
         bs.setPositiveButton("  Finalizar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                if(tvRestante.getText().toString().endsWith("0")){
+                DB root = new DB(c);
+                util result = root.getTemp(1);
+                if(!result.getTemp().equals("0")){
                     Toast.makeText(c, "Há valores pendentes para finalinar a compra.", Toast.LENGTH_LONG).show();
                 } else {
                     if(!dinheiro.getText().toString().equals("")){
@@ -337,6 +343,52 @@ public class pay extends Activity {
                             }
                         }
                     }
+                }
+                try {
+                    File sd = Environment.getExternalStorageDirectory();
+                    File data = Environment.getDataDirectory();
+
+                    if (sd.canWrite()) {
+                        String  currentDBPath= "//data//" + c.getOpPackageName()
+                                + "//databases//" + "myDB.db";
+                        String  currentDBPath2 = "//data//" + c.getOpPackageName()
+                                + "//databases//" + "myDB.db-shm";
+                        String  currentDBPath3 = "//data//" + c.getOpPackageName()
+                                + "//databases//" + "myDB.db-wal";
+
+                        String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
+                        String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
+                        String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+
+                        File currentDB = new File(data, currentDBPath);
+                        File currentDB2 = new File(data, currentDBPath2);
+                        File currentDB3 = new File(data, currentDBPath3);
+                        File backupDB = new File(sd, backupDBPath);
+                        File backupDB2 = new File(sd, backupDBPath2);
+                        File backupDB3 = new File(sd, backupDBPath3);
+
+                        if(currentDB2.exists()){
+                            FileChannel src = new FileInputStream(currentDB2).getChannel();
+                            FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+                            dst.transferFrom(src, 0, src.size());
+                            src.close();
+                            dst.close();
+                        }
+                        if(currentDB3.exists()){
+                            FileChannel src = new FileInputStream(currentDB3).getChannel();
+                            FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+                            dst.transferFrom(src, 0, src.size());
+                            src.close();
+                            dst.close();
+                        }
+                        FileChannel src = new FileInputStream(currentDB).getChannel();
+                        FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                        dst.transferFrom(src, 0, src.size());
+                        src.close();
+                        dst.close();
+                    }
+                } catch (Exception e2) {
+
                 }
             }
         });
