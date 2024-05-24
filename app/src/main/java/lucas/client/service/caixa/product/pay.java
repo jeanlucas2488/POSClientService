@@ -31,7 +31,7 @@ import lucas.client.service.sqlite.DB;
 
 
 public class pay extends Activity {
-    String result, resD;
+    String result, resPagto;
     AlertDialog root;
     TextView tvDinheiro, tvCarD, tvCarC, tvPix;
     EditText dinheiro, tvTotal, tvRestante, carD, carC, pix;
@@ -124,13 +124,8 @@ public class pay extends Activity {
                     df.setGroupingSeparator('.');
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
-
-                    util valR = new util();
-                    valR.setTemp(dform.format(res));
-
-                    DB in = new DB(c);
-                    in.setTemp(valR);
-                    tvRestante.setText("R$ " + val.getTemp());
+                    resPagto = dform.format(res);
+                    tvRestante.setText("R$ " + dform.format(res));
                     return true;
                 }
                 return false;
@@ -141,10 +136,7 @@ public class pay extends Activity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
 
-                    DB db = new DB(c);
-                    util val = db.getTemp(1);
-
-                    Double v1 = Double.parseDouble(val.getTemp());
+                    Double v1 = Double.parseDouble(resPagto.toString());
                     Double v2 = Double.parseDouble(carD.getText().toString());
 
                     double res = v1 - v2;
@@ -154,17 +146,6 @@ public class pay extends Activity {
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
-                    util valR = new util();
-                    valR.setTempId(val.getTempId());
-                    valR.setTemp(dform.format(res));
-
-                    if(!valR.getTemp().equals("")){
-                        DB in = new DB(c);
-                        in.upTemp(valR);
-                    } else {
-                        DB in = new DB(c);
-                        in.setTemp(valR);
-                    }
                     tvRestante.setText("R$ " + dform.format(res));
                     return true;
                 }
@@ -180,10 +161,7 @@ public class pay extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 DB root = new DB(c);
 
-                util result = root.getTemp(1);
-                if(!result.getTemp().equals("0")){
-                    Toast.makeText(c, "Há valores pendentes para finalinar a compra.", Toast.LENGTH_LONG).show();
-                } else {
+                if(!resPagto.toString().equals("0")){
                     if(!dinheiro.getText().toString().equals("")){
                         try{
                             DB db  = new DB(c);
@@ -303,6 +281,8 @@ public class pay extends Activity {
                             }
                         }
                     }
+                } else {
+                    Toast.makeText(c, "Há valores pendentes para finalizar a compra!", Toast.LENGTH_LONG).show();
                 }
                 try {
                     File sd = Environment.getExternalStorageDirectory();
