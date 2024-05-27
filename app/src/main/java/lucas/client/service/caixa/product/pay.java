@@ -126,6 +126,34 @@ public class pay extends Activity {
                     DecimalFormat dform = new DecimalFormat("####.##", df);
                     resPagto = dform.format(res);
                     tvRestante.setText("R$ " + dform.format(res));
+
+                    try{
+                        DB dbPost  = new DB(c);
+                        List<util> rd;
+                        rd = dbPost.moFind();
+                        if(!rd.get(0).getMoney().equals("")){
+                            String re1 = rd.get(0).getMoney();
+                            String re2 = result.toString();
+                            Double d0 = new Double(re1);
+                            Double d1 = new Double(re2);
+                            double resD = d0 + d1;
+                            DecimalFormatSymbols df2 = new DecimalFormatSymbols();
+                            df2.setGroupingSeparator('.');
+                            df2.setDecimalSeparator('.');
+                            DecimalFormat dform2 = new DecimalFormat("####.##", df2);
+                            util us = new util();
+                            us.setMoney(dform2.format(resD));
+                            db.delMoney();
+                            db.moneyIn(us);
+
+                        } else {}
+                    }catch(Exception e){
+                        util us = new util();
+                        us.setMoney(dform.format(res));
+                        DB d1 = new DB(c);
+                        d1.moneyIn(us);
+
+                    }
                     return true;
                 }
                 return false;
@@ -147,6 +175,34 @@ public class pay extends Activity {
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
                     tvRestante.setText("R$ " + dform.format(res));
+                        try{
+                            DB db  = new DB(c);
+                            List<util> rd;
+                            rd = db.getCarD();
+                            if(!rd.get(0).getCarD().equals("")){
+                                String re1 = rd.get(0).getCarD();
+                                String re2 = resPagto.toString();
+                                Double d0 = new Double(re1);
+                                Double d1 = new Double(re2);
+                                double res2 = d0 + d1;
+                                DecimalFormatSymbols df2 = new DecimalFormatSymbols();
+                                df2.setGroupingSeparator('.');
+                                df2.setDecimalSeparator('.');
+                                DecimalFormat dform2 = new DecimalFormat("####.##", df2);
+                                util us = new util();
+                                us.setCarD(dform2.format(res2));
+                                db.delCarD();
+                                db.carDIn(us);
+
+                            } else {}
+                        }catch(Exception e){
+                            util us = new util();
+                            us.setCarD(resPagto.toString());
+                            DB d1 = new DB(c);
+                            d1.carDIn(us);
+
+                        }
+
                     return true;
                 }
                 return false;
@@ -161,129 +217,7 @@ public class pay extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 DB root = new DB(c);
 
-                if(!resPagto.toString().equals("0")){
-                    if(!dinheiro.getText().toString().equals("")){
-                        try{
-                            DB db  = new DB(c);
-                            List<util> rd;
-                            rd = db.moFind();
-                            if(!rd.get(0).getMoney().equals("")){
-                                String re1 = rd.get(0).getMoney();
-                                String re2 = dinheiro.getText().toString();
-                                Double d0 = new Double(re1);
-                                Double d1 = new Double(re2);
-                                double res = d0 + d1;
-                                DecimalFormatSymbols df = new DecimalFormatSymbols();
-                                df.setGroupingSeparator('.');
-                                df.setDecimalSeparator('.');
-                                DecimalFormat dform = new DecimalFormat("####.##", df);
-                                util us = new util();
-                                us.setMoney(dform.format(res));
-                                db.delMoney();
-                                db.moneyIn(us);
 
-                            } else {}
-                        }catch(Exception e){
-                            util us = new util();
-                            us.setMoney(dinheiro.getText().toString());
-                            DB d1 = new DB(c);
-                            d1.moneyIn(us);
-
-                        }
-                    } else {
-                        if(!carD.getText().toString().equals("")){
-                            try{
-                                DB db  = new DB(c);
-                                List<util> rd;
-                                rd = db.getCarD();
-                                if(!rd.get(0).getCarD().equals("")){
-                                    String re1 = rd.get(0).getCarD();
-                                    String re2 = carD.getText().toString();
-                                    Double d0 = new Double(re1);
-                                    Double d1 = new Double(re2);
-                                    double res = d0 + d1;
-                                    DecimalFormatSymbols df = new DecimalFormatSymbols();
-                                    df.setGroupingSeparator('.');
-                                    df.setDecimalSeparator('.');
-                                    DecimalFormat dform = new DecimalFormat("####.##", df);
-                                    util us = new util();
-                                    us.setCarD(dform.format(res));
-                                    db.delCarD();
-                                    db.carDIn(us);
-
-                                } else {}
-                            }catch(Exception e){
-                                util us = new util();
-                                us.setCarD(carD.getText().toString());
-                                DB d1 = new DB(c);
-                                d1.carDIn(us);
-
-                            }
-                        } else {
-                            if(!carC.getText().toString().equals("")){
-                                try{
-                                    DB db  = new DB(c);
-                                    List<util> rd;
-                                    rd = db.getCarC();
-                                    if(!rd.get(0).getCarC().equals("")){
-                                        String re1 = rd.get(0).getCarC();
-                                        String re2 = carC.getText().toString();
-                                        Double d0 = new Double(re1);
-                                        Double d1 = new Double(re2);
-                                        double res = d0 + d1;
-                                        DecimalFormatSymbols df = new DecimalFormatSymbols();
-                                        df.setGroupingSeparator('.');
-                                        df.setDecimalSeparator('.');
-                                        DecimalFormat dform = new DecimalFormat("####.##", df);
-                                        util us = new util();
-                                        us.setCarC(dform.format(res));
-                                        db.delCarC();
-                                        db.carCIn(us);
-
-                                    } else {}
-                                }catch(Exception e){
-                                    util us = new util();
-                                    us.setCarC(carC.getText().toString());
-                                    DB d1 = new DB(c);
-                                    d1.carCIn(us);
-                                }
-                            } else {
-                                if(!pix.getText().toString().equals("")){
-                                    try{
-                                        DB db  = new DB(c);
-                                        List<util> rd;
-                                        rd = db.getPix();
-                                        if(!rd.get(0).getPix().equals("")){
-                                            String re1 = rd.get(0).getPix();
-                                            String re2 = pix.getText().toString();
-                                            Double d0 = new Double(re1);
-                                            Double d1 = new Double(re2);
-                                            double res = d0 + d1;
-                                            DecimalFormatSymbols df = new DecimalFormatSymbols();
-                                            df.setGroupingSeparator('.');
-                                            df.setDecimalSeparator('.');
-                                            DecimalFormat dform = new DecimalFormat("####.##", df);
-                                            util us = new util();
-                                            us.setPix(dform.format(res));
-                                            db.delPix();
-                                            db.PixIn(us);
-
-                                        } else {}
-                                    }catch(Exception e){
-                                        util us = new util();
-                                        us.setPix(pix.getText().toString());
-                                        DB d1 = new DB(c);
-                                        d1.PixIn(us);
-                                    }
-                                } else {
-
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    Toast.makeText(c, "Há valores pendentes para finalizar a compra!", Toast.LENGTH_LONG).show();
-                }
                 try {
                     File sd = Environment.getExternalStorageDirectory();
                     File data = Environment.getDataDirectory();
