@@ -133,7 +133,7 @@ public class pay extends Activity {
                         rd = dbPost.moFind();
                         if(!rd.get(0).getMoney().equals("")){
                             String re1 = rd.get(0).getMoney();
-                            String re2 = result.toString();
+                            String re2 = dinheiro.getText().toString();
                             Double d0 = new Double(re1);
                             Double d1 = new Double(re2);
                             double resD = d0 + d1;
@@ -142,14 +142,14 @@ public class pay extends Activity {
                             df2.setDecimalSeparator('.');
                             DecimalFormat dform2 = new DecimalFormat("####.##", df2);
                             util us = new util();
-                            us.setMoney(dform2.format(resD));
+                            us.setMoney(dinheiro.getText().toString());
                             db.delMoney();
                             db.moneyIn(us);
 
                         } else {}
                     }catch(Exception e){
                         util us = new util();
-                        us.setMoney(dform.format(res));
+                        us.setMoney(dinheiro.getText().toString());
                         DB d1 = new DB(c);
                         d1.moneyIn(us);
 
@@ -175,13 +175,14 @@ public class pay extends Activity {
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
                     tvRestante.setText("R$ " + dform.format(res));
+
                         try{
                             DB db  = new DB(c);
                             List<util> rd;
                             rd = db.getCarD();
                             if(!rd.get(0).getCarD().equals("")){
                                 String re1 = rd.get(0).getCarD();
-                                String re2 = resPagto.toString();
+                                String re2 = carD.getText().toString();
                                 Double d0 = new Double(re1);
                                 Double d1 = new Double(re2);
                                 double res2 = d0 + d1;
@@ -197,7 +198,7 @@ public class pay extends Activity {
                             } else {}
                         }catch(Exception e){
                             util us = new util();
-                            us.setCarD(resPagto.toString());
+                            us.setCarD(carD.getText().toString());
                             DB d1 = new DB(c);
                             d1.carDIn(us);
 
