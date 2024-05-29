@@ -102,6 +102,7 @@ public class Core extends SQLiteOpenHelper
 		db.execSQL("CREATE TABLE sangria (id integer primary key, valor TEXT, motivo TEXT);");
 
 		db.execSQL("CREATE TABLE cartaoD (id integer primary key, carD text);");
+
 		db.execSQL("CREATE TABLE cartaoC (id integer primary key, carC text);");
 		db.execSQL("CREATE TABLE Pix (id integer primary key, pix text);");
 

@@ -124,7 +124,9 @@ public class pay extends Activity {
                     df.setGroupingSeparator('.');
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
+
                     resPagto = dform.format(res);
+
                     tvRestante.setText("R$ " + dform.format(res));
 
                     try{
@@ -142,7 +144,7 @@ public class pay extends Activity {
                             df2.setDecimalSeparator('.');
                             DecimalFormat dform2 = new DecimalFormat("####.##", df2);
                             util us = new util();
-                            us.setMoney(dinheiro.getText().toString());
+                            us.setMoney(dform2.format(resD));
                             db.delMoney();
                             db.moneyIn(us);
 
@@ -163,7 +165,7 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
-
+                    resPagto = tvRestante.getText().toString();
                     Double v1 = Double.parseDouble(resPagto.toString());
                     Double v2 = Double.parseDouble(carD.getText().toString());
 
@@ -186,17 +188,19 @@ public class pay extends Activity {
                                 Double d0 = new Double(re1);
                                 Double d1 = new Double(re2);
                                 double res2 = d0 + d1;
+
                                 DecimalFormatSymbols df2 = new DecimalFormatSymbols();
                                 df2.setGroupingSeparator('.');
                                 df2.setDecimalSeparator('.');
                                 DecimalFormat dform2 = new DecimalFormat("####.##", df2);
                                 util us = new util();
-                                us.setCarD(dform2.format(res2));
+                                us.setCarD(carD.getText().toString());
                                 db.delCarD();
                                 db.carDIn(us);
 
                             } else {}
                         }catch(Exception e){
+                            Toast.makeText(c, carD.getText().toString(), Toast.LENGTH_SHORT).show();
                             util us = new util();
                             us.setCarD(carD.getText().toString());
                             DB d1 = new DB(c);
@@ -216,8 +220,6 @@ public class pay extends Activity {
         bs.setPositiveButton("  Finalizar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                DB root = new DB(c);
-
 
                 try {
                     File sd = Environment.getExternalStorageDirectory();
