@@ -113,9 +113,7 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
-                    DB db = new DB(c);
-                    util val = db.getTemp(1);
-
+                
                     Double v1 = new Double(result);
                     Double v2 = new Double(dinheiro.getText().toString());
 
@@ -124,10 +122,8 @@ public class pay extends Activity {
                     df.setGroupingSeparator('.');
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
-
                     resPagto = dform.format(res);
-
-                    tvRestante.setText("R$ " + dform.format(res));
+                    tvRestante.setText("R$" + dform.format(res));
 
                     try{
                         DB dbPost  = new DB(c);
@@ -145,7 +141,6 @@ public class pay extends Activity {
                             DecimalFormat dform2 = new DecimalFormat("####.##", df2);
                             util us = new util();
                             us.setMoney(dform2.format(resD));
-                            db.delMoney();
                             db.moneyIn(us);
 
                         } else {}
