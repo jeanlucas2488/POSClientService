@@ -71,8 +71,8 @@ public class pay extends Activity {
         carC.setVisibility(View.GONE);
         pix.setVisibility(View.GONE);
 
-        tvTotal.setText("R$ " + result.toString());
-        tvRestante.setText("R$ " + result.toString());
+        tvTotal.setText(result.toString());
+        tvRestante.setText(result.toString());
 
         dinLayout.setOnClickListener(new View.OnClickListener() {
             @Override
