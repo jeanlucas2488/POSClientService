@@ -113,8 +113,8 @@ public class pay extends Activity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
-                
-                    Double v1 = new Double(result);
+
+                    Double v1 = new Double(tvRestante.getText().toString());
                     Double v2 = new Double(dinheiro.getText().toString());
 
                     double res = v1 - v2;
@@ -122,7 +122,7 @@ public class pay extends Activity {
                     df.setGroupingSeparator('.');
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
-                    resPagto = dform.format(res);
+                    dform.format(res);
                     tvRestante.setText("R$" + dform.format(res));
 
                     try{
@@ -140,8 +140,9 @@ public class pay extends Activity {
                             df2.setDecimalSeparator('.');
                             DecimalFormat dform2 = new DecimalFormat("####.##", df2);
                             util us = new util();
+                            us.setMoneyID(rd.get(0).getMoneyID());
                             us.setMoney(dform2.format(resD));
-                            db.moneyIn(us);
+                            dbPost.moneyUp(us);
 
                         } else {}
                     }catch(Exception e){
@@ -149,7 +150,6 @@ public class pay extends Activity {
                         us.setMoney(dinheiro.getText().toString());
                         DB d1 = new DB(c);
                         d1.moneyIn(us);
-
                     }
                     return true;
                 }
@@ -161,7 +161,7 @@ public class pay extends Activity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
                     resPagto = tvRestante.getText().toString();
-                    Double v1 = Double.parseDouble(resPagto.toString());
+                    Double v1 = Double.parseDouble(tvRestante.getText().toString());
                     Double v2 = Double.parseDouble(carD.getText().toString());
 
                     double res = v1 - v2;
@@ -189,20 +189,16 @@ public class pay extends Activity {
                                 df2.setDecimalSeparator('.');
                                 DecimalFormat dform2 = new DecimalFormat("####.##", df2);
                                 util us = new util();
-                                us.setCarD(carD.getText().toString());
-                                db.delCarD();
-                                db.carDIn(us);
-
+                                us.setCarD_ID(rd.get(0).getCarD_ID());
+                                us.setCarD(dform2.format(res2));
+                                db.carDUp(us);
                             } else {}
                         }catch(Exception e){
-                            Toast.makeText(c, carD.getText().toString(), Toast.LENGTH_SHORT).show();
                             util us = new util();
                             us.setCarD(carD.getText().toString());
                             DB d1 = new DB(c);
                             d1.carDIn(us);
-
                         }
-
                     return true;
                 }
                 return false;

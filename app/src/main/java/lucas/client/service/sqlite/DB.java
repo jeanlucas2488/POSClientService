@@ -15,19 +15,7 @@ public class DB
 		Core cor = new Core(c);
 		db = cor.getWritableDatabase();
 	}
-	public void delTemp(){
-		db.execSQL("delete from temp");
-	}
-	public void setTemp(util us){
-		ContentValues ct = new ContentValues();
-		ct.put("valRest", us.getTemp());
-		db.insert("temp", null, ct);
-	}
-	public void upTemp(util us){
-		ContentValues ct = new ContentValues();
-		ct.put("valRest", us.getTemp());
-		db.update("temp", ct, "id = ?", new String[]{String.valueOf(us.getTempId())});
-	}
+
 	public void insertFecha(util us){
 		ContentValues cv = new ContentValues();
 		cv.put("data", us.getData());
@@ -94,18 +82,7 @@ public class DB
 		}
 		return us2;
 	}
-	public util getTemp(long id){
-		util us = new util();
-		Cursor cs = db.rawQuery("select * from temp WHERE id="+id+"", null);
-		if(cs.moveToFirst()){
-			do{
-				us.setTempId(cs.getLong(cs.getColumnIndex("id")));
-				us.setTemp(cs.getString(cs.getColumnIndex("valRest")));
 
-			}while(cs.moveToNext());
-		}
-		return us;
-	}
 	public util getUserCM(long id){
 		util us = new util();
 		Cursor cs = db.rawQuery("select * from senhaCM WHERE userId="+id+"", null);
@@ -542,20 +519,40 @@ public class DB
 		ct.put("money", us.getMoney());
 		db.insert("dinheiro", null, ct);
 	}
+	public void moneyUp(util us){
+		ContentValues ct = new ContentValues();
+		ct.put("money", us.getMoney());
+		db.update("dinheiro", ct, "id = ?", new String[]{String.valueOf(us.getMoneyID())});
+	}
 	public void carDIn(util us){
 		ContentValues ct = new ContentValues();
 		ct.put("carD", us.getCarD());
 		db.insert("cartaoD", null, ct);
 	}
+	public void carDUp(util us){
+		ContentValues ct = new ContentValues();
+		ct.put("carD", us.getCarD());
+		db.update("cartaoD", ct, "id = ?", new String[]{String.valueOf(us.getCarD_ID())});
+	}
 	public void carCIn(util us){
 		ContentValues ct = new ContentValues();
-		ct.put("carC", us.getCarD());
+		ct.put("carC", us.getCarC());
 		db.insert("cartaoC", null, ct);
+	}
+	public void carCUp(util us){
+		ContentValues ct = new ContentValues();
+		ct.put("carC", us.getCarC());
+		db.update("cartaoC", ct, "id = ?", new String[]{String.valueOf(us.getCarC_ID())});
 	}
 	public void PixIn(util us){
 		ContentValues ct = new ContentValues();
 		ct.put("pix", us.getPix());
 		db.insert("Pix", null, ct);
+	}
+	public void PixUp(util us){
+		ContentValues ct = new ContentValues();
+		ct.put("pix", us.getPix());
+		db.update("Pix", ct, "id = ?", new String[]{String.valueOf(us.getPix_ID())});
 	}
 	public List<util> eFind(){
 		ArrayList<util> arr = new ArrayList<util>();
@@ -814,6 +811,7 @@ public class DB
 			cs.moveToFirst();
 		do{
 			util us = new util();
+			us.setMoneyID(Integer.parseInt(cs.getString(0)));
 			us.setMoney(cs.getString(1));
 			arr.add(us);	
 		}while(cs.moveToNext());

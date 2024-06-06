@@ -11,7 +11,7 @@ public class util {
 	public String money, data, table, user, pass;
 	public String prod;
 	public byte[] image, image2;
-    public long carD_ID, carC_ID, pix_ID;
+    public long moneyID, carD_ID, carC_ID, pix_ID;
 
 	public String quant;
 	public String valor, pagto, pagto2, pagto3, pagto4, pagto5;
@@ -64,6 +64,12 @@ public void setTemp(String tm){
 	public long vendaId;
 	public long supervisor_id;
 
+	public long getMoneyID(){
+		return moneyID;
+	}
+	public void setMoneyID(long cd){
+		this.moneyID = cd;
+	}
 	public long getCarD_ID(){
 		return carD_ID;
 	}
