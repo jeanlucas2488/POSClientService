@@ -3,13 +3,14 @@ import android.Manifest;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.*;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
+import android.view.*;
+import android.widget.*;
+import android.widget.Toolbar.*;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -39,291 +40,282 @@ public class selfConfig extends AppCompatActivity
 	private static final int PERMISSION_REQUEST_CODE = 200;
 	private static final String TAG = "Permisssion";
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		// TODO: Implement this method
 		super.onCreate(savedInstanceState);
-		progress = new ProgressDialog(c, R.style.dialog);
-		progress.setTitle("Configuração do POS!");
-		progress.setIcon(R.drawable.icon);
-		progress.setCancelable(false);
-		progress.setProgress(100);
-		progress.setMessage("Iniciando Configuração do POS...");
-		progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		progress.show();
-		new Thread(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						while (progress.getProgress() <= progress
-							   .getMax()) {
-							Thread.sleep(400);
-							handle.sendMessage(handle.obtainMessage());
-							if (progress.getProgress() == 10) {
-								progress.setMessage("Checando Permissões...");
+
+		Handler handler2 = new Handler();
+		handler2.postDelayed(new Runnable() {
+			public void run() {
+
+				ScrollView sc = new ScrollView(c);
+				LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+				pr.setMargins(10, 60, 10, 0);
+				final LinearLayout root = new LinearLayout(c);
+				sc.setLayoutParams(pr);
+				root.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+				root.setOrientation(LinearLayout.VERTICAL);
+				LinearLayout l1 = new LinearLayout(c);
+				l1.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+
+				l1.setBackgroundColor(Color.BLUE);
+				TextView tv1 = new TextView(c);
+				LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+				pr1.setMargins(10, 40, 10, 0);
+				tv1.setGravity(Gravity.CENTER_HORIZONTAL);
+				tv1.setText("Configuração do POS" + "\n");
+				tv1.setTextSize(20);
+				tv1.setTextColor(Color.WHITE);
+				//tv.setBackgroundResource(R.drawable.border);
+				tv1.setLayoutParams(pr1);
+				l1.addView(tv1);
+				root.addView(l1);
+				sc.addView(root);
+
+				Handler hd = new Handler();
+				hd.postDelayed(new Runnable(){
+					public void run(){
+						LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+						pr1.setMargins(10, 40, 10, 0);
+
+						LinearLayout l2 = new LinearLayout(c);
+						l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+						final TextView tv = new TextView(c);
+						tv.setText("Checando Permissões..." + "\n");
+
+						tv.setBackgroundResource(R.drawable.border);
+						tv.setLayoutParams(pr1);
+						l2.addView(tv);
+						root.addView(l2);
+
+						Handler hd2 = new Handler();
+						hd2.postDelayed(new Runnable(){
+							public void run(){
+								LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+								pr1.setMargins(10, 30, 10, 0);
+
+								LinearLayout l2 = new LinearLayout(c);
+								l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+								final TextView tv = new TextView(c);
+
 								if(checkPermission()){
-									Thread.sleep(5000);
-									progress.setMessage("Continuando Configuração do POS...");
-								} else {
+									tv.setText("Permissão de SdCard Concedida!" + "\n");
+									tv.setTextColor(Color.GREEN);
+								}else {
 									requestPermission();
-									progress.dismiss();
-									finishAffinity();
-									Thread.sleep(999999999);
+									tv.setText("Permissão de SdCard Negada!" + "\n");
+									tv.setTextColor(Color.RED);
 								}
-							}
-							
-							if(progress.getProgress() == 20){
-								progress.setMessage("Importando dados do PDV 1/2...");
+								tv.setBackgroundResource(R.drawable.border);
+								tv.setLayoutParams(pr1);
+								l2.addView(tv);
+								root.addView(l2);
 
-								Thread.sleep(5000);
+								Handler hd3 = new Handler();
+								hd3.postDelayed(new Runnable(){
+									public void run(){
+										LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+										pr1.setMargins(10, 30, 10, 0);
 
-								try {
+										LinearLayout l2 = new LinearLayout(c);
+										l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+										final TextView tv = new TextView(c);
 
-									Thread.sleep(2000);
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
+										tv.setText("Criando diretórios do Sistema POS 1/4..." + "\n");
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-												+ "//databases//" + "myDB.db";
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
+										File f = new File(Environment.getExternalStorageDirectory(), "pdvMain");
+										f.exists();
+										f.mkdir();
 
-										File dbshm = new File(data, currentDBPath + "-shm");
-										File dbwal = new File(data, currentDBPath + "-wal");
+										if(f.canWrite()){
+											Handler ha = new Handler();
+											ha.postDelayed(new Runnable(){
+												public void run(){
+													tv.setText("Criando diretórios do Sistema POS 2/4..." + "\n");
+													File f = new File(Environment.getExternalStorageDirectory(), "pdvMain/.sqlite");
+													f.exists();
+													f.mkdir();
+													if(f.canWrite()){
+														Handler hd4 = new Handler();
+														hd4.postDelayed(new Runnable(){
+															public void run(){
+																Handler hd5 = new Handler();
+																hd5.postDelayed(new Runnable(){
+																	public void run(){
+																		tv.setText("Criando diretórios do Sistema POS 3/4..." + "\n");
 
-										if (dbshm.exists()) {
-											dbshm.delete();
-										}
-										if (dbwal.exists()) {
-											dbwal.delete();
-										}
+																		File f = new File(Environment.getExternalStorageDirectory(), "pdvMain/.Nfe");
+																		f.exists();
+																		f.mkdir();
+																		if(f.canWrite()){
+																			Handler hd6 = new Handler();
+																			hd6.postDelayed(new Runnable(){
+																				public void run(){
+																					tv.setText("Criando diretórios do Sistema POS 4/4..." + "\n");
 
-										File currentDB = new File(data, currentDBPath);
-										File backupDB = new File(sd, backupDBPath);
+																					File f = new File(Environment.getExternalStorageDirectory(), "pdvMain/.fechamentos");
+																					f.exists();
+																					f.mkdir();
+																					if(f.canWrite()){
+																						Handler hd6 = new Handler();
+																						hd6.postDelayed(new Runnable(){
+																							public void run(){
+																								LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+																								pr1.setMargins(10, 30, 10, 0);
 
-										FileChannel src = new FileInputStream(backupDB).getChannel();
-										FileChannel dst = new FileOutputStream(currentDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
+																								LinearLayout l2 = new LinearLayout(c);
+																								l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+																								final TextView tv = new TextView(c);
 
-										progress.setMessage("Banco de Dados Importado!");
-									}
-								} catch (Exception e) {
-									progress.setMessage("Falha ao Importar SQLite!");
-									Thread.sleep(2000);
-									Intent launchIntent = getPackageManager().getLaunchIntentForPackage("lucas.client.service.pos.admin");
-									if (launchIntent != null) {
-										startActivity(launchIntent);//null pointer check in case package name was not found
-									}
-									progress.dismiss();
-									Thread.sleep(99999999);
-								}
-							}
-							if(progress.getProgress() == 30){
-								progress.setMessage("Importando dados do PDV 2/2...");
-								Thread.sleep(3000);
+																								tv.setText("Concluído!" + "\n");
 
-								try {
+																								tv.setBackgroundResource(R.drawable.border);
+																								tv.setLayoutParams(pr1);
+																								l2.addView(tv);
+																								root.addView(l2);
 
-									Thread.sleep(2000);
-									File sd = Environment.getExternalStorageDirectory();
-									File data = Environment.getDataDirectory();
+																								Handler hd6 = new Handler();
+																								hd6.postDelayed(new Runnable(){
+																									public void run(){
+																										LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+																										pr1.setMargins(10, 30, 10, 0);
 
-									if (sd.canWrite()) {
-										String  currentDBPath= "//data//" + c.getOpPackageName()
-												+ "//databases//" + "MCRDB.db";
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/MCRDB.db";
+																										LinearLayout l2 = new LinearLayout(c);
+																										l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+																										final TextView tv = new TextView(c);
 
-										File dbshm = new File(data, currentDBPath + "-shm");
-										File dbwal = new File(data, currentDBPath + "-wal");
+																										tv.setText("Importando Banco de Dados..." + "\n");
+																										Handler hd7 = new Handler();
+																										hd7.postDelayed(new Runnable(){
+																											public void run(){
+																												try {
+																													File sd = Environment.getExternalStorageDirectory();
+																													File data = Environment.getDataDirectory();
 
-										if (dbshm.exists()) {
-											dbshm.delete();
-										}
-										if (dbwal.exists()) {
-											dbwal.delete();
-										}
+																													if (sd.canWrite()) {
+																														tv.setText("Banco de dados Importado!" + "\n");
+																														tv.setTextColor(Color.GREEN);
+																														String  currentDBPath= "//data//" + c.getOpPackageName()
+																																+ "//databases//" + "myDB.db";
 
-										File currentDB = new File(data, currentDBPath);
-										File backupDB = new File(sd, backupDBPath);
+																														String backupDBPath  = "pdvMain/.sqlite/myDB.db";
 
-										FileChannel src = new FileInputStream(backupDB).getChannel();
-										FileChannel dst = new FileOutputStream(currentDB).getChannel();
-										dst.transferFrom(src, 0, src.size());
-										src.close();
-										dst.close();
-										progress.setMessage("Banco de Dados Importado!");
-									}
-								} catch (Exception e) {
-									progress.setMessage("Falha ao Importar SQLite!");
-									Thread.sleep(2000);
-									Intent launchIntent = getPackageManager().getLaunchIntentForPackage("lucas.client.service.pos.admin");
-									if (launchIntent != null) {
-										startActivity(launchIntent);//null pointer check in case package name was not found
-									}
-									progress.dismiss();
-									Thread.sleep(99999999);
-								}
-							}
-							if(progress.getProgress() == 40){
-								progress.setMessage("Verificando a integridade do POS 1/2...");
-								Thread.sleep(5000);
+																														File currentDB = new File(data, currentDBPath);
+																														File backupDB = new File(sd, backupDBPath);
 
-								try{
-									DB db = new DB(c);
-									util pag1 = db.getCategory(1);
-									if(!pag1.getCategory().toString().equals("")){
-										List<util> res = db.findP1();
-										if(!res.get(0).getProd1().toString().equals("")){
-											util user1 = db.getUserCM(1);
-											util user2 = db.getUserMCR(1);
-											util user3 = db.getSuperVisor(1);
-											if(!user1.getUser().toString().equals("")){
-												if(user2.getUser().toString().equals("")){
-													if(user3.getSenhaSuperVisor().toString().equals("")){
-														progress.setMessage("Verificação concluída!");
-														Thread.sleep(4000);
+
+																														FileChannel src = new FileInputStream(backupDB).getChannel();
+																														FileChannel dst = new FileOutputStream(currentDB).getChannel();
+																														dst.transferFrom(src, 0, src.size());
+																														src.close();
+																														dst.close();
+																													} else {
+																														tv.setText("Erro ao Importar Banco de dados!" + "\n");
+																														tv.setTextColor(Color.GREEN);
+
+																													}
+																												} catch (Exception e2) {
+
+																												}
+																												try {
+																													File sd = Environment.getExternalStorageDirectory();
+																													File data = Environment.getDataDirectory();
+
+																													if (sd.canWrite()) {
+																														tv.setText("Banco de dados Importado!" + "\n");
+																														tv.setTextColor(Color.GREEN);
+																														String  currentDBPath= "//data//" + c.getOpPackageName()
+																																+ "//databases//" + "MCRDB.db";
+
+																														String backupDBPath  = "pdvMain/.sqlite/MCRDB.db";
+
+																														File currentDB = new File(data, currentDBPath);
+																														File backupDB = new File(sd, backupDBPath);
+
+
+																														FileChannel src = new FileInputStream(backupDB).getChannel();
+																														FileChannel dst = new FileOutputStream(currentDB).getChannel();
+																														dst.transferFrom(src, 0, src.size());
+																														src.close();
+																														dst.close();
+																													} else {
+																														tv.setText("Erro ao Importar Banco de dados!" + "\n");
+																														tv.setTextColor(Color.GREEN);
+
+																													}
+																												} catch (Exception e2) {
+
+																												}
+																											}
+																										}, 2000);
+																										tv.setBackgroundResource(R.drawable.border);
+																										tv.setLayoutParams(pr1);
+																										l2.addView(tv);
+																										root.addView(l2);
+																										Handler hd8 = new Handler();
+																										hd8.postDelayed(new Runnable(){
+																											public void run(){
+
+																												LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+																												pr1.setMargins(10, 30, 10, 0);
+
+																												LinearLayout l2 = new LinearLayout(c);
+																												l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+																												final TextView tv = new TextView(c);
+
+																												tv.setText("Verificando a Integridade do POS..." + "\n");
+
+
+																												tv.setBackgroundResource(R.drawable.border);
+																												tv.setLayoutParams(pr1);
+																												l2.addView(tv);
+																												root.addView(l2);
+																											}
+																										}, 2000);
+																									}
+																								}, 900);
+																							}
+																						}, 1000);
+																					} else {
+																						tv.setText("Erro ao Criar diretórios!" + "\n");
+																						tv.setTextColor(Color.RED);
+																					}
+																				}
+																			}, 1000);
+																		} else {
+																			tv.setText("Erro ao Criar diretórios!" + "\n");
+																			tv.setTextColor(Color.RED);
+																		}
+																	}
+																}, 1000);
+															}
+														}, 1000);
 													} else {
-
+														tv.setText("Erro ao Criar diretórios!" + "\n");
+														tv.setTextColor(Color.RED);
 													}
-												} else {
-
 												}
-											} else {
-
-											}
+											}, 1000);
 										} else {
-
+											tv.setText("Erro ao Criar diretórios!" + "\n");
+											tv.setTextColor(Color.RED);
 										}
-									} else {
-
+										tv.setBackgroundResource(R.drawable.border);
+										tv.setLayoutParams(pr1);
+										l2.addView(tv);
+										root.addView(l2);
 									}
-								} catch (Exception e){
-									progress.setMessage("POS 1/2 Não configurado corretamente!");
-									progress.cancel();
-									progress.dismiss();
-									Thread.sleep(999999999);
-								}
+								}, 900);
 							}
-							if(progress.getProgress() == 50){
-								progress.setMessage("Verificando a integridade do POS 2/2...");
-								try{
-									SQLiteControl db = new SQLiteControl(c);
-									util pag1 = db.getCategory(1);
-									if(!pag1.getCategory().toString().equals("")){
-										List<util> res = db.findP1();
-										if(!res.get(0).getProd1().toString().equals("")){
-											DB dtes = new DB(c);
-											util user2 = dtes.getUserMCR(1);
-											if(!user2.getUser().toString().equals("")){
-												progress.setMessage("Verificação Concluída!");
-												Thread.sleep(2000);
-											} else {
-
-											}
-											} else {
-
-											}
-										} else {
-
-										}
-								} catch (Exception e){
-									progress.setMessage("POS 2/2 Não configurado corretamente!");
-									progress.cancel();
-									progress.dismiss();
-									Thread.sleep(999999999);
-								}
-							}
-							if(progress.getProgress() == 60){
-								progress.setMessage("Verificando se há vendas no POS 1/2");
-								Thread.sleep(3000);
-								DB db = new DB(c);
-								try {
-									List<util> res = db.moFind();
-									if(!res.get(0).getMoney().toString().equals("")){
-										progress.setMessage("Ops, há vendas em Aberto!");
-										Thread.sleep(3000);
-										startActivity(new Intent(c, caixaMain.class));
-										Thread.sleep(9999999);
-									} else {
-
-									}
-								} catch (Exception e){
-									try{
-										util venda = db.getVenda(1);
-										if(!venda.getData().toString().equals("")){
-											progress.setMessage("Ops! Tem venda Arquivada pra finalizar!");
-											Thread.sleep(2000);
-											Intent it = new Intent(c, caixaMain.class);
-											Bundle bun = new Bundle();
-											String res = "1";
-											bun.putString("chave2", res);
-											it.putExtras(bun);
-											startActivity(it);
-											progress.cancel();
-											Thread.sleep(999999999);
-										}else {
-										}
-									} catch (Exception i){
-										SQLiteControl d = new SQLiteControl(c);
-										try {
-											List<util> res = db.moFind();
-											if(!res.get(0).getMoney().toString().equals("")){
-												progress.setMessage("Ops, há vendas em Aberto!");
-												Thread.sleep(3000);
-												startActivity(new Intent(c, caixaMain.class));
-												Thread.sleep(9999999);
-											} else {
-
-											}
-										} catch(Exception e2){
-											try{
-												SQLiteControl sql = new SQLiteControl(c);
-												util venda2 = sql.getVenda(1);
-												if(!venda2.getData().toString().equals("")){
-													progress.setMessage("Ops! Tem venda Arquivada pra finalizar!");
-													Thread.sleep(2000);
-													Intent it = new Intent(c, MerceariaMain.class);
-													Bundle bun = new Bundle();
-													String res = "1";
-													bun.putString("chave2", res);
-													it.putExtras(bun);
-													startActivity(it);
-													progress.cancel();
-													Thread.sleep(999999999);
-												}else {
-												}
-											}catch (Exception i2){
-												progress.setMessage("Não há vendas em Aberto!");
-											}
-										}
-									}
-							}
-						}
-							if(progress.getProgress() == 80){
-								progress.setMessage("Executando Abertura do POS...");
-								Thread.sleep(2000);
-								progress.dismiss();
-								progress.cancel();
-								Intent itt = new Intent(c, Login.class);
-								startActivity(itt);
-								Thread.sleep(99999999);
-							}
-						}
-					} catch (Exception e6) {
-						e6.printStackTrace();
+						}, 5000);
 					}
-				}
-			}).start();
+				}, 1000);
+				setContentView(sc);
+
+			}
+		}, 2000);
+
 	}
-	Handler handle = new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			progress.incrementProgressBy(1);
-		}
-	};
 	private void requestPermission(){
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
 			try{

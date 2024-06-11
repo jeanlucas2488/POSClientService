@@ -17,7 +17,7 @@
             android:theme="@style/dialog"
             android:name=".caixa.DBGen"
             android:exported="true"
-            android:label="@string/app_name" >
+           >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +28,7 @@
         <activity
             android:theme="@style/dialog"
             android:name=".caixa.selfConfig"
-            android:label="@string/app_pdv" >
+            android:label="Configuração do POS" >
         </activity>
         <activity
             android:theme="@style/dialog"
