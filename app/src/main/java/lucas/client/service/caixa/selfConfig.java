@@ -195,7 +195,7 @@ public class selfConfig extends AppCompatActivity
 																													if (sd.canWrite()) {
 																														tv.setText("Banco de dados Importado!" + "\n");
 																														tv.setTextColor(Color.GREEN);
-																														String  currentDBPath= "//data//" + c.getOpPackageName()
+																														String  currentDBPath= "//data//" + c.getPackageName()
 																																+ "//databases//" + "myDB.db";
 
 																														String backupDBPath  = "pdvMain/.sqlite/myDB.db";
@@ -210,41 +210,12 @@ public class selfConfig extends AppCompatActivity
 																														src.close();
 																														dst.close();
 																													} else {
-																														tv.setText("Erro ao Importar Banco de dados!" + "\n");
-																														tv.setTextColor(Color.GREEN);
+
 
 																													}
 																												} catch (Exception e2) {
-
-																												}
-																												try {
-																													File sd = Environment.getExternalStorageDirectory();
-																													File data = Environment.getDataDirectory();
-
-																													if (sd.canWrite()) {
-																														tv.setText("Banco de dados Importado!" + "\n");
-																														tv.setTextColor(Color.GREEN);
-																														String  currentDBPath= "//data//" + c.getOpPackageName()
-																																+ "//databases//" + "MCRDB.db";
-
-																														String backupDBPath  = "pdvMain/.sqlite/MCRDB.db";
-
-																														File currentDB = new File(data, currentDBPath);
-																														File backupDB = new File(sd, backupDBPath);
-
-
-																														FileChannel src = new FileInputStream(backupDB).getChannel();
-																														FileChannel dst = new FileOutputStream(currentDB).getChannel();
-																														dst.transferFrom(src, 0, src.size());
-																														src.close();
-																														dst.close();
-																													} else {
-																														tv.setText("Erro ao Importar Banco de dados!" + "\n");
-																														tv.setTextColor(Color.GREEN);
-
-																													}
-																												} catch (Exception e2) {
-
+																													tv.setText("Erro ao Importar Banco de dados!" + "\n");
+																													tv.setTextColor(Color.RED);
 																												}
 																											}
 																										}, 2000);
@@ -263,9 +234,56 @@ public class selfConfig extends AppCompatActivity
 																												l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 																												final TextView tv = new TextView(c);
 
-																												tv.setText("Verificando a Integridade do POS..." + "\n");
+																												tv.setText("Verificando a Integridade do POS 1/2..." + "\n");
 
+																												try{
+																													DB db = new DB(c);
 
+																													util root = db.getCategory(1);
+																													if(!root.getCategory().equals("")){
+																														Handler nb = new Hanler();
+																														nb.postDelayed(new Runnable() {
+																															@Override
+																															public void run() {
+																																tv.setText("Verificando se há produtos cadastrados no PDV 1/2...");
+																																Handler nb2 = new Handler();
+																																nb2.postDelayed(new Runnable() {
+																																	@Override
+																																	public void run() {
+																																		try{
+																																			DB b = new DB(c);
+																																			List<util> result = b.findP1();
+
+																																			if(!result.get(0).getP1().toString().equals("")){
+																																				tv.setText("Verificando outros requisitos, aguarde...");
+																																				Handler hd = new Handler();
+																																				hd.postDelayed(new Runnable() {
+																																					@Override
+																																					public void run() {
+
+																																					}
+																																				}, 1000);
+																																			} else {
+																																			}
+																																		} catch(Exception e){
+																																			tv.setText("Não Há produtos cadastrados no PDV 1/2!");
+																																			tv.setTextColor(Color.RED);
+																																		}
+																																	}
+																																}, 1000);
+																															}
+																														}, 900);
+																													} else{}
+																												} catch(Exception e){
+																													Handler nb = new Handler();
+																													nb.postDelayed(new Runnable() {
+																														@Override
+																														public void run() {
+																															tv.setText("Não foram adicionadas as Páginas do PDV 1/2!");
+																															tv.setTextColor(Color.RED);
+																														}
+																													}, 900);
+																												}
 																												tv.setBackgroundResource(R.drawable.border);
 																												tv.setLayoutParams(pr1);
 																												l2.addView(tv);
