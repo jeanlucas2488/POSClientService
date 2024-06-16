@@ -184,7 +184,7 @@ public class selfConfig extends AppCompatActivity
 																										l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 																										final TextView tv = new TextView(c);
 
-																										tv.setText("Importando Banco de Dados..." + "\n");
+																										tv.setText("Importando Banco de Dados 1/2..." + "\n");
 																										Handler hd7 = new Handler();
 																										hd7.postDelayed(new Runnable(){
 																											public void run(){
@@ -193,7 +193,7 @@ public class selfConfig extends AppCompatActivity
 																													File data = Environment.getDataDirectory();
 
 																													if (sd.canWrite()) {
-																														tv.setText("Banco de dados Importado!" + "\n");
+																														tv.setText("Banco de dados 1/2 Importado!" + "\n");
 																														tv.setTextColor(Color.GREEN);
 																														String  currentDBPath= "//data//" + c.getPackageName()
 																																+ "//databases//" + "myDB.db";
@@ -210,11 +210,9 @@ public class selfConfig extends AppCompatActivity
 																														src.close();
 																														dst.close();
 																													} else {
-
-
 																													}
 																												} catch (Exception e2) {
-																													tv.setText("Erro ao Importar Banco de dados!" + "\n");
+																													tv.setText("Erro ao Importar Banco de dados 1/2!" + "\n");
 																													tv.setTextColor(Color.RED);
 																												}
 																											}
@@ -223,6 +221,7 @@ public class selfConfig extends AppCompatActivity
 																										tv.setLayoutParams(pr1);
 																										l2.addView(tv);
 																										root.addView(l2);
+																										
 																										Handler hd8 = new Handler();
 																										hd8.postDelayed(new Runnable(){
 																											public void run(){
@@ -293,7 +292,7 @@ public class selfConfig extends AppCompatActivity
 																									}
 																								}, 900);
 																							}
-																						}, 1000);
+																						}, 10000);
 																					} else {
 																						tv.setText("Erro ao Criar diretórios!" + "\n");
 																						tv.setTextColor(Color.RED);
