@@ -46,291 +46,348 @@ public class selfConfig extends AppCompatActivity
 
 		Handler handler2 = new Handler();
 		handler2.postDelayed(new Runnable() {
-			public void run() {
+				public void run() {
 
-				ScrollView sc = new ScrollView(c);
-				LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-				pr.setMargins(10, 60, 10, 0);
-				final LinearLayout root = new LinearLayout(c);
-				sc.setLayoutParams(pr);
-				root.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-				root.setOrientation(LinearLayout.VERTICAL);
-				LinearLayout l1 = new LinearLayout(c);
-				l1.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+					ScrollView sc = new ScrollView(c);
+					LinearLayout.LayoutParams pr = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+					pr.setMargins(10, 60, 10, 0);
+					final LinearLayout root = new LinearLayout(c);
+					sc.setLayoutParams(pr);
+					root.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+					root.setOrientation(LinearLayout.VERTICAL);
+					LinearLayout l1 = new LinearLayout(c);
+					l1.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 
-				l1.setBackgroundColor(Color.BLUE);
-				TextView tv1 = new TextView(c);
-				LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-				pr1.setMargins(10, 40, 10, 0);
-				tv1.setGravity(Gravity.CENTER_HORIZONTAL);
-				tv1.setText("Configuração do POS" + "\n");
-				tv1.setTextSize(20);
-				tv1.setTextColor(Color.WHITE);
-				//tv.setBackgroundResource(R.drawable.border);
-				tv1.setLayoutParams(pr1);
-				l1.addView(tv1);
-				root.addView(l1);
-				sc.addView(root);
+					l1.setBackgroundColor(Color.BLUE);
+					TextView tv1 = new TextView(c);
+					LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+					pr1.setMargins(10, 40, 10, 0);
+					tv1.setGravity(Gravity.CENTER_HORIZONTAL);
+					tv1.setText("Configuração do POS" + "\n");
+					tv1.setTextSize(20);
+					tv1.setTextColor(Color.WHITE);
+					//tv.setBackgroundResource(R.drawable.border);
+					tv1.setLayoutParams(pr1);
+					l1.addView(tv1);
+					root.addView(l1);
+					sc.addView(root);
 
-				Handler hd = new Handler();
-				hd.postDelayed(new Runnable(){
-					public void run(){
-						LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-						pr1.setMargins(10, 40, 10, 0);
-
-						LinearLayout l2 = new LinearLayout(c);
-						l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-						final TextView tv = new TextView(c);
-						tv.setText("Checando Permissões..." + "\n");
-
-						tv.setBackgroundResource(R.drawable.border);
-						tv.setLayoutParams(pr1);
-						l2.addView(tv);
-						root.addView(l2);
-
-						Handler hd2 = new Handler();
-						hd2.postDelayed(new Runnable(){
+					Handler hd = new Handler();
+					hd.postDelayed(new Runnable(){
 							public void run(){
 								LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-								pr1.setMargins(10, 30, 10, 0);
+								pr1.setMargins(10, 40, 10, 0);
 
 								LinearLayout l2 = new LinearLayout(c);
 								l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 								final TextView tv = new TextView(c);
+								tv.setText("Checando Permissões..." + "\n");
 
-								if(checkPermission()){
-									tv.setText("Permissão de SdCard Concedida!" + "\n");
-									tv.setTextColor(Color.GREEN);
-								}else {
-									requestPermission();
-									tv.setText("Permissão de SdCard Negada!" + "\n");
-									tv.setTextColor(Color.RED);
-								}
 								tv.setBackgroundResource(R.drawable.border);
 								tv.setLayoutParams(pr1);
 								l2.addView(tv);
 								root.addView(l2);
 
-								Handler hd3 = new Handler();
-								hd3.postDelayed(new Runnable(){
-									public void run(){
-										LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-										pr1.setMargins(10, 30, 10, 0);
+								Handler hd2 = new Handler();
+								hd2.postDelayed(new Runnable(){
+										public void run(){
+											LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+											pr1.setMargins(10, 30, 10, 0);
 
-										LinearLayout l2 = new LinearLayout(c);
-										l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-										final TextView tv = new TextView(c);
+											LinearLayout l2 = new LinearLayout(c);
+											l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+											final TextView tv = new TextView(c);
 
-										tv.setText("Criando diretórios do Sistema POS 1/4..." + "\n");
+											if(checkPermission()){
+												tv.setText("Permissão de SdCard Concedida!" + "\n");
+												tv.setTextColor(Color.GREEN);
+											}else {
+												requestPermission();
+												tv.setText("Permissão de SdCard Negada!" + "\n");
+												tv.setTextColor(Color.RED);
+											}
+											tv.setBackgroundResource(R.drawable.border);
+											tv.setLayoutParams(pr1);
+											l2.addView(tv);
+											root.addView(l2);
 
-										File f = new File(Environment.getExternalStorageDirectory(), "pdvMain");
-										f.exists();
-										f.mkdir();
+											Handler hd3 = new Handler();
+											hd3.postDelayed(new Runnable(){
+													public void run(){
+														LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+														pr1.setMargins(10, 30, 10, 0);
 
-										if(f.canWrite()){
-											Handler ha = new Handler();
-											ha.postDelayed(new Runnable(){
-												public void run(){
-													tv.setText("Criando diretórios do Sistema POS 2/4..." + "\n");
-													File f = new File(Environment.getExternalStorageDirectory(), "pdvMain/.sqlite");
-													f.exists();
-													f.mkdir();
-													if(f.canWrite()){
-														Handler hd4 = new Handler();
-														hd4.postDelayed(new Runnable(){
-															public void run(){
-																Handler hd5 = new Handler();
-																hd5.postDelayed(new Runnable(){
+														LinearLayout l2 = new LinearLayout(c);
+														l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+														final TextView tv = new TextView(c);
+
+														tv.setText("Criando diretórios do Sistema POS 1/4..." + "\n");
+
+														File f = new File(Environment.getExternalStorageDirectory(), "pdvMain");
+														f.exists();
+														f.mkdir();
+
+														if(f.canWrite()){
+															Handler ha = new Handler();
+															ha.postDelayed(new Runnable(){
 																	public void run(){
-																		tv.setText("Criando diretórios do Sistema POS 3/4..." + "\n");
-
-																		File f = new File(Environment.getExternalStorageDirectory(), "pdvMain/.Nfe");
+																		tv.setText("Criando diretórios do Sistema POS 2/4..." + "\n");
+																		File f = new File(Environment.getExternalStorageDirectory(), "pdvMain/.sqlite");
 																		f.exists();
 																		f.mkdir();
 																		if(f.canWrite()){
-																			Handler hd6 = new Handler();
-																			hd6.postDelayed(new Runnable(){
-																				public void run(){
-																					tv.setText("Criando diretórios do Sistema POS 4/4..." + "\n");
+																			Handler hd4 = new Handler();
+																			hd4.postDelayed(new Runnable(){
+																					public void run(){
+																						Handler hd5 = new Handler();
+																						hd5.postDelayed(new Runnable(){
+																								public void run(){
+																									tv.setText("Criando diretórios do Sistema POS 3/4..." + "\n");
 
-																					File f = new File(Environment.getExternalStorageDirectory(), "pdvMain/.fechamentos");
-																					f.exists();
-																					f.mkdir();
-																					if(f.canWrite()){
-																						Handler hd6 = new Handler();
-																						hd6.postDelayed(new Runnable(){
-																							public void run(){
-																								LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-																								pr1.setMargins(10, 30, 10, 0);
+																									File f = new File(Environment.getExternalStorageDirectory(), "pdvMain/.Nfe");
+																									f.exists();
+																									f.mkdir();
+																									if(f.canWrite()){
+																										Handler hd6 = new Handler();
+																										hd6.postDelayed(new Runnable(){
+																												public void run(){
+																													tv.setText("Criando diretórios do Sistema POS 4/4..." + "\n");
 
-																								LinearLayout l2 = new LinearLayout(c);
-																								l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-																								final TextView tv = new TextView(c);
+																													File f = new File(Environment.getExternalStorageDirectory(), "pdvMain/.fechamentos");
+																													f.exists();
+																													f.mkdir();
+																													if(f.canWrite()){
+																														Handler hd6 = new Handler();
+																														hd6.postDelayed(new Runnable(){
+																																public void run(){
+																																	LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+																																	pr1.setMargins(10, 30, 10, 0);
 
-																								tv.setText("Concluído!" + "\n");
+																																	LinearLayout l2 = new LinearLayout(c);
+																																	l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+																																	final TextView tv = new TextView(c);
 
-																								tv.setBackgroundResource(R.drawable.border);
-																								tv.setLayoutParams(pr1);
-																								l2.addView(tv);
-																								root.addView(l2);
+																																	tv.setText("Concluído!" + "\n");
 
-																								Handler hd6 = new Handler();
-																								hd6.postDelayed(new Runnable(){
-																									public void run(){
-																										LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-																										pr1.setMargins(10, 30, 10, 0);
+																																	tv.setBackgroundResource(R.drawable.border);
+																																	tv.setLayoutParams(pr1);
+																																	l2.addView(tv);
+																																	root.addView(l2);
 
-																										LinearLayout l2 = new LinearLayout(c);
-																										l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-																										final TextView tv = new TextView(c);
+																																	Handler hd6 = new Handler();
+																																	hd6.postDelayed(new Runnable(){
+																																			public void run(){
+																																				LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+																																				pr1.setMargins(10, 30, 10, 0);
 
-																										tv.setText("Importando Banco de Dados 1/2..." + "\n");
-																										Handler hd7 = new Handler();
-																										hd7.postDelayed(new Runnable(){
-																											public void run(){
-																												try {
-																													File sd = Environment.getExternalStorageDirectory();
-																													File data = Environment.getDataDirectory();
+																																				LinearLayout l2 = new LinearLayout(c);
+																																				l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+																																				final TextView tv = new TextView(c);
 
-																													if (sd.canWrite()) {
-																														tv.setText("Banco de dados 1/2 Importado!" + "\n");
-																														tv.setTextColor(Color.GREEN);
-																														String  currentDBPath= "//data//" + c.getPackageName()
-																																+ "//databases//" + "myDB.db";
+																																				tv.setText("Importando Banco de Dados 1/2..." + "\n");
+																																				Handler hd7 = new Handler();
+																																				hd7.postDelayed(new Runnable(){
+																																						public void run(){
+																																							try {
+																																								File sd = Environment.getExternalStorageDirectory();
+																																								File data = Environment.getDataDirectory();
 
-																														String backupDBPath  = "pdvMain/.sqlite/myDB.db";
+																																								if (sd.canWrite()) {
+																																									tv.setText("Banco de dados 1/2 Importado!" + "\n");
+																																									tv.setTextColor(Color.GREEN);
+																																									String  currentDBPath= "//data//" + c.getPackageName()
+																																										+ "//databases//" + "myDB.db";
 
-																														File currentDB = new File(data, currentDBPath);
-																														File backupDB = new File(sd, backupDBPath);
+																																									String backupDBPath  = "pdvMain/.sqlite/myDB.db";
+
+																																									File currentDB = new File(data, currentDBPath);
+																																									File backupDB = new File(sd, backupDBPath);
 
 
-																														FileChannel src = new FileInputStream(backupDB).getChannel();
-																														FileChannel dst = new FileOutputStream(currentDB).getChannel();
-																														dst.transferFrom(src, 0, src.size());
-																														src.close();
-																														dst.close();
-																													} else {
-																													}
-																												} catch (Exception e2) {
-																													tv.setText("Erro ao Importar Banco de dados 1/2!" + "\n");
-																													tv.setTextColor(Color.RED);
-																												}
-																											}
-																										}, 2000);
-																										tv.setBackgroundResource(R.drawable.border);
-																										tv.setLayoutParams(pr1);
-																										l2.addView(tv);
-																										root.addView(l2);
-																										
-																										Handler hd8 = new Handler();
-																										hd8.postDelayed(new Runnable(){
-																											public void run(){
+																																									FileChannel src = new FileInputStream(backupDB).getChannel();
+																																									FileChannel dst = new FileOutputStream(currentDB).getChannel();
+																																									dst.transferFrom(src, 0, src.size());
+																																									src.close();
+																																									dst.close();
+																																								} else {
+																																								}
+																																							} catch (Exception e2) {
+																																								tv.setText("Erro ao Importar Banco de dados 1/2!" + "\n");
+																																								tv.setTextColor(Color.RED);
+																																							}
+																																						}
+																																					}, 2000);
+																																					
+																																				tv.setBackgroundResource(R.drawable.border);
+																																				tv.setLayoutParams(pr1);
+																																				l2.addView(tv);
+																																				root.addView(l2);
+																																				
+																																				Handler as = new Handler();
+																																				as.postDelayed(new Runnable(){
 
-																												LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-																												pr1.setMargins(10, 30, 10, 0);
+																																						@Override
+																																						public void run()
+																																						{
+																																							// TODO: Implement this method
+																																							LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+																																							pr1.setMargins(10, 30, 10, 0);
 
-																												LinearLayout l2 = new LinearLayout(c);
-																												l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-																												final TextView tv = new TextView(c);
+																																							LinearLayout l2 = new LinearLayout(c);
+																																							l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+																																							final TextView tv = new TextView(c);
 
-																												tv.setText("Verificando a Integridade do POS 1/2..." + "\n");
+																																							tv.setText("Importando Banco de Dados 2/2..." + "\n");
+																																							Handler hd7 = new Handler();
+																																							hd7.postDelayed(new Runnable(){
+																																									public void run(){
+																																										try {
+																																											File sd = Environment.getExternalStorageDirectory();
+																																											File data = Environment.getDataDirectory();
 
-																												try{
-																													DB db = new DB(c);
+																																											if (sd.canWrite()) {
+																																												tv.setText("Banco de dados 2/2 Importado!" + "\n");
+																																												tv.setTextColor(Color.GREEN);
+																																												String  currentDBPath= "//data//" + c.getPackageName()
+																																													+ "//databases//" + "MCRDB.db";
 
-																													util root = db.getCategory(1);
-																													if(!root.getCategory().equals("")){
-																														Handler nb = new Hanler();
-																														nb.postDelayed(new Runnable() {
-																															@Override
-																															public void run() {
-																																tv.setText("Verificando se há produtos cadastrados no PDV 1/2...");
-																																Handler nb2 = new Handler();
-																																nb2.postDelayed(new Runnable() {
-																																	@Override
-																																	public void run() {
-																																		try{
-																																			DB b = new DB(c);
-																																			List<util> result = b.findP1();
+																																												String backupDBPath  = "pdvMain/.sqlite/MCRDB.db";
 
-																																			if(!result.get(0).getP1().toString().equals("")){
-																																				tv.setText("Verificando outros requisitos, aguarde...");
-																																				Handler hd = new Handler();
-																																				hd.postDelayed(new Runnable() {
-																																					@Override
-																																					public void run() {
+																																												File currentDB = new File(data, currentDBPath);
+																																												File backupDB = new File(sd, backupDBPath);
 
-																																					}
-																																				}, 1000);
-																																			} else {
+
+																																												FileChannel src = new FileInputStream(backupDB).getChannel();
+																																												FileChannel dst = new FileOutputStream(currentDB).getChannel();
+																																												dst.transferFrom(src, 0, src.size());
+																																												src.close();
+																																												dst.close();
+																																											} else {
+																																											}
+																																										} catch (Exception e2) {
+																																											tv.setText("Erro ao Importar Banco de dados 2/2!" + "\n");
+																																											tv.setTextColor(Color.RED);
+																																										}
+																																									}
+																																								}, 2000);
+
+																																							tv.setBackgroundResource(R.drawable.border);
+																																							tv.setLayoutParams(pr1);
+																																							l2.addView(tv);
+																																							root.addView(l2);
+																																						}
+																																					
+																																				}, 2000);
+																																				Handler hd8 = new Handler();
+																																				hd8.postDelayed(new Runnable(){
+																																						public void run(){
+
+																																							LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+																																							pr1.setMargins(10, 30, 10, 0);
+
+																																							LinearLayout l2 = new LinearLayout(c);
+																																							l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+																																							final TextView tv = new TextView(c);
+
+																																							tv.setText("Verificando a Integridade do POS 1/2..." + "\n");
+
+																																							try{
+																																								DB db = new DB(c);
+
+																																								util root = db.getCategory(1);
+																																								if(!root.getCategory().equals("")){
+																																									Handler nb = new Handler();
+																																									nb.postDelayed(new Runnable() {
+																																											@Override
+																																											public void run() {
+																																												tv.setText("Verificando se há produtos cadastrados no PDV 1/2...");
+																																												Handler nb2 = new Handler();
+																																												nb2.postDelayed(new Runnable() {
+																																														@Override
+																																														public void run() {
+																																															try{
+																																																DB b = new DB(c);
+																																																List<util> result = b.findP1();
+
+																																																if(!result.get(0).getP1().toString().equals("")){
+																																																	tv.setText("Verificando outros requisitos, aguarde...");
+																																																	Handler hd = new Handler();
+																																																	hd.postDelayed(new Runnable() {
+																																																			@Override
+																																																			public void run() {
+
+																																																			}
+																																																		}, 1000);
+																																																} else {
+																																																}
+																																															} catch(Exception e){
+																																																tv.setText("Não Há produtos cadastrados no PDV 1/2!");
+																																																tv.setTextColor(Color.RED);
+																																															}
+																																														}
+																																													}, 1000);
+																																											}
+																																										}, 900);
+																																								} else{}
+																																							} catch(Exception e){
+																																								Handler nb = new Handler();
+																																								nb.postDelayed(new Runnable() {
+																																										@Override
+																																										public void run() {
+																																											tv.setText("Não foram adicionadas as Páginas do PDV 1/2!");
+																																											tv.setTextColor(Color.RED);
+																																										}
+																																									}, 900);
+																																							}
+																																							tv.setBackgroundResource(R.drawable.border);
+																																							tv.setLayoutParams(pr1);
+																																							l2.addView(tv);
+																																							root.addView(l2);
+																																						}
+																																						
+																																					}, 8000);
 																																			}
-																																		} catch(Exception e){
-																																			tv.setText("Não Há produtos cadastrados no PDV 1/2!");
-																																			tv.setTextColor(Color.RED);
-																																		}
-																																	}
-																																}, 1000);
-																															}
-																														}, 900);
-																													} else{}
-																												} catch(Exception e){
-																													Handler nb = new Handler();
-																													nb.postDelayed(new Runnable() {
-																														@Override
-																														public void run() {
-																															tv.setText("Não foram adicionadas as Páginas do PDV 1/2!");
-																															tv.setTextColor(Color.RED);
-																														}
-																													}, 900);
+																																		}, 900);
+																																}
+																															}, 1000);
+																													} else {
+																														tv.setText("Erro ao Criar diretórios!" + "\n");
+																														tv.setTextColor(Color.RED);
+																													}
 																												}
-																												tv.setBackgroundResource(R.drawable.border);
-																												tv.setLayoutParams(pr1);
-																												l2.addView(tv);
-																												root.addView(l2);
-																											}
-																										}, 2000);
+																											}, 1000);
+																									} else {
+																										tv.setText("Erro ao Criar diretórios!" + "\n");
+																										tv.setTextColor(Color.RED);
 																									}
-																								}, 900);
-																							}
-																						}, 10000);
-																					} else {
-																						tv.setText("Erro ao Criar diretórios!" + "\n");
-																						tv.setTextColor(Color.RED);
+																								}
+																							}, 1000);
 																					}
-																				}
-																			}, 1000);
+																				}, 1000);
 																		} else {
 																			tv.setText("Erro ao Criar diretórios!" + "\n");
 																			tv.setTextColor(Color.RED);
 																		}
 																	}
 																}, 1000);
-															}
-														}, 1000);
-													} else {
-														tv.setText("Erro ao Criar diretórios!" + "\n");
-														tv.setTextColor(Color.RED);
+														} else {
+															tv.setText("Erro ao Criar diretórios!" + "\n");
+															tv.setTextColor(Color.RED);
+														}
+														tv.setBackgroundResource(R.drawable.border);
+														tv.setLayoutParams(pr1);
+														l2.addView(tv);
+														root.addView(l2);
 													}
-												}
-											}, 1000);
-										} else {
-											tv.setText("Erro ao Criar diretórios!" + "\n");
-											tv.setTextColor(Color.RED);
+												}, 900);
 										}
-										tv.setBackgroundResource(R.drawable.border);
-										tv.setLayoutParams(pr1);
-										l2.addView(tv);
-										root.addView(l2);
-									}
-								}, 900);
+									}, 5000);
 							}
-						}, 5000);
-					}
-				}, 1000);
-				setContentView(sc);
+						}, 1000);
+					setContentView(sc);
 
-			}
-		}, 2000);
+				}
+			}, 2000);
 
 	}
 	private void requestPermission(){
@@ -349,56 +406,4 @@ public class selfConfig extends AppCompatActivity
 				storageActivityResultLauncher.launch(it2);
 			}
 		} else {
-			ActivityCompat.requestPermissions(selfConfig.this, new String[]{WRITE_EXTERNAL_STORAGE, MANAGE_EXTERNAL_STORAGE,  READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
-		}
-	}
-	private ActivityResultLauncher<Intent> storageActivityResultLauncher =
-			registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-					new ActivityResultCallback<ActivityResult>(){
-
-						@Override
-						public void onActivityResult(ActivityResult o) {
-							if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
-								//Android is 11 (R) or above
-								if(Environment.isExternalStorageManager()){
-									//Manage External Storage Permissions Granted
-
-									Log.d(TAG, "onActivityResult: Manage External Storage Permissions Granted");
-								}else{
-									Toast.makeText(c, "Storage Permissions Denied", Toast.LENGTH_SHORT).show();
-								}
-							}else{
-								//Below android 11
-
-							}
-						}
-					});
-
-	public boolean checkPermission(){
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
-			return Environment.isExternalStorageManager();
-		} else {
-			int write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-			int read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-
-			return write == PackageManager.PERMISSION_GRANTED && read == PackageManager.PERMISSION_GRANTED;
-		}
-
-	}
-	@Override
-	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		if(requestCode == PERMISSION_REQUEST_CODE){
-			if(grantResults.length > 0){
-				boolean write = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-				boolean read = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-
-				if(read && write){
-					Toast.makeText(c, "Storage Permissions Granted", Toast.LENGTH_SHORT).show();
-				}else{
-					Toast.makeText(c, "Storage Permissions Denied", Toast.LENGTH_SHORT).show();
-				}
-			}
-		}
-	}
-}
+			ActivityCompat.requestPermissions(selfConfig.this, new String[]{WRITE_EXTERNAL_STORAGE, MANAGE
