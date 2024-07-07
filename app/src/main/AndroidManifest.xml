@@ -26,7 +26,6 @@
 
         </activity>
         <activity
-            android:theme="@style/dialog"
             android:name=".caixa.selfConfig"
             android:label="Configuração do POS" >
         </activity>
