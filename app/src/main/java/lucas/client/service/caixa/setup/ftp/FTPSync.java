@@ -1,8 +1,11 @@
 package lucas.client.service.caixa.setup.ftp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import org.apache.commons.net.ftp.FTPClient;
+
+import lucas.client.service.caixa.selfConfig;
 
 public class FTPSync extends AsyncTask<Void, Void, Boolean> {
     private String host, user, pass;
@@ -25,6 +28,12 @@ public class FTPSync extends AsyncTask<Void, Void, Boolean> {
             boolean result = ftp.login(user, pass);
             ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftp.enterLocalPassiveMode();
+
+            if(ftp.isConnected()){
+
+            } else{
+
+            }
             return result;
         }catch(Exception e){
 

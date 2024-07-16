@@ -16,6 +16,14 @@ public class DB
 		db = cor.getWritableDatabase();
 	}
 
+	public void ftpIn(util us){
+		ContentValues ct = new ContentValues();
+		ct.put("host", us.getFtpHost());
+		ct.put("user", us.getFtpUser());
+		ct.put("pass", us.getFtpPass());
+		ct.put("port", us.getFtpPort());
+		db.insert("ftpServer", null, ct);
+	}
 	public void insertFecha(util us){
 		ContentValues cv = new ContentValues();
 		cv.put("data", us.getData());
@@ -104,6 +112,21 @@ public class DB
 				us.setUserId(cs.getLong(cs.getColumnIndex("userId")));
 				us.setUser(cs.getString(cs.getColumnIndex("usuario")));
 				us.setSenha(cs.getString(cs.getColumnIndex("senha")));
+
+			}while(cs.moveToNext());
+		}
+		return us;
+	}
+	public util getFtpServer(long id){
+		util us = new util();
+		Cursor cs = db.rawQuery("select * from ftpServer WHERE id ="+id+"", null);
+		if(cs.moveToFirst()){
+			do{
+				us.setFtpServerID(Integer.parseInt(cs.getString(cs.getColumnIndex("id"))));
+				us.setFtpHost(cs.getString(cs.getColumnIndex("host")));
+				us.setFtpUser(cs.getString(cs.getColumnIndex("user")));
+				us.setFtpPass(cs.getString(cs.getColumnIndex("pass")));
+				us.setFtpPort(Integer.parseInt(cs.getString(cs.getColumnIndex("port"))));
 
 			}while(cs.moveToNext());
 		}

@@ -7,11 +7,14 @@ public class Core extends SQLiteOpenHelper
 	public static String name = "myDB.db";
 	
 	public Core(Context c){
-		super(c, name, null, 1);
+		super(c, name, null, 2);
 	}
 	@Override
 	public void onCreate(SQLiteDatabase db)
 	{
+		db.execSQL("CREATE TABLE ftpServer" +
+				   "(id integer primary key, host text, user text, pass text, port integer);");
+
 		db.execSQL("CREATE TABLE temp (id integer primary key, valRest text);");
 
 		db.execSQL("CREATE TABLE ContasReceber" +

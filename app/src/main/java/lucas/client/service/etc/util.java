@@ -48,6 +48,43 @@ public class util {
 	public String troco5;
 	public long tempId;
 
+	public String ftpHost, ftpUser, ftpPass;
+	public int ftpPort;
+
+	public long ftpServerID;
+
+	public long getFtpServerID(){
+		return ftpServerID;
+	}
+	public void setFtpServerID(long id){
+		this.ftpServerID = id;
+	}
+	public String getFtpHost(){
+		return ftpHost;
+	}
+	public void setFtpHost(String host){
+		this.ftpHost = host;
+	}
+	public String getFtpUser(){
+		return ftpUser;
+	}
+	public void setFtpUser(String user){
+		this.ftpUser = user;
+	}
+	public String getFtpPass(){
+		return ftpPass;
+	}
+	public void setFtpPass(String pass){
+		this.ftpPass = pass;
+	}
+
+	public int getFtpPort(){
+		return ftpPort;
+	}
+	public void setFtpPort(int port){
+		this.ftpPort = port;
+	}
+
 	public long getTempId(){
 		return tempId;
 	}
