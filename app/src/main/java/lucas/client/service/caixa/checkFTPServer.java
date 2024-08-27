@@ -34,11 +34,11 @@ public class checkFTPServer extends Activity {
             }
         } catch(Exception e){
             LayoutInflater li = getLayoutInflater();
-            View r = li.inflate(c, R.layout.checkFtp, null);
-            final EditText ftpHost = r.findViewById(R.id.ftpHost);
-            final EditText ftpUser = r.findViewById(R.id.ftpUser);
-            final EditText ftpPass = r.findViewById(R.id.ftpPass);
-            final EditText ftpPort = r.findViewById(R.id.ftpPort);
+            View r = li.inflate(R.layout.check_ftp, null);
+            final EditText ftpHost = r.findViewById(R.id.host);
+            final EditText ftpUser = r.findViewById(R.id.user);
+            final EditText ftpPass = r.findViewById(R.id.pass);
+            final EditText ftpPort = r.findViewById(R.id.port);
 
             if(!ftpHost.getText().toString().equals("")){
                 if(!ftpUser.getText().toString().equals("")){

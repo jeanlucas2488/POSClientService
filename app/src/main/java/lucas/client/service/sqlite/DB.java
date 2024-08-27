@@ -134,7 +134,7 @@ public class DB
 	}
 	public util getCategory(long id){
 		util us = new util();
-		Cursor cs = db.rawQuery("select paginas from Paginas WHERE id ="+id+"", null);
+		Cursor cs = db.rawQuery("select paginas from Paginas WHERE id="+id+"", null);
 		if(cs.moveToFirst()){
 			do{
 				us.setCategory(cs.getString(cs.getColumnIndex("paginas")));

@@ -3,6 +3,8 @@ import android.Manifest;
 import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.*;
@@ -36,6 +38,7 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 public class selfConfig extends AppCompatActivity {
 	ProgressDialog progress;
 	Context c = this;
+	SQLiteDatabase d;
 	private static final int PERMISSION_REQUEST_CODE = 200;
 	private static final String TAG = "Permisssion";
 
@@ -292,57 +295,29 @@ public class selfConfig extends AppCompatActivity {
 
 																												tv.setText("Verificando a Integridade do POS 1/2..." + "\n");
 
-																												try {
-																													DB db = new DB(c);
+																												String path = Environment.getExternalStorageDirectory().getPath() + "pdvMain/.sqlite/myDB.db";
+																												d = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READWRITE);
 
-																													util root = db.getCategory(1);
-																													if (!root.getCategory().equals("")) {
-																														Handler nb = new Handler();
-																														nb.postDelayed(new Runnable() {
-																															@Override
-																															public void run() {
-																																tv.setText("Verificando se há produtos cadastrados no PDV 1/2...");
-																																Handler nb2 = new Handler();
-																																nb2.postDelayed(new Runnable() {
-																																	@Override
-																																	public void run() {
-																																		try {
-																																			DB b = new DB(c);
-																																			List<util> result = b.findP1();
+																												util us = new util();
+																												Cursor cs = d.rawQuery("select * from Paginas WHERE id=?", null);
 
-																																			if (!result.get(0).getP1().toString().equals("")) {
-																																				tv.setText("Verificando outros requisitos, aguarde...");
-																																				Handler hd = new Handler();
-																																				hd.postDelayed(new Runnable() {
-																																					@Override
-																																					public void run() {
-
-																																					}
-																																				}, 1000);
-																																			} else {
-																																			}
-																																		} catch (
-																																				Exception e) {
-																																			tv.setText("Não Há produtos cadastrados no PDV 1/2!");
-																																			tv.setTextColor(Color.RED);
-																																		}
-																																	}
-																																}, 1000);
-																															}
-																														}, 900);
-																													} else {
-																													}
-																												} catch (
-																														Exception e) {
-																													Handler nb = new Handler();
-																													nb.postDelayed(new Runnable() {
-																														@Override
-																														public void run() {
-																															tv.setText("Não foram adicionadas as Páginas do PDV 1/2!");
-																															tv.setTextColor(Color.RED);
-																														}
-																													}, 900);
+																												if(cs.moveToFirst()){
+																													do{
+																														us.setCategory(cs.getString(cs.getColumnIndex("paginas")));
+																													}while(cs.moveToNext());
 																												}
+
+																												try {
+
+																													if(!us.getCategory().toString().equals("")){
+																														tv.setText("Sucesso");
+																													}else {
+
+																													}
+																												} catch (Exception e){
+																													tv.setText("Falha");
+																												}
+
 																												tv.setBackgroundResource(R.drawable.border);
 																												tv.setLayoutParams(pr1);
 																												l2.addView(tv);

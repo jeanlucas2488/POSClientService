@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<EditText
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:ems="20"
+    android:hint="Servidor..."
+    android:id="@+id/host" />
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="20"
+        android:hint="Usuário..."
+        android:id="@+id/user" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Senha..."
+            android:id="@+id/pass" />
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="8"
+            android:hint="Porta..."
+            android:id="@+id/port" />
+    </LinearLayout>
+</LinearLayout>
