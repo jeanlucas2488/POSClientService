@@ -123,7 +123,7 @@ public class pay extends Activity {
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
                     dform.format(res);
-                    tvRestante.setText("R$" + dform.format(res));
+                    tvRestante.setText(dform.format(res));
 
                     try{
                         DB dbPost  = new DB(c);
@@ -171,7 +171,7 @@ public class pay extends Activity {
                     df.setDecimalSeparator('.');
                     DecimalFormat dform = new DecimalFormat("####.##", df);
 
-                    tvRestante.setText("R$ " + dform.format(res));
+                    tvRestante.setText(dform.format(res));
 
                         try{
                             DB db  = new DB(c);
@@ -224,9 +224,9 @@ public class pay extends Activity {
                         String  currentDBPath3 = "//data//" + c.getOpPackageName()
                                 + "//databases//" + "myDB.db-wal";
 
-                        String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-                        String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-                        String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+                        String backupDBPath  = "pdvMain/.sqlite/myDB.db";
+                        String backupDBPath2  = "pdvMain/.sqlite/myDB.db-shm";
+                        String backupDBPath3  = "pdvMain/.sqlite/myDB.db-wal";
 
                         File currentDB = new File(data, currentDBPath);
                         File currentDB2 = new File(data, currentDBPath2);

@@ -122,7 +122,6 @@ public class Core extends SQLiteOpenHelper
 	public void onUpgrade(SQLiteDatabase p1, int p2, int p3)
 	{
 		// TODO: Implement this method
-		p1.execSQL("DROP TABLE IF EXISTS");
 	}
 
 }

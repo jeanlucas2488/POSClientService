@@ -61,25 +61,14 @@ public class selfConfig extends AppCompatActivity {
 				LinearLayout l1 = new LinearLayout(c);
 				l1.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 
-				l1.setBackgroundColor(Color.BLUE);
-				TextView tv1 = new TextView(c);
-				LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-				pr1.setMargins(10, 40, 10, 0);
-				tv1.setGravity(Gravity.CENTER_HORIZONTAL);
-				tv1.setText("Configuração do POS" + "\n");
-				tv1.setTextSize(20);
-				tv1.setTextColor(Color.WHITE);
-				//tv.setBackgroundResource(R.drawable.border);
-				tv1.setLayoutParams(pr1);
-				l1.addView(tv1);
-				root.addView(l1);
+
 				sc.addView(root);
 
 				Handler hd = new Handler();
 				hd.postDelayed(new Runnable() {
 					public void run() {
 						LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-						pr1.setMargins(10, 40, 10, 0);
+						pr1.setMargins(10, 0, 10, 0);
 
 						LinearLayout l2 = new LinearLayout(c);
 						l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
@@ -293,38 +282,117 @@ public class selfConfig extends AppCompatActivity {
 																												l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 																												final TextView tv = new TextView(c);
 
-																												tv.setText("Verificando a Integridade do POS 1/2..." + "\n");
+																												tv.setText("Verificando a Integridade do PDV 1/2..." + "\n");
 
-																												String path = Environment.getExternalStorageDirectory().getPath() + "pdvMain/.sqlite/myDB.db";
-																												d = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READWRITE);
+																												Handler hde = new Handler();
+																												hde.postDelayed(new Runnable() {
+																													@Override
+																													public void run() {
+																														LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+																														pr1.setMargins(10, 30, 10, 0);
 
-																												util us = new util();
-																												Cursor cs = d.rawQuery("select * from Paginas WHERE id=?", null);
+																														LinearLayout l2 = new LinearLayout(c);
+																														l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+																														final TextView tv = new TextView(c);
 
-																												if(cs.moveToFirst()){
-																													do{
-																														us.setCategory(cs.getString(cs.getColumnIndex("paginas")));
-																													}while(cs.moveToNext());
-																												}
+																														tv.setText("Verificando Pagers..." + "\n");
 
-																												try {
+																														Handler hde1 = new Handler();
+																														hde1.postDelayed(new Runnable() {
+																																			 @Override
+																																			 public void run() {
+																																				try {
+																																					DB db = new DB(c);
+																																					util us = db.getCategory(1);
+																																					LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+																																					pr1.setMargins(10, 30, 10, 0);
 
-																													if(!us.getCategory().toString().equals("")){
-																														tv.setText("Sucesso");
-																													}else {
+																																					LinearLayout l2 = new LinearLayout(c);
+																																					l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+																																					final TextView tv2 = new TextView(c);
 
+
+																																					if(!us.getCategory().toString().equals("")){
+																																						tv2.setText("Verificando Produtos..." + "\n");
+
+																																						Handler hde2 = new Handler();
+																																						hde2.postDelayed(new Runnable() {
+																																							@Override
+																																							public void run() {
+																																								LayoutParams pr1 = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+																																								pr1.setMargins(10, 30, 10, 0);
+
+																																								LinearLayout l2 = new LinearLayout(c);
+																																								l2.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+																																								final TextView tv3 = new TextView(c);
+																																								try{
+																																									DB db2 = new DB(c);
+																																									List<util> lt = db2.findP1();
+
+																																									if (!lt.get(0).getProd1().toString().equals("")){
+																																										tv3.setText("Verificando supervisor..." + "\n");
+
+																																										Handler hde4 = new Handler();
+																																										hde4.postDelayed(new Runnable() {
+																																											@Override
+																																											public void run() {
+
+																																												try {
+																																													DB db3 = new DB(c);
+																																													util sup = db3.getSuperVisor(1);
+
+																																													if (!sup.getSenhaSuperVisor().toString().equals("")){
+																																														tv3.setText("Concluído! Abrindo tela de Login..." + "\n");
+
+																																														Intent itt = new Intent(c, Login.class);
+																																														startActivity(itt);
+																																													} else {
+
+																																													}
+																																												}catch (Exception e){
+																																													tv3.setText("Configure uma Senha de Supervisor!");
+																																												}
+																																											}
+																																										}, 8000);
+																																									} else {
+
+																																									}
+																																								} catch (Exception e){
+																																									tv3.setText("Não há produtos cadastrados no PDV!" + "\n");
+																																								}
+																																								tv3.setBackgroundResource(R.drawable.border);
+																																								tv3.setLayoutParams(pr1);
+																																								l2.addView(tv3);
+																																								root.addView(l2);
+																																							}
+																																						}, 6000);
+																																					} else {
+
+																																					}
+																																					tv2.setBackgroundResource(R.drawable.border);
+																																					tv2.setLayoutParams(pr1);
+																																					l2.addView(tv2);
+																																					root.addView(l2);
+
+																																				}catch (Exception e) {
+																																					tv.setText("Não há Páginas configuradas no PDV!");
+																																				}
+																																			 }
+																																		 }, 4000);
+
+																																tv.setBackgroundResource(R.drawable.border);
+																														tv.setLayoutParams(pr1);
+																														l2.addView(tv);
+																														root.addView(l2);
 																													}
-																												} catch (Exception e){
-																													tv.setText("Falha");
-																												}
-
+																												}, 2000);
 																												tv.setBackgroundResource(R.drawable.border);
 																												tv.setLayoutParams(pr1);
 																												l2.addView(tv);
 																												root.addView(l2);
 																											}
 
-																										}, 8000);
+																										}, 6000);
 																									}
 																								}, 900);
 																							}
