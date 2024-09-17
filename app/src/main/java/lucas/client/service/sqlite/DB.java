@@ -15,6 +15,16 @@ public class DB
 		Core cor = new Core(c);
 		db = cor.getWritableDatabase();
 	}
+	public void valTempInsert(util us){
+		ContentValues ct = new ContentValues();
+		ct.put("valorRestante", us.getValTemp());
+		db.insert("valTemp", null, ct);
+	}
+	public void valTempUp(util us){
+		ContentValues ct = new ContentValues();
+		ct.put("valorRestante", us.getValTemp());
+		db.update("valTemp", ct, "id = ?", new String[]{String.valueOf(us.getValTempId())});
+	}
 
 	public void ftpIn(util us){
 		ContentValues ct = new ContentValues();
@@ -79,6 +89,19 @@ public class DB
 	public void delVenda(long id){
 		db.delete("Vendas", "id = ?", new String[]{String.valueOf(id)});
 	}
+
+	public util getValTemp(long id){
+		util us = new util();
+		Cursor cs = db.rawQuery("select * from valTemp WHERE id ="+id+"",  null);
+		if (cs.moveToFirst()){
+			do {
+				us.setValTempId(cs.getLong(cs.getColumnIndex("id")));
+				us.setValTemp(cs.getString(cs.getColumnIndex("valorRestante")));
+			} while(cs.moveToNext());
+		}
+		return us;
+	}
+
 	public util getSuperVisor(long id){
 		util us2 = new util();
 		Cursor cs = db.rawQuery("select * from supervisor WHERE id ="+id+"", null);

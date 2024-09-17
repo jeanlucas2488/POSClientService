@@ -31,10 +31,10 @@ import lucas.client.service.sqlite.DB;
 
 
 public class pay extends Activity {
-    String result, resPagto;
+    String result, resPagto, valTemp;
     AlertDialog root;
-    TextView tvDinheiro, tvCarD, tvCarC, tvPix;
-    EditText dinheiro, tvTotal, tvRestante, carD, carC, pix;
+    TextView tvDinheiro, tvCarD, tvCarC, tvPix, tvTotal, tvRestante;
+    EditText dinheiro, carD, carC, pix;
     RelativeLayout dinLayout, debLayout, credLayout, pixLayout;
 
     Context c = this;
@@ -114,16 +114,63 @@ public class pay extends Activity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
 
-                    Double v1 = new Double(tvRestante.getText().toString());
-                    Double v2 = new Double(dinheiro.getText().toString());
+                    try{
+                        DB db2 = new DB(c);
+                        util us = db2.getValTemp(1);
 
-                    double res = v1 - v2;
-                    DecimalFormatSymbols df = new DecimalFormatSymbols();
-                    df.setGroupingSeparator('.');
-                    df.setDecimalSeparator('.');
-                    DecimalFormat dform = new DecimalFormat("####.##", df);
-                    dform.format(res);
-                    tvRestante.setText(dform.format(res));
+                        if (!us.getValTemp().toString().equals("")){
+                            tvRestante.setText(us.getValTemp());
+                            valTemp = us.getValTemp();
+                        } else {
+                            valTemp = "0";
+                        }
+                    } catch (Exception e){
+
+                    }
+                    if (!valTemp.toString().startsWith("0")){
+                        Double v1 = new Double(tvTotal.getText().toString());
+                        Double v2 = new Double(dinheiro.getText().toString());
+
+                        double res = v1 - v2;
+                        DecimalFormatSymbols df = new DecimalFormatSymbols();
+                        df.setGroupingSeparator('.');
+                        df.setDecimalSeparator('.');
+                        DecimalFormat dform = new DecimalFormat("####.##", df);
+                        dform.format(res);
+                        util us = new util();
+                        us.setValTemp(dform.format(res));
+                        DB db = new DB(c);
+                        db.valTempInsert(us);
+
+
+                    } else {
+                        try{
+                            DB db2 = new DB(c);
+                            util us = db2.getValTemp(1);
+
+                            if (!us.getValTemp().toString().equals("")){
+                                tvRestante.setText(us.getValTemp());
+                                valTemp = us.getValTemp();
+                            } else {
+                                valTemp = "0";
+                            }
+                        } catch (Exception e){
+
+                        }
+                        Double v1 = new Double(valTemp.toString());
+                        Double v2 = new Double(dinheiro.getText().toString());
+                        double res = v1 - v2;
+                        DecimalFormatSymbols df = new DecimalFormatSymbols();
+                        df.setGroupingSeparator('.');
+                        df.setDecimalSeparator('.');
+                        DecimalFormat dform = new DecimalFormat("####.##", df);
+                        dform.format(res);
+                        util us = new util();
+                        us.setValTempId(us.getValTempId());
+                        us.setValTemp(dform.format(res));
+                        DB db = new DB(c);
+                        db.valTempUp(us);
+                    }
 
                     try{
                         DB dbPost  = new DB(c);
@@ -212,51 +259,56 @@ public class pay extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                try {
-                    File sd = Environment.getExternalStorageDirectory();
-                    File data = Environment.getDataDirectory();
+                if(!tvRestante.getText().toString().equals("")){
+                    msg("Compra finalizada com sucesso!");
+                    try {
+                        File sd = Environment.getExternalStorageDirectory();
+                        File data = Environment.getDataDirectory();
 
-                    if (sd.canWrite()) {
-                        String  currentDBPath= "//data//" + c.getOpPackageName()
-                                + "//databases//" + "myDB.db";
-                        String  currentDBPath2 = "//data//" + c.getOpPackageName()
-                                + "//databases//" + "myDB.db-shm";
-                        String  currentDBPath3 = "//data//" + c.getOpPackageName()
-                                + "//databases//" + "myDB.db-wal";
+                        if (sd.canWrite()) {
+                            String  currentDBPath= "//data//" + c.getOpPackageName()
+                                    + "//databases//" + "myDB.db";
+                            String  currentDBPath2 = "//data//" + c.getOpPackageName()
+                                    + "//databases//" + "myDB.db-shm";
+                            String  currentDBPath3 = "//data//" + c.getOpPackageName()
+                                    + "//databases//" + "myDB.db-wal";
 
-                        String backupDBPath  = "pdvMain/.sqlite/myDB.db";
-                        String backupDBPath2  = "pdvMain/.sqlite/myDB.db-shm";
-                        String backupDBPath3  = "pdvMain/.sqlite/myDB.db-wal";
+                            String backupDBPath  = "pdvMain/.sqlite/myDB.db";
+                            String backupDBPath2  = "pdvMain/.sqlite/myDB.db-shm";
+                            String backupDBPath3  = "pdvMain/.sqlite/myDB.db-wal";
 
-                        File currentDB = new File(data, currentDBPath);
-                        File currentDB2 = new File(data, currentDBPath2);
-                        File currentDB3 = new File(data, currentDBPath3);
-                        File backupDB = new File(sd, backupDBPath);
-                        File backupDB2 = new File(sd, backupDBPath2);
-                        File backupDB3 = new File(sd, backupDBPath3);
+                            File currentDB = new File(data, currentDBPath);
+                            File currentDB2 = new File(data, currentDBPath2);
+                            File currentDB3 = new File(data, currentDBPath3);
+                            File backupDB = new File(sd, backupDBPath);
+                            File backupDB2 = new File(sd, backupDBPath2);
+                            File backupDB3 = new File(sd, backupDBPath3);
 
-                        if(currentDB2.exists()){
-                            FileChannel src = new FileInputStream(currentDB2).getChannel();
-                            FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+                            if(currentDB2.exists()){
+                                FileChannel src = new FileInputStream(currentDB2).getChannel();
+                                FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+                                dst.transferFrom(src, 0, src.size());
+                                src.close();
+                                dst.close();
+                            }
+                            if(currentDB3.exists()){
+                                FileChannel src = new FileInputStream(currentDB3).getChannel();
+                                FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+                                dst.transferFrom(src, 0, src.size());
+                                src.close();
+                                dst.close();
+                            }
+                            FileChannel src = new FileInputStream(currentDB).getChannel();
+                            FileChannel dst = new FileOutputStream(backupDB).getChannel();
                             dst.transferFrom(src, 0, src.size());
                             src.close();
                             dst.close();
                         }
-                        if(currentDB3.exists()){
-                            FileChannel src = new FileInputStream(currentDB3).getChannel();
-                            FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-                            dst.transferFrom(src, 0, src.size());
-                            src.close();
-                            dst.close();
-                        }
-                        FileChannel src = new FileInputStream(currentDB).getChannel();
-                        FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                        dst.transferFrom(src, 0, src.size());
-                        src.close();
-                        dst.close();
+                    } catch (Exception e2) {
+
                     }
-                } catch (Exception e2) {
-
+                } else {
+                    msg("Existem valores pendentes, finalize o pagamento!");
                 }
             }
         });
@@ -264,5 +316,8 @@ public class pay extends Activity {
 
        root = bs.create();
        root = bs.show();
+    }
+    public void msg(String ms){
+        Toast.makeText(c, ms, Toast.LENGTH_SHORT).show();
     }
 }

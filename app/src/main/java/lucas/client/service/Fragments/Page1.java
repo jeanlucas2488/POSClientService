@@ -176,9 +176,9 @@ public class Page1 extends Fragment
 										String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
 											+ "//databases//" + "myDB.db-wal";
 
-										String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-										String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-										String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+										String backupDBPath  = "pdvMain/.sqlite/myDB.db";
+										String backupDBPath2  = "pdvMain/.sqlite/myDB.db-shm";
+										String backupDBPath3  = "pdvMain/.sqlite/myDB.db-wal";
 
 										File currentDB = new File(data, currentDBPath);
 										File currentDB2 = new File(data, currentDBPath2);
@@ -681,9 +681,9 @@ public class Page1 extends Fragment
 															String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
 																	+ "//databases//" + "myDB.db-wal";
 
-															String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-															String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-															String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+															String backupDBPath  = "pdvMain/.sqlite/myDB.db";
+															String backupDBPath2  = "pdvMain/.sqlite/myDB.db-shm";
+															String backupDBPath3  = "pdvMain/.sqlite/myDB.db-wal";
 
 															File currentDB = new File(data, currentDBPath);
 															File currentDB2 = new File(data, currentDBPath2);
@@ -895,9 +895,9 @@ public class Page1 extends Fragment
 													String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
 															+ "//databases//" + "myDB.db-wal";
 
-													String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-													String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-													String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+													String backupDBPath  = "pdvMain/.sqlite/myDB.db";
+													String backupDBPath2  = "pdvMain/.sqlite/myDB.db-shm";
+													String backupDBPath3  = "pdvMain/.sqlite/myDB.db-wal";
 
 													File currentDB = new File(data, currentDBPath);
 													File currentDB2 = new File(data, currentDBPath2);
@@ -1108,9 +1108,9 @@ public class Page1 extends Fragment
 											String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
 													+ "//databases//" + "myDB.db-wal";
 
-											String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-											String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-											String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+											String backupDBPath  = "pdvMain/.sqlite/myDB.db";
+											String backupDBPath2  = "pdvMain/.sqlite/myDB.db-shm";
+											String backupDBPath3  = "pdvMain/.sqlite/myDB.db-wal";
 
 											File currentDB = new File(data, currentDBPath);
 											File currentDB2 = new File(data, currentDBPath2);
@@ -1324,9 +1324,9 @@ public class Page1 extends Fragment
 									String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
 											+ "//databases//" + "myDB.db-wal";
 
-									String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-									String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-									String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+									String backupDBPath  = "pdvMain/.sqlite/myDB.db";
+									String backupDBPath2  = "pdvMain/.sqlite/myDB.db-shm";
+									String backupDBPath3  = "pdvMain/.sqlite/myDB.db-wal";
 
 									File currentDB = new File(data, currentDBPath);
 									File currentDB2 = new File(data, currentDBPath2);
@@ -1373,9 +1373,9 @@ public class Page1 extends Fragment
 								String  currentDBPath3 = "//data//" + getActivity().getOpPackageName()
 										+ "//databases//" + "myDB.db-wal";
 
-								String backupDBPath  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db";
-								String backupDBPath2  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-shm";
-								String backupDBPath3  = "pdvMain/data/lucas.client.service/.sqlite/myDB.db-wal";
+								String backupDBPath  = "pdvMain/.sqlite/myDB.db";
+								String backupDBPath2  = "pdvMain/.sqlite/myDB.db-shm";
+								String backupDBPath3  = "pdvMain/.sqlite/myDB.db-wal";
 
 								File currentDB = new File(data, currentDBPath);
 								File currentDB2 = new File(data, currentDBPath2);

@@ -3,6 +3,9 @@ import javax.security.auth.callback.*;
 
 public class util {
 
+	public String valTemp;
+	public long valTempId;
+
 	public String carD, carC, pix, temp;
 	public String eCod, eProd, eQuant, eForn, eDataIn, eDataOut, eValor, eTotal, eTipo, nfe;
 	public long eId, supId;
@@ -52,7 +55,18 @@ public class util {
 	public int ftpPort;
 
 	public long ftpServerID;
-
+public String getValTemp(){
+	return valTemp;
+}
+public void setValTemp(String temp){
+	this.valTemp = temp;
+}
+public long getValTempId(){
+	return valTempId;
+}
+public void setValTempId(long id){
+	this.valTempId = id;
+}
 	public long getFtpServerID(){
 		return ftpServerID;
 	}
