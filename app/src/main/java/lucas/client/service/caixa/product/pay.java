@@ -6,8 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.icu.text.DecimalFormat;
-import android.icu.text.DecimalFormatSymbols;
+
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.KeyEvent;
@@ -23,6 +22,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
+import android.icu.text.DecimalFormat;
+import android.icu.text.DecimalFormatSymbols;
 import java.util.List;
 
 import lucas.client.service.R;
@@ -31,10 +32,10 @@ import lucas.client.service.sqlite.DB;
 
 
 public class pay extends Activity {
-    String result, resPagto, valTemp;
+    String result, dinres, tvres;
     AlertDialog root;
-    TextView tvDinheiro, tvCarD, tvCarC, tvPix, tvTotal, tvRestante;
-    EditText dinheiro, carD, carC, pix;
+    TextView tvDinheiro, tvCarD, tvCarC, tvPix;
+    EditText dinheiro,  tvTotal, tvRestante,  carD, carC, pix;
     RelativeLayout dinLayout, debLayout, credLayout, pixLayout;
 
     Context c = this;
@@ -72,7 +73,7 @@ public class pay extends Activity {
         pix.setVisibility(View.GONE);
 
         tvTotal.setText(result.toString());
-        tvRestante.setText(result.toString());
+        tvRestante.setText("0.00");
 
         dinLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,149 +109,96 @@ public class pay extends Activity {
                 tvPix.setTextColor(Color.WHITE);
             }
         });
-
+        dinres = dinheiro.getText().toString();
+        tvres = tvTotal.getText().toString();
         dinheiro.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
 
-                    try{
-                        DB db2 = new DB(c);
-                        util us = db2.getValTemp(1);
+                    if(tvRestante.getText().toString().equals("0.00")){
+                        DecimalFormatSymbols df = new DecimalFormatSymbols();
+                        df.setGroupingSeparator('.');
+                        df.setDecimalSeparator('.');
+                        DecimalFormat dform = new DecimalFormat("####.##", df);
 
-                        if (!us.getValTemp().toString().equals("")){
-                            tvRestante.setText(us.getValTemp());
-                            valTemp = us.getValTemp();
-                        } else {
-                            valTemp = "0";
-                        }
-                    } catch (Exception e){
-
-                    }
-                    if (!valTemp.toString().startsWith("0")){
                         Double v1 = new Double(tvTotal.getText().toString());
                         Double v2 = new Double(dinheiro.getText().toString());
 
                         double res = v1 - v2;
-                        DecimalFormatSymbols df = new DecimalFormatSymbols();
-                        df.setGroupingSeparator('.');
-                        df.setDecimalSeparator('.');
-                        DecimalFormat dform = new DecimalFormat("####.##", df);
-                        dform.format(res);
-                        util us = new util();
-                        us.setValTemp(dform.format(res));
-                        DB db = new DB(c);
-                        db.valTempInsert(us);
 
-
-                    } else {
+                        tvRestante.setText(String.valueOf(res));
                         try{
-                            DB db2 = new DB(c);
-                            util us = db2.getValTemp(1);
+                            DB db = new DB(c);
+                            util us = db.getDinheiro(1);
 
-                            if (!us.getValTemp().toString().equals("")){
-                                tvRestante.setText(us.getValTemp());
-                                valTemp = us.getValTemp();
+                            if(!us.getMoney().toString().equals("")){
+                                Double re1 = new Double(us.getMoney());
+                                Double re2 = new Double(dinheiro.getText().toString());
+
+                                double result = re1 + re2;
+
+                                util us2 = new util();
+                                us2.setMoneyID(us.getMoneyID());
+                                us2.setMoney(dform.format(result));
+
+                                DB db2 = new DB(c);
+                                db2.moneyUp(us2);
                             } else {
-                                valTemp = "0";
+
                             }
                         } catch (Exception e){
+                            util us2 = new util();
+                            us2.setMoney(dform.format(dinheiro.getText().toString()));
+
+                            DB db2 = new DB(c);
+                            db2.moneyIn(us2);
 
                         }
-                        Double v1 = new Double(valTemp.toString());
+                    } else {
+                        Double v1 = new Double(tvRestante.getText().toString());
                         Double v2 = new Double(dinheiro.getText().toString());
                         double res = v1 - v2;
                         DecimalFormatSymbols df = new DecimalFormatSymbols();
                         df.setGroupingSeparator('.');
                         df.setDecimalSeparator('.');
                         DecimalFormat dform = new DecimalFormat("####.##", df);
-                        dform.format(res);
-                        util us = new util();
-                        us.setValTempId(us.getValTempId());
-                        us.setValTemp(dform.format(res));
-                        DB db = new DB(c);
-                        db.valTempUp(us);
-                    }
 
-                    try{
-                        DB dbPost  = new DB(c);
-                        List<util> rd;
-                        rd = dbPost.moFind();
-                        if(!rd.get(0).getMoney().equals("")){
-                            String re1 = rd.get(0).getMoney();
-                            String re2 = dinheiro.getText().toString();
-                            Double d0 = new Double(re1);
-                            Double d1 = new Double(re2);
-                            double resD = d0 + d1;
-                            DecimalFormatSymbols df2 = new DecimalFormatSymbols();
-                            df2.setGroupingSeparator('.');
-                            df2.setDecimalSeparator('.');
-                            DecimalFormat dform2 = new DecimalFormat("####.##", df2);
-                            util us = new util();
-                            us.setMoneyID(rd.get(0).getMoneyID());
-                            us.setMoney(dform2.format(resD));
-                            dbPost.moneyUp(us);
-
-                        } else {}
-                    }catch(Exception e){
-                        util us = new util();
-                        us.setMoney(dinheiro.getText().toString());
-                        DB d1 = new DB(c);
-                        d1.moneyIn(us);
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-        carD.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_NULL){
-                    resPagto = tvRestante.getText().toString();
-                    Double v1 = Double.parseDouble(tvRestante.getText().toString());
-                    Double v2 = Double.parseDouble(carD.getText().toString());
-
-                    double res = v1 - v2;
-
-                    DecimalFormatSymbols df = new DecimalFormatSymbols();
-                    df.setGroupingSeparator('.');
-                    df.setDecimalSeparator('.');
-                    DecimalFormat dform = new DecimalFormat("####.##", df);
-
-                    tvRestante.setText(dform.format(res));
-
+                        tvRestante.setText(dform.format(res));
                         try{
-                            DB db  = new DB(c);
-                            List<util> rd;
-                            rd = db.getCarD();
-                            if(!rd.get(0).getCarD().equals("")){
-                                String re1 = rd.get(0).getCarD();
-                                String re2 = carD.getText().toString();
-                                Double d0 = new Double(re1);
-                                Double d1 = new Double(re2);
-                                double res2 = d0 + d1;
+                            DB db = new DB(c);
+                            util us = db.getDinheiro(1);
 
-                                DecimalFormatSymbols df2 = new DecimalFormatSymbols();
-                                df2.setGroupingSeparator('.');
-                                df2.setDecimalSeparator('.');
-                                DecimalFormat dform2 = new DecimalFormat("####.##", df2);
-                                util us = new util();
-                                us.setCarD_ID(rd.get(0).getCarD_ID());
-                                us.setCarD(dform2.format(res2));
-                                db.carDUp(us);
-                            } else {}
-                        }catch(Exception e){
-                            util us = new util();
-                            us.setCarD(carD.getText().toString());
-                            DB d1 = new DB(c);
-                            d1.carDIn(us);
+                            if(!us.getMoney().toString().equals("")){
+                                Double re1 = new Double(us.getMoney());
+                                Double re2 = new Double(dinheiro.getText().toString());
+
+                                double result = re1 + re2;
+
+                                util us2 = new util();
+                                us2.setMoneyID(us.getMoneyID());
+                                us2.setMoney(dform.format(result));
+
+                                DB db2 = new DB(c);
+                                db2.moneyUp(us2);
+                            } else {
+
+                            }
+                        } catch (Exception e){
+                            util us2 = new util();
+                            us2.setMoney(dform.format(dinheiro.getText().toString()));
+
+                            DB db2 = new DB(c);
+                            db2.moneyIn(us2);
                         }
+
+                    }
                     return true;
                 }
                 return false;
             }
         });
+
 
         AlertDialog.Builder bs = new AlertDialog.Builder(c);
         bs.setTitle("Fechar Pedido:");

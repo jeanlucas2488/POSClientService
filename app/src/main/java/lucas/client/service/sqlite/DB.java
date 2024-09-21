@@ -15,16 +15,6 @@ public class DB
 		Core cor = new Core(c);
 		db = cor.getWritableDatabase();
 	}
-	public void valTempInsert(util us){
-		ContentValues ct = new ContentValues();
-		ct.put("valorRestante", us.getValTemp());
-		db.insert("valTemp", null, ct);
-	}
-	public void valTempUp(util us){
-		ContentValues ct = new ContentValues();
-		ct.put("valorRestante", us.getValTemp());
-		db.update("valTemp", ct, "id = ?", new String[]{String.valueOf(us.getValTempId())});
-	}
 
 	public void ftpIn(util us){
 		ContentValues ct = new ContentValues();
@@ -600,6 +590,35 @@ public class DB
 		ct.put("pix", us.getPix());
 		db.update("Pix", ct, "id = ?", new String[]{String.valueOf(us.getPix_ID())});
 	}
+
+	public util getDinheiro(long id){
+		util us = new util();
+		Cursor cs = db.rawQuery("select * from dinheiro WHERE id ="+id+"", null);
+
+		if(cs.moveToFirst()){
+
+			do {
+				us.setMoneyID(cs.getLong(cs.getColumnIndex("id")));
+				us.setMoney(cs.getString(cs.getColumnIndex("money")));
+
+			} while(cs.moveToNext());
+		}
+		return us;
+	}
+	public util getCarD(long id){
+		util us = new util();
+		Cursor cs = db.rawQuery("select * from cartaoD WHERE id ="+id+"", null);
+
+		if(cs.moveToFirst()){
+
+			do {
+				us.setCarD_ID(cs.getLong(cs.getColumnIndex("id")));
+				us.setCarD(cs.getString(cs.getColumnIndex("carD")));
+
+			} while(cs.moveToNext());
+		}
+		return us;
+	}
 	public List<util> eFind(){
 		ArrayList<util> arr = new ArrayList<util>();
 		String[] cl = {"id", "eCod", "eProd", "eQuant", "eForn", "eDataIn", "eDataOut", "eVal", "eTotal", "eTipo"};
@@ -634,51 +653,7 @@ public class DB
 		}
 		return us;
 	}
-	public List<util> getCarD(){
-		ArrayList<util> arr = new ArrayList<util>();
-		String[] colunm = {"id", "carD"};
-		Cursor cs = db.query("cartaoD", colunm, null, null, null, null, "carD ASC");
-		if(cs.getCount() >0){
-			cs.moveToFirst();
-			do {
-				util us = new util();
-				us.setCarD_ID(Integer.parseInt(cs.getString(0)));
-				us.setCarD(cs.getString(1));
-				arr.add(us);
-			}  while (cs.moveToNext());
-		}
-		return arr;
-	}
-	public List<util> getCarC(){
-		ArrayList<util> arr = new ArrayList<util>();
-		String[] colunm = {"id", "carC"};
-		Cursor cs = db.query("cartaoC", colunm, null, null, null, null, "carC ASC");
-		if(cs.getCount() >0){
-			cs.moveToFirst();
-			do {
-				util us = new util();
-				us.setCarC_ID(Integer.parseInt(cs.getString(0)));
-				us.setCarC(cs.getString(1));
-				arr.add(us);
-			}  while (cs.moveToNext());
-		}
-		return arr;
-	}
-	public List<util> getPix(){
-		ArrayList<util> arr = new ArrayList<util>();
-		String[] colunm = {"id", "pix"};
-		Cursor cs = db.query("Pix", colunm, null, null, null, null, "pix ASC");
-		if(cs.getCount() >0){
-			cs.moveToFirst();
-			do {
-				util us = new util();
-				us.setPix_ID(Integer.parseInt(cs.getString(0)));
-				us.setPix(cs.getString(1));
-				arr.add(us);
-			}  while (cs.moveToNext());
-		}
-		return arr;
-	}
+
 	public List<util> getVedaS(){
 		ArrayList<util> arr = new ArrayList<util>();
 		String[] colunm = {"id", "data", "prod", "total"};
@@ -727,24 +702,7 @@ public class DB
 		}
 		return arr;
 	}
-	public List<util> Pfind(){
-		ArrayList<util> arr = new ArrayList<util>();
-		String[] cl = {"id", "prod", "quant", "valor", "image"};
-		Cursor cs = db.query("caixaP", cl, null, null, null, null, "prod ASC");
-		if(cs.getCount() >0){
-			cs.moveToFirst();
-			do{
-				util us = new util();
-				us.setIdP(Integer.parseInt(cs.getString(0)));
-				us.setProd1(cs.getString(1));
-				us.setQuant1(cs.getString(2));
-				us.setValor1(cs.getString(3));
-				us.setImage(cs.getBlob(4));
-				arr.add(us);
-			}while(cs.moveToNext());
-		}
-		return arr;
-	}
+
 	public List<util> proFind(){
 		ArrayList<util> arr = new ArrayList<util>();
 		String[] cl = {"id", "loc", "prod", "quant", "valor", "payType", "pagto", "troco"};
@@ -845,22 +803,6 @@ public class DB
 				us.setOp(cs.getString(1));
 				arr.add(us);
 			}while(cs.moveToNext());
-		}
-		return arr;
-	}
-
-	public List<util> moFind(){
-		ArrayList<util> arr = new ArrayList<util>();
-		String[] cl = {"id", "money"};
-		Cursor cs = db.query("dinheiro", cl, null, null, null, null, "money ASC");
-		if(cs.getCount() >0){
-			cs.moveToFirst();
-		do{
-			util us = new util();
-			us.setMoneyID(Integer.parseInt(cs.getString(0)));
-			us.setMoney(cs.getString(1));
-			arr.add(us);	
-		}while(cs.moveToNext());
 		}
 		return arr;
 	}

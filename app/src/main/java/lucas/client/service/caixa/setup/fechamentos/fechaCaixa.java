@@ -69,7 +69,7 @@ public class fechaCaixa extends AppCompatActivity
 		dateTime2 = simpleDateFormat2.format(calendar2.getTime()).toString(); 
 		data.setText(dateTime2.toString());
 
-		try{
+		/*try{
 			DB db = new DB(c);
 			supS = db.suFind();
 			if(!supS.get(0).getSupVal().equals("")){
@@ -831,6 +831,6 @@ public class fechaCaixa extends AppCompatActivity
 			br.setIcon(R.drawable.icon);
 			br.setView(r);
 			br.create();
-			br.show();
+			br.show();*/
 	}
 }
