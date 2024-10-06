@@ -16,6 +16,16 @@ public class DB
 		db = cor.getWritableDatabase();
 	}
 
+	public void setValTemp(util us){
+		ContentValues ct = new ContentValues();
+		ct.put("valorRestante", us.getValTemp());
+		db.insert("valTemp", null, ct);
+	}
+	public void upValTemp(util us){
+		ContentValues ct = new ContentValues();
+		ct.put("valorRestante", us.getValTemp());
+		db.update("valTemp", ct, "id = ?", new String[]{String.valueOf(us.getValTempId())});
+	}
 	public void ftpIn(util us){
 		ContentValues ct = new ContentValues();
 		ct.put("host", us.getFtpHost());
@@ -80,6 +90,9 @@ public class DB
 		db.delete("Vendas", "id = ?", new String[]{String.valueOf(id)});
 	}
 
+	public void delValTemp(){
+		db.execSQL("delete from valTemp;");
+	}
 	public util getValTemp(long id){
 		util us = new util();
 		Cursor cs = db.rawQuery("select * from valTemp WHERE id ="+id+"",  null);

@@ -111,91 +111,112 @@ public class pay extends Activity {
         });
         dinres = dinheiro.getText().toString();
         tvres = tvTotal.getText().toString();
+
         dinheiro.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if(actionId == EditorInfo.IME_NULL){
 
-                    if(tvRestante.getText().toString().equals("0.00")){
-                        DecimalFormatSymbols df = new DecimalFormatSymbols();
-                        df.setGroupingSeparator('.');
-                        df.setDecimalSeparator('.');
-                        DecimalFormat dform = new DecimalFormat("####.##", df);
+                    try {
+                        DB db = new DB(c);
+                        util us = db.getValTemp(1);
 
-                        Double v1 = new Double(tvTotal.getText().toString());
-                        Double v2 = new Double(dinheiro.getText().toString());
+                        if (!us.getValTemp().toString().equals("")){
+                            Double v1 = new Double(us.getValTemp());
+                            Double v2 = new Double(dinheiro.getText().toString());
 
-                        double res = v1 - v2;
+                            double res = v1 - v2;
 
-                        tvRestante.setText(String.valueOf(res));
-                        try{
-                            DB db = new DB(c);
-                            util us = db.getDinheiro(1);
+                            DecimalFormatSymbols df = new DecimalFormatSymbols();
+                            df.setDecimalSeparator('.');
+                            df.setGroupingSeparator('.');
 
-                            if(!us.getMoney().toString().equals("")){
-                                Double re1 = new Double(us.getMoney());
-                                Double re2 = new Double(dinheiro.getText().toString());
+                            DecimalFormat dform = new DecimalFormat("###0.00", df);
 
-                                double result = re1 + re2;
+                            tvRestante.setText(dform.format(res));
 
-                                util us2 = new util();
-                                us2.setMoneyID(us.getMoneyID());
-                                us2.setMoney(dform.format(result));
-
-                                DB db2 = new DB(c);
-                                db2.moneyUp(us2);
-                            } else {
-
-                            }
-                        } catch (Exception e){
                             util us2 = new util();
-                            us2.setMoney(dform.format(dinheiro.getText().toString()));
+                            us2.setValTempId(us.getValTempId());
+                            us2.setValTemp(dform.format(res));
 
                             DB db2 = new DB(c);
-                            db2.moneyIn(us2);
+                            db2.upValTemp(us2);
+
+                            try {
+                                DB db3 = new DB(c);
+                                util root = db3.getDinheiro(1);
+
+                                if(!root.getMoney().toString().equals("")){
+                                    Double r1 = new Double(root.getMoney());
+                                    Double r2 = new Double(dinheiro.getText().toString());
+
+                                    double result = r1 + r2;
+
+                                    util post = new util();
+                                    post.setMoneyID(root.getMoneyID());
+                                    post.setMoney(dform.format(result));
+                                    DB dbpost = new DB(c);
+                                    dbpost.moneyUp(post);
+                                } else {
+
+                                }
+                            } catch (Exception e){
+                                util post = new util();
+                                post.setMoney(dform.format(result));
+                                DB dbpost = new DB(c);
+                                dbpost.moneyIn(post);
+                            }
+                        } else {
 
                         }
-                    } else {
-                        Double v1 = new Double(tvRestante.getText().toString());
-                        Double v2 = new Double(dinheiro.getText().toString());
-                        double res = v1 - v2;
+                    } catch (Exception e){
+
+                        Double val1 = new Double(tvTotal.getText().toString());
+                        Double val2 = new Double(dinheiro.getText().toString());
+
+                        double res = val1 - val2;
+
                         DecimalFormatSymbols df = new DecimalFormatSymbols();
                         df.setGroupingSeparator('.');
                         df.setDecimalSeparator('.');
-                        DecimalFormat dform = new DecimalFormat("####.##", df);
+
+                        DecimalFormat dform = new DecimalFormat("###0.00", df);
 
                         tvRestante.setText(dform.format(res));
-                        try{
+
+                        util us = new util();
+                        us.setValTemp(dform.format(res));
+                        DB d1 = new DB(c);
+                        d1.setValTemp(us);
+
+                        try {
                             DB db = new DB(c);
-                            util us = db.getDinheiro(1);
+                            util root = db.getDinheiro(1);
 
-                            if(!us.getMoney().toString().equals("")){
-                                Double re1 = new Double(us.getMoney());
-                                Double re2 = new Double(dinheiro.getText().toString());
+                            if(!root.getMoney().toString().equals("")){
+                                Double r1 = new Double(root.getMoney());
+                                Double r2 = new Double(dinheiro.getText().toString());
 
-                                double result = re1 + re2;
+                                double result = r1 + r2;
 
-                                util us2 = new util();
-                                us2.setMoneyID(us.getMoneyID());
-                                us2.setMoney(dform.format(result));
-
-                                DB db2 = new DB(c);
-                                db2.moneyUp(us2);
+                                util post = new util();
+                                post.setMoneyID(root.getMoneyID());
+                                post.setMoney(dform.format(result));
+                                DB dbpost2 = new DB(c);
+                                dbpost2.moneyUp(post);
                             } else {
 
                             }
-                        } catch (Exception e){
-                            util us2 = new util();
-                            us2.setMoney(dform.format(dinheiro.getText().toString()));
-
-                            DB db2 = new DB(c);
-                            db2.moneyIn(us2);
+                        } catch (Exception e2){
+                            util post = new util();
+                            post.setMoney(dinheiro.getText().toString());
+                            DB dbpost2 = new DB(c);
+                            dbpost2.moneyIn(post);
                         }
-
                     }
-                    return true;
+                    return false;
                 }
-                return false;
+                return true;
             }
         });
 
@@ -207,56 +228,64 @@ public class pay extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if(!tvRestante.getText().toString().equals("")){
-                    msg("Compra finalizada com sucesso!");
-                    try {
-                        File sd = Environment.getExternalStorageDirectory();
-                        File data = Environment.getDataDirectory();
+                try {
+                    DB get = new DB(c);
+                    util root = get.getValTemp(1);
 
-                        if (sd.canWrite()) {
-                            String  currentDBPath= "//data//" + c.getOpPackageName()
-                                    + "//databases//" + "myDB.db";
-                            String  currentDBPath2 = "//data//" + c.getOpPackageName()
-                                    + "//databases//" + "myDB.db-shm";
-                            String  currentDBPath3 = "//data//" + c.getOpPackageName()
-                                    + "//databases//" + "myDB.db-wal";
+                    if(root.getValTemp().toString().equals("0.00")){
+                        get.delValTemp();
+                        try {
+                            File sd = Environment.getExternalStorageDirectory();
+                            File data = Environment.getDataDirectory();
 
-                            String backupDBPath  = "pdvMain/.sqlite/myDB.db";
-                            String backupDBPath2  = "pdvMain/.sqlite/myDB.db-shm";
-                            String backupDBPath3  = "pdvMain/.sqlite/myDB.db-wal";
+                            if (sd.canWrite()) {
+                                String  currentDBPath= "//data//" + c.getOpPackageName()
+                                        + "//databases//" + "myDB.db";
+                                String  currentDBPath2 = "//data//" + c.getOpPackageName()
+                                        + "//databases//" + "myDB.db-shm";
+                                String  currentDBPath3 = "//data//" + c.getOpPackageName()
+                                        + "//databases//" + "myDB.db-wal";
 
-                            File currentDB = new File(data, currentDBPath);
-                            File currentDB2 = new File(data, currentDBPath2);
-                            File currentDB3 = new File(data, currentDBPath3);
-                            File backupDB = new File(sd, backupDBPath);
-                            File backupDB2 = new File(sd, backupDBPath2);
-                            File backupDB3 = new File(sd, backupDBPath3);
+                                String backupDBPath  = "pdvMain/.sqlite/myDB.db";
+                                String backupDBPath2  = "pdvMain/.sqlite/myDB.db-shm";
+                                String backupDBPath3  = "pdvMain/.sqlite/myDB.db-wal";
 
-                            if(currentDB2.exists()){
-                                FileChannel src = new FileInputStream(currentDB2).getChannel();
-                                FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+                                File currentDB = new File(data, currentDBPath);
+                                File currentDB2 = new File(data, currentDBPath2);
+                                File currentDB3 = new File(data, currentDBPath3);
+                                File backupDB = new File(sd, backupDBPath);
+                                File backupDB2 = new File(sd, backupDBPath2);
+                                File backupDB3 = new File(sd, backupDBPath3);
+
+                                if(currentDB2.exists()){
+                                    FileChannel src = new FileInputStream(currentDB2).getChannel();
+                                    FileChannel dst = new FileOutputStream(backupDB2).getChannel();
+                                    dst.transferFrom(src, 0, src.size());
+                                    src.close();
+                                    dst.close();
+                                }
+                                if(currentDB3.exists()){
+                                    FileChannel src = new FileInputStream(currentDB3).getChannel();
+                                    FileChannel dst = new FileOutputStream(backupDB3).getChannel();
+                                    dst.transferFrom(src, 0, src.size());
+                                    src.close();
+                                    dst.close();
+                                }
+                                FileChannel src = new FileInputStream(currentDB).getChannel();
+                                FileChannel dst = new FileOutputStream(backupDB).getChannel();
                                 dst.transferFrom(src, 0, src.size());
                                 src.close();
                                 dst.close();
                             }
-                            if(currentDB3.exists()){
-                                FileChannel src = new FileInputStream(currentDB3).getChannel();
-                                FileChannel dst = new FileOutputStream(backupDB3).getChannel();
-                                dst.transferFrom(src, 0, src.size());
-                                src.close();
-                                dst.close();
-                            }
-                            FileChannel src = new FileInputStream(currentDB).getChannel();
-                            FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                            dst.transferFrom(src, 0, src.size());
-                            src.close();
-                            dst.close();
+                        } catch (Exception e2) {
+
                         }
-                    } catch (Exception e2) {
-
+                        msg("Compra finalizada com sucesso!");
+                    } else {
+                        msg("Existem valores pendentes!");
                     }
-                } else {
-                    msg("Existem valores pendentes, finalize o pagamento!");
+                } catch (Exception e){
+
                 }
             }
         });
