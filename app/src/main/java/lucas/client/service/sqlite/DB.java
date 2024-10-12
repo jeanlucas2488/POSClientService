@@ -16,15 +16,15 @@ public class DB
 		db = cor.getWritableDatabase();
 	}
 
-	public void setValTemp(util us){
+	public void setValPago(util us){
 		ContentValues ct = new ContentValues();
-		ct.put("valorRestante", us.getValTemp());
-		db.insert("valTemp", null, ct);
+		ct.put("pago", us.getValTemp());
+		db.insert("valPago", null, ct);
 	}
-	public void upValTemp(util us){
+	public void upValPago(util us){
 		ContentValues ct = new ContentValues();
-		ct.put("valorRestante", us.getValTemp());
-		db.update("valTemp", ct, "id = ?", new String[]{String.valueOf(us.getValTempId())});
+		ct.put("pago", us.getValTemp());
+		db.update("valPago", ct, "id = ?", new String[]{String.valueOf(us.getValTempId())});
 	}
 	public void ftpIn(util us){
 		ContentValues ct = new ContentValues();
@@ -73,7 +73,7 @@ public class DB
 	public void delSang(){
 		db.execSQL("delete from sangria");
 	}
-
+	public void limpaCarrinho(){db.execSQL("delete from carrinho");}
 	public void delMoney(){
 		db.execSQL("delete from dinheiro");
 	}
@@ -90,21 +90,20 @@ public class DB
 		db.delete("Vendas", "id = ?", new String[]{String.valueOf(id)});
 	}
 
-	public void delValTemp(){
-		db.execSQL("delete from valTemp;");
-	}
-	public util getValTemp(long id){
+	public util getValPago(long id){
 		util us = new util();
-		Cursor cs = db.rawQuery("select * from valTemp WHERE id ="+id+"",  null);
-		if (cs.moveToFirst()){
+		Cursor cs = db.rawQuery("select * from valPago WHERE id ="+id+"", null);
+
+		if(cs.moveToFirst()){
+
 			do {
 				us.setValTempId(cs.getLong(cs.getColumnIndex("id")));
-				us.setValTemp(cs.getString(cs.getColumnIndex("valorRestante")));
+				us.setValTemp(cs.getString(cs.getColumnIndex("pago")));
+
 			} while(cs.moveToNext());
 		}
 		return us;
 	}
-
 	public util getSuperVisor(long id){
 		util us2 = new util();
 		Cursor cs = db.rawQuery("select * from supervisor WHERE id ="+id+"", null);
@@ -467,9 +466,6 @@ public class DB
 		ContentValues ct = new ContentValues();
 		ct.put("sup", us.getSupVal());
 		db.insert("supSom", null, ct);
-	}
-	public void limpaCarrinho(){
-		db.execSQL("delete from carrinho");
 	}
 	public void delItem(long id){
 		db.delete("carrinho", "id = ?", new String[]{String.valueOf(id)});

@@ -27,38 +27,78 @@
 				android:layout_height="wrap_content"
 				/>
 			<EditText
-				android:layout_toRightOf="@+id/total"
+
 				android:id="@+id/valTotal"
 				android:textColor="#0000ff"
 				android:textSize="17dp"
-				android:ems="3"
+				android:ems="4"
+				android:layout_alignParentRight="true"
 				android:layout_marginTop="-15dp"
 				android:layout_marginRight="10dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				/>
 
+
+		</RelativeLayout>
+		<RelativeLayout
+
+			android:layout_marginTop="20dp"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" >
 			<TextView
+
 				android:textColor="#000000"
 				android:textSize="17dp"
+				android:layout_marginLeft="10dp"
 				android:layout_marginRight="10dp"
-				android:layout_toLeftOf="@+id/valRestante"
-				android:text="Valor Restante:"
-				android:layout_centerInParent="true"
+				android:text="Valor Pago:"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				 />
+				/>
 			<EditText
-				android:id="@+id/valRestante"
-				android:textColor="#FF0000"
+
+				android:id="@+id/valPago"
+				android:textColor="#0000ff"
 				android:textSize="17dp"
-				android:ems="3"
-				android:layout_marginTop="-15dp"
+				android:ems="4"
 				android:layout_alignParentRight="true"
+				android:layout_marginTop="-15dp"
 				android:layout_marginRight="10dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				/>
+
+		</RelativeLayout>
+		<RelativeLayout
+
+			android:layout_marginTop="20dp"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" >
+			<TextView
+				android:id="@+id/total"
+				android:textColor="#000000"
+				android:textSize="17dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:text="Valor Restante:"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				/>
+			<EditText
+
+				android:id="@+id/valRestante"
+				android:textColor="#0000ff"
+				android:textSize="17dp"
+				android:ems="4"
+				android:layout_alignParentRight="true"
+				android:layout_marginTop="-15dp"
+				android:layout_marginRight="10dp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				/>
+
+
 		</RelativeLayout>
 		<LinearLayout
 			android:layout_marginLeft="10dp"
@@ -236,6 +276,26 @@
 					android:id="@+id/pix" />
 			</RelativeLayout>
 		</LinearLayout>
+		<RelativeLayout
+			android:layout_marginTop="10dp"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+			<Button
+				android:layout_marginLeft="10dp"
+				android:id="@+id/cancel"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Cancelar"
+				style="?android:attr/buttonBarButtonStyle" />
+			<Button
+				android:id="@+id/fim"
+				android:layout_alignParentRight="true"
+				android:layout_marginRight="10dp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Finalizar Compra"
+				style="?android:attr/buttonBarButtonStyle" />
+		</RelativeLayout>
 	</LinearLayout>
 
 </ScrollView>

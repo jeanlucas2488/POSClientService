@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,7 +36,8 @@ public class pay extends Activity {
     String result, dinres, tvres;
     AlertDialog root;
     TextView tvDinheiro, tvCarD, tvCarC, tvPix;
-    EditText dinheiro,  tvTotal, tvRestante,  carD, carC, pix;
+    EditText dinheiro,  tvTotal, tvPago, tvRestante,  carD, carC, pix;
+    Button canc, fim;
     RelativeLayout dinLayout, debLayout, credLayout, pixLayout;
 
     Context c = this;
@@ -51,12 +53,14 @@ public class pay extends Activity {
         LayoutInflater li = getLayoutInflater();
         View r = li.inflate(R.layout.fecha_pedido, null);
         tvTotal = r.findViewById(R.id.valTotal);
+        tvPago = r.findViewById(R.id.valPago);
         tvRestante = r.findViewById(R.id.valRestante);
         tvDinheiro = r.findViewById(R.id.tvDinheiro);
         tvCarD = r.findViewById(R.id.tvCarD);
         tvCarC = r.findViewById(R.id.tvCarC);
         tvPix = r.findViewById(R.id.tvPix);
-
+        canc = r.findViewById(R.id.cancel);
+        fim = r.findViewById(R.id.fim);
         dinheiro = r.findViewById(R.id.money);
         carD = r.findViewById(R.id.carD);
         carC = r.findViewById(R.id.carC);
@@ -73,6 +77,7 @@ public class pay extends Activity {
         pix.setVisibility(View.GONE);
 
         tvTotal.setText(result.toString());
+        tvPago.setText("0.00");
         tvRestante.setText("0.00");
 
         dinLayout.setOnClickListener(new View.OnClickListener() {
@@ -115,81 +120,59 @@ public class pay extends Activity {
         dinheiro.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_NULL){
+                if(actionId == EditorInfo.IME_NULL) {
 
-                    try {
-                        DB db = new DB(c);
-                        util us = db.getValTemp(1);
+                    if(tvRestante.getText().toString().equals("0.00")){
 
-                        if (!us.getValTemp().toString().equals("")){
-                            Double v1 = new Double(us.getValTemp());
-                            Double v2 = new Double(dinheiro.getText().toString());
+                        Double v1 = new Double(tvTotal.getText().toString());
+                        Double v2 = new Double(dinheiro.getText().toString());
 
-                            double res = v1 - v2;
-
-                            DecimalFormatSymbols df = new DecimalFormatSymbols();
-                            df.setDecimalSeparator('.');
-                            df.setGroupingSeparator('.');
-
-                            DecimalFormat dform = new DecimalFormat("###0.00", df);
-
-                            tvRestante.setText(dform.format(res));
-
-                            util us2 = new util();
-                            us2.setValTempId(us.getValTempId());
-                            us2.setValTemp(dform.format(res));
-
-                            DB db2 = new DB(c);
-                            db2.upValTemp(us2);
-
-                            try {
-                                DB db3 = new DB(c);
-                                util root = db3.getDinheiro(1);
-
-                                if(!root.getMoney().toString().equals("")){
-                                    Double r1 = new Double(root.getMoney());
-                                    Double r2 = new Double(dinheiro.getText().toString());
-
-                                    double result = r1 + r2;
-
-                                    util post = new util();
-                                    post.setMoneyID(root.getMoneyID());
-                                    post.setMoney(dform.format(result));
-                                    DB dbpost = new DB(c);
-                                    dbpost.moneyUp(post);
-                                } else {
-
-                                }
-                            } catch (Exception e){
-                                util post = new util();
-                                post.setMoney(dform.format(result));
-                                DB dbpost = new DB(c);
-                                dbpost.moneyIn(post);
-                            }
-                        } else {
-
-                        }
-                    } catch (Exception e){
-
-                        Double val1 = new Double(tvTotal.getText().toString());
-                        Double val2 = new Double(dinheiro.getText().toString());
-
-                        double res = val1 - val2;
+                        double res = v1 - v2;
 
                         DecimalFormatSymbols df = new DecimalFormatSymbols();
-                        df.setGroupingSeparator('.');
                         df.setDecimalSeparator('.');
+                        df.setGroupingSeparator('.');
 
                         DecimalFormat dform = new DecimalFormat("###0.00", df);
 
+                        try{
+                            DB db = new DB(c);
+                            util root = db.getValPago(1);
+
+                            if(!root.getValTemp().toString().equals("")){
+                                Double val1 = new Double(root.getValTemp());
+                                Double val2 = new Double(dinheiro.getText().toString());
+
+                                double result = val1 + val2;
+
+                                util us2 = new util();
+                                us2.setValTempId(root.getValTempId());
+                                us2.setValTemp(dform.format(result));
+                                db.upValPago(us2);
+                            } else {
+
+                            }
+                        } catch (Exception e){
+                            util us2 = new util();
+                            us2.setValTemp(dinheiro.getText().toString());
+                            DB db = new DB(c);
+                            db.setValPago(us2);
+                        }
                         tvRestante.setText(dform.format(res));
+                       try {
+                           DB db  = new DB(c);
+                           util root = db.getValPago(1);
 
-                        util us = new util();
-                        us.setValTemp(dform.format(res));
-                        DB d1 = new DB(c);
-                        d1.setValTemp(us);
+                           if(!root.getValTemp().toString().equals("")){
+                               tvPago.setText(root.getValTemp());
+                           } else {
 
+                           }
+                       } catch (Exception e){
+
+                       }
                         try {
+
                             DB db = new DB(c);
                             util root = db.getDinheiro(1);
 
@@ -199,19 +182,93 @@ public class pay extends Activity {
 
                                 double result = r1 + r2;
 
-                                util post = new util();
-                                post.setMoneyID(root.getMoneyID());
-                                post.setMoney(dform.format(result));
-                                DB dbpost2 = new DB(c);
-                                dbpost2.moneyUp(post);
+                                util us = new util();
+                                us.setMoneyID(root.getMoneyID());
+                                us.setMoney(dform.format(result));
+                                db.moneyUp(us);
+
                             } else {
 
                             }
-                        } catch (Exception e2){
-                            util post = new util();
-                            post.setMoney(dinheiro.getText().toString());
-                            DB dbpost2 = new DB(c);
-                            dbpost2.moneyIn(post);
+                        } catch (Exception e){
+                            util us = new util();
+                            us.setMoney(dinheiro.getText().toString());
+                            DB db = new DB(c);
+                            db.moneyIn(us);
+                        }
+                    } else {
+                        Double v1 = new Double(tvRestante.getText().toString());
+                        Double v2 = new Double(dinheiro.getText().toString());
+
+                        double res = v1 - v2;
+
+                        DecimalFormatSymbols df = new DecimalFormatSymbols();
+                        df.setDecimalSeparator('.');
+                        df.setGroupingSeparator('.');
+
+                        DecimalFormat dform = new DecimalFormat("###0.00", df);
+
+                        tvRestante.setText(dform.format(res));
+                        try{
+                            DB db = new DB(c);
+                            util root = db.getValPago(1);
+
+                            if(!root.getValTemp().toString().equals("")){
+                                Double val1 = new Double(root.getValTemp());
+                                Double val2 = new Double(dinheiro.getText().toString());
+
+                                double result = val1 + val2;
+
+                                util us2 = new util();
+                                us2.setValTempId(root.getValTempId());
+                                us2.setValTemp(dform.format(result));
+                                db.upValPago(us2);
+                            } else {
+
+                            }
+                        } catch (Exception e){
+                            util us2 = new util();
+                            us2.setValTemp(dinheiro.getText().toString());
+                            DB db = new DB(c);
+                            db.setValPago(us2);
+                        }
+                        tvRestante.setText(dform.format(res));
+                        try {
+                            DB db  = new DB(c);
+                            util root = db.getValPago(1);
+
+                            if(!root.getValTemp().toString().equals("")){
+                                tvPago.setText(root.getValTemp());
+                            } else {
+
+                            }
+                        } catch (Exception e){
+
+                        }
+                        try {
+
+                            DB db = new DB(c);
+                            util root = db.getDinheiro(1);
+
+                            if(!root.getMoney().toString().equals("")){
+                                Double r1 = new Double(root.getMoney());
+                                Double r2 = new Double(dinheiro.getText().toString());
+
+                                double result = r1 + r2;
+
+                                util us = new util();
+                                us.setMoneyID(root.getMoneyID());
+                                us.setMoney(dform.format(result));
+                                db.moneyUp(us);
+
+                            } else {
+
+                            }
+                        } catch (Exception e){
+                            util us = new util();
+                            us.setMoney(dinheiro.getText().toString());
+                            DB db = new DB(c);
+                            db.moneyIn(us);
                         }
                     }
                     return false;
@@ -219,21 +276,110 @@ public class pay extends Activity {
                 return true;
             }
         });
-
-
-        AlertDialog.Builder bs = new AlertDialog.Builder(c);
-        bs.setTitle("Fechar Pedido:");
-        bs.setView(r);
-        bs.setPositiveButton("  Finalizar", new DialogInterface.OnClickListener() {
+        carD.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_NULL) {
 
-                try {
-                    DB get = new DB(c);
-                    util root = get.getValTemp(1);
+                    if(tvRestante.getText().toString().equals("0.00")){
 
-                    if(root.getValTemp().toString().equals("0.00")){
-                        get.delValTemp();
+                        Double v1 = new Double(tvTotal.getText().toString());
+                        Double v2 = new Double(carD.getText().toString());
+
+                        double res = v1 - v2;
+
+                        DecimalFormatSymbols df = new DecimalFormatSymbols();
+                        df.setDecimalSeparator('.');
+                        df.setGroupingSeparator('.');
+
+                        DecimalFormat dform = new DecimalFormat("###0.00", df);
+
+                        tvRestante.setText(dform.format(res));
+
+                        try {
+
+                            DB db = new DB(c);
+                            util root = db.getCarD(1);
+
+                            if(!root.getCarD().toString().equals("")){
+                                Double r1 = new Double(root.getCarD());
+                                Double r2 = new Double(carD.getText().toString());
+
+                                double result = r1 + r2;
+
+                                util us = new util();
+                                us.setCarD_ID(root.getCarD_ID());
+                                us.setCarD(dform.format(result));
+                                db.carDUp(us);
+
+                            } else {
+
+                            }
+                        } catch (Exception e){
+                            util us = new util();
+                            us.setCarD(carD.getText().toString());
+                            DB db = new DB(c);
+                            db.carDIn(us);
+                        }
+                    } else {
+                        Double v1 = new Double(tvRestante.getText().toString());
+                        Double v2 = new Double(dinheiro.getText().toString());
+
+                        double res = v1 - v2;
+
+                        DecimalFormatSymbols df = new DecimalFormatSymbols();
+                        df.setDecimalSeparator('.');
+                        df.setGroupingSeparator('.');
+
+                        DecimalFormat dform = new DecimalFormat("###0.00", df);
+
+                        tvRestante.setText(dform.format(res));
+
+                        try {
+
+                            DB db = new DB(c);
+                            util root = db.getDinheiro(1);
+
+                            if(!root.getCarD().toString().equals("")){
+                                Double r1 = new Double(root.getCarD());
+                                Double r2 = new Double(carD.getText().toString());
+
+                                double result = r1 + r2;
+
+                                util us = new util();
+                                us.setCarD_ID(root.getCarD_ID());
+                                us.setCarD(dform.format(result));
+                                db.carDUp(us);
+
+                            } else {
+
+                            }
+                        } catch (Exception e){
+                            util us = new util();
+                            us.setCarD(carD.getText().toString());
+                            DB db = new DB(c);
+                            db.carDIn(us);
+                        }
+                    }
+                    return false;
+                }
+                return true;
+            }
+        });
+        canc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                root.dismiss();
+                DB db = new DB(c);
+            }
+        });
+        fim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                    if(tvRestante.getText().toString().equals("0.00")){
+
                         try {
                             File sd = Environment.getExternalStorageDirectory();
                             File data = Environment.getDataDirectory();
@@ -281,15 +427,17 @@ public class pay extends Activity {
 
                         }
                         msg("Compra finalizada com sucesso!");
+                        DB db = new DB(c);
+                        db.limpaCarrinho();
                     } else {
                         msg("Existem valores pendentes!");
                     }
-                } catch (Exception e){
 
-                }
             }
         });
-        bs.setNegativeButton("Cancelar", null);
+        AlertDialog.Builder bs = new AlertDialog.Builder(c);
+        bs.setTitle("Fechar Pedido:");
+        bs.setView(r);
 
        root = bs.create();
        root = bs.show();
