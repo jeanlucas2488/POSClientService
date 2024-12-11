@@ -354,7 +354,7 @@ public class Page1 extends Fragment
 							DecimalFormatSymbols df = new DecimalFormatSymbols();
 							df.setGroupingSeparator('.');
 							df.setDecimalSeparator('.');
-							DecimalFormat dform = new DecimalFormat("####.##", df);
+							DecimalFormat dform = new DecimalFormat("####.00", df);
 							String result = dform.format(res_);
 
 							Intent it = new Intent(getActivity(), pay.class);
@@ -482,7 +482,7 @@ public class Page1 extends Fragment
 						DecimalFormatSymbols df = new DecimalFormatSymbols();
 						df.setGroupingSeparator('.');
 						df.setDecimalSeparator('.');
-						DecimalFormat dform = new DecimalFormat("####.##", df);
+						DecimalFormat dform = new DecimalFormat("####.00", df);
 						final String result = dform.format(res_);
 
 						try{

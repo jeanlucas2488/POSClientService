@@ -9,17 +9,33 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
+		android:background="#0000ff"
 		android:layout_height="match_parent"
 		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Fechar Pedido:"
+				android:textColor="#ffffff"
+				android:textSize="20dp"
+				android:layout_marginTop="20dp"
+				android:layout_marginLeft="15dp"
+				android:layout_marginRight="10dp"/>
+		</LinearLayout>
 		<RelativeLayout
 
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="30dp"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content" >
 			<TextView
 				android:id="@+id/total"
-				android:textColor="#000000"
-				android:textSize="17dp"
+				android:textColor="#ffffff"
+				android:textSize="20dp"
+				android:layout_marginTop="10dp"
 				android:layout_marginLeft="10dp"
 				android:layout_marginRight="10dp"
 				android:text="Valor Total:"
@@ -27,13 +43,16 @@
 				android:layout_height="wrap_content"
 				/>
 			<EditText
-
+				android:background="#ffffff"
 				android:id="@+id/valTotal"
-				android:textColor="#0000ff"
-				android:textSize="17dp"
+				android:padding="10dp"
+				android:text="0.00"
+				android:textColor="#ff0000"
+				android:textSize="20dp"
+				android:textAlignment="center"
 				android:ems="4"
 				android:layout_alignParentRight="true"
-				android:layout_marginTop="-15dp"
+
 				android:layout_marginRight="10dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -47,27 +66,30 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content" >
 			<TextView
-
-				android:textColor="#000000"
-				android:textSize="17dp"
+				android:layout_marginTop="10dp"
+				android:textColor="#ffffff"
+				android:textSize="20dp"
 				android:layout_marginLeft="10dp"
 				android:layout_marginRight="10dp"
 				android:text="Valor Pago:"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				/>
-			<EditText
 
+			<EditText
 				android:id="@+id/valPago"
-				android:textColor="#0000ff"
-				android:textSize="17dp"
-				android:ems="4"
-				android:layout_alignParentRight="true"
-				android:layout_marginTop="-15dp"
-				android:layout_marginRight="10dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				/>
+				android:layout_alignParentRight="true"
+				android:layout_marginRight="9dp"
+				android:background="#ffffff"
+				android:ems="4"
+				android:padding="10dp"
+				android:text="0.00"
+
+				android:textAlignment="center"
+				android:textColor="#0000ff"
+				android:textSize="20dp" />
 
 		</RelativeLayout>
 		<RelativeLayout
@@ -77,8 +99,9 @@
 			android:layout_height="wrap_content" >
 			<TextView
 				android:id="@+id/total"
-				android:textColor="#000000"
-				android:textSize="17dp"
+				android:textColor="#ffffff"
+				android:textSize="20dp"
+				android:layout_marginTop="10dp"
 				android:layout_marginLeft="10dp"
 				android:layout_marginRight="10dp"
 				android:text="Valor Restante:"
@@ -86,13 +109,16 @@
 				android:layout_height="wrap_content"
 				/>
 			<EditText
-
+				android:padding="10dp"
+				android:text="0.00"
+				android:textAlignment="center"
+				android:background="#ffffff"
 				android:id="@+id/valRestante"
 				android:textColor="#0000ff"
-				android:textSize="17dp"
+				android:textSize="20dp"
 				android:ems="4"
 				android:layout_alignParentRight="true"
-				android:layout_marginTop="-15dp"
+
 				android:layout_marginRight="10dp"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -100,24 +126,59 @@
 
 
 		</RelativeLayout>
-		<LinearLayout
-			android:layout_marginLeft="10dp"
-			android:layout_marginRight="10dp"
+		<RelativeLayout
+
 			android:layout_marginTop="20dp"
-			android:background="@drawable/fecha_pedido_layout_border"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content" >
 			<TextView
-				android:textColor="#000000"
-				android:textSize="18dp"
-				android:layout_marginTop="20dp"
+				android:id="@+id/total"
+				android:textColor="#ffffff"
+				android:textSize="20dp"
+				android:layout_marginTop="10dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:text="Troco:"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Escolha a Forma de Pagamento: " />
+				/>
+
+			<EditText
+				android:id="@+id/troco"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentRight="true"
+				android:layout_marginRight="10dp"
+				android:background="#ffffff"
+				android:ems="4"
+				android:padding="10dp"
+				android:text="0.00"
+
+				android:textAlignment="center"
+				android:textColor="#ff0000"
+				android:textSize="20dp" />
+
+
+		</RelativeLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginTop="30dp"
+			android:layout_marginRight="10dp"
+			android:background="@drawable/fecha_pedido_layout_border">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="30dp"
+				android:text="Escolha a Forma de Pagamento: "
+				android:textColor="#ffffff"
+				android:textSize="20dp" />
 		</LinearLayout>
 
 		<LinearLayout
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="40dp"
 			android:background="@drawable/fecha_pedido_listview_layout_border"
 			android:layout_marginRight="10dp"
 			android:layout_marginLeft="10dp"
@@ -135,15 +196,16 @@
 					android:layout_width="40dp"
 					android:layout_height="50dp"
 					android:src="@drawable/money" />
+
 				<TextView
 					android:id="@+id/tvDinheiro"
-					android:layout_marginTop="10dp"
-					android:layout_marginLeft="5dp"
-					android:textSize="16dp"
-					android:layout_toRightOf="@+id/dinheiro"
+					android:textColor="#ffffff"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="Dinheiro: " />
+					android:layout_marginLeft="5dp"
+					android:layout_toRightOf="@+id/dinheiro"
+					android:text="Dinheiro: "
+					android:textSize="20dp" />
 
 				<EditText
 					android:layout_width="wrap_content"
@@ -154,7 +216,9 @@
 					android:background="#ffffff"
 					android:textColor="#000000"
 					android:singleLine="true"
-					android:padding="12dp"
+					android:textAlignment="center"
+					android:textSize="20dp"
+					android:padding="10dp"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"
 					android:layout_alignParentRight="true"
@@ -172,15 +236,16 @@
 					android:layout_width="40dp"
 					android:layout_height="50dp"
 					android:src="@drawable/cartao" />
+
 				<TextView
 					android:id="@+id/tvCarD"
-					android:layout_marginTop="10dp"
-					android:layout_marginLeft="5dp"
-					android:textSize="16dp"
-					android:layout_toRightOf="@+id/dinheiro"
+					android:textColor="#ffffff"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="Cartão de Débito: " />
+					android:layout_marginLeft="5dp"
+					android:layout_toRightOf="@+id/dinheiro"
+					android:text="Cartão de Débito: "
+					android:textSize="20dp" />
 
 				<EditText
 					android:layout_width="wrap_content"
@@ -192,7 +257,9 @@
 					android:background="#ffffff"
 					android:textColor="#000000"
 					android:singleLine="true"
-					android:padding="12dp"
+					android:textAlignment="center"
+					android:textSize="20dp"
+					android:padding="10dp"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"
 					android:layout_alignParentRight="true"
@@ -212,9 +279,10 @@
 					android:src="@drawable/cartao" />
 				<TextView
 					android:id="@+id/tvCarC"
+					android:textColor="#ffffff"
 					android:layout_marginTop="10dp"
 					android:layout_marginLeft="5dp"
-					android:textSize="16dp"
+					android:textSize="20dp"
 					android:layout_toRightOf="@+id/dinheiro"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -229,7 +297,9 @@
 					android:clickable="true"
 					android:background="#ffffff"
 					android:textColor="#000000"
-					android:padding="12dp"
+					android:textAlignment="center"
+					android:textSize="20dp"
+					android:padding="10dp"
 					android:singleLine="true"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"
@@ -249,31 +319,35 @@
 					android:layout_height="50dp"
 					android:src="@drawable/pix" />
 				<TextView
+					android:textColor="#ffffff"
 					android:id="@+id/tvPix"
 					android:layout_marginTop="10dp"
 					android:layout_marginLeft="5dp"
-					android:textSize="16dp"
+					android:textSize="20dp"
 					android:layout_toRightOf="@+id/dinheiro"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="Pix: " />
 
 				<EditText
+					android:id="@+id/pix"
 					android:layout_width="wrap_content"
-					android:ems="4"
-					android:hint="00.00"
-					android:textColorHint="#000000"
-					android:filterTouchesWhenObscured="true"
-					android:clickable="true"
+					android:layout_height="wrap_content"
+					android:layout_alignParentRight="true"
+					android:layout_marginRight="-1dp"
 					android:background="#ffffff"
-					android:textColor="#000000"
-					android:padding="12dp"
-					android:singleLine="true"
+					android:clickable="true"
+					android:ems="4"
+					android:filterTouchesWhenObscured="true"
+					android:hint="00.00"
 					android:imeOptions="actionDone"
 					android:inputType="numberDecimal"
-					android:layout_alignParentRight="true"
-					android:layout_height="wrap_content"
-					android:id="@+id/pix" />
+					android:textAlignment="center"
+					android:textSize="20dp"
+					android:padding="10dp"
+					android:singleLine="true"
+					android:textColor="#000000"
+					android:textColorHint="#000000" />
 			</RelativeLayout>
 		</LinearLayout>
 		<RelativeLayout
@@ -286,6 +360,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="Cancelar"
+				android:textColor="#ffffff"
 				style="?android:attr/buttonBarButtonStyle" />
 			<Button
 				android:id="@+id/fim"
@@ -294,6 +369,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="Finalizar Compra"
+				android:textColor="#ffffff"
 				style="?android:attr/buttonBarButtonStyle" />
 		</RelativeLayout>
 	</LinearLayout>
